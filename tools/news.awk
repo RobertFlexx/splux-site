@@ -113,23 +113,36 @@ END {
 	print "</div>"
 }
 
-function print_item(i, brief,    k, when, s, v, a, av) {
+function profile_href(a) {
+	if (a ~ /^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$/ && length(a) <= 39)
+		return "https://github.com/" a
+	return ""
+}
+
+function print_item(i, brief,    k, when, s, v, a, av, href) {
 	when = esc(utc_label(iso[i]))
 	k = esc(kind_label(kind[i]))
 	a = author[i]
 	v = verified[i]
 	av = avatar[i]
+	href = profile_href(a)
 	printf "<article class=\"item\" data-kind=\"%s\" data-repo=\"%s\" data-author=\"%s\" data-verified=\"%s\" data-avatar=\"%s\">\n", \
 		k, esc(repo[i]), esc(a), esc(v), esc(av)
 	printf "<p class=\"meta\"><time datetime=\"%s\">%s</time> <span class=\"kind\">%s</span> %s", \
 		esc(iso[i]), when, k, esc(repo[i])
 	if (a != "" || av != "") {
-		printf " <span class=\"who\">"
+		if (href != "")
+			printf " <a class=\"who\" href=\"%s\">", esc(href)
+		else
+			printf " <span class=\"who\">"
 		if (av != "")
 			printf "<img class=\"avatar\" src=\"%s\" width=\"24\" height=\"24\" alt=\"\" loading=\"lazy\">", esc(av)
 		if (a != "")
 			printf "%s", esc(a)
-		printf "</span>"
+		if (href != "")
+			printf "</a>"
+		else
+			printf "</span>"
 	}
 	if (v == "yes")
 		printf " <span class=\"verified\">verified</span>"

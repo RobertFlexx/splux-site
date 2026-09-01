@@ -159,8 +159,16 @@
 		return "";
 	}
 
+	function profileOf(it) {
+		var name = it && it.author ? String(it.author) : "";
+		if (/^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$/.test(name) && name.length <= 39)
+			return "https://github.com/" + name;
+		return "";
+	}
+
 	function renderItem(it, hideSummary) {
 		var av = avatarOf(it);
+		var profile = profileOf(it);
 		var html = "<article class=\"item\" data-kind=\"" + esc(it.kind || "") +
 			"\" data-repo=\"" + esc(it.repo || "") +
 			"\" data-author=\"" + esc(it.author || "") +
@@ -170,13 +178,16 @@
 			esc(formatLocal(it.iso)) + "</time> <span class=\"kind\">" +
 			esc(it.kind) + "</span> " + esc(it.repo);
 		if (it.author || av) {
-			html += " <span class=\"who\">";
+			if (profile)
+				html += " <a class=\"who\" href=\"" + esc(profile) + "\">";
+			else
+				html += " <span class=\"who\">";
 			if (av)
 				html += "<img class=\"avatar\" src=\"" + esc(av) +
 					"\" width=\"24\" height=\"24\" alt=\"\" loading=\"lazy\">";
 			if (it.author)
 				html += esc(it.author);
-			html += "</span>";
+			html += profile ? "</a>" : "</span>";
 		}
 		if (it.verified)
 			html += " <span class=\"verified\">verified</span>";

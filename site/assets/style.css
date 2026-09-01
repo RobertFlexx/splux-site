@@ -285,6 +285,14 @@ footer p {
 	color: var(--fg);
 }
 
+.feed a.who {
+	color: var(--accent);
+}
+
+.feed a.who:hover .avatar {
+	border-color: var(--accent);
+}
+
 .feed .avatar {
 	display: block;
 	width: 24px;
