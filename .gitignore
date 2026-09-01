@@ -1,0 +1,4 @@
+_site/
+vendor/
+*.iso
+.DS_Store

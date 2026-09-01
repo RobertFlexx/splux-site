@@ -1,0 +1,281 @@
+/* Splux site. Black, gray, yellow. Monospace. No framework. */
+
+:root {
+	--bg: #0a0a0a;
+	--fg: #d6d6d6;
+	--muted: #8a8a8a;
+	--rule: #2a2a2a;
+	--accent: #ffff00;
+	--focus: #ffff00;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--bg);
+	color: var(--fg);
+	font-family: ui-monospace, "SFMono-Regular", "Cascadia Mono",
+		"Liberation Mono", "DejaVu Sans Mono", "Adwaita Mono", monospace;
+	font-size: 15px;
+	line-height: 1.5;
+}
+
+body {
+	margin: 0;
+	padding: 1.5rem 1.25rem 3rem;
+}
+
+.wrap {
+	max-width: 920px;
+	margin: 0 auto;
+}
+
+a {
+	color: var(--accent);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+	outline: 1px solid var(--focus);
+	outline-offset: 2px;
+}
+
+.skip {
+	position: absolute;
+	left: -999px;
+}
+
+.skip:focus {
+	left: 1rem;
+	top: 1rem;
+	background: var(--bg);
+	padding: 0.25rem 0.5rem;
+}
+
+header.top {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.25rem;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid var(--rule);
+	padding-bottom: 1rem;
+}
+
+.logo {
+	margin: 0;
+	font-size: 11px;
+	line-height: 1.15;
+	letter-spacing: 0;
+	color: #9a9a9a;
+	white-space: pre;
+}
+
+.logo .p {
+	color: var(--accent);
+}
+
+.identity h1 {
+	margin: 0;
+	font-size: 1.15rem;
+	font-weight: 700;
+	color: var(--fg);
+}
+
+.identity p {
+	margin: 0.15rem 0 0;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+nav.row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1rem;
+	margin: 1rem 0 1.5rem;
+	color: var(--muted);
+}
+
+nav.row a {
+	color: var(--accent);
+}
+
+nav.row a[aria-current="page"] {
+	color: var(--fg);
+	text-decoration: underline;
+}
+
+nav.row .gh {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+nav.row .gh img {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
+
+h2 {
+	margin: 1.75rem 0 0.35rem;
+	font-size: 1rem;
+	font-weight: 700;
+	color: var(--accent);
+}
+
+h2 .num {
+	color: var(--muted);
+	font-weight: 400;
+}
+
+hr.rule {
+	border: 0;
+	border-top: 1px solid var(--rule);
+	margin: 0.35rem 0 0.85rem;
+}
+
+p, li {
+	max-width: 78ch;
+}
+
+.muted, .note {
+	color: var(--muted);
+}
+
+pre, code {
+	font-family: inherit;
+}
+
+pre.block {
+	background: #111;
+	border: 1px solid var(--rule);
+	padding: 0.75rem 1rem;
+	overflow: auto;
+	color: var(--fg);
+}
+
+table.pkgs {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.92rem;
+}
+
+table.pkgs th {
+	text-align: left;
+	color: var(--muted);
+	font-weight: 400;
+	border-bottom: 1px solid var(--rule);
+	padding: 0.3rem 0.6rem 0.3rem 0;
+}
+
+table.pkgs td {
+	padding: 0.25rem 0.6rem 0.25rem 0;
+	border-bottom: 1px solid #1a1a1a;
+	vertical-align: top;
+}
+
+table.pkgs a.name {
+	color: var(--accent);
+}
+
+.filters {
+	margin: 0.75rem 0;
+	color: var(--muted);
+}
+
+.filters a {
+	margin-right: 0.75rem;
+}
+
+.filters a[aria-current="true"] {
+	color: var(--fg);
+	text-decoration: underline;
+}
+
+label.search {
+	display: block;
+	margin: 0.75rem 0;
+	color: var(--muted);
+}
+
+label.search input {
+	display: block;
+	width: 100%;
+	max-width: 28rem;
+	margin-top: 0.25rem;
+	background: #111;
+	color: var(--fg);
+	border: 1px solid var(--rule);
+	padding: 0.35rem 0.5rem;
+	font: inherit;
+}
+
+.stats {
+	color: var(--muted);
+	margin: 0.5rem 0 1rem;
+}
+
+dl.meta dt {
+	color: var(--muted);
+	float: left;
+	clear: left;
+	width: 11rem;
+}
+
+dl.meta dd {
+	margin: 0 0 0.25rem 11rem;
+}
+
+ul.plain {
+	list-style: none;
+	padding: 0;
+	margin: 0.5rem 0;
+}
+
+ul.plain li {
+	margin: 0.2rem 0;
+}
+
+footer {
+	margin-top: 2.5rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	color: var(--muted);
+	font-size: 0.9rem;
+}
+
+footer p {
+	margin: 0.2rem 0;
+}
+
+.dl-row {
+	display: grid;
+	grid-template-columns: 12rem 1fr;
+	gap: 0.25rem 1rem;
+	margin: 0.2rem 0;
+}
+
+@media (max-width: 640px) {
+	.dl-row,
+	dl.meta dt,
+	dl.meta dd {
+		display: block;
+		width: auto;
+		float: none;
+		margin-left: 0;
+	}
+
+	table.pkgs {
+		display: block;
+		overflow-x: auto;
+	}
+}

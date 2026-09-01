@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Packages - Splux Linux</title>
+<meta name="description" content="Official Splux package collections: core and extra.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+@@HEADER@@
+<main id="main">
+<h2>Packages</h2>
+<hr class="rule">
+<p>Generated from the official <a href="https://github.com/RobertFlexx/sps-core">sps-core</a> and <a href="https://github.com/RobertFlexx/sps-extra">sps-extra</a> recipe trees. @@N_PACKAGES@@ packages (@@N_CORE@@ core, @@N_EXTRA@@ extra). Updated @@GENERATED@@.</p>
+<form id="pkg-search" role="search">
+<label class="search" for="q">Search
+<input id="q" name="q" type="search" autocomplete="off" spellcheck="false">
+</label>
+</form>
+<p class="filters">
+<a href="?repo=all" data-repo="all">all</a>
+<a href="?repo=core" data-repo="core">core</a>
+<a href="?repo=extra" data-repo="extra">extra</a>
+</p>
+<p class="stats" id="pkg-stats">@@N_PACKAGES@@ packages</p>
+<div style="overflow-x:auto">
+<table class="pkgs" id="pkg-table">
+<thead>
+<tr>
+<th>name</th>
+<th>version</th>
+<th>repository</th>
+<th>category</th>
+</tr>
+</thead>
+<tbody>
+@@PKG_ROWS@@
+</tbody>
+</table>
+</div>
+</main>
+@@FOOTER@@
+</div>
+<script src="@@ROOT@@assets/packages.js"></script>
+<script>
+(function () {
+	var repo = new URLSearchParams(location.search).get("repo") || "all";
+	var links = document.querySelectorAll(".filters a");
+	for (var i = 0; i < links.length; i++) {
+		if (links[i].getAttribute("data-repo") === repo)
+			links[i].setAttribute("aria-current", "true");
+	}
+})();
+</script>
+</body>
+</html>

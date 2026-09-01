@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Splux Linux</title>
+<meta name="description" content="Splux is a source-based Linux distribution using SPS, the Source Package System.">
+<meta property="og:title" content="Splux Linux">
+<meta property="og:description" content="A source-based Linux distribution using SPS.">
+<meta property="og:image" content="@@ROOT@@assets/sps.png">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+@@HEADER@@
+<main id="main">
+
+<h2 id="about"><span class="num">[001]</span> About</h2>
+<hr class="rule">
+<p>Splux is an independent source-based Linux distribution using SPS, the Source Package System.</p>
+<p>SPS is built from small POSIX shell and AWK tools. Packages are described by text recipes in Git repositories and built locally. The system is intended for users who want to understand and maintain their installation directly.</p>
+<p>SPS the package system is not locked to Splux. The same tools can be used on other Unix-like trees. Splux is the distribution that uses SPS for its installer, live images, and official package collections.</p>
+
+<h2 id="download"><span class="num">[002]</span> Download</h2>
+<hr class="rule">
+<p>Live images are published from the SPS repository. Asset names stay the same from release to release, so these links always point at the newest published files.</p>
+<div class="dl-row"><span class="muted">Latest tag</span><span>@@RELEASE_TAG@@</span></div>
+<div class="dl-row"><span class="muted">Released</span><span>@@RELEASE_DATE@@</span></div>
+<div class="dl-row"><span class="muted">Architecture</span><span>x86_64</span></div>
+<p>
+<a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-tty.iso">sps-live-tty.iso</a>
+(console image with recipes and a compiler)<br>
+<a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-tty-slim.iso">sps-live-tty-slim.iso</a>
+(small console image; setup needs the network)<br>
+<a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-plasma.iso">sps-live-plasma.iso</a>
+(Plasma/Wayland live session)<br>
+<a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a><br>
+<a href="https://github.com/RobertFlexx/SPS/releases/latest">release notes</a>
+</p>
+<p class="note">These are development live snapshots, not a numbered stable distro release. Installation still compiles packages from source. A Plasma install takes a long time. See <a href="@@ROOT@@install/">install</a>.</p>
+
+<h2 id="packages"><span class="num">[003]</span> Package system</h2>
+<hr class="rule">
+<p>SPS is split into small tools rather than one large front end:</p>
+<pre class="block">src       repository handling
+sget      dependency-aware package frontend
+mkpkg     package builder
+pkin      package installer
+pkdel     package removal
+pkstat    installed package queries
+pkcheck   package verification
+pkmark    package reason management
+setup     Splux installer
+mkiso     Splux live ISO builder</pre>
+<p>Example:</p>
+<pre class="block">$ src update
+$ sget install curl
+install curl @@CURL_VER@@
+
+mkpkg: curl @@CURL_VER@@
+mkpkg: running configure phase
+mkpkg: running build phase
+mkpkg: built curl-@@CURL_VER@@-x86_64.pkg.tar.zst
+pkin: installed curl @@CURL_VER@@</pre>
+<p><a href="@@ROOT@@packages/">Search @@N_PACKAGES@@ packages</a> in the official trees.</p>
+
+<h2 id="repos"><span class="num">[004]</span> Repositories</h2>
+<hr class="rule">
+<p><a href="https://github.com/RobertFlexx/sps-core">core</a><br>
+Base system, toolchain, libraries, boot, filesystems, and networking. @@N_CORE@@ packages.</p>
+<p><a href="https://github.com/RobertFlexx/sps-extra">extra</a><br>
+Desktop software, graphics, multimedia, development tools, and other packages. @@N_EXTRA@@ packages.</p>
+<p>SPS also supports administrator-maintained local repositories in addition to the official trees.</p>
+
+<h2 id="docs"><span class="num">[005]</span> Documentation</h2>
+<hr class="rule">
+<p><a href="@@ROOT@@install/">Installation</a><br>
+<a href="@@ROOT@@docs/">Documentation index</a><br>
+<a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a><br>
+<a href="https://github.com/RobertFlexx/SPS/blob/main/DESIGN.md">SPS 1.0 formats</a></p>
+
+<h2 id="source"><span class="num">[006]</span> Source</h2>
+<hr class="rule">
+<p>
+<a class="gh" href="https://github.com/RobertFlexx/SPS"><img src="@@ROOT@@assets/github.svg" width="14" height="14" alt=""> SPS</a>
+the package system<br>
+<a href="https://github.com/RobertFlexx/sps-core">sps-core</a>
+official base recipes<br>
+<a href="https://github.com/RobertFlexx/sps-extra">sps-extra</a>
+official extra recipes<br>
+<a href="https://github.com/RobertFlexx/splux-site">splux-site</a>
+this website
+</p>
+
+<h2 id="status"><span class="num">[007]</span> Project status</h2>
+<hr class="rule">
+<p>Splux is under active development. SPS 1.0 is usable and the official package repositories are being built out. Live images exist so the installer can be tested. Splux is not a stable release yet.</p>
+
+</main>
+@@FOOTER@@
+</div>
+</body>
+</html>

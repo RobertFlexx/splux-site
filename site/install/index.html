@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install - Splux Linux</title>
+<meta name="description" content="How to boot a Splux live image and run setup.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+@@HEADER@@
+<main id="main">
+<h2>Install</h2>
+<hr class="rule">
+<p>The installation procedure is still being finalized. The path that exists today is: boot a live ISO, mount a target filesystem, and run <code>setup</code>.</p>
+<p><code>setup</code> is the Splux installer. It is not a generic SPS or LFS installer. It uses dialog screens, or the same choices from flags for scripts.</p>
+<h2>1. Download and verify</h2>
+<hr class="rule">
+<p>Get an image from <a href="@@ROOT@@download/">download</a>. For a source install use <code>sps-live-tty.iso</code>, not the slim image. Check it against <a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a>.</p>
+<h2>2. Write the image</h2>
+<hr class="rule">
+<pre class="block">dd if=sps-live-tty.iso of=/dev/sdX bs=4M status=progress conv=fsync</pre>
+<p>Replace <code>/dev/sdX</code> with the USB device. That command erases the destination.</p>
+<h2>3. Boot and target disk</h2>
+<hr class="rule">
+<p>Boot the "SPS Linux live (Splux)" entry. The live system comes up on the console (or Plasma on the Plasma image). For QEMU, give the guest a writable second disk in addition to the CD. The live image never runs <code>grub-install</code> on its own.</p>
+<h2>4. Run setup</h2>
+<hr class="rule">
+<pre class="block">setup
+setup --plan --profile plasma-desktop --target /mnt --user alex
+setup --non-interactive --profile minimal --target /mnt --hostname darkstar</pre>
+<p>Profiles are <code>minimal</code>, <code>server</code>, <code>plasma-desktop</code>, and <code>plasma-full</code>. Init is a choice: systemd (default) or OpenRC. Those packages conflict. Guided partitioning is optional. <code>grub-install</code> still needs <code>--install-bootloader</code> and <code>--disk</code>.</p>
+<p>The installer writes hostname, timezone, keymap, and a first user, copies bundled recipe trees when present, runs <code>src update</code>, and <code>sget install</code>. Packages are built from source on the target. A Plasma install compiles Qt and KDE and takes a long time.</p>
+<h2>More</h2>
+<hr class="rule">
+<p><a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a> and <a href="https://github.com/RobertFlexx/SPS/blob/main/man/setup.1">setup(1)</a> are the current command references.</p>
+</main>
+@@FOOTER@@
+</div>
+</body>
+</html>

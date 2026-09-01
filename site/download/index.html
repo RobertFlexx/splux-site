@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download - Splux Linux</title>
+<meta name="description" content="Download Splux Linux live images and checksums.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+@@HEADER@@
+<main id="main">
+<h2>Download</h2>
+<hr class="rule">
+<p>Images are hybrid ISOs from <a href="https://github.com/RobertFlexx/SPS">RobertFlexx/SPS</a>. The filenames below are stable. GitHub's <code>releases/latest/download</code> URLs always resolve to the newest published files of those names.</p>
+<div class="dl-row"><span class="muted">Latest tag</span><span>@@RELEASE_TAG@@</span></div>
+<div class="dl-row"><span class="muted">Released</span><span>@@RELEASE_DATE@@</span></div>
+<div class="dl-row"><span class="muted">Architecture</span><span>x86_64</span></div>
+<h2>Images</h2>
+<hr class="rule">
+<p><a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-tty.iso">sps-live-tty.iso</a><br>
+Console live image with sps-core, sps-extra, and a seed compiler so <code>setup</code> can build packages.</p>
+<p><a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-tty-slim.iso">sps-live-tty-slim.iso</a><br>
+Small console image without the seed compiler. <code>setup</code> needs the network to fetch recipes and a toolchain.</p>
+<p><a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-plasma.iso">sps-live-plasma.iso</a><br>
+Plasma/Wayland live session plus the same installer path. Needs a KMS device (virtio-gpu or a real GPU).</p>
+<h2>Checksums</h2>
+<hr class="rule">
+<p><a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a> is produced from the uploaded ISOs. Verify on the machine that downloads the image:</p>
+<pre class="block">sha256sum -c SHA256SUMS</pre>
+<p>Signatures are not published yet.</p>
+<p><a href="https://github.com/RobertFlexx/SPS/releases/latest">GitHub release notes</a></p>
+<p class="note">These snapshots track installer and live-session work. They are not a numbered stable Splux release.</p>
+</main>
+@@FOOTER@@
+</div>
+</body>
+</html>
