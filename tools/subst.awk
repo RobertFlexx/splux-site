@@ -63,6 +63,11 @@ $0 == "@@PAGER@@" {
 	next
 }
 
+$0 == "@@DOCSNAV@@" {
+	dump_file(docsnavfile)
+	next
+}
+
 {
 	gsub(/@@ROOT@@/, root)
 	gsub(/@@RELEASE_TAG@@/, tag)

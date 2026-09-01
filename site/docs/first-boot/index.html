@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>After first boot - Splux Linux</title>
+<meta name="description" content="What to do after a Splux install: passwords, network, services, packages.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap wide">
+@@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
+<main id="main">
+<h2>After first boot</h2>
+<hr class="rule">
+<p>This chapter assumes the machine booted the kernel you installed, with GRUB, and reached a getty. If it did not, go back to the <a href="@@ROOT@@install/">install chapter</a> and check the kernel package, <code>/etc/fstab</code>, and <code>grub-install</code>.</p>
+
+<h3>Passwords</h3>
+<p>If you did not set hashes during <code>setup</code>, root and the first user are locked. From a live root you can <code>chroot</code> and run <code>passwd</code>. After a successful boot:</p>
+<pre class="block">passwd
+passwd alex</pre>
+<p>Busybox <code>passwd</code> is on the live images. The installed <code>shadow</code> package provides it on the new system once <code>base-system</code> is in place.</p>
+
+<h3>Read the notes</h3>
+<p><code>setup</code> writes text files under <code>/root/</code>:</p>
+<ul>
+<li><code>sps-bootloader.txt</code> if GRUB was not installed during setup</li>
+<li><code>sps-user.txt</code> for the first account</li>
+<li><code>sps-init.txt</code> for the chosen PID 1</li>
+<li><code>sps-network.txt</code> (setup does not write DHCP or static network config)</li>
+<li><code>sps-fstab.txt</code> and <code>/etc/fstab</code></li>
+<li><code>sps-services.txt</code> when services were enabled</li>
+</ul>
+<p>A manual install does not create those files unless you write them yourself. The same facts still apply.</p>
+
+<h3>Network</h3>
+<p>On a console install, bring an interface up by hand. <code>dhcpcd</code> is in <code>base-system</code>:</p>
+<pre class="block">ip link
+dhcpcd eth0</pre>
+<p>On Plasma, use plasma-nm after graphical login. OpenSSH is present when you used the server profile or installed <code>openssh</code>.</p>
+
+<h3>Services</h3>
+<p>The file <code>/etc/sps/init</code> records which PID 1 was chosen. Known services (sshd, dbus, SDDM, NetworkManager, and others mapped by SPS) are enabled during <code>setup</code> unless you passed <code>--services no</code>. Later <code>sget install</code> of a mapped package enables it for that init too.</p>
+<table class="docs">
+<thead>
+<tr><th>Init</th><th>Enable a service</th></tr>
+</thead>
+<tbody>
+<tr><td>systemd</td><td><code>systemctl enable --now sshd</code> (unit names follow the package)</td></tr>
+<tr><td>OpenRC</td><td><code>rc-update add sshd default</code></td></tr>
+<tr><td>s6</td><td>symlink under <code>/etc/s6/enabled</code></td></tr>
+<tr><td>runit</td><td>symlink under <code>/etc/runit/runsvdir/default</code></td></tr>
+<tr><td>dinit</td><td>symlink under <code>/etc/dinit.d/boot.d</code></td></tr>
+<tr><td>Shepherd</td><td>Scheme files under <code>/etc/shepherd.d</code></td></tr>
+</tbody>
+</table>
+
+<h3>Next packages</h3>
+<pre class="block">src update
+sget install nano
+pkstat</pre>
+<p>Search the <a href="@@ROOT@@packages/">package browser</a> for names. Extra is where desktop, init, and most applications live. Core is the base system, toolchain pieces that exist as recipes, boot, filesystems, and networking.</p>
+
+<h3>Configuration files</h3>
+<p>Files under <code>etc</code> are preserved when you change them. On upgrade, SPS keeps the local file. If the new package also changed its copy, the new one is written beside it as <code>.sps-new</code>. SPS does not merge the two.</p>
+</main>
+</div>
+@@FOOTER@@
+</div>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
+</body>
+</html>

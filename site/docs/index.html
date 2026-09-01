@@ -3,33 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Documentation - Splux Linux</title>
-<meta name="description" content="Splux and SPS documentation.">
+<title>Handbook - Splux Linux</title>
+<meta name="description" content="Splux Linux handbook: live images, installation, and SPS.">
 <link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="@@ROOT@@assets/style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
+<div class="wrap wide">
 @@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
 <main id="main">
-<h2>Documentation</h2>
+<h2>Handbook</h2>
 <hr class="rule">
+<p>This is the Splux Linux handbook. Splux is a source-based distribution. Packages are built on the machine that installs them, from recipes in <a href="https://github.com/RobertFlexx/sps-core">sps-core</a> and <a href="https://github.com/RobertFlexx/sps-extra">sps-extra</a>, using SPS.</p>
+<p>Live images are development snapshots, not a numbered stable release. Read the chapter that matches the ISO you booted.</p>
+
+<h3>Start here</h3>
+<table class="docs">
+<thead>
+<tr><th>Chapter</th><th>What it covers</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="@@ROOT@@docs/images/">Live images</a></td>
+<td>tty, slim, and Plasma: what is on each disc, and which one to download.</td>
+</tr>
+<tr>
+<td><a href="@@ROOT@@install/">Install</a></td>
+<td>Three paths in tabs: <code>setup</code>, a full manual install from the tty ISO without <code>setup</code>, and the slim image.</td>
+</tr>
+<tr>
+<td><a href="@@ROOT@@docs/sps/">SPS tools</a></td>
+<td><code>src</code>, <code>sget</code>, <code>mkpkg</code>, <code>pkin</code>, and the rest of the package system.</td>
+</tr>
+<tr>
+<td><a href="@@ROOT@@docs/first-boot/">After first boot</a></td>
+<td>Passwords, network, services, and the next packages.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Install paths</h3>
+<p>Use <a href="@@ROOT@@install/#setup">guided setup</a> on <code>sps-live-tty.iso</code> or <code>sps-live-plasma.iso</code> if you want dialog screens. Use the <a href="@@ROOT@@install/#manual">manual chapter</a> if you want the same work as shell commands, with only tools that exist on the tty disc. The <a href="@@ROOT@@install/#slim">slim chapter</a> is rescue, partitioning, and network debugging. Slim is not a source-install disc.</p>
+
+<h3>Architecture and status</h3>
+<p>Published images are x86_64 hybrid ISOs. Live PID 1 is busybox init with gettys on tty1 and ttyS0 (or systemd when the machine that built the ISO had it). The login is <code>root</code> with an empty password.</p>
+<p>SPS 1.0 is usable. Official recipe trees are still being built out. A console install compiles for a long time. A Plasma install compiles Qt and KDE and takes much longer.</p>
+
+<h3>Reference trees</h3>
 <ul class="plain">
-<li><a href="@@ROOT@@install/">Installation</a></li>
-<li><a href="@@ROOT@@packages/">Package browser</a></li>
+<li><a href="@@ROOT@@packages/">Package browser</a> (@@N_PACKAGES@@ packages)</li>
 <li><a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a></li>
 <li><a href="https://github.com/RobertFlexx/SPS/blob/main/DESIGN.md">SPS 1.0 formats and behavior</a></li>
+<li><a href="https://github.com/RobertFlexx/SPS/blob/main/man/setup.1">setup(1)</a></li>
 <li><a href="https://github.com/RobertFlexx/SPS/blob/main/PACKAGE-MAINTAINER.md">Package maintainer guide</a></li>
-<li><a href="https://github.com/RobertFlexx/SPS/blob/main/MANIFESTO.md">SPS manifesto</a></li>
 <li><a href="https://github.com/RobertFlexx/sps-core/blob/main/README.md">core collection</a></li>
 <li><a href="https://github.com/RobertFlexx/sps-extra/blob/main/README.md">extra collection</a></li>
 <li><a href="@@ROOT@@source/">Source repositories</a></li>
 </ul>
-<p>SPS stores package definitions in ordinary Git repositories. The core tree contains the base system and toolchain. Extra contains packages outside the base installation.</p>
+
+<h3>Fastfetch</h3>
 <p>Fastfetch is a native SPS package. On a Splux install it counts SPS packages in its Packages module and still reports Flatpak, Homebrew, Nix, and other managers when they are present. The system default is gray labels and a yellow P in the SPS logo. A user config in <code>~/.config/fastfetch/</code> overrides that default. Fastfetch is not started from shell profiles.</p>
 </main>
+</div>
 @@FOOTER@@
 </div>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
 </body>
 </html>

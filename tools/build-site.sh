@@ -44,7 +44,8 @@ fi
 
 rm -rf "$OUT"
 mkdir -p "$OUT/assets" "$OUT/data" "$OUT/download" "$OUT/packages" \
-	"$OUT/install" "$OUT/docs" "$OUT/source" "$OUT/news"
+	"$OUT/install" "$OUT/docs" "$OUT/docs/images" "$OUT/docs/sps" \
+	"$OUT/docs/first-boot" "$OUT/source" "$OUT/news"
 
 cp -a site/assets/. "$OUT/assets/"
 if [ -f CNAME ]; then
@@ -83,6 +84,32 @@ write_footer() {
 <p>This site was fully handmade by <a href="https://github.com/RobertFlexx">RobertFlexx</a>.</p>
 </footer>
 EOF
+}
+
+write_docs_nav() {
+	root=$1
+	cur=$2
+	printf '%s\n' '<nav class="docs-side" aria-label="Handbook">'
+	printf '%s\n' '<p class="docs-kicker">Handbook</p>'
+	printf '%s\n' '<ul class="docs-toc">'
+	set -- \
+		overview "${root}docs/" "Overview" \
+		images "${root}docs/images/" "Live images" \
+		install "${root}install/" "Install" \
+		sps "${root}docs/sps/" "SPS tools" \
+		firstboot "${root}docs/first-boot/" "After first boot"
+	while [ "$#" -ge 3 ]
+	do
+		if [ "$cur" = "$1" ]; then
+			printf '<li><a href="%s" aria-current="page">%s</a></li>\n' \
+				"$2" "$3"
+		else
+			printf '<li><a href="%s">%s</a></li>\n' "$2" "$3"
+		fi
+		shift 3
+	done
+	printf '%s\n' '</ul>'
+	printf '%s\n' '</nav>'
 }
 
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/splux-site.XXXXXX") || exit 1
@@ -196,7 +223,7 @@ if command -v gh >/dev/null 2>&1; then
 fi
 if [ "$tag" = unknown ] || [ -z "$tag" ]; then
 	tag=latest
-	date=see GitHub
+	date="see GitHub"
 	published=
 fi
 generated=$(date -u '+%Y-%m-%d %H:%M UTC' 2>/dev/null || date)
@@ -263,12 +290,15 @@ subst() {
 	src=$1
 	dest=$2
 	root=$3
+	docscurrent=${4-}
 	write_header "$root" >"$tmp/header.html"
 	write_footer "$root" >"$tmp/footer.html"
+	write_docs_nav "$root" "$docscurrent" >"$tmp/docsnav.html"
 	mkdir -p "$(dirname "$dest")"
 	awk -f tools/subst.awk \
 		-v headerfile="$tmp/header.html" \
 		-v footerfile="$tmp/footer.html" \
+		-v docsnavfile="$tmp/docsnav.html" \
 		-v rowsfile="$tmp/rows.html" \
 		-v newsfile="$tmp/news.html" \
 		-v brieffile="$tmp/news-brief.html" \
@@ -291,8 +321,11 @@ subst() {
 subst site/index.html "$OUT/index.html" "./"
 subst site/download/index.html "$OUT/download/index.html" "../"
 subst site/packages/index.html "$OUT/packages/index.html" "../"
-subst site/install/index.html "$OUT/install/index.html" "../"
-subst site/docs/index.html "$OUT/docs/index.html" "../"
+subst site/install/index.html "$OUT/install/index.html" "../" install
+subst site/docs/index.html "$OUT/docs/index.html" "../" overview
+subst site/docs/images/index.html "$OUT/docs/images/index.html" "../../" images
+subst site/docs/sps/index.html "$OUT/docs/sps/index.html" "../../" sps
+subst site/docs/first-boot/index.html "$OUT/docs/first-boot/index.html" "../../" firstboot
 subst site/source/index.html "$OUT/source/index.html" "../"
 
 awk -f tools/news.awk -v mode=html -v page=1 -v per="$news_per" \

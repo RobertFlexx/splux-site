@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPS tools - Splux Linux</title>
+<meta name="description" content="SPS package tools used on Splux: src, sget, mkpkg, pkin, and setup.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap wide">
+@@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
+<main id="main">
+<h2>SPS tools</h2>
+<hr class="rule">
+<p>SPS is a set of small POSIX shell and AWK programs, not one large front end. Splux uses them for the installer, live images, and official collections. The same tools can manage a tree that is not Splux.</p>
+<p>On a live image they live on <code>PATH</code> under <code>/usr</code>. Package database, cache, and build directories are under <code>SPS_ROOT</code> (default <code>/</code>).</p>
+
+<table class="docs">
+<thead>
+<tr><th>Tool</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr><td><code>src</code></td><td>Repository handling. <code>src update</code> clones or indexes trees from <code>/etc/sps/repos.conf</code>.</td></tr>
+<tr><td><code>sget</code></td><td>Dependency-aware frontend. Resolves a graph, then calls <code>mkpkg</code> and <code>pkin</code>.</td></tr>
+<tr><td><code>mkpkg</code></td><td>Builds one recipe into a <code>.pkg.tar.zst</code> (or gz/xz when compression says so).</td></tr>
+<tr><td><code>pkin</code></td><td>Installs a built package into <code>SPS_ROOT</code>.</td></tr>
+<tr><td><code>pkdel</code></td><td>Removes an installed package.</td></tr>
+<tr><td><code>pkstat</code></td><td>Queries the installed database.</td></tr>
+<tr><td><code>pkcheck</code></td><td>Verifies files against recorded checksums.</td></tr>
+<tr><td><code>pkmark</code></td><td>Marks why a package is installed (explicit / as-needed).</td></tr>
+<tr><td><code>setup</code></td><td>Splux installer. Dialog screens, or the same choices from flags. Not required to use SPS.</td></tr>
+<tr><td><code>mkiso</code></td><td>Builds Splux live images. Maintainer tool.</td></tr>
+</tbody>
+</table>
+
+<h3>Configuration</h3>
+<p><code>/etc/sps/sps.conf</code> must exist before the first <code>sget</code>. Live images already have one. Default keys:</p>
+<pre class="block">db /var/lib/sps
+cache /var/cache/sps
+build /var/tmp/sps
+repo_root /usr/src/sps
+makejobs auto
+cflags -O2 -pipe
+cxxflags -O2 -pipe
+march native
+compression auto
+preserve etc</pre>
+<p>Paths in that file are relative to <code>SPS_ROOT</code> unless you override them with environment variables. For an install into <code>/mnt</code>:</p>
+<pre class="block">export SPS_ROOT=/mnt
+unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
+<p>Leaving those unset is required so they resolve under the target, not under the live root.</p>
+
+<h3>Repositories</h3>
+<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins.</p>
+<pre class="block">dir core /usr/src/sps/core 100
+dir extra /usr/src/sps/extra 80
+git core https://github.com/RobertFlexx/sps-core.git 100
+git extra https://github.com/RobertFlexx/sps-extra.git 80</pre>
+<p>On tty and Plasma images the live <code>repos.conf</code> uses <code>dir</code> entries pointing at the bundled trees. Slim images have no recipes, so they use the git lines. <code>src update</code> for a git repo needs <code>git</code>, which slim does not ship.</p>
+<p>During a target install, <code>setup</code> writes <code>dir</code> paths prefixed with the target (<code>/mnt/usr/src/sps/core</code>) so <code>src update</code> can index them from the live system, then rewrites them to <code>/usr/src/sps/...</code> for the booted machine. The <a href="@@ROOT@@install/#manual">manual install</a> does the same.</p>
+
+<h3>Install a package</h3>
+<pre class="block">src update
+sget install curl</pre>
+<p>That resolves dependencies, builds each recipe with the live compiler, and installs into <code>SPS_ROOT</code>. Builds take as long as compiling that software usually takes. Plasma graphs compile Qt and KDE.</p>
+
+<h3>Init packages</h3>
+<p>These conflict. <code>sget</code> will not install more than one. Write the choice to <code>$SPS_ROOT/etc/sps/init</code> before the first package so service hooks see it.</p>
+<table class="docs">
+<thead>
+<tr><th>File</th><th>Package</th><th>PID 1</th></tr>
+</thead>
+<tbody>
+<tr><td><code>systemd</code></td><td><code>init-systemd</code></td><td>systemd (udev, logind)</td></tr>
+<tr><td><code>openrc</code></td><td><code>init-openrc</code></td><td>OpenRC, eudev, elogind</td></tr>
+<tr><td><code>s6</code></td><td><code>init-s6</code></td><td>s6, eudev, elogind</td></tr>
+<tr><td><code>runit</code></td><td><code>init-runit</code></td><td>runit, eudev, elogind</td></tr>
+<tr><td><code>dinit</code></td><td><code>init-dinit</code></td><td>dinit, eudev, elogind</td></tr>
+<tr><td><code>shepherd</code></td><td><code>init-shepherd</code></td><td>GNU Shepherd, eudev, elogind, Guile</td></tr>
+<tr><td><code>none</code></td><td>(no init package)</td><td>the installed tree has no PID 1 from SPS</td></tr>
+</tbody>
+</table>
+<p>Init packages live in extra. A bootable console needs extra recipes on the disc (tty or Plasma), not slim.</p>
+
+<h3>Kernels</h3>
+<p><code>linux-desktop</code> is the Splux daily-driver config (DRM, NVMe, virtio, filesystems). It installs <code>/boot/vmlinuz-desktop-7.2.2</code>. <code>linux</code> is upstream defconfig and installs <code>/boot/vmlinuz-7.2.2</code>. Neither package runs <code>grub-install</code>. <code>none</code> will not boot a new disk.</p>
+
+<h3>Further reading</h3>
+<ul class="plain">
+<li><a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a></li>
+<li><a href="https://github.com/RobertFlexx/SPS/blob/main/DESIGN.md">DESIGN.md</a></li>
+<li><a href="https://github.com/RobertFlexx/SPS/blob/main/PACKAGE-MAINTAINER.md">Recipe format</a></li>
+<li><a href="@@ROOT@@packages/">Package browser</a></li>
+</ul>
+</main>
+</div>
+@@FOOTER@@
+</div>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
+</body>
+</html>

@@ -4,42 +4,419 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install - Splux Linux</title>
-<meta name="description" content="How to boot a Splux live image and run setup.">
+<meta name="description" content="Install Splux: guided setup, a full manual tty install without setup, and the slim image.">
 <link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="@@ROOT@@assets/style.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="wrap">
+<div class="wrap wide">
 @@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
 <main id="main">
 <h2>Install</h2>
 <hr class="rule">
-<p>The installation procedure is still being finalized. The path that exists today is: boot a live ISO, mount a target filesystem, and run <code>setup</code>.</p>
-<p><code>setup</code> is the Splux installer. It is not a generic SPS or LFS installer. It uses dialog screens, or the same choices from flags for scripts.</p>
-<h2>1. Download and verify</h2>
-<hr class="rule">
-<p>Get an image from <a href="@@ROOT@@download/">download</a>. For a source install use <code>sps-live-tty.iso</code>, not the slim image. Check it against <a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a>.</p>
-<h2>2. Write the image</h2>
-<hr class="rule">
+<p>Splux is installed from a live ISO. Packages are compiled on that live system into a target root. Pick a tab. Hash URLs stay on the method: <code>#setup</code>, <code>#manual</code>, <code>#slim</code>.</p>
+<ul class="local-toc">
+<li><a href="#setup">Guided setup</a> on tty or Plasma</li>
+<li><a href="#manual">Manual install</a> from the tty ISO, without <code>setup</code></li>
+<li><a href="#slim">Slim image</a> (rescue, not a source install)</li>
+</ul>
+<div class="callout">
+<p><strong>Which ISO.</strong> Source install needs <code>sps-live-tty.iso</code> or <code>sps-live-plasma.iso</code>. Those discs carry sps-core, sps-extra, and a seed compiler. <code>sps-live-tty-slim.iso</code> does not. Compare images in the <a href="@@ROOT@@docs/images/">live images</a> chapter.</p>
+</div>
+
+<div class="tabs" data-tabs>
+<div class="tablist" role="tablist" aria-label="Install method">
+<button type="button" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true" tabindex="0" data-hash="setup">setup</button>
+<button type="button" role="tab" id="tab-manual" aria-controls="panel-manual" aria-selected="false" tabindex="-1" data-hash="manual">Manual (tty)</button>
+<button type="button" role="tab" id="tab-slim" aria-controls="panel-slim" aria-selected="false" tabindex="-1" data-hash="slim">Slim ISO</button>
+</div>
+
+<section class="tabpanel" role="tabpanel" id="panel-setup" aria-labelledby="tab-setup">
+<h3>Guided setup</h3>
+<p><code>setup</code> is the Splux installer. It is not a generic SPS or LFS installer. Dialog screens collect the same choices you can pass as flags. It never guesses a disk for <code>grub-install</code>.</p>
+
+<h4>1. Download and verify</h4>
+<p>Get <a href="@@ROOT@@download/">sps-live-tty.iso</a> (or the Plasma image). Check it on the machine that downloaded it:</p>
+<pre class="block">sha256sum -c SHA256SUMS</pre>
+<p>Current published tag: <a href="https://github.com/RobertFlexx/SPS/releases/latest">@@RELEASE_TAG@@</a> (@@RELEASE_DATE@@). Signatures are not published yet.</p>
+
+<h4>2. Write the image</h4>
 <pre class="block">dd if=sps-live-tty.iso of=/dev/sdX bs=4M status=progress conv=fsync</pre>
 <p>Replace <code>/dev/sdX</code> with the USB device. That command erases the destination.</p>
-<h2>3. Boot and target disk</h2>
-<hr class="rule">
-<p>Boot the "SPS Linux live (Splux)" entry. The live system comes up on the console (or Plasma on the Plasma image). For QEMU, give the guest a writable second disk in addition to the CD. The live image never runs <code>grub-install</code> on its own.</p>
-<h2>4. Run setup</h2>
-<hr class="rule">
-<pre class="block">setup
-setup --plan --profile plasma-desktop --target /mnt --user alex
-setup --non-interactive --profile minimal --target /mnt --hostname darkstar</pre>
-<p>Profiles are <code>minimal</code>, <code>server</code>, <code>plasma-desktop</code>, and <code>plasma-full</code>. Init is a choice: systemd (default) or OpenRC. Those packages conflict. Guided partitioning is optional. <code>grub-install</code> still needs <code>--install-bootloader</code> and <code>--disk</code>.</p>
-<p>The installer writes hostname, timezone, keymap, and a first user, copies bundled recipe trees when present, runs <code>src update</code>, and <code>sget install</code>. Packages are built from source on the target. A Plasma install compiles Qt and KDE and takes a long time.</p>
-<h2>More</h2>
-<hr class="rule">
-<p><a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a> and <a href="https://github.com/RobertFlexx/SPS/blob/main/man/setup.1">setup(1)</a> are the current command references.</p>
+
+<h4>3. Boot</h4>
+<p>Boot the "SPS Linux live (Splux)" entry. Login is <code>root</code> with an empty password. On Plasma, open Konsole. Live PATH often omits <code>/sbin</code>:</p>
+<pre class="block">export PATH=/sbin:/usr/sbin:/usr/bin:/bin:$PATH</pre>
+<p>For QEMU, give the guest a writable second disk. The live image never runs <code>grub-install</code> on its own.</p>
+
+<h4>4. Run setup</h4>
+<pre class="block">setup</pre>
+<p>Profiles: <code>minimal</code>, <code>server</code>, <code>plasma-desktop</code>, <code>plasma-full</code>. Init: systemd, OpenRC, s6, runit, dinit, or Shepherd. Those packages conflict. Guided partitioning waits until the last confirmation. Kernel <code>none</code> is the interactive default for a console profile; a disk that must boot itself needs <code>linux-desktop</code> or <code>linux</code>.</p>
+<p>Non-interactive examples:</p>
+<pre class="block">setup --plan --profile plasma-desktop --target /mnt --user alex
+
+setup --non-interactive \
+  --profile minimal \
+  --target /mnt \
+  --hostname darkstar \
+  --timezone UTC \
+  --keymap us \
+  --locale C.UTF-8 \
+  --init systemd \
+  --kernel linux-desktop \
+  --partition efi-swap-root \
+  --disk /dev/sda \
+  --format yes \
+  --bootloader grub \
+  --install-bootloader \
+  --user alex</pre>
+<p><code>--plan</code> and <code>--non-interactive</code> never touch a disk unless you pass <code>--disk</code> and <code>--format yes</code> together. <code>grub-install</code> still needs <code>--install-bootloader</code> and <code>--disk</code>.</p>
+
+<h4>Profiles and kernels</h4>
+<table class="docs">
+<thead>
+<tr><th>Profile</th><th>Packages (plus init and kernel you select)</th></tr>
+</thead>
+<tbody>
+<tr><td><code>minimal</code></td><td><code>base-system dialog splux-base fastfetch</code></td></tr>
+<tr><td><code>server</code></td><td>minimal, plus <code>openssh gnupg rsync sudo</code></td></tr>
+<tr><td><code>plasma-desktop</code></td><td>minimal, plus Plasma, SDDM, Mesa, PipeWire, portals</td></tr>
+<tr><td><code>plasma-full</code></td><td>plasma-desktop, plus <code>kde-apps firefox flatpak</code></td></tr>
+</tbody>
+</table>
+<p><code>setup --list-profiles</code> and <code>setup --list-sets</code> print the catalog. Optional sets cover SSH, printing, Flatpak, NVIDIA, firmware, and more. <code>--kernel</code> is <code>none</code>, <code>linux</code>, <code>linux-desktop</code>, or <code>custom</code>.</p>
+
+<h4>Partition layouts</h4>
+<table class="docs">
+<thead>
+<tr><th>Layout</th><th>GPT map</th></tr>
+</thead>
+<tbody>
+<tr><td><code>efi-root</code></td><td>512MiB ESP, rest root</td></tr>
+<tr><td><code>efi-swap-root</code></td><td>ESP, swap (default 8GiB), rest root</td></tr>
+<tr><td><code>efi-swap-root-home</code></td><td>ESP, swap, 48GiB root, rest home</td></tr>
+<tr><td><code>bios-root</code></td><td>1MiB BIOS boot, rest root</td></tr>
+<tr><td><code>existing</code> / <code>manage</code></td><td>you mount or name partitions</td></tr>
+</tbody>
+</table>
+<p>Formats match the installer: ESP is FAT32 labeled <code>SPS_EFI</code>, root is ext4 labeled <code>sps-root</code>, swap is labeled <code>sps-swap</code>. <code>/etc/fstab</code> is written from <code>blkid</code> UUIDs when setup partitioned the disk.</p>
+
+<h4>What setup does</h4>
+<p>It writes hostname, timezone, keymap, locale, and <code>/etc/sps/init</code>, copies bundled recipe trees when they exist, writes <code>sps.conf</code>, runs <code>src update</code>, then <code>sget install</code>. Users land after packages so <code>filesystem</code>'s passwd file is already there. If you passed <code>--install-bootloader</code>, it runs live <code>grub-install</code> (EFI removable <code>EFI/BOOT/BOOTX64.EFI</code>, then NVRAM via <code>efibootmgr</code> when that binary exists; BIOS uses <code>i386-pc</code>). It does not run <code>grub-mkconfig</code>. See <code>/root/sps-bootloader.txt</code> on the target.</p>
+<p>A Plasma install compiles Qt and KDE and takes a long time. See <a href="https://github.com/RobertFlexx/SPS/blob/main/man/setup.1">setup(1)</a> for every flag.</p>
+</section>
+
+<section class="tabpanel" role="tabpanel" id="panel-manual" aria-labelledby="tab-manual">
+<h3>Manual install (no setup)</h3>
+<p>This is the same work <code>setup</code> does, written as shell commands. It uses tools that exist on <code>sps-live-tty.iso</code> (the Plasma ISO has the same installer stack). Do not follow this chapter on slim.</p>
+<div class="callout">
+<p><strong>Tools on the tty disc.</strong> SPS (<code>src</code>, <code>sget</code>, <code>mkpkg</code>, <code>pkin</code>, and the rest), gcc/g++, make, cmake, ninja, meson, python3, perl, git, curl, wget, tar, xz, gzip, zstd, nano, vim, <code>dialog</code>, <code>openssl</code>, <code>lsblk</code>, <code>blkid</code>, <code>sfdisk</code>, <code>cfdisk</code>, <code>fdisk</code>, <code>wipefs</code>, <code>mkfs.ext4</code>, <code>mkfs.vfat</code>, <code>mkswap</code>, <code>partprobe</code>, <code>dhcpcd</code>, <code>grub-install</code>, <code>grub-mkconfig</code>, <code>efibootmgr</code> (when the builder had it), plus busybox <code>sh</code>, <code>mount</code>, <code>chroot</code>, <code>passwd</code>. Recipes are at <code>/usr/src/sps/core</code> and <code>/usr/src/sps/extra</code>.</p>
+</div>
+
+<ol class="steps">
+<li>
+<p><strong>Boot tty and fix PATH.</strong> Login is <code>root</code> with an empty password.</p>
+<pre class="block">export PATH=/sbin:/usr/sbin:/usr/bin:/bin:$PATH
+lsblk -o NAME,SIZE,TYPE,TRAN,MODEL</pre>
+<p>Pick a writable disk that is not the live USB. On QEMU that is the second disk. Optional DHCP: <code>dhcpcd</code>.</p>
+</li>
+<li>
+<p><strong>Partition and format.</strong> Use the firmware tabs. Names: <code>/dev/sda1</code> versus <code>/dev/nvme0n1p1</code>. These layouts match <code>setup</code>.</p>
+<div class="tabs" data-tabs>
+<div class="tablist" role="tablist" aria-label="Firmware">
+<button type="button" role="tab" id="tab-uefi" aria-controls="panel-uefi" aria-selected="true" tabindex="0" data-hash="uefi">UEFI (GPT)</button>
+<button type="button" role="tab" id="tab-bios" aria-controls="panel-bios" aria-selected="false" tabindex="-1" data-hash="bios">BIOS (GPT)</button>
+</div>
+<section class="tabpanel" role="tabpanel" id="panel-uefi" aria-labelledby="tab-uefi">
+<p>ESP (type EFI System), swap, then Linux root. Default swap size is 8GiB, same as setup.</p>
+<pre class="block">DISK=/dev/sda
+wipefs -a "$DISK"
+sfdisk --wipe always --wipe-partitions always "$DISK" &lt;&lt;'EOF'
+label: gpt
+size=512MiB, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B, name=EFI
+size=8GiB, type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F, name=swap
+type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, name=root
+EOF
+partprobe "$DISK"
+
+EFI=${DISK}1
+SWAP=${DISK}2
+ROOT=${DISK}3
+# nvme: EFI=${DISK}p1 and so on
+
+mkfs.vfat -F 32 -n SPS_EFI "$EFI"
+mkswap -L sps-swap "$SWAP"
+mkfs.ext4 -F -L sps-root "$ROOT"
+
+mount "$ROOT" /mnt
+mount -o remount,rw,exec,suid,dev /mnt
+mkdir -p /mnt/boot/efi
+mount "$EFI" /mnt/boot/efi
+swapon "$SWAP"</pre>
+<p>No swap: omit the swap line in the sfdisk script (setup layout <code>efi-root</code>) and skip <code>mkswap</code> / <code>swapon</code>. Separate <code>/home</code>: setup layout <code>efi-swap-root-home</code> uses a 48GiB root then the rest as home; format that partition ext4 labeled <code>sps-home</code> and mount it on <code>/mnt/home</code>.</p>
+<p><code>cfdisk "$DISK"</code> is on the disc if you want a TUI instead of a script. Types: EFI System, Linux swap, Linux filesystem.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-bios" aria-labelledby="tab-bios">
+<p>1MiB BIOS boot partition (GRUB GPT), then Linux root. No ESP.</p>
+<pre class="block">DISK=/dev/sda
+wipefs -a "$DISK"
+sfdisk --wipe always --wipe-partitions always "$DISK" &lt;&lt;'EOF'
+label: gpt
+size=1MiB, type=21686148-6449-6E6F-744E-656564454649, name=BIOS
+type=0FC63DAF-8483-4772-8E79-3D69D8477DE4, name=root
+EOF
+partprobe "$DISK"
+
+ROOT=${DISK}2
+mkfs.ext4 -F -L sps-root "$ROOT"
+mount "$ROOT" /mnt
+mount -o remount,rw,exec,suid,dev /mnt</pre>
+<p>The remount matters. Autoconf runs conftests on this mount; a <code>noexec</code> or <code>nodev</code> root fails those builds.</p>
+</section>
+</div>
+</li>
+<li>
+<p><strong>Target directories and sps.conf.</strong> <code>sget</code> will not run without a config.</p>
+<pre class="block">mkdir -p /mnt/etc/sps /mnt/usr/src/sps /mnt/root
+if [ -f /etc/sps/live ] &amp;&amp; [ -f /etc/sps/sps.conf ]; then
+  cp /etc/sps/sps.conf /mnt/etc/sps/sps.conf
+else
+  cat &gt; /mnt/etc/sps/sps.conf &lt;&lt;'EOF'
+db /var/lib/sps
+cache /var/cache/sps
+build /var/tmp/sps
+repo_root /usr/src/sps
+makejobs auto
+cflags -O2 -pipe
+cxxflags -O2 -pipe
+march native
+compression auto
+preserve etc
+EOF
+fi</pre>
+</li>
+<li>
+<p><strong>Copy bundled recipes.</strong> tty and Plasma already have them. Copying avoids a git clone during <code>src update</code>.</p>
+<pre class="block">cp -a /usr/src/sps/core/. /mnt/usr/src/sps/core/
+cp -a /usr/src/sps/extra/. /mnt/usr/src/sps/extra/
+rm -rf /mnt/usr/src/sps/core/.git /mnt/usr/src/sps/extra/.git
+
+cat &gt; /mnt/etc/sps/repos.conf &lt;&lt;'EOF'
+dir core /mnt/usr/src/sps/core 100
+dir extra /mnt/usr/src/sps/extra 80
+EOF</pre>
+<p>Those paths are for indexing from the live system. After packages you rewrite them to <code>/usr/src/sps/...</code> for the booted machine.</p>
+</li>
+<li>
+<p><strong>Point SPS at /mnt and record init.</strong> Write <code>/etc/sps/init</code> before the first package so service hooks see it. The init packages conflict.</p>
+<pre class="block">export SPS_ROOT=/mnt
+unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
+<div class="tabs" data-tabs>
+<div class="tablist" role="tablist" aria-label="Init system">
+<button type="button" role="tab" id="tab-systemd" aria-controls="panel-init-systemd" aria-selected="true" tabindex="0" data-hash="systemd">systemd</button>
+<button type="button" role="tab" id="tab-openrc" aria-controls="panel-init-openrc" aria-selected="false" tabindex="-1" data-hash="openrc">OpenRC</button>
+<button type="button" role="tab" id="tab-s6" aria-controls="panel-init-s6" aria-selected="false" tabindex="-1" data-hash="s6">s6</button>
+<button type="button" role="tab" id="tab-runit" aria-controls="panel-init-runit" aria-selected="false" tabindex="-1" data-hash="runit">runit</button>
+<button type="button" role="tab" id="tab-dinit" aria-controls="panel-init-dinit" aria-selected="false" tabindex="-1" data-hash="dinit">dinit</button>
+<button type="button" role="tab" id="tab-shepherd" aria-controls="panel-init-shepherd" aria-selected="false" tabindex="-1" data-hash="shepherd">Shepherd</button>
+</div>
+<section class="tabpanel" role="tabpanel" id="panel-init-systemd" aria-labelledby="tab-systemd">
+<pre class="block">printf '%s\n' systemd &gt; /mnt/etc/sps/init
+# later: sget install init-systemd</pre>
+<p>PID 1 is systemd, with udev and logind. Interactive <code>setup</code> defaults to systemd when the live disc recorded that init.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-openrc" aria-labelledby="tab-openrc">
+<pre class="block">printf '%s\n' openrc &gt; /mnt/etc/sps/init
+# later: sget install init-openrc</pre>
+<p>OpenRC plus eudev and elogind. Enable services with <code>rc-update</code> after boot.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-s6" aria-labelledby="tab-s6">
+<pre class="block">printf '%s\n' s6 &gt; /mnt/etc/sps/init
+# later: sget install init-s6</pre>
+<p>s6 plus eudev and elogind. Enabled longruns live in <code>/etc/s6/enabled</code>.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-runit" aria-labelledby="tab-runit">
+<pre class="block">printf '%s\n' runit &gt; /mnt/etc/sps/init
+# later: sget install init-runit</pre>
+<p>runit plus eudev and elogind. Enable with a symlink in <code>/etc/runit/runsvdir/default</code>.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-dinit" aria-labelledby="tab-dinit">
+<pre class="block">printf '%s\n' dinit &gt; /mnt/etc/sps/init
+# later: sget install init-dinit</pre>
+<p>dinit plus eudev and elogind. Enable by linking into <code>/etc/dinit.d/boot.d</code>.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-shepherd" aria-labelledby="tab-shepherd">
+<pre class="block">printf '%s\n' shepherd &gt; /mnt/etc/sps/init
+# later: sget install init-shepherd</pre>
+<p>GNU Shepherd plus eudev, elogind, and Guile. Services are Scheme files under <code>/etc/shepherd.d</code>.</p>
+</section>
+</div>
+</li>
+<li>
+<p><strong>Probe the live compiler, then install packages.</strong> Fail here rather than inside the first autoconf package.</p>
+<pre class="block">printf '%s\n' 'int main(void){return 0;}' | gcc -x c - -o /tmp/sps-cc-probe
+rm -f /tmp/sps-cc-probe
+meson --version
+
+src update
+
+sget install base-system dialog splux-base fastfetch
+sget install init-systemd
+sget install linux-desktop
+sget install grub</pre>
+<p>Replace <code>init-systemd</code> with the package from the init tab. <code>base-system</code> is a metapackage (shell, coreutils, curl, git, e2fsprogs, busybox, shadow, tzdata, and the rest of the essential userland). <code>splux-base</code> is branding and os-release. <code>linux-desktop</code> is the Splux daily-driver kernel and installs <code>/boot/vmlinuz-desktop-7.2.2</code>. <code>linux</code> is upstream defconfig (<code>/boot/vmlinuz-7.2.2</code>). Skipping a kernel package will not boot a new disk.</p>
+<p>Server add-ons: <code>sget install openssh gnupg rsync sudo</code>. Plasma add-ons are the plasma-desktop profile set (Plasma, SDDM, Mesa, PipeWire, portals) and compile for a long time.</p>
+</li>
+<li>
+<p><strong>Rewrite repos.conf for the booted system.</strong></p>
+<pre class="block">cat &gt; /mnt/etc/sps/repos.conf &lt;&lt;'EOF'
+dir core /usr/src/sps/core 100
+dir extra /usr/src/sps/extra 80
+EOF</pre>
+</li>
+<li>
+<p><strong>Hostname, locale, keymap, timezone, fstab.</strong> Do this after packages so <code>filesystem</code> has already laid down passwd and a stub fstab. <code>tzdata</code> is in <code>base-system</code>; the live disc also has <code>/usr/share/zoneinfo</code> from the seed.</p>
+<pre class="block">printf '%s\n' darkstar &gt; /mnt/etc/hostname
+printf '%s\n' UTC &gt; /mnt/etc/timezone
+printf 'KEYMAP=%s\n' us &gt; /mnt/etc/vconsole.conf
+printf 'keymap %s\n' us &gt; /mnt/etc/sps/keymap
+printf 'LANG=%s\n' C.UTF-8 &gt; /mnt/etc/locale.conf
+cp /usr/share/zoneinfo/UTC /mnt/etc/localtime
+
+ROOT_UUID=$(blkid -s UUID -o value "$ROOT")
+{
+  printf '%s\n' '# /etc/fstab'
+  printf 'UUID=%s / ext4 defaults 1 1\n' "$ROOT_UUID"
+  if [ -n "$EFI" ]; then
+    printf 'UUID=%s /boot/efi vfat umask=0077 0 2\n' \
+      "$(blkid -s UUID -o value "$EFI")"
+  fi
+  if [ -n "$SWAP" ]; then
+    printf 'UUID=%s none swap defaults 0 0\n' \
+      "$(blkid -s UUID -o value "$SWAP")"
+  fi
+} &gt; /mnt/etc/fstab</pre>
+</li>
+<li>
+<p><strong>Users.</strong> After <code>shadow</code> / <code>filesystem</code> exist. setup uses uid 1000 and groups wheel, audio, video, input, kvm, users. Busybox <code>passwd</code> can set a hash in the live tree; <code>openssl passwd -6</code> is on the disc too.</p>
+<pre class="block"># example: lock root until you set a password, add user alex
+# edit /mnt/etc/passwd /mnt/etc/group /mnt/etc/shadow, or:
+mkdir -p /mnt/home/alex
+printf '%s\n' 'alex:x:1000:1000:alex:/home/alex:/bin/sh' &gt;&gt; /mnt/etc/passwd
+printf '%s\n' 'alex:x:1000:' &gt;&gt; /mnt/etc/group
+printf '%s\n' 'alex:!:0:0:99999:7:::' &gt;&gt; /mnt/etc/shadow
+chown -R 1000:1000 /mnt/home/alex
+chmod 0750 /mnt/home/alex
+# add alex to wheel,audio,video,input,kvm,users in /mnt/etc/group
+chroot /mnt passwd root
+chroot /mnt passwd alex</pre>
+<p>A full chroot for <code>passwd</code> needs a working target userland (after <code>base-system</code>). If chroot cannot run the target <code>passwd</code>, set hashes from the live system with <code>openssl passwd -6</code> and put the hash in the shadow field.</p>
+</li>
+<li>
+<p><strong>Bootloader.</strong> Explicit, same as setup. Run it after <code>grub</code> and a kernel are installed. Use the live <code>grub-install</code> pointed at the mounted tree.</p>
+<p>UEFI (writes <code>\EFI\BOOT\BOOTX64.EFI</code>, no NVRAM required):</p>
+<pre class="block">grub-install --target=x86_64-efi \
+  --efi-directory=/mnt/boot/efi \
+  --boot-directory=/mnt/boot \
+  --removable --no-nvram \
+  "$DISK"
+if command -v efibootmgr &gt;/dev/null 2&gt;&amp;1; then
+  grub-install --target=x86_64-efi \
+    --efi-directory=/mnt/boot/efi \
+    --bootloader-id=SPS \
+    --boot-directory=/mnt/boot \
+    "$DISK" || printf '%s\n' 'NVRAM update failed; removable path is in place'
+fi</pre>
+<p>BIOS:</p>
+<pre class="block">grub-install --target=i386-pc --boot-directory=/mnt/boot "$DISK"</pre>
+<p><code>setup</code> does not run <code>grub-mkconfig</code>. After the kernel is in <code>/mnt/boot</code>:</p>
+<pre class="block">mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg</pre>
+</li>
+<li>
+<p><strong>Unmount and reboot.</strong></p>
+<pre class="block">umount /mnt/dev /mnt/proc /mnt/sys 2&gt;/dev/null || :
+swapoff -a
+umount /mnt/boot/efi 2&gt;/dev/null || :
+umount /mnt
+reboot</pre>
+<p>Continue in <a href="@@ROOT@@docs/first-boot/">After first boot</a>.</p>
+</li>
+</ol>
+
+<h4>Time and limits</h4>
+<p>Source install compiles on the live compiler into <code>SPS_ROOT</code>. <code>linux-desktop</code> is a kernel build. Plasma is Qt and KDE. Leave it running.</p>
+<p>Packages are linked against the live C library. There is no glibc recipe in sps-core yet. That is the same for <code>setup</code> and this chapter. Splux is still under testing; a first boot needs the kernel, an init, GRUB, and a userland that can actually start.</p>
+</section>
+
+<section class="tabpanel" role="tabpanel" id="panel-slim" aria-labelledby="tab-slim">
+<h3>Slim ISO</h3>
+<p><code>sps-live-tty-slim.iso</code> is the small console image from <code>make iso-slim</code> (<code>--no-seed --no-modules</code>, no <code>--core</code>, no <code>--extra</code>). It is a rescue and disk tool. It is not a Splux source-install disc.</p>
+<div class="callout">
+<p><strong>What slim cannot do.</strong> No gcc, no make, no git, no python, no meson, no recipes, no live kernel modules. <code>repos.conf</code> lists git URLs, but <code>git</code> is not on the image, so <code>src update</code> cannot clone sps-core. <code>setup</code> is present because SPS is installed on every live root; it still cannot build packages here.</p>
+</div>
+
+<h4>What is on the disc</h4>
+<table class="docs">
+<thead>
+<tr><th>Class</th><th>Commands</th></tr>
+</thead>
+<tbody>
+<tr><td>SPS</td><td><code>src sget mkpkg pkin pkdel pkstat pkcheck pkmark setup mkiso</code></td></tr>
+<tr><td>Disk</td><td><code>lsblk blkid sfdisk cfdisk fdisk wipefs mkfs.ext4 mke2fs mkfs.vfat mkswap partprobe</code></td></tr>
+<tr><td>Boot</td><td><code>grub-install grub-mkconfig</code>, and <code>efibootmgr</code> when the builder had it</td></tr>
+<tr><td>Network</td><td>host <code>dhcpcd</code>; busybox <code>udhcpc</code>, <code>wget</code>, <code>ip</code>, <code>ifconfig</code>, <code>ping</code></td></tr>
+<tr><td>Crypto / linker</td><td><code>openssl ldd ldconfig</code></td></tr>
+<tr><td>Busybox</td><td><code>sh vi mount umount chroot tar gzip xz passwd sha256sum modprobe fdisk mkswap</code> and the rest of the applet list. No <code>git</code>. No <code>zstd</code> applet. No <code>nano</code> / <code>vim</code>.</td></tr>
+</tbody>
+</table>
+
+<h4>Boot and PATH</h4>
+<pre class="block">export PATH=/sbin:/usr/sbin:/usr/bin:/bin:$PATH
+lsblk -o NAME,SIZE,TYPE,TRAN,MODEL</pre>
+<p>Login is <code>root</code> with an empty password. Edit files with busybox <code>vi</code>.</p>
+
+<h4>Network</h4>
+<pre class="block">ip link
+dhcpcd
+# if dhcpcd is missing or the interface needs busybox:
+udhcpc -i eth0
+ping -c 1 1.1.1.1
+wget -O - https://splux.robertflexx.dev/ &gt; /dev/null</pre>
+<p><code>wget</code> can fetch SHA256SUMS or another ISO. It cannot replace git for <code>src update</code>.</p>
+
+<h4>Partition and filesystems</h4>
+<p>The same <code>sfdisk</code> / <code>mkfs.ext4</code> / <code>mkfs.vfat</code> / <code>mkswap</code> commands as the <a href="#manual">manual tty chapter</a> work here. That only prepares disks. It does not install Splux. Typical rescue:</p>
+<pre class="block">lsblk
+# mount an existing Splux or other Linux root
+mount /dev/sda2 /mnt
+mount /dev/sda1 /mnt/boot/efi
+mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys /mnt/sys
+chroot /mnt /bin/sh</pre>
+<p>Reinstall GRUB from slim onto a disk that already has a <code>/boot</code> tree, using live <code>grub-install</code> the same way the tty chapter does. You still need a kernel and userland on that disk already.</p>
+
+<h4>Why setup fails here</h4>
+<p><code>setup</code> copies recipes from <code>/usr/src/sps/{core,extra}</code> when those trees exist. On slim they do not, so it would try git clones. <code>git</code> is missing. Even with recipes, the live gcc probe fails because there is no compiler. Use tty or Plasma for install.</p>
+<p>Download the install disc from another machine, or from slim if you have network and a place to write it, then reboot into tty:</p>
+<pre class="block"># on a machine that can download:
+# sps-live-tty.iso from https://github.com/RobertFlexx/SPS/releases/latest</pre>
+<p>Full install: <a href="#setup">setup tab</a> or <a href="#manual">manual tab</a>.</p>
+</section>
+</div>
+
+<p class="note">Splux is under active development. These snapshots track installer and live-session work. They are not a numbered stable release.</p>
 </main>
+</div>
 @@FOOTER@@
 </div>
 <script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@"></script>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
 </body>
 </html>

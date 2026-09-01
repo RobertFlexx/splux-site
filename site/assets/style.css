@@ -400,3 +400,229 @@ footer p {
 		overflow-x: auto;
 	}
 }
+
+/* Handbook: sidebar, tabs, callouts. Same black / gray / yellow. */
+
+.wrap.wide {
+	max-width: 1100px;
+}
+
+.handbook {
+	display: grid;
+	grid-template-columns: 13.5rem minmax(0, 1fr);
+	gap: 2rem;
+	align-items: start;
+}
+
+.docs-side {
+	position: sticky;
+	top: 1rem;
+	padding-top: 0.15rem;
+}
+
+.docs-kicker {
+	margin: 0 0 0.45rem;
+	color: var(--muted);
+	font-size: 0.8rem;
+}
+
+.docs-toc {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	border-top: 1px solid var(--rule);
+}
+
+.docs-toc li {
+	margin: 0;
+	max-width: none;
+}
+
+.docs-toc a {
+	display: block;
+	padding: 0.35rem 0;
+	border-bottom: 1px solid var(--rule);
+	color: var(--muted);
+}
+
+.docs-toc a:hover {
+	color: var(--accent);
+}
+
+.docs-toc a[aria-current="page"] {
+	color: var(--fg);
+	text-decoration: none;
+	border-bottom-color: var(--accent);
+}
+
+.handbook main h2:first-child {
+	margin-top: 0;
+}
+
+.handbook h3 {
+	margin: 1.5rem 0 0.35rem;
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: var(--fg);
+}
+
+.handbook h4 {
+	margin: 1.15rem 0 0.3rem;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--muted);
+}
+
+.local-toc {
+	list-style: none;
+	padding: 0;
+	margin: 0.5rem 0 1rem;
+}
+
+.local-toc li {
+	margin: 0.15rem 0;
+}
+
+.tabs {
+	margin: 0.85rem 0 1.25rem;
+}
+
+.tablist {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	border-bottom: 1px solid var(--rule);
+	margin: 0 0 1rem;
+}
+
+.tablist [role="tab"] {
+	font: inherit;
+	background: transparent;
+	color: var(--muted);
+	border: 1px solid transparent;
+	border-bottom: 0;
+	padding: 0.45rem 0.85rem;
+	cursor: pointer;
+	margin-bottom: -1px;
+}
+
+.tablist [role="tab"]:hover {
+	color: var(--fg);
+}
+
+.tablist [role="tab"][aria-selected="true"] {
+	color: var(--accent);
+	background: #111;
+	border-color: var(--rule);
+	border-bottom-color: var(--bg);
+}
+
+.tabpanel {
+	margin: 0;
+}
+
+html.js-tabs .tabpanel[hidden] {
+	display: none;
+}
+
+.callout {
+	border: 1px solid var(--rule);
+	border-left: 3px solid var(--accent);
+	padding: 0.65rem 0.85rem;
+	margin: 0.85rem 0 1rem;
+	color: var(--muted);
+}
+
+.callout strong {
+	color: var(--fg);
+	font-weight: 700;
+}
+
+.callout p {
+	margin: 0.35rem 0;
+}
+
+.callout p:first-child {
+	margin-top: 0;
+}
+
+.callout p:last-child {
+	margin-bottom: 0;
+}
+
+table.docs {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9rem;
+	margin: 0.75rem 0 1rem;
+}
+
+table.docs th,
+table.docs td {
+	text-align: left;
+	vertical-align: top;
+	padding: 0.35rem 0.7rem 0.35rem 0;
+	border-bottom: 1px solid #1a1a1a;
+}
+
+table.docs th {
+	color: var(--muted);
+	font-weight: 400;
+	border-bottom: 1px solid var(--rule);
+}
+
+.steps {
+	list-style: none;
+	padding: 0;
+	margin: 0.75rem 0 1rem;
+	counter-reset: step;
+}
+
+.steps > li {
+	counter-increment: step;
+	position: relative;
+	padding-left: 2.4rem;
+	margin: 0.9rem 0;
+	max-width: none;
+}
+
+.steps > li::before {
+	content: counter(step, decimal-leading-zero);
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: var(--accent);
+	font-weight: 700;
+}
+
+@media (max-width: 860px) {
+	.handbook {
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+	}
+
+	.docs-side {
+		position: static;
+	}
+
+	.docs-toc {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 1rem;
+		border-top: 0;
+	}
+
+	.docs-toc li {
+		border: 0;
+	}
+
+	.docs-toc a {
+		border: 0;
+		padding: 0.15rem 0;
+	}
+
+	table.docs {
+		display: block;
+		overflow-x: auto;
+	}
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live images - Splux Linux</title>
+<meta name="description" content="What is on sps-live-tty, sps-live-tty-slim, and sps-live-plasma.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap wide">
+@@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
+<main id="main">
+<h2>Live images</h2>
+<hr class="rule">
+<p>Images are hybrid ISOs from <a href="https://github.com/RobertFlexx/SPS">RobertFlexx/SPS</a>. Filenames stay the same; the current tag is <a href="https://github.com/RobertFlexx/SPS/releases/latest">@@RELEASE_TAG@@</a> (@@RELEASE_DATE@@). Verify against <a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a>.</p>
+<p>Every image includes SPS (<code>src</code>, <code>sget</code>, <code>mkpkg</code>, <code>pkin</code>, <code>setup</code>, <code>mkiso</code>, and the rest), <code>dialog</code>, disk tools, <code>dhcpcd</code>, <code>grub-install</code>, and <code>grub-mkconfig</code>. Live PID 1 is busybox init on published snapshots. <code>/bin/sh</code> is busybox. Login is <code>root</code> with an empty password.</p>
+
+<table class="docs">
+<thead>
+<tr><th></th><th>tty</th><th>slim</th><th>Plasma</th></tr>
+</thead>
+<tbody>
+<tr><td>File</td><td><code>sps-live-tty.iso</code></td><td><code>sps-live-tty-slim.iso</code></td><td><code>sps-live-plasma.iso</code></td></tr>
+<tr><td>Recipes</td><td>core and extra on the disc</td><td>none (git URLs in repos.conf)</td><td>core and extra on the disc</td></tr>
+<tr><td>Compiler</td><td>seed gcc, headers, startfiles</td><td>no</td><td>same as tty</td></tr>
+<tr><td>git / make / python / meson</td><td>yes</td><td>no</td><td>yes</td></tr>
+<tr><td>Kernel modules for the live kernel</td><td>yes</td><td>no</td><td>yes</td></tr>
+<tr><td>Source install with <code>setup</code> or <code>sget</code></td><td>yes</td><td>no</td><td>yes</td></tr>
+<tr><td>Session</td><td>console</td><td>console</td><td>Plasma / Wayland</td></tr>
+<tr><td>Use it for</td><td>install Splux</td><td>rescue, partition, network debug</td><td>install Splux from a graphical live session</td></tr>
+</tbody>
+</table>
+
+<div class="tabs" data-tabs>
+<div class="tablist" role="tablist" aria-label="Live image">
+<button type="button" role="tab" id="tab-img-tty" aria-controls="panel-img-tty" aria-selected="true" tabindex="0" data-hash="tty">tty</button>
+<button type="button" role="tab" id="tab-img-slim" aria-controls="panel-img-slim" aria-selected="false" tabindex="-1" data-hash="slim">slim</button>
+<button type="button" role="tab" id="tab-img-plasma" aria-controls="panel-img-plasma" aria-selected="false" tabindex="-1" data-hash="plasma">Plasma</button>
+</div>
+
+<section class="tabpanel" role="tabpanel" id="panel-img-tty" aria-labelledby="tab-img-tty">
+<h3>sps-live-tty.iso</h3>
+<p>This is the install disc. <code>make iso</code> copies sps-core and sps-extra into <code>/usr/src/sps/{core,extra}</code> and writes <code>dir</code> entries in <code>/etc/sps/repos.conf</code>. A host seed compiler, headers, glibc startfiles, and kernel modules come along so packages can be built offline.</p>
+<p>Seed tools include gcc, g++, make, cmake, ninja, meson, python3, perl, git, curl, wget, tar, xz, gzip, bzip2, zstd, nano, vim, pkg-config, and the binutils used to link. Partition tools, <code>dhcpcd</code>, <code>openssl</code>, <code>grub-install</code>, and <code>efibootmgr</code> (when the builder had it) are on this image too.</p>
+<p>Manual install: <a href="@@ROOT@@install/#manual">Install, Manual tab</a>. Guided: <a href="@@ROOT@@install/#setup">Install, setup tab</a>.</p>
+</section>
+
+<section class="tabpanel" role="tabpanel" id="panel-img-slim" aria-labelledby="tab-img-slim">
+<h3>sps-live-tty-slim.iso</h3>
+<p><code>make iso-slim</code> passes <code>--no-seed --no-modules</code> and does not copy core or extra. <code>repos.conf</code> falls back to git URLs. There is no gcc, no git, no make, no python, no meson, no recipes, and no live kernel modules.</p>
+<p>Busybox still provides <code>sh</code>, <code>vi</code>, <code>wget</code>, <code>udhcpc</code>, <code>ip</code>, <code>mount</code>, <code>chroot</code>, <code>tar</code>, <code>gzip</code>, <code>xz</code>, <code>passwd</code>, <code>sha256sum</code>, <code>ping</code>, and <code>modprobe</code>. Host copies of <code>dialog</code>, <code>lsblk</code>, <code>sfdisk</code>, <code>cfdisk</code>, <code>mkfs.ext4</code>, <code>mkfs.vfat</code>, <code>mkswap</code>, <code>dhcpcd</code>, <code>grub-install</code>, and <code>openssl</code> are still on the disc. There is no busybox <code>git</code> applet and no busybox <code>zstd</code> applet.</p>
+<p><code>setup</code> is installed (SPS is on every image) but it cannot complete a source install from slim. Full slim handbook: <a href="@@ROOT@@install/#slim">Install, slim tab</a>.</p>
+</section>
+
+<section class="tabpanel" role="tabpanel" id="panel-img-plasma" aria-labelledby="tab-img-plasma">
+<h3>sps-live-plasma.iso</h3>
+<p>Same installer, recipes, and seed compiler as tty, plus a host Plasma / Wayland stack. It needs a KMS device: virtio-gpu in QEMU, or a real GPU. NVIDIA on the live session is nouveau.</p>
+<p>Open Konsole and run <code>setup</code>, or follow the <a href="@@ROOT@@install/#manual">manual tty chapter</a>. The live graphical session is not the installed desktop. Installing Plasma still compiles Qt and KDE from source on the target.</p>
+</section>
+</div>
+
+<h3>Write a USB</h3>
+<pre class="block">dd if=sps-live-tty.iso of=/dev/sdX bs=4M status=progress conv=fsync</pre>
+<p>Replace <code>/dev/sdX</code> with the USB device, not a partition. That command erases the destination. Boot the "SPS Linux live (Splux)" entry.</p>
+<p>For QEMU, attach a writable second disk. The live image never runs <code>grub-install</code> on its own.</p>
+</main>
+</div>
+@@FOOTER@@
+</div>
+<script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@"></script>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
+</body>
+</html>

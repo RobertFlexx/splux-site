@@ -33,6 +33,13 @@ ISO names are stable:
 The visible tag name is filled at build time from the GitHub Releases API
 and refreshed from GitHub when you open the page.
 
+## Handbook
+
+`docs/` and `install/` are a static handbook (sidebar plus tabs). The
+install page covers guided `setup`, a full manual tty install without
+`setup`, and the slim ISO. New handbook HTML under `site/docs/` must be
+registered in `tools/build-site.sh` with the correct `@@ROOT@@` depth.
+
 ## News
 
 `news/` is generated at build time from GitHub, not edited by hand:
