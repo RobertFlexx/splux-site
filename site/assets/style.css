@@ -279,7 +279,19 @@ footer p {
 }
 
 .feed .who {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
 	color: var(--fg);
+}
+
+.feed .avatar {
+	display: block;
+	width: 24px;
+	height: 24px;
+	border: 1px solid var(--rule);
+	background: #111;
+	flex-shrink: 0;
 }
 
 .feed .verified {

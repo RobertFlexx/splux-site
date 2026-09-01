@@ -117,6 +117,7 @@
 				repo: a.getAttribute("data-repo") || "",
 				author: a.getAttribute("data-author") || "",
 				verified: a.getAttribute("data-verified") === "yes",
+				avatar: a.getAttribute("data-avatar") || "",
 				url: link.getAttribute("href") || "",
 				title: link.textContent || "",
 				summary: summary ? summary.textContent : ""
@@ -139,6 +140,7 @@
 				repo: it.repo || "",
 				author: it.author || "",
 				verified: !!it.verified,
+				avatar: it.avatar || "",
 				url: it.url,
 				title: it.title || "",
 				summary: it.summary || ""
@@ -147,16 +149,35 @@
 		return items;
 	}
 
+	function avatarOf(it) {
+		var av = it && it.avatar ? String(it.avatar) : "";
+		if (/^https:\/\/(avatars\.githubusercontent\.com\/|github\.com\/)/.test(av))
+			return av;
+		var name = it && it.author ? String(it.author) : "";
+		if (/^[A-Za-z0-9-]+$/.test(name))
+			return "https://github.com/" + name + ".png?size=48";
+		return "";
+	}
+
 	function renderItem(it, hideSummary) {
+		var av = avatarOf(it);
 		var html = "<article class=\"item\" data-kind=\"" + esc(it.kind || "") +
 			"\" data-repo=\"" + esc(it.repo || "") +
 			"\" data-author=\"" + esc(it.author || "") +
-			"\" data-verified=\"" + (it.verified ? "yes" : "no") + "\">";
+			"\" data-verified=\"" + (it.verified ? "yes" : "no") +
+			"\" data-avatar=\"" + esc(av) + "\">";
 		html += "<p class=\"meta\"><time datetime=\"" + esc(it.iso) + "\">" +
 			esc(formatLocal(it.iso)) + "</time> <span class=\"kind\">" +
 			esc(it.kind) + "</span> " + esc(it.repo);
-		if (it.author)
-			html += " <span class=\"who\">" + esc(it.author) + "</span>";
+		if (it.author || av) {
+			html += " <span class=\"who\">";
+			if (av)
+				html += "<img class=\"avatar\" src=\"" + esc(av) +
+					"\" width=\"24\" height=\"24\" alt=\"\" loading=\"lazy\">";
+			if (it.author)
+				html += esc(it.author);
+			html += "</span>";
+		}
 		if (it.verified)
 			html += " <span class=\"verified\">verified</span>";
 		html += "</p>";
@@ -324,6 +345,7 @@
 				repo: "SPS",
 				author: (r.author && r.author.login) || "",
 				verified: false,
+				avatar: (r.author && r.author.avatar_url) || "",
 				url: r.html_url || "",
 				title: r.name || r.tag_name || "",
 				summary: body
@@ -350,6 +372,7 @@
 				repo: label,
 				author: author,
 				verified: !!ver.verified,
+				avatar: (c.author && c.author.avatar_url) || "",
 				url: c.html_url || "",
 				title: firstLine(commit.message),
 				summary: ""

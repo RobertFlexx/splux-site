@@ -1,6 +1,6 @@
 #!/bin/sh
 # Collect Splux releases and git history into TSV for the news page.
-# Fields: epoch iso kind repo url title summary author verified
+# Fields: epoch iso kind repo url title summary author verified avatar
 # Env: CORE EXTRA SPS SITE (git work trees). GH_TOKEN optional via gh.
 # Pulls every non-draft SPS release and every commit available from the
 # local clones and from the GitHub API. Duplicate URLs keep the last row
@@ -29,16 +29,30 @@ emit() {
 	summary=${7-}
 	author=${8-}
 	verified=${9-}
+	avatar=${10-}
 	title=$(printf '%s' "$title" | tr '\t\r\n' '   ')
 	summary=$(printf '%s' "$summary" | tr '\t\r\n' '   ')
 	author=$(printf '%s' "$author" | tr '\t\r\n' '   ')
+	avatar=$(printf '%s' "$avatar" | tr '\t\r\n' '   ')
 	case $verified in
 		yes|no) ;;
 		*) verified= ;;
 	esac
-	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+	case $avatar in
+		https://avatars.githubusercontent.com/*|https://github.com/*.png*) ;;
+		*) avatar=$(github_avatar "$author") ;;
+	esac
+	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
 		"$epoch" "$iso" "$kind" "$repo" "$url" "$title" "$summary" \
-		"$author" "$verified" >>"$out"
+		"$author" "$verified" "$avatar" >>"$out"
+}
+
+github_avatar() {
+	login=$1
+	case $login in
+		""|*[!A-Za-z0-9-]*) ;;
+		*) printf 'https://github.com/%s.png?size=48' "$login" ;;
+	esac
 }
 
 epoch_of() {
@@ -67,21 +81,22 @@ git_commits() {
 		[ -n "${iso-}" ] || continue
 		[ -n "${hash-}" ] || continue
 		emit "$epoch" "$iso" commit "$repo" \
-			"$baseurl/commit/$hash" "$subject" "" "$author" ""
+			"$baseurl/commit/$hash" "$subject" "" "$author" "" \
+			"$(github_avatar "$author")"
 	done
 }
 
 read_commit_tsv() {
 	repo=$1
 	file=$2
-	while IFS=$tab read -r published url title author verified || [ -n "${published-}" ]
+	while IFS=$tab read -r published url title author verified avatar || [ -n "${published-}" ]
 	do
 		[ -n "${published-}" ] || continue
 		[ -n "${url-}" ] || continue
 		[ -n "${title-}" ] || title=$url
 		epoch=$(epoch_of "$published")
 		emit "$epoch" "$published" commit "$repo" "$url" "$title" "" \
-			"$author" "$verified"
+			"$author" "$verified" "$avatar"
 	done <"$file"
 }
 
@@ -97,16 +112,17 @@ if command -v gh >/dev/null 2>&1; then
 			.html_url,
 			((.name // .tag_name) | gsub("[\r\t]"; " ")),
 			((.body // "") | gsub("[\r\t]"; " ") | gsub("\n+"; " ") | .[0:900]),
-			((.author.login // "") | gsub("[\r\t]"; " "))
+			((.author.login // "") | gsub("[\r\t]"; " ")),
+			((.author.avatar_url // "") | gsub("[\r\t]"; " "))
 		] | @tsv' >"$tmp/rel"
 	then
-		while IFS=$tab read -r published url name body author || [ -n "${published-}" ]
+		while IFS=$tab read -r published url name body author avatar || [ -n "${published-}" ]
 		do
 			[ -n "${published-}" ] || continue
 			[ -n "${url-}" ] || continue
 			epoch=$(epoch_of "$published")
 			emit "$epoch" "$published" release SPS "$url" "$name" "$body" \
-				"$author" ""
+				"$author" "" "$avatar"
 		done <"$tmp/rel"
 	else
 		printf '%s\n' "collect-news: GitHub releases request failed" >&2
@@ -121,7 +137,8 @@ if command -v gh >/dev/null 2>&1; then
 				.html_url,
 				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " ")),
 				((.author.login // .commit.author.name // "") | gsub("[\r\t]"; " ")),
-				(if .commit.verification.verified == true then "yes" else "no" end)
+				(if .commit.verification.verified == true then "yes" else "no" end),
+				((.author.avatar_url // "") | gsub("[\r\t]"; " "))
 			] | @tsv' >"$tmp/c"
 		then
 			read_commit_tsv "$label" "$tmp/c"

@@ -1,5 +1,5 @@
 # Turn collect-news.sh TSV into HTML, a pager, JSON, or Atom.
-# Fields: epoch iso kind repo url title summary author verified
+# Fields: epoch iso kind repo url title summary author verified avatar
 # -v mode=html|brief|atom|json|pager
 # -v page= -v per= -v pages= -v nest=0|1  -v siteurl=  -v feedupdated=
 
@@ -73,6 +73,7 @@ function page_href(p) {
 	summary[n] = $7
 	author[n] = $8
 	verified[n] = $9
+	avatar[n] = $10
 }
 
 END {
@@ -112,17 +113,24 @@ END {
 	print "</div>"
 }
 
-function print_item(i, brief,    k, when, s, v, a) {
+function print_item(i, brief,    k, when, s, v, a, av) {
 	when = esc(utc_label(iso[i]))
 	k = esc(kind_label(kind[i]))
 	a = author[i]
 	v = verified[i]
-	printf "<article class=\"item\" data-kind=\"%s\" data-repo=\"%s\" data-author=\"%s\" data-verified=\"%s\">\n", \
-		k, esc(repo[i]), esc(a), esc(v)
+	av = avatar[i]
+	printf "<article class=\"item\" data-kind=\"%s\" data-repo=\"%s\" data-author=\"%s\" data-verified=\"%s\" data-avatar=\"%s\">\n", \
+		k, esc(repo[i]), esc(a), esc(v), esc(av)
 	printf "<p class=\"meta\"><time datetime=\"%s\">%s</time> <span class=\"kind\">%s</span> %s", \
 		esc(iso[i]), when, k, esc(repo[i])
-	if (a != "")
-		printf " <span class=\"who\">%s</span>", esc(a)
+	if (a != "" || av != "") {
+		printf " <span class=\"who\">"
+		if (av != "")
+			printf "<img class=\"avatar\" src=\"%s\" width=\"24\" height=\"24\" alt=\"\" loading=\"lazy\">", esc(av)
+		if (a != "")
+			printf "%s", esc(a)
+		printf "</span>"
+	}
 	if (v == "yes")
 		printf " <span class=\"verified\">verified</span>"
 	print "</p>"
@@ -200,10 +208,10 @@ function print_json(    i, v) {
 		if (i > 1)
 			print ","
 		v = (verified[i] == "yes") ? "true" : "false"
-		printf "{\"iso\":\"%s\",\"kind\":\"%s\",\"repo\":\"%s\",\"url\":\"%s\",\"title\":\"%s\",\"summary\":\"%s\",\"author\":\"%s\",\"verified\":%s}", \
+		printf "{\"iso\":\"%s\",\"kind\":\"%s\",\"repo\":\"%s\",\"url\":\"%s\",\"title\":\"%s\",\"summary\":\"%s\",\"author\":\"%s\",\"verified\":%s,\"avatar\":\"%s\"}", \
 			jesc(iso[i]), jesc(kind_label(kind[i])), jesc(repo[i]), \
 			jesc(url[i]), jesc(title[i]), jesc(summary[i]), \
-			jesc(author[i]), v
+			jesc(author[i]), v, jesc(avatar[i])
 	}
 	print "\n]"
 }
