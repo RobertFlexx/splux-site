@@ -4,9 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>News - Splux Linux</title>
-<meta name="description" content="Splux Linux news.">
+<meta name="description" content="Splux Linux news from ISO releases and git history.">
 <link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="@@ROOT@@assets/style.css">
+<link rel="alternate" type="application/atom+xml" href="@@ROOT@@news/atom.xml" title="Splux Linux news">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -15,9 +16,12 @@
 <main id="main">
 <h2>News</h2>
 <hr class="rule">
-<p>2026-08-31 Website brought online.</p>
-<p>2026-08-31 Live ISO snapshots published from <a href="https://github.com/RobertFlexx/SPS/releases">SPS releases</a>.</p>
-<p>Release notes stay on GitHub rather than being copied here.</p>
+<p>This page is filled from GitHub when the site builds: SPS live ISO releases, plus recent commits on SPS, sps-core, sps-extra, and this website. Nobody has to edit it for a new snapshot or commit to show up.</p>
+<p class="note">The Pages workflow rebuilds on a schedule and on push. <a href="@@ROOT@@news/atom.xml">Atom feed</a>.</p>
+@@NEWS_INFO@@
+<h2>Feed</h2>
+<hr class="rule">
+@@NEWS@@
 </main>
 @@FOOTER@@
 </div>

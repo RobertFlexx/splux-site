@@ -1,6 +1,14 @@
 # Replace @@HEADER@@ / @@FOOTER@@ / @@ROOT@@ and other tokens.
 # headerfile, footerfile, root, rowsfile, and token variables are -v flags.
 
+function dump_file(path,    line) {
+	if (path == "")
+		return
+	while ((getline line < path) > 0)
+		print line
+	close(path)
+}
+
 BEGIN {
 	if (headerfile != "") {
 		while ((getline line < headerfile) > 0)
@@ -32,6 +40,21 @@ $0 == "@@PKG_ROWS@@" {
 		}
 		close(rowsfile)
 	}
+	next
+}
+
+$0 == "@@NEWS@@" {
+	dump_file(newsfile)
+	next
+}
+
+$0 == "@@NEWS_BRIEF@@" {
+	dump_file(brieffile)
+	next
+}
+
+$0 == "@@NEWS_INFO@@" {
+	dump_file(infofile)
 	next
 }
 

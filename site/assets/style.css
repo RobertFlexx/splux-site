@@ -252,6 +252,45 @@ footer p {
 	margin: 0.2rem 0;
 }
 
+.feed {
+	margin: 0.75rem 0 0;
+}
+
+.feed .item {
+	margin: 0 0 1rem;
+	padding: 0 0 1rem;
+	border-bottom: 1px solid var(--rule);
+}
+
+.feed .item:last-child {
+	border-bottom: 0;
+}
+
+.feed .item h3 {
+	margin: 0.15rem 0 0;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+.feed .meta {
+	color: var(--muted);
+	margin: 0;
+	font-size: 0.9rem;
+}
+
+.feed .kind {
+	color: var(--accent);
+}
+
+.feed .summary {
+	margin: 0.35rem 0 0;
+	color: var(--fg);
+}
+
+.info {
+	margin: 0.75rem 0 1.25rem;
+}
+
 .dl-row {
 	display: grid;
 	grid-template-columns: 12rem 1fr;

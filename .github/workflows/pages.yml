@@ -4,8 +4,10 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 * * * *"
+    - cron: "7,27,47 * * * *"
   workflow_dispatch:
+  repository_dispatch:
+    types: [rebuild]
 
 permissions:
   contents: read
@@ -21,19 +23,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 25
       - uses: actions/checkout@v4
         with:
           repository: RobertFlexx/sps-core
           path: vendor/core
+          fetch-depth: 25
       - uses: actions/checkout@v4
         with:
           repository: RobertFlexx/sps-extra
           path: vendor/extra
+          fetch-depth: 25
+      - uses: actions/checkout@v4
+        with:
+          repository: RobertFlexx/SPS
+          path: vendor/sps
+          fetch-depth: 25
       - name: Build site
         env:
           GH_TOKEN: ${{ github.token }}
           CORE: vendor/core
           EXTRA: vendor/extra
+          SPS: vendor/sps
           SITE_PREFIX: ""
         run: sh tools/build-site.sh
       - uses: actions/upload-pages-artifact@v3

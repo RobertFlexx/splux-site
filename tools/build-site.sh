@@ -9,24 +9,38 @@ cd "$(CDPATH= cd -P "$(dirname "$0")/.." && pwd)" || exit 1
 
 CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
+SPS=${SPS:-vendor/sps}
+SITE=${SITE:-.}
 OUT=${OUT:-_site}
 SITE_PREFIX=${SITE_PREFIX-}
 CORE_GIT=${CORE_GIT:-https://github.com/RobertFlexx/sps-core}
 EXTRA_GIT=${EXTRA_GIT:-https://github.com/RobertFlexx/sps-extra}
 SPS_GIT=${SPS_GIT:-https://github.com/RobertFlexx/SPS}
+SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
 
-if [ ! -d "$CORE" ] || [ ! -d "$EXTRA" ]; then
+clone_tree() {
+	url=$1
+	dest=$2
+	depth=${3:-25}
+	if [ -d "$dest" ]; then
+		return 0
+	fi
 	mkdir -p vendor
-	if [ ! -d "$CORE" ]; then
-		printf '%s\n' "cloning sps-core" >&2
-		git clone --depth 1 "$CORE_GIT.git" vendor/core
-		CORE=vendor/core
-	fi
-	if [ ! -d "$EXTRA" ]; then
-		printf '%s\n' "cloning sps-extra" >&2
-		git clone --depth 1 "$EXTRA_GIT.git" vendor/extra
-		EXTRA=vendor/extra
-	fi
+	printf '%s\n' "cloning $url" >&2
+	git clone --depth "$depth" "$url" "$dest"
+}
+
+if [ ! -d "$CORE" ]; then
+	clone_tree "$CORE_GIT.git" vendor/core 25
+	CORE=vendor/core
+fi
+if [ ! -d "$EXTRA" ]; then
+	clone_tree "$EXTRA_GIT.git" vendor/extra 25
+	EXTRA=vendor/extra
+fi
+if [ ! -d "$SPS" ]; then
+	clone_tree "$SPS_GIT.git" vendor/sps 25
+	SPS=vendor/sps
 fi
 
 rm -rf "$OUT"
@@ -168,6 +182,40 @@ generated=$(date -u '+%Y-%m-%d %H:%M UTC' 2>/dev/null || date)
 printf '%s\n' "{\"tag\":\"$tag\",\"date\":\"$date\",\"iso_tty\":\"$SPS_GIT/releases/latest/download/sps-live-tty.iso\"}" \
 	>"$OUT/data/release.json"
 
+short_sha() {
+	git -C "$1" rev-parse --short HEAD 2>/dev/null || printf '%s\n' unknown
+}
+
+export CORE EXTRA SPS SITE
+if ! sh tools/collect-news.sh >"$tmp/news.tsv"
+then
+	printf '%s\n' "warning: news collection failed" >&2
+	: >"$tmp/news.tsv"
+fi
+awk -f tools/news.awk -v mode=html "$tmp/news.tsv" >"$tmp/news.html"
+awk -f tools/news.awk -v mode=brief "$tmp/news.tsv" >"$tmp/news-brief.html"
+generated_iso=$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u '+%Y-%m-%dT00:00:00Z')
+awk -f tools/news.awk -v mode=atom -v siteurl="$SITE_URL" \
+	-v feedupdated="$generated_iso" \
+	"$tmp/news.tsv" >"$OUT/news/atom.xml"
+cp "$tmp/news.tsv" "$OUT/data/news.tsv"
+
+sps_sha=$(short_sha "$SPS")
+core_sha=$(short_sha "$CORE")
+extra_sha=$(short_sha "$EXTRA")
+site_sha=$(short_sha "$SITE")
+
+cat >"$tmp/news-info.html" <<EOF
+<div class="info">
+<div class="dl-row"><span class="muted">Latest ISO</span><span><a href="$SPS_GIT/releases/latest">$tag</a> ($date)</span></div>
+<div class="dl-row"><span class="muted">SPS</span><span><a href="$SPS_GIT/commit/$sps_sha">$sps_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-core</span><span><a href="$CORE_GIT/commit/$core_sha">$core_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-extra</span><span><a href="$EXTRA_GIT/commit/$extra_sha">$extra_sha</a></span></div>
+<div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra)</span></div>
+<div class="dl-row"><span class="muted">Site build</span><span>$generated ($site_sha)</span></div>
+</div>
+EOF
+
 subst() {
 	src=$1
 	dest=$2
@@ -179,6 +227,9 @@ subst() {
 		-v headerfile="$tmp/header.html" \
 		-v footerfile="$tmp/footer.html" \
 		-v rowsfile="$tmp/rows.html" \
+		-v newsfile="$tmp/news.html" \
+		-v brieffile="$tmp/news-brief.html" \
+		-v infofile="$tmp/news-info.html" \
 		-v root="$root" \
 		-v tag="$tag" \
 		-v date="$date" \
@@ -237,6 +288,9 @@ do
 		-v headerfile="$tmp/h2.html" \
 		-v footerfile="$tmp/f2.html" \
 		-v rowsfile="" \
+		-v newsfile="" \
+		-v brieffile="" \
+		-v infofile="" \
 		-v root="$root" \
 		-v tag="$tag" \
 		-v date="$date" \
