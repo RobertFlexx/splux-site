@@ -34,20 +34,15 @@ mkdir -p "$OUT/assets" "$OUT/data" "$OUT/download" "$OUT/packages" \
 	"$OUT/install" "$OUT/docs" "$OUT/source" "$OUT/news"
 
 cp -a site/assets/. "$OUT/assets/"
-
-# Official SPS logo, three letters. Colors: gray S, yellow P, gray S.
-logo_pre='<pre class="logo" aria-label="SPS"><span class="s">  _____     </span><span class="p">_____     </span><span class="s">_____</span>
-<span class="s"> /  ___|   </span><span class="p">|  _  \   </span><span class="s">/  ___|</span>
-<span class="s"> \ `--.    </span><span class="p">| |_| |   </span><span class="s">\ `--.</span>
-<span class="s">  `--. \   </span><span class="p">|  __/     </span><span class="s">`--. \</span>
-<span class="s"> /\__/ /   </span><span class="p">| |       </span><span class="s">/\__/ /</span>
-<span class="s"> \____/    </span><span class="p">|_|       </span><span class="s">\____/</span></pre>'
+if [ -f CNAME ]; then
+	cp CNAME "$OUT/CNAME"
+fi
 
 write_header() {
 	root=$1
 	cat <<EOF
 <header class="top">
-$logo_pre
+<img class="logo" src="${root}assets/sps.png" width="96" height="96" alt="SPS">
 <div class="identity">
 <h1>Splux Linux</h1>
 <p>source-based Linux using SPS</p>

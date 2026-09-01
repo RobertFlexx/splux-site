@@ -36,5 +36,6 @@ The visible tag name is filled at build time from the GitHub Releases API.
 ## GitHub Pages
 
 The workflow rebuilds the package index on a schedule and on push to `main`.
-For a project site the Pages URL is `/splux-site/`. Set `SITE_PREFIX=/splux-site`
-in that workflow so the 404 page can still load CSS.
+The custom domain is `https://splux.robertflexx.dev`. Point a DNS CNAME
+for `splux` at `robertflexx.github.io`, then GitHub Pages serves this
+repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.

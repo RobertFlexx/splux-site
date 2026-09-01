@@ -34,7 +34,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           CORE: vendor/core
           EXTRA: vendor/extra
-          SITE_PREFIX: /splux-site
+          SITE_PREFIX: ""
         run: sh tools/build-site.sh
       - uses: actions/upload-pages-artifact@v3
         with:

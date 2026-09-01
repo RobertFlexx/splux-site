@@ -70,17 +70,12 @@ header.top {
 	padding-bottom: 1rem;
 }
 
-.logo {
-	margin: 0;
-	font-size: 11px;
-	line-height: 1.15;
-	letter-spacing: 0;
-	color: #9a9a9a;
-	white-space: pre;
-}
-
-.logo .p {
-	color: var(--accent);
+img.logo {
+	display: block;
+	width: 96px;
+	height: 96px;
+	flex-shrink: 0;
+	background: #000;
 }
 
 .identity h1 {
