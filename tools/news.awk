@@ -8,8 +8,8 @@ BEGIN {
 		mode = "html"
 	if (siteurl == "")
 		siteurl = "https://splux.robertflexx.dev"
-	html_limit = (mode == "brief") ? 8 : 60
-	atom_limit = 40
+	html_limit = (mode == "brief") ? 8 : 10000
+	atom_limit = 200
 }
 
 function esc(s) {

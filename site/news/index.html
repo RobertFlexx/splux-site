@@ -16,14 +16,17 @@
 <main id="main">
 <h2>News</h2>
 <hr class="rule">
-<p>This page is filled from GitHub when the site builds: SPS live ISO releases, plus recent commits on SPS, sps-core, sps-extra, and this website. Nobody has to edit it for a new snapshot or commit to show up.</p>
-<p class="note">The Pages workflow rebuilds on a schedule and on push. <a href="@@ROOT@@news/atom.xml">Atom feed</a>.</p>
+<p>This page is filled from GitHub: every published SPS live ISO release, plus commits on SPS, sps-core, sps-extra, and this website. Nobody has to edit it for a new snapshot or commit to show up.</p>
+<p class="note">The Pages workflow rebuilds every five minutes, on push, and when SPS asks it to. This page also reads GitHub when you open it, so a delayed rebuild cannot hide a new ISO. <a href="@@ROOT@@news/atom.xml">Atom feed</a>.</p>
 @@NEWS_INFO@@
 <h2>Feed</h2>
 <hr class="rule">
+<div id="live-feed">
 @@NEWS@@
+</div>
 </main>
 @@FOOTER@@
 </div>
+<script src="@@ROOT@@assets/live.js"></script>
 </body>
 </html>

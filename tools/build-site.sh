@@ -21,25 +21,24 @@ SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
 clone_tree() {
 	url=$1
 	dest=$2
-	depth=${3:-25}
 	if [ -d "$dest" ]; then
 		return 0
 	fi
 	mkdir -p vendor
 	printf '%s\n' "cloning $url" >&2
-	git clone --depth "$depth" "$url" "$dest"
+	git clone "$url" "$dest"
 }
 
 if [ ! -d "$CORE" ]; then
-	clone_tree "$CORE_GIT.git" vendor/core 25
+	clone_tree "$CORE_GIT.git" vendor/core
 	CORE=vendor/core
 fi
 if [ ! -d "$EXTRA" ]; then
-	clone_tree "$EXTRA_GIT.git" vendor/extra 25
+	clone_tree "$EXTRA_GIT.git" vendor/extra
 	EXTRA=vendor/extra
 fi
 if [ ! -d "$SPS" ]; then
-	clone_tree "$SPS_GIT.git" vendor/sps 25
+	clone_tree "$SPS_GIT.git" vendor/sps
 	SPS=vendor/sps
 fi
 
@@ -207,10 +206,10 @@ site_sha=$(short_sha "$SITE")
 
 cat >"$tmp/news-info.html" <<EOF
 <div class="info">
-<div class="dl-row"><span class="muted">Latest ISO</span><span><a href="$SPS_GIT/releases/latest">$tag</a> ($date)</span></div>
-<div class="dl-row"><span class="muted">SPS</span><span><a href="$SPS_GIT/commit/$sps_sha">$sps_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-core</span><span><a href="$CORE_GIT/commit/$core_sha">$core_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-extra</span><span><a href="$EXTRA_GIT/commit/$extra_sha">$extra_sha</a></span></div>
+<div class="dl-row"><span class="muted">Latest ISO</span><span id="live-iso"><a href="$SPS_GIT/releases/latest">$tag</a> ($date)</span></div>
+<div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$SPS_GIT/commit/$sps_sha">$sps_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$CORE_GIT/commit/$core_sha">$core_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$EXTRA_GIT/commit/$extra_sha">$extra_sha</a></span></div>
 <div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra)</span></div>
 <div class="dl-row"><span class="muted">Site build</span><span>$generated ($site_sha)</span></div>
 </div>

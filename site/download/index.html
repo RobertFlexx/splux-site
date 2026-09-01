@@ -16,8 +16,8 @@
 <h2>Download</h2>
 <hr class="rule">
 <p>Images are hybrid ISOs from <a href="https://github.com/RobertFlexx/SPS">RobertFlexx/SPS</a>. The filenames below are stable. GitHub's <code>releases/latest/download</code> URLs always resolve to the newest published files of those names.</p>
-<div class="dl-row"><span class="muted">Latest tag</span><span>@@RELEASE_TAG@@</span></div>
-<div class="dl-row"><span class="muted">Released</span><span>@@RELEASE_DATE@@</span></div>
+<div class="dl-row"><span class="muted">Latest tag</span><span id="live-tag">@@RELEASE_TAG@@</span></div>
+<div class="dl-row"><span class="muted">Released</span><span id="live-date">@@RELEASE_DATE@@</span></div>
 <div class="dl-row"><span class="muted">Architecture</span><span>x86_64</span></div>
 <h2>Images</h2>
 <hr class="rule">
@@ -37,5 +37,6 @@ Plasma/Wayland live session plus the same installer path. Needs a KMS device (vi
 </main>
 @@FOOTER@@
 </div>
+<script src="@@ROOT@@assets/live.js"></script>
 </body>
 </html>

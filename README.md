@@ -30,28 +30,32 @@ ISO names are stable:
 - https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-plasma.iso
 - https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS
 
-The visible tag name is filled at build time from the GitHub Releases API.
+The visible tag name is filled at build time from the GitHub Releases API
+and refreshed from GitHub when you open the page.
 
 ## News
 
 `news/` is generated at build time from GitHub, not edited by hand:
 
-- SPS live ISO releases (`RobertFlexx/SPS` GitHub Releases)
-- recent commits on SPS, sps-core, sps-extra, and this repository
+- every published SPS live ISO release (`RobertFlexx/SPS` GitHub Releases)
+- every commit on SPS, sps-core, sps-extra, and this repository that
+  Git or the GitHub API can see
 
-The Pages workflow rebuilds about every twenty minutes, and also on
-push and `workflow_dispatch`. A new ISO tag shows up here without
-committing to splux-site. Atom feed: `/news/atom.xml`.
+The Pages workflow rebuilds every five minutes, and also on push,
+`workflow_dispatch`, and a `rebuild` repository dispatch. The news and
+download pages also ask GitHub for anything newer when they load, so a
+missed cron job cannot hide a new ISO. Atom feed: `/news/atom.xml`.
 
 To rebuild immediately from another repository, send a
 `repository_dispatch` of type `rebuild` to `RobertFlexx/splux-site`.
-SPS does that after a live ISO release when the `SPLUX_SITE_TOKEN`
-secret is set (a PAT that can dispatch workflows on this repo).
-Without that secret, the schedule still picks releases up.
+SPS does that after a live ISO release and on push to `main` when the
+`SPLUX_SITE_TOKEN` secret is set (a PAT that can dispatch workflows on
+this repo). Without that secret, the five-minute schedule and the
+in-page GitHub refresh still pick releases up.
 
 ## GitHub Pages
 
-The workflow rebuilds the package index and news feed on a schedule
+The workflow rebuilds the package index and news feed every five minutes
 and on push to `main`.
 The custom domain is `https://splux.robertflexx.dev`. Point a DNS CNAME
 for `splux` at `robertflexx.github.io`, then GitHub Pages serves this

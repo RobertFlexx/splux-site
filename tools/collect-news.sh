@@ -2,6 +2,8 @@
 # Collect Splux releases and git history into TSV for the news page.
 # Fields: epoch iso kind repo url title summary
 # Env: CORE EXTRA SPS SITE (git work trees). GH_TOKEN optional via gh.
+# Pulls every non-draft SPS release and every commit available from the
+# local clones and from the GitHub API, then drops duplicate URLs.
 
 set -eu
 
@@ -11,9 +13,10 @@ SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
 
 tab=$(printf '\t')
-out=$(mktemp "${TMPDIR:-/tmp}/splux-news.XXXXXX") || exit 1
-trap 'rm -f "$out" "$rel"' 0 HUP INT TERM
-rel=
+tmp=$(mktemp -d "${TMPDIR:-/tmp}/splux-news.XXXXXX") || exit 1
+out=$tmp/out
+trap 'rm -rf "$tmp"' 0 HUP INT TERM
+: >"$out"
 
 emit() {
 	epoch=$1
@@ -47,9 +50,8 @@ git_commits() {
 	dir=$1
 	repo=$2
 	baseurl=$3
-	n=${4:-12}
 	git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
-	git -C "$dir" log -n "$n" --format='%ct%x09%cI%x09%H%x09%s' 2>/dev/null |
+	git -C "$dir" log --format='%ct%x09%cI%x09%H%x09%s' 2>/dev/null |
 	while IFS=$tab read -r epoch iso hash subject || [ -n "${epoch-}" ]
 	do
 		[ -n "${epoch-}" ] || continue
@@ -60,20 +62,32 @@ git_commits() {
 	done
 }
 
-git_commits "$SPS" SPS https://github.com/RobertFlexx/SPS 15
-git_commits "$CORE" sps-core https://github.com/RobertFlexx/sps-core 15
-git_commits "$EXTRA" sps-extra https://github.com/RobertFlexx/sps-extra 15
-git_commits "$SITE" splux-site https://github.com/RobertFlexx/splux-site 8
+read_commit_tsv() {
+	repo=$1
+	file=$2
+	while IFS=$tab read -r published url title || [ -n "${published-}" ]
+	do
+		[ -n "${published-}" ] || continue
+		[ -n "${url-}" ] || continue
+		[ -n "${title-}" ] || title=$url
+		epoch=$(epoch_of "$published")
+		emit "$epoch" "$published" commit "$repo" "$url" "$title" ""
+	done <"$file"
+}
+
+git_commits "$SPS" SPS https://github.com/RobertFlexx/SPS
+git_commits "$CORE" sps-core https://github.com/RobertFlexx/sps-core
+git_commits "$EXTRA" sps-extra https://github.com/RobertFlexx/sps-extra
+git_commits "$SITE" splux-site https://github.com/RobertFlexx/splux-site
 
 if command -v gh >/dev/null 2>&1; then
-	rel=$(mktemp "${TMPDIR:-/tmp}/splux-rel.XXXXXX") || exit 1
-	if gh api "repos/RobertFlexx/SPS/releases?per_page=25" --jq \
+	if gh api --paginate "repos/RobertFlexx/SPS/releases?per_page=100" --jq \
 		'.[] | select(.draft == false) | [
 			.published_at,
 			.html_url,
-			(.name // .tag_name),
+			((.name // .tag_name) | gsub("[\r\t]"; " ")),
 			((.body // "") | gsub("[\r\t]"; " ") | gsub("\n+"; " ") | .[0:900])
-		] | @tsv' >"$rel" 2>/dev/null
+		] | @tsv' >"$tmp/rel"
 	then
 		while IFS=$tab read -r published url name body || [ -n "${published-}" ]
 		do
@@ -81,8 +95,32 @@ if command -v gh >/dev/null 2>&1; then
 			[ -n "${url-}" ] || continue
 			epoch=$(epoch_of "$published")
 			emit "$epoch" "$published" release SPS "$url" "$name" "$body"
-		done <"$rel"
+		done <"$tmp/rel"
+	else
+		printf '%s\n' "collect-news: GitHub releases request failed" >&2
 	fi
+
+	api_commits() {
+		path=$1
+		label=$2
+		if gh api --paginate "repos/${path}/commits?per_page=100" --jq \
+			'.[] | [
+				.commit.committer.date,
+				.html_url,
+				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " "))
+			] | @tsv' >"$tmp/c"
+		then
+			read_commit_tsv "$label" "$tmp/c"
+		else
+			printf '%s\n' "collect-news: GitHub commits $path failed" >&2
+		fi
+	}
+
+	api_commits RobertFlexx/SPS SPS
+	api_commits RobertFlexx/sps-core sps-core
+	api_commits RobertFlexx/sps-extra sps-extra
+	api_commits RobertFlexx/splux-site splux-site
 fi
 
-LC_ALL=C sort -t "$tab" -k1,1nr "$out"
+LC_ALL=C sort -t "$tab" -k1,1nr "$out" |
+awk -F '\t' 'NF >= 5 && $5 != "" && !seen[$5]++'

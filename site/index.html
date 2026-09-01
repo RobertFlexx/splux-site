@@ -27,8 +27,8 @@
 <h2 id="download"><span class="num">[002]</span> Download</h2>
 <hr class="rule">
 <p>Live images are published from the SPS repository. Asset names stay the same from release to release, so these links always point at the newest published files.</p>
-<div class="dl-row"><span class="muted">Latest tag</span><span>@@RELEASE_TAG@@</span></div>
-<div class="dl-row"><span class="muted">Released</span><span>@@RELEASE_DATE@@</span></div>
+<div class="dl-row"><span class="muted">Latest tag</span><span id="live-tag">@@RELEASE_TAG@@</span></div>
+<div class="dl-row"><span class="muted">Released</span><span id="live-date">@@RELEASE_DATE@@</span></div>
 <div class="dl-row"><span class="muted">Architecture</span><span>x86_64</span></div>
 <p>
 <a href="https://github.com/RobertFlexx/SPS/releases/latest/download/sps-live-tty.iso">sps-live-tty.iso</a>
@@ -102,12 +102,15 @@ this website
 <h2 id="news"><span class="num">[008]</span> News</h2>
 <hr class="rule">
 @@NEWS_INFO@@
+<div id="live-brief">
 @@NEWS_BRIEF@@
+</div>
 <p><a href="@@ROOT@@news/">Full news feed</a> · <a href="@@ROOT@@news/atom.xml">Atom</a></p>
-<p class="note">The feed is generated from GitHub when this site builds. New ISO releases and git commits appear here without a manual site edit.</p>
+<p class="note">The feed is filled from GitHub when this site builds, and this page also asks GitHub for anything newer when you open it.</p>
 
 </main>
 @@FOOTER@@
 </div>
+<script src="@@ROOT@@assets/live.js"></script>
 </body>
 </html>
