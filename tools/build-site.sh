@@ -165,20 +165,52 @@ BEGIN { print "[" }
 END { print "\n]" }
 ' "$tsv" >"$OUT/data/packages.json"
 
+# GitHub's "latest" flag can lag. Pick the highest live-YYYY-MM-DD[-N]
+# tag by numeric suffix. String sort ranks -9 above -15.
+pick_live_release() {
+	gh api "repos/RobertFlexx/SPS/releases?per_page=100" --jq '
+		def rank:
+			capture("^live-(?<y>[0-9]+)-(?<m>[0-9]+)-(?<d>[0-9]+)(?:-(?<n>[0-9]+))?$")
+			| [(.y|tonumber), (.m|tonumber), (.d|tonumber), ((.n // "0")|tonumber)];
+		[.[] | select(.draft == false) | select(.tag_name | test("^live-[0-9]{4}-[0-9]{2}-[0-9]{2}(-[0-9]+)?$"))]
+		| if length == 0 then empty else max_by(.tag_name | rank) end
+		| [.tag_name, .published_at] | @tsv
+	' 2>/dev/null
+}
+
 tag=unknown
 date=unknown
+published=
 if command -v gh >/dev/null 2>&1; then
-	tag=$(gh release view -R RobertFlexx/SPS --json tagName --jq .tagName 2>/dev/null) || tag=unknown
-	date=$(gh release view -R RobertFlexx/SPS --json publishedAt --jq .publishedAt 2>/dev/null) || date=unknown
-	date=${date%%T*}
+	picked=$(pick_live_release || true)
+	if [ -n "$picked" ]; then
+		tag=${picked%%	*}
+		published=${picked#*	}
+		date=${published%%T*}
+	fi
+	if [ "$tag" = unknown ] || [ -z "$tag" ]; then
+		tag=$(gh release view -R RobertFlexx/SPS --json tagName --jq .tagName 2>/dev/null) || tag=unknown
+		published=$(gh release view -R RobertFlexx/SPS --json publishedAt --jq .publishedAt 2>/dev/null) || published=
+		date=${published%%T*}
+	fi
 fi
 if [ "$tag" = unknown ] || [ -z "$tag" ]; then
 	tag=latest
 	date=see GitHub
+	published=
 fi
 generated=$(date -u '+%Y-%m-%d %H:%M UTC' 2>/dev/null || date)
 
-printf '%s\n' "{\"tag\":\"$tag\",\"date\":\"$date\",\"iso_tty\":\"$SPS_GIT/releases/latest/download/sps-live-tty.iso\"}" \
+iso_base=$SPS_GIT/releases/latest/download
+notes_url=$SPS_GIT/releases/latest
+case $tag in
+	latest|unknown) ;;
+	*)
+		iso_base=$SPS_GIT/releases/download/$tag
+		notes_url=$SPS_GIT/releases/tag/$tag
+		;;
+esac
+printf '%s\n' "{\"tag\":\"$tag\",\"date\":\"$date\",\"published_at\":\"$published\",\"iso_tty\":\"$iso_base/sps-live-tty.iso\",\"iso_slim\":\"$iso_base/sps-live-tty-slim.iso\",\"iso_plasma\":\"$iso_base/sps-live-plasma.iso\",\"sha256sums\":\"$iso_base/SHA256SUMS\"}" \
 	>"$OUT/data/release.json"
 
 short_sha() {
@@ -214,10 +246,11 @@ sps_sha=$(short_sha "$SPS")
 core_sha=$(short_sha "$CORE")
 extra_sha=$(short_sha "$EXTRA")
 site_sha=$(short_sha "$SITE")
+livesig=${site_sha}-$(date -u '+%Y%m%d%H%M%S' 2>/dev/null || date +%Y%m%d%H%M%S)
 
 cat >"$tmp/news-info.html" <<EOF
 <div class="info">
-<div class="dl-row"><span class="muted">Latest ISO</span><span id="live-iso"><a href="$SPS_GIT/releases/latest">$tag</a> ($date)</span></div>
+<div class="dl-row"><span class="muted">Latest ISO</span><span id="live-iso"><a href="$notes_url">$tag</a> ($date)</span></div>
 <div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$SPS_GIT/commit/$sps_sha">$sps_sha</a></span></div>
 <div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$CORE_GIT/commit/$core_sha">$core_sha</a></span></div>
 <div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$EXTRA_GIT/commit/$extra_sha">$extra_sha</a></span></div>
@@ -249,6 +282,7 @@ subst() {
 		-v ncore="$ncore" \
 		-v nextra="$nextra" \
 		-v generated="$generated" \
+		-v livesig="$livesig" \
 		-v curlver="$curlver" \
 		"$src" >"$dest"
 }
@@ -329,6 +363,7 @@ do
 		-v ncore="$ncore" \
 		-v nextra="$nextra" \
 		-v generated="$generated" \
+		-v livesig="$livesig" \
 		-v curlver="$curlver" \
 		"$page" >"$tmp/page.html"
 	mv "$tmp/page.html" "$page"

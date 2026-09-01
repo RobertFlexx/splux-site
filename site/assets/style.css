@@ -76,6 +76,7 @@ img.logo {
 	height: 96px;
 	flex-shrink: 0;
 	background: #000;
+	border-radius: 50%;
 }
 
 .identity h1 {

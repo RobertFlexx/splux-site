@@ -325,13 +325,83 @@
 			esc(shortSha(sha)) + "</a>";
 	}
 
+	// live-2026-08-31-9 sorts after live-2026-08-31-15 as a string.
+	function liveRank(tag) {
+		var m = /^live-(\d{4})-(\d{2})-(\d{2})(?:-(\d+))?$/.exec(String(tag || ""));
+		if (!m)
+			return null;
+		return [
+			parseInt(m[1], 10),
+			parseInt(m[2], 10),
+			parseInt(m[3], 10),
+			parseInt(m[4] || "0", 10)
+		];
+	}
+
+	function liveBetter(a, b) {
+		var ra = liveRank(a);
+		var rb = liveRank(b);
+		if (!ra)
+			return false;
+		if (!rb)
+			return true;
+		for (var i = 0; i < 4; i++) {
+			if (ra[i] > rb[i])
+				return true;
+			if (ra[i] < rb[i])
+				return false;
+		}
+		return false;
+	}
+
+	function pickLiveRelease(list) {
+		var best = null;
+		if (!list || !list.length)
+			return null;
+		for (var i = 0; i < list.length; i++) {
+			var r = list[i];
+			if (!r || r.draft)
+				continue;
+			var tag = r.tag_name || r.tag || "";
+			if (!liveRank(tag))
+				continue;
+			if (!best || liveBetter(tag, best.tag_name || best.tag || ""))
+				best = r;
+		}
+		return best;
+	}
+
+	var shownIsoTag = "";
+
+	function rewriteDownloads(tag) {
+		if (!tag)
+			return;
+		var encoded = encodeURIComponent(tag);
+		var prefix = "https://github.com/RobertFlexx/SPS/releases/";
+		var as = document.getElementsByTagName("a");
+		for (var i = 0; i < as.length; i++) {
+			var href = as[i].getAttribute("href") || "";
+			var m = href.match(/^https:\/\/github\.com\/RobertFlexx\/SPS\/releases\/(?:latest\/download|download\/[^/]+)\/([^/?#]+)$/);
+			if (m) {
+				as[i].setAttribute("href", prefix + "download/" + encoded + "/" + m[1]);
+				continue;
+			}
+			if (href === prefix + "latest" || href === prefix + "latest/" ||
+			    /^https:\/\/github\.com\/RobertFlexx\/SPS\/releases\/tag\/[^/]+\/?$/.test(href))
+				as[i].setAttribute("href", prefix + "tag/" + encoded);
+		}
+	}
+
 	function setIso(rel) {
 		if (!rel)
 			return;
-		var tag = rel.tag_name || rel.name || "";
-		var when = rel.published_at || "";
+		var tag = rel.tag_name || rel.tag || rel.name || "";
+		var when = rel.published_at || rel.published || rel.date || "";
+		var href = tag
+			? "https://github.com/RobertFlexx/SPS/releases/tag/" + encodeURIComponent(tag)
+			: "https://github.com/RobertFlexx/SPS/releases/latest";
 		if (isoEl && tag) {
-			isoEl.innerHTML = "<a href=\"https://github.com/RobertFlexx/SPS/releases/latest\">" +
+			isoEl.innerHTML = "<a href=\"" + esc(href) + "\">" +
 				esc(tag) + "</a> (<time datetime=\"" + esc(when) + "\">" +
 				esc(formatLocal(when)) + "</time>)";
 		}
@@ -339,8 +409,22 @@
 			tagEl.textContent = tag;
 		if (dateEl && when) {
 			dateEl.setAttribute("data-iso", when);
+			dateEl.setAttribute("datetime", when);
 			dateEl.textContent = formatLocal(when);
 		}
+	}
+
+	function applyRelease(rel) {
+		if (!rel)
+			return;
+		var tag = rel.tag_name || rel.tag || rel.name || "";
+		if (!liveRank(tag))
+			return;
+		if (shownIsoTag && liveBetter(shownIsoTag, tag))
+			return;
+		shownIsoTag = tag;
+		setIso(rel);
+		rewriteDownloads(tag);
 	}
 
 	function fromReleases(list) {
@@ -411,58 +495,72 @@
 		location.href = newsHref(n, newsNest());
 	});
 
-	var req = [json(API + "SPS/releases?per_page=100")];
-	for (var r = 0; r < REPOS.length; r++)
-		req.push(json(API + REPOS[r].path + "/commits?per_page=100"));
-	if (feed)
-		req.push(json(dataRoot + "data/news.json").catch(function () { return []; }));
+	json(dataRoot + "data/release.json").then(function (info) {
+		if (!info || !info.tag)
+			return;
+		applyRelease({
+			tag_name: info.tag,
+			published_at: info.published_at || info.date || ""
+		});
+	}).catch(function () {});
 
-	Promise.all(req).then(function (rows) {
-		var releases = rows[0] || [];
-		var extra = fromReleases(releases);
-		for (var i = 0; i < REPOS.length; i++)
-			extra = extra.concat(fromCommits(rows[i + 1] || [], REPOS[i].label));
+	function refreshCommitsAndNews(releases) {
+		var needCommits = !!(feed || brief || document.getElementById("live-sps"));
+		if (!needCommits)
+			return;
+		var extra = fromReleases(releases || []);
+		var commitReqs = [];
+		for (var r = 0; r < REPOS.length; r++)
+			commitReqs.push(json(API + REPOS[r].path + "/commits?per_page=100")
+				.catch(function () { return []; }));
+		var newsReq = feed
+			? json(dataRoot + "data/news.json").catch(function () { return []; })
+			: Promise.resolve([]);
+		Promise.all(commitReqs.concat([newsReq])).then(function (rows) {
+			var i;
+			for (i = 0; i < REPOS.length; i++)
+				extra = extra.concat(fromCommits(rows[i] || [], REPOS[i].label));
+			var baked = [];
+			if (feed)
+				baked = fromJson(rows[REPOS.length] || []);
+			if (!baked.length)
+				baked = readItems(feed).concat(readItems(brief));
+			var items = merge(baked, extra);
 
-		var baked = [];
-		if (feed)
-			baked = fromJson(rows[REPOS.length + 1] || []);
-		if (!baked.length)
-			baked = readItems(feed).concat(readItems(brief));
-		var items = merge(baked, extra);
-
-		if (feed) {
-			var nest = newsNest();
-			var page = newsPage();
-			var pages = Math.max(1, Math.ceil(items.length / PER) || 1);
-			if (page > pages) {
-				location.replace(newsHref(pages, nest));
-				return;
+			if (feed) {
+				var nest = newsNest();
+				var page = newsPage();
+				var pages = Math.max(1, Math.ceil(items.length / PER) || 1);
+				if (page > pages) {
+					location.replace(newsHref(pages, nest));
+					return;
+				}
+				paintPage(feed, items, page, PER);
+				paintPager(page, pages, nest, PER);
 			}
-			paintPage(feed, items, page, PER);
-			paintPager(page, pages, nest, PER);
-		}
-		paint(brief, items, 8, true);
+			paint(brief, items, 8, true);
 
-		var latest = null;
-		for (var j = 0; j < releases.length; j++) {
-			if (releases[j] && !releases[j].draft) {
-				latest = releases[j];
-				break;
+			for (var k = 0; k < REPOS.length; k++) {
+				var commits = rows[k] || [];
+				var sha = commits[0] && commits[0].sha;
+				if (REPOS[k].path === "SPS")
+					setSha("live-sps", "SPS", sha);
+				else if (REPOS[k].path === "sps-core")
+					setSha("live-core", "sps-core", sha);
+				else if (REPOS[k].path === "sps-extra")
+					setSha("live-extra", "sps-extra", sha);
 			}
-		}
-		setIso(latest);
+		}).catch(function () {
+			/* keep the HTML from the last site build */
+		});
+	}
 
-		for (var k = 0; k < REPOS.length; k++) {
-			var commits = rows[k + 1] || [];
-			var sha = commits[0] && commits[0].sha;
-			if (REPOS[k].path === "SPS")
-				setSha("live-sps", "SPS", sha);
-			else if (REPOS[k].path === "sps-core")
-				setSha("live-core", "sps-core", sha);
-			else if (REPOS[k].path === "sps-extra")
-				setSha("live-extra", "sps-extra", sha);
-		}
+	json(API + "SPS/releases?per_page=100").then(function (releases) {
+		var rel = pickLiveRelease(releases);
+		if (rel)
+			applyRelease(rel);
+		refreshCommitsAndNews(releases);
 	}).catch(function () {
-		/* keep the HTML from the last site build */
+		refreshCommitsAndNews([]);
 	});
 })();

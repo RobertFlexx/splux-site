@@ -71,6 +71,7 @@ $0 == "@@PAGER@@" {
 	gsub(/@@N_CORE@@/, ncore)
 	gsub(/@@N_EXTRA@@/, nextra)
 	gsub(/@@GENERATED@@/, generated)
+	gsub(/@@LIVE_SIG@@/, livesig)
 	gsub(/@@CURL_VER@@/, curlver)
 	gsub(/@@NEWS_PAGE_TITLE@@/, pagetitle)
 	print
