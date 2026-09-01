@@ -191,13 +191,24 @@ then
 	printf '%s\n' "warning: news collection failed" >&2
 	: >"$tmp/news.tsv"
 fi
-awk -f tools/news.awk -v mode=html "$tmp/news.tsv" >"$tmp/news.html"
 awk -f tools/news.awk -v mode=brief "$tmp/news.tsv" >"$tmp/news-brief.html"
 generated_iso=$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u '+%Y-%m-%dT00:00:00Z')
 awk -f tools/news.awk -v mode=atom -v siteurl="$SITE_URL" \
 	-v feedupdated="$generated_iso" \
 	"$tmp/news.tsv" >"$OUT/news/atom.xml"
+awk -f tools/news.awk -v mode=json "$tmp/news.tsv" >"$OUT/data/news.json"
 cp "$tmp/news.tsv" "$OUT/data/news.tsv"
+
+news_per=20
+nnews=$(awk 'END { print NR + 0 }' "$tmp/news.tsv")
+if [ "$nnews" -lt 1 ]; then
+	news_pages=1
+else
+	news_pages=$(( (nnews + news_per - 1) / news_per ))
+fi
+: >"$tmp/pager.html"
+: >"$tmp/news.html"
+pagetitle=
 
 sps_sha=$(short_sha "$SPS")
 core_sha=$(short_sha "$CORE")
@@ -229,6 +240,8 @@ subst() {
 		-v newsfile="$tmp/news.html" \
 		-v brieffile="$tmp/news-brief.html" \
 		-v infofile="$tmp/news-info.html" \
+		-v pagerfile="$tmp/pager.html" \
+		-v pagetitle="$pagetitle" \
 		-v root="$root" \
 		-v tag="$tag" \
 		-v date="$date" \
@@ -247,7 +260,26 @@ subst site/packages/index.html "$OUT/packages/index.html" "../"
 subst site/install/index.html "$OUT/install/index.html" "../"
 subst site/docs/index.html "$OUT/docs/index.html" "../"
 subst site/source/index.html "$OUT/source/index.html" "../"
+
+awk -f tools/news.awk -v mode=html -v page=1 -v per="$news_per" \
+	"$tmp/news.tsv" >"$tmp/news.html"
+awk -f tools/news.awk -v mode=pager -v page=1 -v pages="$news_pages" \
+	-v per="$news_per" -v nest=0 "$tmp/news.tsv" >"$tmp/pager.html"
+pagetitle=
 subst site/news/index.html "$OUT/news/index.html" "../"
+news_p=2
+while [ "$news_p" -le "$news_pages" ]
+do
+	awk -f tools/news.awk -v mode=html -v page="$news_p" -v per="$news_per" \
+		"$tmp/news.tsv" >"$tmp/news.html"
+	awk -f tools/news.awk -v mode=pager -v page="$news_p" -v pages="$news_pages" \
+		-v per="$news_per" -v nest=1 "$tmp/news.tsv" >"$tmp/pager.html"
+	pagetitle=" page $news_p"
+	subst site/news/index.html "$OUT/news/$news_p/index.html" "../../"
+	news_p=$((news_p + 1))
+done
+pagetitle=
+: >"$tmp/pager.html"
 
 # 404 must use an absolute prefix so nested missing URLs still load CSS.
 if [ -n "$SITE_PREFIX" ]; then

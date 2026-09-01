@@ -58,6 +58,11 @@ $0 == "@@NEWS_INFO@@" {
 	next
 }
 
+$0 == "@@PAGER@@" {
+	dump_file(pagerfile)
+	next
+}
+
 {
 	gsub(/@@ROOT@@/, root)
 	gsub(/@@RELEASE_TAG@@/, tag)
@@ -67,5 +72,6 @@ $0 == "@@NEWS_INFO@@" {
 	gsub(/@@N_EXTRA@@/, nextra)
 	gsub(/@@GENERATED@@/, generated)
 	gsub(/@@CURL_VER@@/, curlver)
+	gsub(/@@NEWS_PAGE_TITLE@@/, pagetitle)
 	print
 }

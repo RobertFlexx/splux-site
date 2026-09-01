@@ -39,7 +39,13 @@ and refreshed from GitHub when you open the page.
 
 - every published SPS live ISO release (`RobertFlexx/SPS` GitHub Releases)
 - every commit on SPS, sps-core, sps-extra, and this repository that
-  Git or the GitHub API can see
+  Git or the GitHub API can see, with author and whether GitHub verified
+  the signature
+
+The news feed splits into pages of twenty items. Each page is a real
+URL (`/news/`, `/news/2/`, ...). Times in the page HTML are UTC; the
+browser rewrites them to the viewer's local timezone. There is a page
+number field for jumping when the archive grows.
 
 The Pages workflow rebuilds every five minutes, and also on push,
 `workflow_dispatch`, and a `rebuild` repository dispatch. The news and

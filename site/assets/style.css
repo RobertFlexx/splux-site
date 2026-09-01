@@ -278,8 +278,74 @@ footer p {
 	font-size: 0.9rem;
 }
 
-.feed .kind {
+.feed .who {
+	color: var(--fg);
+}
+
+.feed .verified {
+	display: inline-block;
 	color: var(--accent);
+	border: 1px solid var(--accent);
+	padding: 0 0.35rem;
+	font-size: 0.8rem;
+}
+
+.pager {
+	margin: 1.25rem 0 0;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	color: var(--muted);
+}
+
+.pager-status {
+	margin: 0 0 0.5rem;
+}
+
+.pager-links {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem 0.85rem;
+	margin: 0 0 0.85rem;
+}
+
+.pager-links a[aria-current="page"] {
+	color: var(--fg);
+	text-decoration: underline;
+}
+
+.pager-gap {
+	color: var(--muted);
+}
+
+.pager-jump {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.4rem 0.6rem;
+	margin: 0;
+}
+
+.pager-jump input {
+	width: 4.5rem;
+	background: #111;
+	color: var(--fg);
+	border: 1px solid var(--rule);
+	padding: 0.35rem 0.5rem;
+	font: inherit;
+}
+
+.pager-jump button {
+	font: inherit;
+	background: #111;
+	color: var(--accent);
+	border: 1px solid var(--rule);
+	padding: 0.35rem 0.6rem;
+	cursor: pointer;
+}
+
+.pager-jump button:hover {
+	text-decoration: underline;
 }
 
 .feed .summary {

@@ -1,9 +1,10 @@
 #!/bin/sh
 # Collect Splux releases and git history into TSV for the news page.
-# Fields: epoch iso kind repo url title summary
+# Fields: epoch iso kind repo url title summary author verified
 # Env: CORE EXTRA SPS SITE (git work trees). GH_TOKEN optional via gh.
 # Pulls every non-draft SPS release and every commit available from the
-# local clones and from the GitHub API, then drops duplicate URLs.
+# local clones and from the GitHub API. Duplicate URLs keep the last row
+# so GitHub author and verified data win over local git.
 
 set -eu
 
@@ -26,10 +27,18 @@ emit() {
 	url=$5
 	title=$6
 	summary=${7-}
+	author=${8-}
+	verified=${9-}
 	title=$(printf '%s' "$title" | tr '\t\r\n' '   ')
 	summary=$(printf '%s' "$summary" | tr '\t\r\n' '   ')
-	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
-		"$epoch" "$iso" "$kind" "$repo" "$url" "$title" "$summary" >>"$out"
+	author=$(printf '%s' "$author" | tr '\t\r\n' '   ')
+	case $verified in
+		yes|no) ;;
+		*) verified= ;;
+	esac
+	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+		"$epoch" "$iso" "$kind" "$repo" "$url" "$title" "$summary" \
+		"$author" "$verified" >>"$out"
 }
 
 epoch_of() {
@@ -51,27 +60,28 @@ git_commits() {
 	repo=$2
 	baseurl=$3
 	git -C "$dir" rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
-	git -C "$dir" log --format='%ct%x09%cI%x09%H%x09%s' 2>/dev/null |
-	while IFS=$tab read -r epoch iso hash subject || [ -n "${epoch-}" ]
+	git -C "$dir" log --format='%ct%x09%cI%x09%H%x09%an%x09%s' 2>/dev/null |
+	while IFS=$tab read -r epoch iso hash author subject || [ -n "${epoch-}" ]
 	do
 		[ -n "${epoch-}" ] || continue
 		[ -n "${iso-}" ] || continue
 		[ -n "${hash-}" ] || continue
 		emit "$epoch" "$iso" commit "$repo" \
-			"$baseurl/commit/$hash" "$subject" ""
+			"$baseurl/commit/$hash" "$subject" "" "$author" ""
 	done
 }
 
 read_commit_tsv() {
 	repo=$1
 	file=$2
-	while IFS=$tab read -r published url title || [ -n "${published-}" ]
+	while IFS=$tab read -r published url title author verified || [ -n "${published-}" ]
 	do
 		[ -n "${published-}" ] || continue
 		[ -n "${url-}" ] || continue
 		[ -n "${title-}" ] || title=$url
 		epoch=$(epoch_of "$published")
-		emit "$epoch" "$published" commit "$repo" "$url" "$title" ""
+		emit "$epoch" "$published" commit "$repo" "$url" "$title" "" \
+			"$author" "$verified"
 	done <"$file"
 }
 
@@ -86,15 +96,17 @@ if command -v gh >/dev/null 2>&1; then
 			.published_at,
 			.html_url,
 			((.name // .tag_name) | gsub("[\r\t]"; " ")),
-			((.body // "") | gsub("[\r\t]"; " ") | gsub("\n+"; " ") | .[0:900])
+			((.body // "") | gsub("[\r\t]"; " ") | gsub("\n+"; " ") | .[0:900]),
+			((.author.login // "") | gsub("[\r\t]"; " "))
 		] | @tsv' >"$tmp/rel"
 	then
-		while IFS=$tab read -r published url name body || [ -n "${published-}" ]
+		while IFS=$tab read -r published url name body author || [ -n "${published-}" ]
 		do
 			[ -n "${published-}" ] || continue
 			[ -n "${url-}" ] || continue
 			epoch=$(epoch_of "$published")
-			emit "$epoch" "$published" release SPS "$url" "$name" "$body"
+			emit "$epoch" "$published" release SPS "$url" "$name" "$body" \
+				"$author" ""
 		done <"$tmp/rel"
 	else
 		printf '%s\n' "collect-news: GitHub releases request failed" >&2
@@ -107,7 +119,9 @@ if command -v gh >/dev/null 2>&1; then
 			'.[] | [
 				.commit.committer.date,
 				.html_url,
-				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " "))
+				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " ")),
+				((.author.login // .commit.author.name // "") | gsub("[\r\t]"; " ")),
+				(if .commit.verification.verified == true then "yes" else "no" end)
 			] | @tsv' >"$tmp/c"
 		then
 			read_commit_tsv "$label" "$tmp/c"
@@ -122,5 +136,15 @@ if command -v gh >/dev/null 2>&1; then
 	api_commits RobertFlexx/splux-site splux-site
 fi
 
-LC_ALL=C sort -t "$tab" -k1,1nr "$out" |
-awk -F '\t' 'NF >= 5 && $5 != "" && !seen[$5]++'
+awk -F '\t' '
+NF >= 5 && $5 != "" {
+	row[$5] = $0
+	if (!seen[$5]++) {
+		n++
+		urls[n] = $5
+	}
+}
+END {
+	for (i = 1; i <= n; i++)
+		print row[urls[i]]
+}' "$out" | LC_ALL=C sort -t "$tab" -k1,1nr
