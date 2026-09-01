@@ -4,7 +4,7 @@ Static site for Splux Linux and the official SPS package collections.
 
 This site was fully handmade by RobertFlexx.
 
-## Build
+## Build (for maintainers)
 
 ```sh
 CORE=/tmp/sps-core EXTRA=/tmp/sps-extra SPS=/path/to/SPS ./tools/build-site.sh
