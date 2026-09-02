@@ -20,6 +20,8 @@ BEGIN {
 			footer = footer line "\n"
 		close(footerfile)
 	}
+	if (githost == "")
+		githost = "https://git.splux.robertflexx.dev"
 }
 
 $0 == "@@HEADER@@" {
@@ -79,5 +81,6 @@ $0 == "@@DOCSNAV@@" {
 	gsub(/@@LIVE_SIG@@/, livesig)
 	gsub(/@@CURL_VER@@/, curlver)
 	gsub(/@@NEWS_PAGE_TITLE@@/, pagetitle)
+	gsub(/@@GIT_HOST@@/, githost)
 	print
 }

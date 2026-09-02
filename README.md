@@ -73,3 +73,15 @@ and on push to `main`.
 The custom domain is `https://splux.robertflexx.dev`. Point a DNS CNAME
 for `splux` at `robertflexx.github.io`, then GitHub Pages serves this
 repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
+
+## Git
+
+`/git/` is the public forge page. Canonical clone, accounts, and pull
+requests belong on Splux Git (`git.splux.robertflexx.dev` once that name
+has DNS and TLS). GitHub stays a mirror of git history. The Forgejo
+theme and installer live in `forgejo/`.
+
+```sh
+sh forgejo/install.sh
+```
+

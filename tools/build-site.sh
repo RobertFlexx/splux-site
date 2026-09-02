@@ -17,6 +17,7 @@ CORE_GIT=${CORE_GIT:-https://github.com/RobertFlexx/sps-core}
 EXTRA_GIT=${EXTRA_GIT:-https://github.com/RobertFlexx/sps-extra}
 SPS_GIT=${SPS_GIT:-https://github.com/RobertFlexx/SPS}
 SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
+GIT_HOST=${GIT_HOST:-https://git.splux.robertflexx.dev}
 
 clone_tree() {
 	url=$1
@@ -45,7 +46,7 @@ fi
 rm -rf "$OUT"
 mkdir -p "$OUT/assets" "$OUT/data" "$OUT/download" "$OUT/packages" \
 	"$OUT/install" "$OUT/docs" "$OUT/docs/images" "$OUT/docs/sps" \
-	"$OUT/docs/first-boot" "$OUT/source" "$OUT/news"
+	"$OUT/docs/first-boot" "$OUT/source" "$OUT/news" "$OUT/git"
 
 cp -a site/assets/. "$OUT/assets/"
 if [ -f CNAME ]; then
@@ -68,6 +69,7 @@ write_header() {
 <a href="${root}packages/">packages</a>
 <a href="${root}install/">install</a>
 <a href="${root}docs/">docs</a>
+<a href="${root}git/">git</a>
 <a href="${root}source/">source</a>
 <a href="${root}news/">news</a>
 <a class="gh" href="${SPS_GIT}"><img src="${root}assets/github.svg" width="14" height="14" alt=""> SPS</a>
@@ -80,7 +82,7 @@ write_footer() {
 	cat <<EOF
 <footer>
 <p>Splux Linux</p>
-<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}docs/">documentation</a></p>
+<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git</a> · <a href="${root}docs/">documentation</a></p>
 <p>This site was fully handmade by <a href="https://github.com/RobertFlexx">RobertFlexx</a>.</p>
 </footer>
 EOF
@@ -97,7 +99,8 @@ write_docs_nav() {
 		images "${root}docs/images/" "Live images" \
 		install "${root}install/" "Install" \
 		sps "${root}docs/sps/" "SPS tools" \
-		firstboot "${root}docs/first-boot/" "After first boot"
+		firstboot "${root}docs/first-boot/" "After first boot" \
+		git "${root}git/" "Git"
 	while [ "$#" -ge 3 ]
 	do
 		if [ "$cur" = "$1" ]; then
@@ -314,6 +317,7 @@ subst() {
 		-v generated="$generated" \
 		-v livesig="$livesig" \
 		-v curlver="$curlver" \
+		-v githost="$GIT_HOST" \
 		"$src" >"$dest"
 }
 
@@ -327,6 +331,7 @@ subst site/docs/images/index.html "$OUT/docs/images/index.html" "../../" images
 subst site/docs/sps/index.html "$OUT/docs/sps/index.html" "../../" sps
 subst site/docs/first-boot/index.html "$OUT/docs/first-boot/index.html" "../../" firstboot
 subst site/source/index.html "$OUT/source/index.html" "../"
+subst site/git/index.html "$OUT/git/index.html" "../"
 
 awk -f tools/news.awk -v mode=html -v page=1 -v per="$news_per" \
 	"$tmp/news.tsv" >"$tmp/news.html"
@@ -398,6 +403,7 @@ do
 		-v generated="$generated" \
 		-v livesig="$livesig" \
 		-v curlver="$curlver" \
+		-v githost="$GIT_HOST" \
 		"$page" >"$tmp/page.html"
 	mv "$tmp/page.html" "$page"
 done
