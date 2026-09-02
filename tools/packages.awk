@@ -140,9 +140,20 @@ function write_page(    dir, ncomp, i, prefix, parts, cat, page, gh_dir) {
 	list_html(page, "optional dependencies", val["optional"])
 	list_html(page, "conflicts", val["conflict"])
 	print "<p>recipe<br>" > page
-	print "<a href=\"" github "/blob/main/" gh_dir "/recipe\">view recipe</a><br>" > page
-	print "<a href=\"" github "/tree/main/" gh_dir "\">repository directory</a><br>" > page
-	print "<a href=\"" github "/commits/main/" gh_dir "\">history</a></p>" > page
+	if (github ~ /github\.com/) {
+		print "<a href=\"" github "/blob/main/" gh_dir "/recipe\">view recipe</a><br>" > page
+		print "<a href=\"" github "/tree/main/" gh_dir "\">repository directory</a><br>" > page
+		print "<a href=\"" github "/commits/main/" gh_dir "\">history</a>" > page
+	} else {
+		print "<a href=\"" github "/src/branch/main/" gh_dir "/recipe\">view recipe</a><br>" > page
+		print "<a href=\"" github "/src/branch/main/" gh_dir "\">repository directory</a><br>" > page
+		print "<a href=\"" github "/commits/branch/main/" gh_dir "\">history</a>" > page
+	}
+	if (mirror != "") {
+		print "<br>" > page
+		print "<a href=\"" mirror "/blob/main/" gh_dir "/recipe\">GitHub mirror</a>" > page
+	}
+	print "</p>" > page
 	print "</main>" > page
 	print "@@FOOTER@@" > page
 	print "</div></body></html>" > page
@@ -151,7 +162,7 @@ function write_page(    dir, ncomp, i, prefix, parts, cat, page, gh_dir) {
 
 BEGIN {
 	if (repo == "") repo = "unknown"
-	if (github == "") github = "https://github.com/RobertFlexx/sps-core"
+	if (github == "") github = "https://git.splux.robertflexx.dev/RobertFlexx/sps-core"
 	if (pkgpath == "") pkgpath = "unknown"
 }
 

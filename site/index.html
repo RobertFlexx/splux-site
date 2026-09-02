@@ -69,34 +69,35 @@ pkin: installed curl @@CURL_VER@@</pre>
 
 <h2 id="repos"><span class="num">[004]</span> Repositories</h2>
 <hr class="rule">
-<p><a href="@@ROOT@@git/">core</a><br>
-Base system, toolchain, libraries, boot, filesystems, and networking. @@N_CORE@@ packages.</p>
-<p><a href="@@ROOT@@git/">extra</a><br>
-Desktop software, graphics, multimedia, development tools, and other packages. @@N_EXTRA@@ packages.</p>
-<p>SPS also supports administrator-maintained local repositories in addition to the official trees.</p>
+<p><a href="@@GIT_HOST@@/RobertFlexx/sps-core">sps-core</a><br>
+Base system, toolchain, libraries, boot, filesystems, and networking. @@N_CORE@@ packages. GitHub mirror: <a href="https://github.com/RobertFlexx/sps-core">RobertFlexx/sps-core</a>.</p>
+<p><a href="@@GIT_HOST@@/RobertFlexx/sps-extra">sps-extra</a><br>
+Desktop software, graphics, multimedia, development tools, and other packages. @@N_EXTRA@@ packages. GitHub mirror: <a href="https://github.com/RobertFlexx/sps-extra">RobertFlexx/sps-extra</a>.</p>
+<p>SPS also supports administrator-maintained local repositories in addition to the official trees. Browse recipes from <a href="@@ROOT@@git/">Splux Git</a>.</p>
 
 <h2 id="docs"><span class="num">[005]</span> Documentation</h2>
 <hr class="rule">
 <p><a href="@@ROOT@@docs/">Handbook</a><br>
 <a href="@@ROOT@@install/">Install</a> (setup, manual tty, slim)<br>
 <a href="@@ROOT@@docs/images/">Live images</a><br>
-<a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a><br>
-<a href="https://github.com/RobertFlexx/SPS/blob/main/DESIGN.md">SPS 1.0 formats</a></p>
+<a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/README.md">SPS README</a><br>
+<a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/DESIGN.md">SPS 1.0 formats</a></p>
 
 <h2 id="source"><span class="num">[006]</span> Source</h2>
 <hr class="rule">
 <p>
 <a href="@@ROOT@@git/">Splux Git</a>
 canonical forge<br>
-<a href="https://github.com/RobertFlexx/SPS">SPS</a>
-the package system (GitHub mirror)<br>
-<a href="https://github.com/RobertFlexx/sps-core">sps-core</a>
+<a href="@@GIT_HOST@@/RobertFlexx/SPS">SPS</a>
+the package system<br>
+<a href="@@GIT_HOST@@/RobertFlexx/sps-core">sps-core</a>
 official base recipes<br>
-<a href="https://github.com/RobertFlexx/sps-extra">sps-extra</a>
+<a href="@@GIT_HOST@@/RobertFlexx/sps-extra">sps-extra</a>
 official extra recipes<br>
-<a href="https://github.com/RobertFlexx/splux-site">splux-site</a>
+<a href="@@GIT_HOST@@/RobertFlexx/splux-site">splux-site</a>
 this website
 </p>
+<p class="note">GitHub holds a read-only mirror of the same history. Live ISO files still come from GitHub Releases.</p>
 
 <h2 id="status"><span class="num">[007]</span> Project status</h2>
 <hr class="rule">
@@ -109,11 +110,11 @@ this website
 @@NEWS_BRIEF@@
 </div>
 <p><a href="@@ROOT@@news/">Full news feed</a> · <a href="@@ROOT@@news/atom.xml">Atom</a></p>
-<p class="note">The feed is filled from GitHub when this site builds, and this page also asks GitHub for anything newer when you open it.</p>
+<p class="note">The feed is filled from git history when this site builds. Commit links go to Splux Git. This page also asks GitHub for anything newer when you open it. ISO files stay on GitHub Releases.</p>
 
 </main>
 @@FOOTER@@
 </div>
-<script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@"></script>
+<script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@" data-git="@@GIT_HOST@@"></script>
 </body>
 </html>

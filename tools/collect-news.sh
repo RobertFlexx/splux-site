@@ -1,10 +1,11 @@
 #!/bin/sh
 # Collect Splux releases and git history into TSV for the news page.
 # Fields: epoch iso kind repo url title summary author verified avatar
-# Env: CORE EXTRA SPS SITE (git work trees). GH_TOKEN optional via gh.
+# Env: CORE EXTRA SPS SITE GIT_HOST (git work trees). GH_TOKEN optional via gh.
 # Pulls every non-draft SPS release and every commit available from the
-# local clones and from the GitHub API. Duplicate URLs keep the last row
-# so GitHub author and verified data win over local git.
+# local clones and from the GitHub API. Commit URLs point at Splux Git.
+# Duplicate URLs keep the last row so GitHub author and verified data
+# win over local git.
 
 set -eu
 
@@ -12,6 +13,8 @@ CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
 SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
+GIT_HOST=${GIT_HOST:-https://git.splux.robertflexx.dev}
+GIT_HOST=${GIT_HOST%/}
 
 tab=$(printf '\t')
 tmp=$(mktemp -d "${TMPDIR:-/tmp}/splux-news.XXXXXX") || exit 1
@@ -100,10 +103,10 @@ read_commit_tsv() {
 	done <"$file"
 }
 
-git_commits "$SPS" SPS https://github.com/RobertFlexx/SPS
-git_commits "$CORE" sps-core https://github.com/RobertFlexx/sps-core
-git_commits "$EXTRA" sps-extra https://github.com/RobertFlexx/sps-extra
-git_commits "$SITE" splux-site https://github.com/RobertFlexx/splux-site
+git_commits "$SPS" SPS "$GIT_HOST/RobertFlexx/SPS"
+git_commits "$CORE" sps-core "$GIT_HOST/RobertFlexx/sps-core"
+git_commits "$EXTRA" sps-extra "$GIT_HOST/RobertFlexx/sps-extra"
+git_commits "$SITE" splux-site "$GIT_HOST/RobertFlexx/splux-site"
 
 if command -v gh >/dev/null 2>&1; then
 	if gh api --paginate "repos/RobertFlexx/SPS/releases?per_page=100" --jq \
@@ -134,7 +137,7 @@ if command -v gh >/dev/null 2>&1; then
 		if gh api --paginate "repos/${path}/commits?per_page=100" --jq \
 			'.[] | [
 				.commit.committer.date,
-				.html_url,
+				("'"$GIT_HOST"'/'"$path"'/commit/" + .sha),
 				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " ")),
 				((.author.login // .commit.author.name // "") | gsub("[\r\t]"; " ")),
 				(if .commit.verification.verified == true then "yes" else "no" end),

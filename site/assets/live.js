@@ -20,6 +20,9 @@
 	var thisScript = document.currentScript ||
 		document.querySelector("script[src*=\"live.js\"]");
 	var dataRoot = (thisScript && thisScript.getAttribute("data-root")) || "./";
+	var gitHost = (thisScript && thisScript.getAttribute("data-git")) ||
+		"https://git.splux.robertflexx.dev";
+	gitHost = String(gitHost).replace(/\/+$/, "");
 	if (!feed && !brief && !isoEl && !tagEl)
 		return;
 
@@ -118,7 +121,7 @@
 				author: a.getAttribute("data-author") || "",
 				verified: a.getAttribute("data-verified") === "yes",
 				avatar: a.getAttribute("data-avatar") || "",
-				url: link.getAttribute("href") || "",
+				url: forgeCommitHref(link.getAttribute("href") || ""),
 				title: link.textContent || "",
 				summary: summary ? summary.textContent : ""
 			});
@@ -141,7 +144,7 @@
 				author: it.author || "",
 				verified: !!it.verified,
 				avatar: it.avatar || "",
-				url: it.url,
+				url: forgeCommitHref(it.url),
 				title: it.title || "",
 				summary: it.summary || ""
 			});
@@ -316,12 +319,25 @@
 		return sha.length > 7 ? sha.slice(0, 7) : sha;
 	}
 
+	function commitHref(repoPath, sha, htmlUrl) {
+		if (gitHost && repoPath && sha)
+			return gitHost + "/RobertFlexx/" + repoPath + "/commit/" + sha;
+		return htmlUrl || "";
+	}
+
+	function forgeCommitHref(url) {
+		var m = /^https:\/\/github\.com\/RobertFlexx\/([^/]+)\/commit\/([0-9a-fA-F]+)/.exec(String(url || ""));
+		if (m && gitHost)
+			return gitHost + "/RobertFlexx/" + m[1] + "/commit/" + m[2];
+		return url;
+	}
+
 	function setSha(id, repoPath, sha) {
 		var el = document.getElementById(id);
 		if (!el || !sha)
 			return;
-		el.innerHTML = "<a href=\"https://github.com/RobertFlexx/" +
-			esc(repoPath) + "/commit/" + esc(sha) + "\">" +
+		el.innerHTML = "<a href=\"" +
+			esc(commitHref(repoPath, sha, "")) + "\">" +
 			esc(shortSha(sha)) + "</a>";
 	}
 
@@ -468,7 +484,7 @@
 				author: author,
 				verified: !!ver.verified,
 				avatar: (c.author && c.author.avatar_url) || "",
-				url: c.html_url || "",
+				url: forgeCommitHref(c.html_url || commitHref(label, c.sha, "")),
 				title: firstLine(commit.message),
 				summary: ""
 			});

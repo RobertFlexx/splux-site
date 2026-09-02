@@ -16,7 +16,7 @@
 <main id="main">
 <h2>News</h2>
 <hr class="rule">
-<p>This page is filled from GitHub: every published SPS live ISO release, plus commits on SPS, sps-core, sps-extra, and this website. Nobody has to edit it for a new snapshot or commit to show up.</p>
+<p>This page is filled from git history: every published SPS live ISO release on GitHub, plus commits on SPS, sps-core, sps-extra, and this website. Commit links go to Splux Git. Nobody has to edit it for a new snapshot or commit to show up.</p>
 <p class="note">Times are shown in your local timezone. Commits name the author and whether GitHub verified the signature. Long feeds split into pages of twenty. <a href="@@ROOT@@news/atom.xml">Atom feed</a>.</p>
 @@NEWS_INFO@@
 <h2>Feed</h2>
@@ -28,6 +28,6 @@
 </main>
 @@FOOTER@@
 </div>
-<script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@"></script>
+<script src="@@ROOT@@assets/live.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@" data-git="@@GIT_HOST@@"></script>
 </body>
 </html>

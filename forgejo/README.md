@@ -18,12 +18,16 @@ the admin account yourself (the installer does not set a password):
   --admin --password 'your-password'
 ```
 
-Then in the web UI, migrate SPS, sps-core, sps-extra, and splux-site
-from GitHub.
+Then import SPS, sps-core, sps-extra, and splux-site from GitHub:
 
-The public handbook page is `/git/`. Clone URLs on the internet still
-use GitHub until `git.splux.robertflexx.dev` has DNS and TLS in front of
-this process. LAN:
+```sh
+sh forgejo/import-repos.sh
+```
+
+The public handbook page is `/git/`. That page is official on the
+site. Clone URLs on the internet still use GitHub until
+`git.splux.robertflexx.dev` has DNS and TLS in front of this process.
+LAN:
 
 ```sh
 git clone http://10.0.0.139:3000/RobertFlexx/SPS.git

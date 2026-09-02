@@ -42,12 +42,13 @@ registered in `tools/build-site.sh` with the correct `@@ROOT@@` depth.
 
 ## News
 
-`news/` is generated at build time from GitHub, not edited by hand:
+`news/` is generated at build time from GitHub metadata and local git
+history, not edited by hand:
 
 - every published SPS live ISO release (`RobertFlexx/SPS` GitHub Releases)
 - every commit on SPS, sps-core, sps-extra, and this repository that
   Git or the GitHub API can see, with author and whether GitHub verified
-  the signature
+  the signature. Commit links point at Splux Git.
 
 The news feed splits into pages of twenty items. Each page is a real
 URL (`/news/`, `/news/2/`, ...). Times in the page HTML are UTC; the
@@ -77,11 +78,17 @@ repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 ## Git
 
 `/git/` is the public forge page. Canonical clone, accounts, and pull
-requests belong on Splux Git (`git.splux.robertflexx.dev` once that name
-has DNS and TLS). GitHub stays a mirror of git history. The Forgejo
-theme and installer live in `forgejo/`.
+requests belong on Splux Git (`https://git.splux.robertflexx.dev`).
+GitHub stays a mirror of git history. Live ISO files stay on GitHub
+Releases. The Forgejo theme and installer live in `forgejo/`.
+
+Point a DNS A or AAAA record for `git.splux` at the host that runs
+Forgejo, then put TLS in front of port 3000 (or a tunnel) and set
+`ROOT_URL` to `https://git.splux.robertflexx.dev/`. Until that name
+answers, the handbook page still lists GitHub clone URLs.
 
 ```sh
 sh forgejo/install.sh
+sh forgejo/import-repos.sh
 ```
 

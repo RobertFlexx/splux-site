@@ -30,32 +30,40 @@
 </thead>
 <tbody>
 <tr data-repo="SPS">
-<td><a class="name" href="https://github.com/RobertFlexx/SPS">SPS</a></td>
+<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/SPS">SPS</a></td>
 <td>package system, installer, live ISO builder</td>
 <td class="lang muted">Shell</td>
 <td class="pushed muted"></td>
 </tr>
 <tr data-repo="sps-core">
-<td><a class="name" href="https://github.com/RobertFlexx/sps-core">sps-core</a></td>
+<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/sps-core">sps-core</a></td>
 <td>official base recipes</td>
 <td class="lang muted">Shell</td>
 <td class="pushed muted"></td>
 </tr>
 <tr data-repo="sps-extra">
-<td><a class="name" href="https://github.com/RobertFlexx/sps-extra">sps-extra</a></td>
+<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/sps-extra">sps-extra</a></td>
 <td>official extra recipes</td>
 <td class="lang muted">Shell</td>
 <td class="pushed muted"></td>
 </tr>
 <tr data-repo="splux-site">
-<td><a class="name" href="https://github.com/RobertFlexx/splux-site">splux-site</a></td>
+<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/splux-site">splux-site</a></td>
 <td>this website</td>
 <td class="lang muted">HTML</td>
 <td class="pushed muted"></td>
 </tr>
 </tbody>
 </table>
-<p class="note">If the forge link does not answer yet, use the GitHub clone URLs below. The trees are the same commits.</p>
+<p class="note">Splux Git is the official clone URL. If that name does not answer yet, use the GitHub mirrors. The trees are the same commits.</p>
+
+<h2>Clone (Splux Git)</h2>
+<hr class="rule">
+<p>Official URLs. They need DNS and TLS on <code>git.splux.robertflexx.dev</code>, or a host on the LAN that already runs the forge.</p>
+<pre class="block">git clone @@GIT_HOST@@/RobertFlexx/SPS.git
+git clone @@GIT_HOST@@/RobertFlexx/sps-core.git
+git clone @@GIT_HOST@@/RobertFlexx/sps-extra.git
+git clone @@GIT_HOST@@/RobertFlexx/splux-site.git</pre>
 
 <h2>Clone (GitHub mirror)</h2>
 <hr class="rule">
@@ -64,14 +72,6 @@
 git clone https://github.com/RobertFlexx/sps-core.git
 git clone https://github.com/RobertFlexx/sps-extra.git
 git clone https://github.com/RobertFlexx/splux-site.git</pre>
-
-<h2>Clone (Splux Git)</h2>
-<hr class="rule">
-<p>Use these when <code>git.splux.robertflexx.dev</code> has DNS and TLS, or from the LAN that runs the forge.</p>
-<pre class="block">git clone @@GIT_HOST@@/RobertFlexx/SPS.git
-git clone @@GIT_HOST@@/RobertFlexx/sps-core.git
-git clone @@GIT_HOST@@/RobertFlexx/sps-extra.git
-git clone @@GIT_HOST@@/RobertFlexx/splux-site.git</pre>
 
 <h2>Pull requests</h2>
 <hr class="rule">
@@ -83,7 +83,7 @@ git clone @@GIT_HOST@@/RobertFlexx/splux-site.git</pre>
 <ul class="plain">
 <li>Live ISO files and SHA256SUMS</li>
 <li>This handbook (GitHub Pages)</li>
-<li>The news feed GitHub API calls</li>
+<li>News metadata from the GitHub API (commit links still point at Splux Git)</li>
 </ul>
 </main>
 @@FOOTER@@

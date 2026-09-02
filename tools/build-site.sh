@@ -72,7 +72,6 @@ write_header() {
 <a href="${root}git/">git</a>
 <a href="${root}source/">source</a>
 <a href="${root}news/">news</a>
-<a class="gh" href="${SPS_GIT}"><img src="${root}assets/github.svg" width="14" height="14" alt=""> SPS</a>
 </nav>
 EOF
 }
@@ -83,7 +82,7 @@ write_footer() {
 <footer>
 <p>Splux Linux</p>
 <p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git</a> · <a href="${root}docs/">documentation</a></p>
-<p>This site was fully handmade by <a href="https://github.com/RobertFlexx">RobertFlexx</a>.</p>
+<p>This site was fully handmade by <a href="${GIT_HOST}/RobertFlexx">RobertFlexx</a>.</p>
 </footer>
 EOF
 }
@@ -126,6 +125,7 @@ scan_tree() {
 	repo=$1
 	rootdir=$2
 	github=$3
+	mirror=${4-}
 	find "$rootdir" -name recipe -type f | LC_ALL=C sort | while IFS= read -r rec
 	do
 		rel=${rec#"$rootdir"/}
@@ -138,6 +138,7 @@ scan_tree() {
 			-v repo="$repo" \
 			-v pkgpath="$pkgpath" \
 			-v github="$github" \
+			-v mirror="$mirror" \
 			-v outdir="$OUT" \
 			"$rec" >>"$tsv"
 		then
@@ -148,8 +149,8 @@ scan_tree() {
 }
 
 printf '%s\n' "reading recipes" >&2
-scan_tree core "$CORE" "$CORE_GIT"
-scan_tree extra "$EXTRA" "$EXTRA_GIT"
+scan_tree core "$CORE" "$GIT_HOST/RobertFlexx/sps-core" "https://github.com/RobertFlexx/sps-core"
+scan_tree extra "$EXTRA" "$GIT_HOST/RobertFlexx/sps-extra" "https://github.com/RobertFlexx/sps-extra"
 
 LC_ALL=C sort -t "$(printf '\t')" -k1,1 -k5,5 "$tsv" >"$tmp/sorted.tsv"
 mv "$tmp/sorted.tsv" "$tsv"
@@ -247,7 +248,7 @@ short_sha() {
 	git -C "$1" rev-parse --short HEAD 2>/dev/null || printf '%s\n' unknown
 }
 
-export CORE EXTRA SPS SITE
+export CORE EXTRA SPS SITE GIT_HOST
 if ! sh tools/collect-news.sh >"$tmp/news.tsv"
 then
 	printf '%s\n' "warning: news collection failed" >&2
@@ -281,9 +282,9 @@ livesig=${site_sha}-$(date -u '+%Y%m%d%H%M%S' 2>/dev/null || date +%Y%m%d%H%M%S)
 cat >"$tmp/news-info.html" <<EOF
 <div class="info">
 <div class="dl-row"><span class="muted">Latest ISO</span><span id="live-iso"><a href="$notes_url">$tag</a> ($date)</span></div>
-<div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$SPS_GIT/commit/$sps_sha">$sps_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$CORE_GIT/commit/$core_sha">$core_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$EXTRA_GIT/commit/$extra_sha">$extra_sha</a></span></div>
+<div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$GIT_HOST/RobertFlexx/SPS/commit/$sps_sha">$sps_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$GIT_HOST/RobertFlexx/sps-core/commit/$core_sha">$core_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$GIT_HOST/RobertFlexx/sps-extra/commit/$extra_sha">$extra_sha</a></span></div>
 <div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra)</span></div>
 <div class="dl-row"><span class="muted">Site build</span><span>$generated ($site_sha)</span></div>
 </div>

@@ -50,16 +50,17 @@
 		}).then(function (v) {
 			var ver = (v && (v.version || v.forgejo)) || "up";
 			status.innerHTML = "reachable (" + esc(String(ver)) + ")";
+		}).catch(function () {
+			status.textContent =
+				"not reachable from this browser yet; clone GitHub until DNS and TLS exist";
 			var rows = document.querySelectorAll("#git-repos tr[data-repo]");
 			for (var j = 0; j < rows.length; j++) {
 				var name = rows[j].getAttribute("data-repo");
 				var a = rows[j].querySelector("a.name");
 				if (a && name)
-					a.setAttribute("href", gitHost + "/RobertFlexx/" + name);
+					a.setAttribute("href",
+						"https://github.com/RobertFlexx/" + name);
 			}
-		}).catch(function () {
-			status.textContent =
-				"not reachable from this browser yet; clone GitHub until DNS and TLS exist";
 		});
 	}
 

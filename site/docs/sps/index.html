@@ -56,9 +56,13 @@ unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
 <p>Leaving those unset is required so they resolve under the target, not under the live root.</p>
 
 <h3>Repositories</h3>
-<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins.</p>
+<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins. Splux Git is official. Until that name answers, use the GitHub mirrors, not both at once.</p>
 <pre class="block">dir core /usr/src/sps/core 100
 dir extra /usr/src/sps/extra 80
+
+git core @@GIT_HOST@@/RobertFlexx/sps-core.git 100
+git extra @@GIT_HOST@@/RobertFlexx/sps-extra.git 80
+
 git core https://github.com/RobertFlexx/sps-core.git 100
 git extra https://github.com/RobertFlexx/sps-extra.git 80</pre>
 <p>On tty and Plasma images the live <code>repos.conf</code> uses <code>dir</code> entries pointing at the bundled trees. Slim images have no recipes, so they use the git lines. <code>src update</code> for a git repo needs <code>git</code>, which slim does not ship.</p>
@@ -92,9 +96,9 @@ sget install curl</pre>
 
 <h3>Further reading</h3>
 <ul class="plain">
-<li><a href="https://github.com/RobertFlexx/SPS/blob/main/README.md">SPS README</a></li>
-<li><a href="https://github.com/RobertFlexx/SPS/blob/main/DESIGN.md">DESIGN.md</a></li>
-<li><a href="https://github.com/RobertFlexx/SPS/blob/main/PACKAGE-MAINTAINER.md">Recipe format</a></li>
+<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/README.md">SPS README</a></li>
+<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/DESIGN.md">DESIGN.md</a></li>
+<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/PACKAGE-MAINTAINER.md">Recipe format</a></li>
 <li><a href="@@ROOT@@packages/">Package browser</a></li>
 </ul>
 </main>
