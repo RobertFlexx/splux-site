@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Git - Splux Linux</title>
-<meta name="description" content="Official Splux Git repositories. Splux Git is the forge. GitHub is a mirror of git history.">
+<title>Git (WIP) - Splux Linux</title>
+<meta name="description" content="Splux Git. Under construction.">
 <link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="@@ROOT@@assets/style.css">
 </head>
@@ -13,81 +13,33 @@
 <div class="wrap">
 @@HEADER@@
 <main id="main">
-<h2>Git</h2>
+<h2>Git <span class="num">(WIP)</span></h2>
 <hr class="rule">
-<p>Splux Git is the official forge: clone, commit history, file trees, accounts, and pull requests. GitHub holds a read-only mirror of the same git history. Live ISO files still come from GitHub Releases.</p>
-<div class="info">
-<div class="dl-row"><span class="muted">Forge</span><span><a href="@@GIT_HOST@@">@@GIT_HOST@@</a></span></div>
-<div class="dl-row"><span class="muted">Status</span><span id="git-status">checking</span></div>
-<div class="dl-row"><span class="muted">Mirror</span><span><a href="https://github.com/RobertFlexx">github.com/RobertFlexx</a></span></div>
+<div class="wip" role="status">
+<div class="wip-tape" aria-hidden="true"></div>
+<pre class="block wip-board">
+
+
+
+
+                        [ under construction ]
+
+
+                            the floor is open
+                            the roof is not
+
+                            no trees
+                            no clones
+                            no pull requests
+
+
+
+$ <span class="wip-cursor"></span>
+</pre>
+<div class="wip-tape" aria-hidden="true"></div>
 </div>
-
-<h2>Repositories</h2>
-<hr class="rule">
-<table class="pkgs" id="git-repos">
-<thead>
-<tr><th>name</th><th>role</th><th>language</th><th>updated</th></tr>
-</thead>
-<tbody>
-<tr data-repo="SPS">
-<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/SPS">SPS</a></td>
-<td>package system, installer, live ISO builder</td>
-<td class="lang muted">Shell</td>
-<td class="pushed muted"></td>
-</tr>
-<tr data-repo="sps-core">
-<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/sps-core">sps-core</a></td>
-<td>official base recipes</td>
-<td class="lang muted">Shell</td>
-<td class="pushed muted"></td>
-</tr>
-<tr data-repo="sps-extra">
-<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/sps-extra">sps-extra</a></td>
-<td>official extra recipes</td>
-<td class="lang muted">Shell</td>
-<td class="pushed muted"></td>
-</tr>
-<tr data-repo="splux-site">
-<td><a class="name" href="@@GIT_HOST@@/RobertFlexx/splux-site">splux-site</a></td>
-<td>this website</td>
-<td class="lang muted">HTML</td>
-<td class="pushed muted"></td>
-</tr>
-</tbody>
-</table>
-<p class="note">Splux Git is the official clone URL. If that name does not answer yet, use the GitHub mirrors. The trees are the same commits.</p>
-
-<h2>Clone (Splux Git)</h2>
-<hr class="rule">
-<p>Official URLs. They need DNS and TLS on <code>git.splux.robertflexx.dev</code>, or a host on the LAN that already runs the forge.</p>
-<pre class="block">git clone @@GIT_HOST@@/RobertFlexx/SPS.git
-git clone @@GIT_HOST@@/RobertFlexx/sps-core.git
-git clone @@GIT_HOST@@/RobertFlexx/sps-extra.git
-git clone @@GIT_HOST@@/RobertFlexx/splux-site.git</pre>
-
-<h2>Clone (GitHub mirror)</h2>
-<hr class="rule">
-<p>These URLs work from anywhere today.</p>
-<pre class="block">git clone https://github.com/RobertFlexx/SPS.git
-git clone https://github.com/RobertFlexx/sps-core.git
-git clone https://github.com/RobertFlexx/sps-extra.git
-git clone https://github.com/RobertFlexx/splux-site.git</pre>
-
-<h2>Pull requests</h2>
-<hr class="rule">
-<p>Open them on Splux Git. GitHub does not receive pull requests, issues, or accounts. A push mirror copies commits, branches, and tags only.</p>
-<p>Registration on the forge is closed until the host is on a public name. Clone and browse do not need an account.</p>
-
-<h2>What stays on GitHub</h2>
-<hr class="rule">
-<ul class="plain">
-<li>Live ISO files and SHA256SUMS</li>
-<li>This handbook (GitHub Pages)</li>
-<li>News metadata from the GitHub API (commit links still point at Splux Git)</li>
-</ul>
 </main>
 @@FOOTER@@
 </div>
-<script src="@@ROOT@@assets/git.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@" data-git="@@GIT_HOST@@"></script>
 </body>
 </html>

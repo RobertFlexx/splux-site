@@ -626,3 +626,45 @@ table.docs th {
 		overflow-x: auto;
 	}
 }
+
+.wip {
+	margin: 1.25rem 0 2rem;
+}
+
+.wip-tape {
+	height: 12px;
+	background: repeating-linear-gradient(
+		-45deg,
+		var(--accent),
+		var(--accent) 10px,
+		#111 10px,
+		#111 20px
+	);
+	border: 1px solid var(--rule);
+}
+
+.wip-board {
+	margin: 0;
+	min-height: 22rem;
+	border-left: 0;
+	border-right: 0;
+	text-align: center;
+	color: var(--muted);
+	white-space: pre;
+}
+
+.wip-cursor::after {
+	content: "█";
+	color: var(--accent);
+	animation: wip-blink 1.05s steps(1, end) infinite;
+}
+
+@keyframes wip-blink {
+	50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wip-cursor::after {
+		animation: none;
+	}
+}

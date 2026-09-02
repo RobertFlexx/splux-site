@@ -69,7 +69,7 @@ write_header() {
 <a href="${root}packages/">packages</a>
 <a href="${root}install/">install</a>
 <a href="${root}docs/">docs</a>
-<a href="${root}git/">git</a>
+<a href="${root}git/">git (WIP)</a>
 <a href="${root}source/">source</a>
 <a href="${root}news/">news</a>
 </nav>
@@ -81,7 +81,7 @@ write_footer() {
 	cat <<EOF
 <footer>
 <p>Splux Linux</p>
-<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git</a> · <a href="${root}docs/">documentation</a></p>
+<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git (WIP)</a> · <a href="${root}docs/">documentation</a></p>
 <p>This site was fully handmade by <a href="${GIT_HOST}/RobertFlexx">RobertFlexx</a>.</p>
 </footer>
 EOF
@@ -99,7 +99,7 @@ write_docs_nav() {
 		install "${root}install/" "Install" \
 		sps "${root}docs/sps/" "SPS tools" \
 		firstboot "${root}docs/first-boot/" "After first boot" \
-		git "${root}git/" "Git"
+		git "${root}git/" "Git (WIP)"
 	while [ "$#" -ge 3 ]
 	do
 		if [ "$cur" = "$1" ]; then
