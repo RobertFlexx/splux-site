@@ -629,6 +629,8 @@ table.docs th {
 
 .wip {
 	margin: 1.25rem 0 2rem;
+	border: 1px solid var(--rule);
+	background: #111;
 }
 
 .wip-tape {
@@ -640,22 +642,41 @@ table.docs th {
 		#111 10px,
 		#111 20px
 	);
-	border: 1px solid var(--rule);
 }
 
 .wip-board {
-	margin: 0;
-	min-height: 22rem;
-	border-left: 0;
-	border-right: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.25rem;
+	padding: 3rem 1.5rem 2.5rem;
 	text-align: center;
 	color: var(--muted);
-	white-space: pre;
 }
 
-.wip-cursor::after {
-	content: "█";
-	color: var(--accent);
+.wip-board p {
+	margin: 0;
+	max-width: none;
+}
+
+.wip-mark,
+.wip-prompt {
+	color: var(--fg);
+}
+
+.wip-copy {
+	white-space: pre-line;
+	line-height: 1.65;
+}
+
+.wip-cursor {
+	display: inline-block;
+	width: 0.7em;
+	height: 1.05em;
+	margin-left: 0.2em;
+	vertical-align: -0.12em;
+	background: var(--accent);
 	animation: wip-blink 1.05s steps(1, end) infinite;
 }
 
@@ -664,7 +685,7 @@ table.docs th {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.wip-cursor::after {
+	.wip-cursor {
 		animation: none;
 	}
 }
