@@ -145,9 +145,9 @@ function write_page(    dir, ncomp, i, prefix, parts, cat, page, gh_dir) {
 		print "<a href=\"" github "/tree/main/" gh_dir "\">repository directory</a><br>" > page
 		print "<a href=\"" github "/commits/main/" gh_dir "\">history</a>" > page
 	} else {
-		print "<a href=\"" github "/src/branch/main/" gh_dir "/recipe\">view recipe</a><br>" > page
-		print "<a href=\"" github "/src/branch/main/" gh_dir "\">repository directory</a><br>" > page
-		print "<a href=\"" github "/commits/branch/main/" gh_dir "\">history</a>" > page
+		print "<a href=\"" github "/blob/" gh_dir "/recipe/\">view recipe</a><br>" > page
+		print "<a href=\"" github "/tree/" gh_dir "/\">repository directory</a><br>" > page
+		print "<a href=\"" github "/log/\">history</a>" > page
 	}
 	if (mirror != "") {
 		print "<br>" > page
@@ -162,7 +162,7 @@ function write_page(    dir, ncomp, i, prefix, parts, cat, page, gh_dir) {
 
 BEGIN {
 	if (repo == "") repo = "unknown"
-	if (github == "") github = "https://git.splux.robertflexx.dev/RobertFlexx/sps-core"
+	if (github == "") github = "https://splux.robertflexx.dev/git/sps-core"
 	if (pkgpath == "") pkgpath = "unknown"
 }
 

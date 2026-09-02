@@ -17,7 +17,7 @@ CORE_GIT=${CORE_GIT:-https://github.com/RobertFlexx/sps-core}
 EXTRA_GIT=${EXTRA_GIT:-https://github.com/RobertFlexx/sps-extra}
 SPS_GIT=${SPS_GIT:-https://github.com/RobertFlexx/SPS}
 SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
-GIT_HOST=${GIT_HOST:-https://git.splux.robertflexx.dev}
+GIT_HOST=${GIT_HOST:-https://splux.robertflexx.dev/git}
 
 clone_tree() {
 	url=$1
@@ -69,7 +69,7 @@ write_header() {
 <a href="${root}packages/">packages</a>
 <a href="${root}install/">install</a>
 <a href="${root}docs/">docs</a>
-<a href="${root}git/">git (WIP)</a>
+<a href="${root}git/">git</a>
 <a href="${root}source/">source</a>
 <a href="${root}news/">news</a>
 </nav>
@@ -81,8 +81,8 @@ write_footer() {
 	cat <<EOF
 <footer>
 <p>Splux Linux</p>
-<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git (WIP)</a> · <a href="${root}docs/">documentation</a></p>
-<p>This site was fully handmade by <a href="${GIT_HOST}/RobertFlexx">RobertFlexx</a>.</p>
+<p><a href="${root}">home</a> · <a href="${root}packages/">packages</a> · <a href="${root}git/">git</a> · <a href="${root}docs/">documentation</a></p>
+<p>This site was fully handmade by <a href="https://github.com/RobertFlexx">RobertFlexx</a>.</p>
 </footer>
 EOF
 }
@@ -99,7 +99,7 @@ write_docs_nav() {
 		install "${root}install/" "Install" \
 		sps "${root}docs/sps/" "SPS tools" \
 		firstboot "${root}docs/first-boot/" "After first boot" \
-		git "${root}git/" "Git (WIP)"
+		git "${root}git/" "Git"
 	while [ "$#" -ge 3 ]
 	do
 		if [ "$cur" = "$1" ]; then
@@ -149,8 +149,8 @@ scan_tree() {
 }
 
 printf '%s\n' "reading recipes" >&2
-scan_tree core "$CORE" "$GIT_HOST/RobertFlexx/sps-core" "https://github.com/RobertFlexx/sps-core"
-scan_tree extra "$EXTRA" "$GIT_HOST/RobertFlexx/sps-extra" "https://github.com/RobertFlexx/sps-extra"
+scan_tree core "$CORE" "$GIT_HOST/sps-core" "https://github.com/RobertFlexx/sps-core"
+scan_tree extra "$EXTRA" "$GIT_HOST/sps-extra" "https://github.com/RobertFlexx/sps-extra"
 
 LC_ALL=C sort -t "$(printf '\t')" -k1,1 -k5,5 "$tsv" >"$tmp/sorted.tsv"
 mv "$tmp/sorted.tsv" "$tsv"
@@ -282,9 +282,9 @@ livesig=${site_sha}-$(date -u '+%Y%m%d%H%M%S' 2>/dev/null || date +%Y%m%d%H%M%S)
 cat >"$tmp/news-info.html" <<EOF
 <div class="info">
 <div class="dl-row"><span class="muted">Latest ISO</span><span id="live-iso"><a href="$notes_url">$tag</a> ($date)</span></div>
-<div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$GIT_HOST/RobertFlexx/SPS/commit/$sps_sha">$sps_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$GIT_HOST/RobertFlexx/sps-core/commit/$core_sha">$core_sha</a></span></div>
-<div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$GIT_HOST/RobertFlexx/sps-extra/commit/$extra_sha">$extra_sha</a></span></div>
+<div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$GIT_HOST/SPS/commit/$sps_sha/">$sps_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$GIT_HOST/sps-core/commit/$core_sha/">$core_sha</a></span></div>
+<div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$GIT_HOST/sps-extra/commit/$extra_sha/">$extra_sha</a></span></div>
 <div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra)</span></div>
 <div class="dl-row"><span class="muted">Site build</span><span>$generated ($site_sha)</span></div>
 </div>
@@ -332,7 +332,50 @@ subst site/docs/images/index.html "$OUT/docs/images/index.html" "../../" images
 subst site/docs/sps/index.html "$OUT/docs/sps/index.html" "../../" sps
 subst site/docs/first-boot/index.html "$OUT/docs/first-boot/index.html" "../../" firstboot
 subst site/source/index.html "$OUT/source/index.html" "../"
-subst site/git/index.html "$OUT/git/index.html" "../"
+
+export OUT CORE EXTRA SPS SITE GIT_HOST SITE_URL
+sh tools/build-git.sh
+find "$OUT/git" -name index.html >"$tmp/gitpages"
+while IFS= read -r page
+do
+	[ -n "$page" ] || continue
+	rel=${page#"$OUT"/}
+	depth=0
+	rest=$rel
+	while [ "$rest" != "${rest#*/}" ]
+	do
+		depth=$((depth + 1))
+		rest=${rest#*/}
+	done
+	root=""
+	i=0
+	while [ "$i" -lt "$depth" ]
+	do
+		root="../$root"
+		i=$((i + 1))
+	done
+	write_header "$root" >"$tmp/hgit.html"
+	write_footer "$root" >"$tmp/fgit.html"
+	awk -f tools/subst.awk \
+		-v headerfile="$tmp/hgit.html" \
+		-v footerfile="$tmp/fgit.html" \
+		-v rowsfile="" \
+		-v newsfile="" \
+		-v brieffile="" \
+		-v infofile="" \
+		-v root="$root" \
+		-v tag="$tag" \
+		-v date="$date" \
+		-v npkgs="$npkgs" \
+		-v ncore="$ncore" \
+		-v nextra="$nextra" \
+		-v generated="$generated" \
+		-v livesig="$livesig" \
+		-v curlver="$curlver" \
+		-v githost="$GIT_HOST" \
+		"$page" >"$tmp/gpage.html"
+	mv "$tmp/gpage.html" "$page"
+done <"$tmp/gitpages"
 
 awk -f tools/news.awk -v mode=html -v page=1 -v per="$news_per" \
 	"$tmp/news.tsv" >"$tmp/news.html"

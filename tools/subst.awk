@@ -21,7 +21,7 @@ BEGIN {
 		close(footerfile)
 	}
 	if (githost == "")
-		githost = "https://git.splux.robertflexx.dev"
+		githost = "https://splux.robertflexx.dev/git"
 }
 
 $0 == "@@HEADER@@" {

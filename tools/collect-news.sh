@@ -13,7 +13,7 @@ CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
 SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
-GIT_HOST=${GIT_HOST:-https://git.splux.robertflexx.dev}
+GIT_HOST=${GIT_HOST:-https://splux.robertflexx.dev/git}
 GIT_HOST=${GIT_HOST%/}
 
 tab=$(printf '\t')
@@ -84,7 +84,7 @@ git_commits() {
 		[ -n "${iso-}" ] || continue
 		[ -n "${hash-}" ] || continue
 		emit "$epoch" "$iso" commit "$repo" \
-			"$baseurl/commit/$hash" "$subject" "" "$author" "" \
+			"$baseurl/commit/$hash/" "$subject" "" "$author" "" \
 			"$(github_avatar "$author")"
 	done
 }
@@ -103,10 +103,10 @@ read_commit_tsv() {
 	done <"$file"
 }
 
-git_commits "$SPS" SPS "$GIT_HOST/RobertFlexx/SPS"
-git_commits "$CORE" sps-core "$GIT_HOST/RobertFlexx/sps-core"
-git_commits "$EXTRA" sps-extra "$GIT_HOST/RobertFlexx/sps-extra"
-git_commits "$SITE" splux-site "$GIT_HOST/RobertFlexx/splux-site"
+git_commits "$SPS" SPS "$GIT_HOST/SPS"
+git_commits "$CORE" sps-core "$GIT_HOST/sps-core"
+git_commits "$EXTRA" sps-extra "$GIT_HOST/sps-extra"
+git_commits "$SITE" splux-site "$GIT_HOST/splux-site"
 
 if command -v gh >/dev/null 2>&1; then
 	if gh api --paginate "repos/RobertFlexx/SPS/releases?per_page=100" --jq \
@@ -137,7 +137,7 @@ if command -v gh >/dev/null 2>&1; then
 		if gh api --paginate "repos/${path}/commits?per_page=100" --jq \
 			'.[] | [
 				.commit.committer.date,
-				("'"$GIT_HOST"'/'"$path"'/commit/" + .sha),
+				("'"$GIT_HOST"'/'"$label"'/commit/" + .sha + "/"),
 				((.commit.message // "") | split("\n")[0] | gsub("[\r\t]"; " ")),
 				((.author.login // .commit.author.name // "") | gsub("[\r\t]"; " ")),
 				(if .commit.verification.verified == true then "yes" else "no" end),

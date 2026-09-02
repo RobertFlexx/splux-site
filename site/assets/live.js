@@ -21,7 +21,7 @@
 		document.querySelector("script[src*=\"live.js\"]");
 	var dataRoot = (thisScript && thisScript.getAttribute("data-root")) || "./";
 	var gitHost = (thisScript && thisScript.getAttribute("data-git")) ||
-		"https://git.splux.robertflexx.dev";
+		"https://splux.robertflexx.dev/git";
 	gitHost = String(gitHost).replace(/\/+$/, "");
 	if (!feed && !brief && !isoEl && !tagEl)
 		return;
@@ -321,15 +321,19 @@
 
 	function commitHref(repoPath, sha, htmlUrl) {
 		if (gitHost && repoPath && sha)
-			return gitHost + "/RobertFlexx/" + repoPath + "/commit/" + sha;
+			return gitHost + "/" + repoPath + "/commit/" + sha + "/";
 		return htmlUrl || "";
 	}
 
 	function forgeCommitHref(url) {
-		var m = /^https:\/\/github\.com\/RobertFlexx\/([^/]+)\/commit\/([0-9a-fA-F]+)/.exec(String(url || ""));
+		var u = String(url || "");
+		var m = /^https:\/\/github\.com\/RobertFlexx\/([^/]+)\/commit\/([0-9a-fA-F]+)/.exec(u);
 		if (m && gitHost)
-			return gitHost + "/RobertFlexx/" + m[1] + "/commit/" + m[2];
-		return url;
+			return gitHost + "/" + m[1] + "/commit/" + m[2] + "/";
+		m = /^https:\/\/git\.splux\.robertflexx\.dev\/RobertFlexx\/([^/]+)\/commit\/([0-9a-fA-F]+)/.exec(u);
+		if (m && gitHost)
+			return gitHost + "/" + m[1] + "/commit/" + m[2] + "/";
+		return u;
 	}
 
 	function setSha(id, repoPath, sha) {

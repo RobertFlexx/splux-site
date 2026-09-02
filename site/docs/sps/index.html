@@ -56,12 +56,9 @@ unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
 <p>Leaving those unset is required so they resolve under the target, not under the live root.</p>
 
 <h3>Repositories</h3>
-<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins. Splux Git is official. Until that name answers, use the GitHub mirrors, not both at once.</p>
+<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins. Clone from GitHub. The handbook git pages are a static browse of the same trees, not a clone URL.</p>
 <pre class="block">dir core /usr/src/sps/core 100
 dir extra /usr/src/sps/extra 80
-
-git core @@GIT_HOST@@/RobertFlexx/sps-core.git 100
-git extra @@GIT_HOST@@/RobertFlexx/sps-extra.git 80
 
 git core https://github.com/RobertFlexx/sps-core.git 100
 git extra https://github.com/RobertFlexx/sps-extra.git 80</pre>
@@ -86,6 +83,7 @@ sget install curl</pre>
 <tr><td><code>runit</code></td><td><code>init-runit</code></td><td>runit, eudev, elogind</td></tr>
 <tr><td><code>dinit</code></td><td><code>init-dinit</code></td><td>dinit, eudev, elogind</td></tr>
 <tr><td><code>shepherd</code></td><td><code>init-shepherd</code></td><td>GNU Shepherd, eudev, elogind, Guile</td></tr>
+<tr><td><code>sysvinit</code></td><td><code>init-sysvinit</code></td><td>SysV init, eudev, elogind</td></tr>
 <tr><td><code>none</code></td><td>(no init package)</td><td>the installed tree has no PID 1 from SPS</td></tr>
 </tbody>
 </table>
@@ -96,9 +94,9 @@ sget install curl</pre>
 
 <h3>Further reading</h3>
 <ul class="plain">
-<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/README.md">SPS README</a></li>
-<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/DESIGN.md">DESIGN.md</a></li>
-<li><a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/PACKAGE-MAINTAINER.md">Recipe format</a></li>
+<li><a href="@@ROOT@@git/SPS/blob/README.md/">SPS README</a></li>
+<li><a href="@@ROOT@@git/SPS/blob/DESIGN.md/">DESIGN.md</a></li>
+<li><a href="@@ROOT@@git/SPS/blob/PACKAGE-MAINTAINER.md/">Recipe format</a></li>
 <li><a href="@@ROOT@@packages/">Package browser</a></li>
 </ul>
 </main>

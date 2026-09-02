@@ -77,18 +77,22 @@ repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 
 ## Git
 
-`/git/` is the public forge page. Canonical clone, accounts, and pull
-requests belong on Splux Git (`https://git.splux.robertflexx.dev`).
-GitHub stays a mirror of git history. Live ISO files stay on GitHub
-Releases. The Forgejo theme and installer live in `forgejo/`.
-
-Point a DNS A or AAAA record for `git.splux` at the host that runs
-Forgejo, then put TLS in front of port 3000 (or a tunnel) and set
-`ROOT_URL` to `https://git.splux.robertflexx.dev/`. Until that name
-answers, the handbook page still lists GitHub clone URLs.
+`/git/` is a static browse of SPS, sps-core, sps-extra, and this
+repository. The Pages workflow clones those trees and writes commit,
+file, and language pages. There is no git server, no accounts, and no
+pull requests. Clone from GitHub:
 
 ```sh
-sh forgejo/install.sh
-sh forgejo/import-repos.sh
+git clone https://github.com/RobertFlexx/SPS.git
+git clone https://github.com/RobertFlexx/sps-core.git
+git clone https://github.com/RobertFlexx/sps-extra.git
+git clone https://github.com/RobertFlexx/splux-site.git
 ```
 
+News commit links point at `/git/<repo>/commit/<sha>/`. Recipe pages
+link into `/git/sps-core/` and `/git/sps-extra/`. Live ISO files stay
+on GitHub Releases.
+
+`git.splux.robertflexx.dev` is not a separate service. GitHub Pages
+allows one custom domain on this repository (`splux.robertflexx.dev`).
+The git UI is `https://splux.robertflexx.dev/git/`.

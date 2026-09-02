@@ -54,7 +54,7 @@
 
 <h4>4. Run setup</h4>
 <pre class="block">setup</pre>
-<p>Profiles: <code>minimal</code>, <code>server</code>, <code>plasma-desktop</code>, <code>plasma-full</code>. Init: systemd, OpenRC, s6, runit, dinit, or Shepherd. Those packages conflict. Guided partitioning waits until the last confirmation. Kernel <code>none</code> is the interactive default for a console profile; a disk that must boot itself needs <code>linux-desktop</code> or <code>linux</code>.</p>
+<p>Profiles: <code>minimal</code>, <code>server</code>, <code>plasma-desktop</code>, <code>plasma-full</code>. Init: systemd, OpenRC, s6, runit, dinit, Shepherd, or SysV. Those packages conflict. Guided partitioning waits until the last confirmation. Kernel <code>none</code> is the interactive default for a console profile; a disk that must boot itself needs <code>linux-desktop</code> or <code>linux</code>.</p>
 <p>Non-interactive examples:</p>
 <pre class="block">setup --plan --profile plasma-desktop --target /mnt --user alex
 
@@ -106,7 +106,7 @@ setup --non-interactive \
 
 <h4>What setup does</h4>
 <p>It writes hostname, timezone, keymap, locale, and <code>/etc/sps/init</code>, copies bundled recipe trees when they exist, writes <code>sps.conf</code>, runs <code>src update</code>, then <code>sget install</code>. Users land after packages so <code>filesystem</code>'s passwd file is already there. If you passed <code>--install-bootloader</code>, it runs live <code>grub-install</code> (EFI removable <code>EFI/BOOT/BOOTX64.EFI</code>, then NVRAM via <code>efibootmgr</code> when that binary exists; BIOS uses <code>i386-pc</code>). It does not run <code>grub-mkconfig</code>. See <code>/root/sps-bootloader.txt</code> on the target.</p>
-<p>A Plasma install compiles Qt and KDE and takes a long time. See <a href="@@GIT_HOST@@/RobertFlexx/SPS/src/branch/main/man/setup.1">setup(1)</a> for every flag.</p>
+<p>A Plasma install compiles Qt and KDE and takes a long time. See <a href="@@ROOT@@git/SPS/blob/man/setup.1/">setup(1)</a> for every flag.</p>
 </section>
 
 <section class="tabpanel" role="tabpanel" id="panel-manual" aria-labelledby="tab-manual">
@@ -222,6 +222,7 @@ unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
 <button type="button" role="tab" id="tab-runit" aria-controls="panel-init-runit" aria-selected="false" tabindex="-1" data-hash="runit">runit</button>
 <button type="button" role="tab" id="tab-dinit" aria-controls="panel-init-dinit" aria-selected="false" tabindex="-1" data-hash="dinit">dinit</button>
 <button type="button" role="tab" id="tab-shepherd" aria-controls="panel-init-shepherd" aria-selected="false" tabindex="-1" data-hash="shepherd">Shepherd</button>
+<button type="button" role="tab" id="tab-sysvinit" aria-controls="panel-init-sysvinit" aria-selected="false" tabindex="-1" data-hash="sysvinit">SysV</button>
 </div>
 <section class="tabpanel" role="tabpanel" id="panel-init-systemd" aria-labelledby="tab-systemd">
 <pre class="block">printf '%s\n' systemd &gt; /mnt/etc/sps/init
@@ -252,6 +253,11 @@ unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
 <pre class="block">printf '%s\n' shepherd &gt; /mnt/etc/sps/init
 # later: sget install init-shepherd</pre>
 <p>GNU Shepherd plus eudev, elogind, and Guile. Services are Scheme files under <code>/etc/shepherd.d</code>.</p>
+</section>
+<section class="tabpanel" role="tabpanel" id="panel-init-sysvinit" aria-labelledby="tab-sysvinit">
+<pre class="block">printf '%s\n' sysvinit &gt; /mnt/etc/sps/init
+# later: sget install init-sysvinit</pre>
+<p>SysV init plus eudev and elogind. Service scripts land in <code>/etc/rc.d/init.d</code>. Enable with <code>S*</code> links in <code>rc2.d</code> through <code>rc5.d</code>.</p>
 </section>
 </div>
 </li>
