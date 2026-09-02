@@ -1,0 +1,3178 @@
+ext	.bsl	1C Enterprise	programming	#814CCC	1C Enterprise
+ext	.os	1C Enterprise	programming	#814CCC	1C Enterprise
+lang	1C Enterprise	1C Enterprise	programming	#814CCC	1C Enterprise
+ext	.2da	2-Dimensional Array	data	#38761D	2-Dimensional Array
+lang	2-Dimensional Array	2-Dimensional Array	data	#38761D	2-Dimensional Array
+ext	.4dm	4D	programming	#004289	4D
+lang	4D	4D	programming	#004289	4D
+ext	.abap	ABAP	programming	#E8274B	ABAP
+lang	ABAP	ABAP	programming	#E8274B	ABAP
+ext	.asddls	ABAP CDS	programming	#555e25	ABAP CDS
+lang	ABAP CDS	ABAP CDS	programming	#555e25	ABAP CDS
+ext	.abnf	ABNF	data		ABNF
+lang	ABNF	ABNF	data		ABNF
+ext	.asc	AGS Script	programming	#B9D9FF	AGS Script
+ext	.ash	AGS Script	programming	#B9D9FF	AGS Script
+lang	AGS Script	AGS Script	programming	#B9D9FF	AGS Script
+ext	.aidl	AIDL	programming	#34EB6B	AIDL
+interpreter	aidl	AIDL	programming	#34EB6B	AIDL
+lang	AIDL	AIDL	programming	#34EB6B	AIDL
+ext	.al	AL	programming	#3AA2B5	AL
+lang	AL	AL	programming	#3AA2B5	AL
+ext	.alg	ALGOL	programming	#D1E0DB	ALGOL
+lang	ALGOL	ALGOL	programming	#D1E0DB	ALGOL
+ext	.ampl	AMPL	programming	#E6EFBB	AMPL
+ext	.mod	AMPL	programming	#E6EFBB	AMPL
+lang	AMPL	AMPL	programming	#E6EFBB	AMPL
+ext	.g4	ANTLR	programming	#9DC3FF	ANTLR
+lang	ANTLR	ANTLR	programming	#9DC3FF	ANTLR
+ext	.apib	API Blueprint	markup	#2ACCA8	API Blueprint
+lang	API Blueprint	API Blueprint	markup	#2ACCA8	API Blueprint
+ext	.apl	APL	programming	#5A8164	APL
+ext	.dyalog	APL	programming	#5A8164	APL
+interpreter	apl	APL	programming	#5A8164	APL
+interpreter	aplx	APL	programming	#5A8164	APL
+interpreter	dyalog	APL	programming	#5A8164	APL
+lang	APL	APL	programming	#5A8164	APL
+ext	.asl	ASL	programming		ASL
+ext	.dsl	ASL	programming		ASL
+lang	ASL	ASL	programming		ASL
+ext	.asn	ASN.1	data		ASN.1
+ext	.asn1	ASN.1	data		ASN.1
+lang	ASN.1	ASN.1	data		ASN.1
+ext	.asax	ASP.NET	programming	#9400ff	ASP.NET
+ext	.ascx	ASP.NET	programming	#9400ff	ASP.NET
+ext	.ashx	ASP.NET	programming	#9400ff	ASP.NET
+ext	.asmx	ASP.NET	programming	#9400ff	ASP.NET
+ext	.aspx	ASP.NET	programming	#9400ff	ASP.NET
+ext	.axd	ASP.NET	programming	#9400ff	ASP.NET
+lang	ASP.NET	ASP.NET	programming	#9400ff	ASP.NET
+ext	.dats	ATS	programming	#1ac620	ATS
+ext	.hats	ATS	programming	#1ac620	ATS
+ext	.sats	ATS	programming	#1ac620	ATS
+lang	ATS	ATS	programming	#1ac620	ATS
+ext	.as	ActionScript	programming	#882B0F	ActionScript
+lang	ActionScript	ActionScript	programming	#882B0F	ActionScript
+ext	.adb	Ada	programming	#02f88c	Ada
+ext	.ada	Ada	programming	#02f88c	Ada
+ext	.ads	Ada	programming	#02f88c	Ada
+lang	Ada	Ada	programming	#02f88c	Ada
+ext	.txt	Adblock Filter List	data	#800000	Adblock Filter List
+lang	Adblock Filter List	Adblock Filter List	data	#800000	Adblock Filter List
+ext	.afm	Adobe Font Metrics	data	#fa0f00	Adobe Font Metrics
+lang	Adobe Font Metrics	Adobe Font Metrics	data	#fa0f00	Adobe Font Metrics
+ext	.agda	Agda	programming	#315665	Agda
+lang	Agda	Agda	programming	#315665	Agda
+ext	.ak	Aiken	programming	#640ff8	Aiken
+lang	Aiken	Aiken	programming	#640ff8	Aiken
+ext	.aleo	Aleo	programming	#154BF9	Aleo
+lang	Aleo	Aleo	programming	#154BF9	Aleo
+ext	.als	Alloy	programming	#64C800	Alloy
+lang	Alloy	Alloy	programming	#64C800	Alloy
+filename	APKBUILD	Alpine Abuild	programming	#0D597F	Shell
+lang	Alpine Abuild	Alpine Abuild	programming	#0D597F	Shell
+ext	.OutJob	Altium Designer	data	#A89663	Altium Designer
+ext	.PcbDoc	Altium Designer	data	#A89663	Altium Designer
+ext	.PrjPCB	Altium Designer	data	#A89663	Altium Designer
+ext	.SchDoc	Altium Designer	data	#A89663	Altium Designer
+lang	Altium Designer	Altium Designer	data	#A89663	Altium Designer
+ext	.as	AngelScript	programming	#C7D7DC	AngelScript
+ext	.angelscript	AngelScript	programming	#C7D7DC	AngelScript
+lang	AngelScript	AngelScript	programming	#C7D7DC	AngelScript
+ext	.lp	Answer Set Programming	programming	#A9CC29	Answer Set Programming
+interpreter	clingo	Answer Set Programming	programming	#A9CC29	Answer Set Programming
+lang	Answer Set Programming	Answer Set Programming	programming	#A9CC29	Answer Set Programming
+filename	ant.xml	Ant Build System	data	#A9157E	Ant Build System
+filename	build.xml	Ant Build System	data	#A9157E	Ant Build System
+lang	Ant Build System	Ant Build System	data	#A9157E	Ant Build System
+ext	.antlers.html	Antlers	markup	#ff269e	Antlers
+ext	.antlers.php	Antlers	markup	#ff269e	Antlers
+ext	.antlers.xml	Antlers	markup	#ff269e	Antlers
+lang	Antlers	Antlers	markup	#ff269e	Antlers
+ext	.apacheconf	ApacheConf	data	#d12127	ApacheConf
+ext	.vhost	ApacheConf	data	#d12127	ApacheConf
+filename	.htaccess	ApacheConf	data	#d12127	ApacheConf
+filename	apache2.conf	ApacheConf	data	#d12127	ApacheConf
+filename	httpd.conf	ApacheConf	data	#d12127	ApacheConf
+lang	ApacheConf	ApacheConf	data	#d12127	ApacheConf
+ext	.cls	Apex	programming	#1797c0	Apex
+ext	.apex	Apex	programming	#1797c0	Apex
+ext	.trigger	Apex	programming	#1797c0	Apex
+lang	Apex	Apex	programming	#1797c0	Apex
+ext	.agc	Apollo Guidance Computer	programming	#0B3D91	Assembly
+lang	Apollo Guidance Computer	Apollo Guidance Computer	programming	#0B3D91	Assembly
+ext	.applescript	AppleScript	programming		AppleScript
+ext	.scpt	AppleScript	programming		AppleScript
+interpreter	osascript	AppleScript	programming		AppleScript
+lang	AppleScript	AppleScript	programming	#101F1F	AppleScript
+ext	.arc	Arc	programming	#aa2afe	Arc
+lang	Arc	Arc	programming	#aa2afe	Arc
+ext	.asciidoc	AsciiDoc	prose	#73a0c5	AsciiDoc
+ext	.adoc	AsciiDoc	prose	#73a0c5	AsciiDoc
+ext	.asc	AsciiDoc	prose	#73a0c5	AsciiDoc
+lang	AsciiDoc	AsciiDoc	prose	#73a0c5	AsciiDoc
+ext	.aj	AspectJ	programming	#a957b0	AspectJ
+lang	AspectJ	AspectJ	programming	#a957b0	AspectJ
+ext	.asm	Assembly	programming	#6E4C13	Assembly
+ext	.a51	Assembly	programming	#6E4C13	Assembly
+ext	.i	Assembly	programming	#6E4C13	Assembly
+ext	.inc	Assembly	programming	#6E4C13	Assembly
+ext	.nas	Assembly	programming	#6E4C13	Assembly
+ext	.nasm	Assembly	programming	#6E4C13	Assembly
+ext	.s	Assembly	programming	#6E4C13	Assembly
+lang	Assembly	Assembly	programming	#6E4C13	Assembly
+ext	.astro	Astro	markup	#ff5a03	Astro
+lang	Astro	Astro	markup	#ff5a03	Astro
+ext	.asy	Asymptote	programming	#ff0000	Asymptote
+interpreter	asy	Asymptote	programming	#ff0000	Asymptote
+lang	Asymptote	Asymptote	programming	#ff0000	Asymptote
+ext	.aug	Augeas	programming	#9CC134	Augeas
+lang	Augeas	Augeas	programming	#9CC134	Augeas
+ext	.ahk	AutoHotkey	programming	#6594b9	AutoHotkey
+ext	.ah1	AutoHotkey	programming	#6594b9	AutoHotkey
+ext	.ah2	AutoHotkey	programming	#6594b9	AutoHotkey
+ext	.ahkl	AutoHotkey	programming	#6594b9	AutoHotkey
+lang	AutoHotkey	AutoHotkey	programming	#6594b9	AutoHotkey
+ext	.au3	AutoIt	programming	#1C3552	AutoIt
+lang	AutoIt	AutoIt	programming	#1C3552	AutoIt
+ext	.avdl	Avro IDL	data	#0040FF	Avro IDL
+lang	Avro IDL	Avro IDL	data	#0040FF	Avro IDL
+ext	.awk	Awk	programming	#c30e9b	Awk
+ext	.auk	Awk	programming	#c30e9b	Awk
+ext	.gawk	Awk	programming	#c30e9b	Awk
+ext	.mawk	Awk	programming	#c30e9b	Awk
+ext	.nawk	Awk	programming	#c30e9b	Awk
+interpreter	awk	Awk	programming	#c30e9b	Awk
+interpreter	gawk	Awk	programming	#c30e9b	Awk
+interpreter	mawk	Awk	programming	#c30e9b	Awk
+interpreter	nawk	Awk	programming	#c30e9b	Awk
+lang	Awk	Awk	programming	#c30e9b	Awk
+ext	.b	B	programming	#da7666	B
+lang	B	B	programming	#da7666	B
+ext	.mch	B (Formal Method)	programming	#8aa8c5	B (Formal Method)
+lang	B (Formal Method)	B (Formal Method)	programming	#8aa8c5	B (Formal Method)
+ext	.bas	B4X	programming	#00e4ff	B4X
+lang	B4X	B4X	programming	#00e4ff	B4X
+ext	.baml	BAML	programming	#a855f7	BAML
+lang	BAML	BAML	programming	#a855f7	BAML
+ext	.bas	BASIC	programming		BASIC
+lang	BASIC	BASIC	programming	#ff0000	BASIC
+ext	.bbcode	BBCode	markup		BBCode
+lang	BBCode	BBCode	markup	#CAFF42	BBCode
+filename	bird.conf	BIRD2	data	#b6d7e4	BIRD2
+lang	BIRD2	BIRD2	data	#b6d7e4	BIRD2
+ext	.bqn	BQN	programming	#2b7067	BQN
+lang	BQN	BQN	programming	#2b7067	BQN
+ext	.bal	Ballerina	programming		Ballerina
+lang	Ballerina	Ballerina	programming	#FF5000	Ballerina
+ext	.bat	Batchfile	programming		Batchfile
+ext	.cmd	Batchfile	programming		Batchfile
+filename	gradlew.bat	Batchfile	programming		Batchfile
+filename	mvnw.cmd	Batchfile	programming		Batchfile
+lang	Batchfile	Batchfile	programming	#C1F12E	Batchfile
+ext	.bf	Beef	programming	#a52f4e	Beef
+lang	Beef	Beef	programming	#a52f4e	Beef
+ext	.befunge	Befunge	programming		Befunge
+ext	.bf	Befunge	programming		Befunge
+lang	Befunge	Befunge	programming		Befunge
+ext	.be	Berry	programming		Berry
+lang	Berry	Berry	programming	#15A13C	Berry
+ext	.bib	BibTeX	markup	#778899	TeX
+ext	.bibtex	BibTeX	markup	#778899	TeX
+lang	BibTeX	BibTeX	markup	#778899	TeX
+ext	.bst	BibTeX Style	programming		BibTeX Style
+lang	BibTeX Style	BibTeX Style	programming		BibTeX Style
+ext	.bicep	Bicep	programming	#519aba	Bicep
+ext	.bicepparam	Bicep	programming	#519aba	Bicep
+lang	Bicep	Bicep	programming	#519aba	Bicep
+ext	.bs	Bikeshed	markup	#5562ac	Bikeshed
+lang	Bikeshed	Bikeshed	markup	#5562ac	Bikeshed
+ext	.bison	Bison	programming	#6A463F	Yacc
+lang	Bison	Bison	programming	#6A463F	Yacc
+ext	.bb	BitBake	programming	#00bce4	BitBake
+ext	.bbappend	BitBake	programming	#00bce4	BitBake
+ext	.bbclass	BitBake	programming	#00bce4	BitBake
+ext	.inc	BitBake	programming	#00bce4	BitBake
+lang	BitBake	BitBake	programming	#00bce4	BitBake
+ext	.blade	Blade	markup	#f7523f	Blade
+ext	.blade.php	Blade	markup	#f7523f	Blade
+lang	Blade	Blade	markup	#f7523f	Blade
+ext	.bb	BlitzBasic	programming	#00FFAE	BlitzBasic
+ext	.decls	BlitzBasic	programming	#00FFAE	BlitzBasic
+lang	BlitzBasic	BlitzBasic	programming	#00FFAE	BlitzBasic
+ext	.bmx	BlitzMax	programming	#cd6400	BlitzMax
+lang	BlitzMax	BlitzMax	programming	#cd6400	BlitzMax
+ext	.blp	Blueprint	markup	#3584E4	Blueprint
+lang	Blueprint	Blueprint	markup	#3584E4	Blueprint
+ext	.bsv	Bluespec	programming	#12223c	Bluespec
+lang	Bluespec	Bluespec	programming	#12223c	Bluespec
+ext	.bs	Bluespec BH	programming	#12223c	Bluespec
+lang	Bluespec BH	Bluespec BH	programming	#12223c	Bluespec
+ext	.boo	Boo	programming	#d4bec1	Boo
+lang	Boo	Boo	programming	#d4bec1	Boo
+ext	.bpl	Boogie	programming	#c80fa0	Boogie
+interpreter	boogie	Boogie	programming	#c80fa0	Boogie
+lang	Boogie	Boogie	programming	#c80fa0	Boogie
+ext	.b	Brainfuck	programming	#2F2530	Brainfuck
+ext	.bf	Brainfuck	programming	#2F2530	Brainfuck
+lang	Brainfuck	Brainfuck	programming	#2F2530	Brainfuck
+ext	.bs	BrighterScript	programming	#66AABB	BrighterScript
+lang	BrighterScript	BrighterScript	programming	#66AABB	BrighterScript
+ext	.brs	Brightscript	programming	#662D91	Brightscript
+lang	Brightscript	Brightscript	programming	#662D91	Brightscript
+filename	.browserslistrc	Browserslist	data	#ffd539	Browserslist
+filename	browserslist	Browserslist	data	#ffd539	Browserslist
+lang	Browserslist	Browserslist	data	#ffd539	Browserslist
+ext	.bru	Bru	markup	#F4AA41	Bru
+lang	Bru	Bru	markup	#F4AA41	Bru
+ext	.bst	BuildStream	data	#006bff	BuildStream
+lang	BuildStream	BuildStream	data	#006bff	BuildStream
+ext	.c	C	programming	#555555	C
+ext	.cats	C	programming	#555555	C
+ext	.h	C	programming	#555555	C
+ext	.h.in	C	programming	#555555	C
+ext	.idc	C	programming	#555555	C
+interpreter	tcc	C	programming	#555555	C
+lang	C	C	programming	#555555	C
+ext	.cs	C#	programming	#7355dd	C#
+ext	.cake	C#	programming	#7355dd	C#
+ext	.cs.pp	C#	programming	#7355dd	C#
+ext	.csx	C#	programming	#7355dd	C#
+ext	.linq	C#	programming	#7355dd	C#
+lang	C#	C#	programming	#7355dd	C#
+ext	.cpp	C++	programming	#f34b7d	C++
+ext	.c++	C++	programming	#f34b7d	C++
+ext	.cc	C++	programming	#f34b7d	C++
+ext	.cp	C++	programming	#f34b7d	C++
+ext	.cppm	C++	programming	#f34b7d	C++
+ext	.cxx	C++	programming	#f34b7d	C++
+ext	.h	C++	programming	#f34b7d	C++
+ext	.h++	C++	programming	#f34b7d	C++
+ext	.hh	C++	programming	#f34b7d	C++
+ext	.hpp	C++	programming	#f34b7d	C++
+ext	.hxx	C++	programming	#f34b7d	C++
+ext	.inc	C++	programming	#f34b7d	C++
+ext	.inl	C++	programming	#f34b7d	C++
+ext	.ino	C++	programming	#f34b7d	C++
+ext	.ipp	C++	programming	#f34b7d	C++
+ext	.ixx	C++	programming	#f34b7d	C++
+ext	.re	C++	programming	#f34b7d	C++
+ext	.tcc	C++	programming	#f34b7d	C++
+ext	.tpp	C++	programming	#f34b7d	C++
+ext	.txx	C++	programming	#f34b7d	C++
+lang	C++	C++	programming	#f34b7d	C++
+ext	.c-objdump	C-ObjDump	data		C-ObjDump
+lang	C-ObjDump	C-ObjDump	data		C-ObjDump
+ext	.chs	C2hs Haskell	programming		Haskell
+lang	C2hs Haskell	C2hs Haskell	programming		Haskell
+ext	.c3	C3	programming	#2563eb	C3
+lang	C3	C3	programming	#2563eb	C3
+ext	.cds	CAP CDS	programming	#0092d1	CAP CDS
+lang	CAP CDS	CAP CDS	programming	#0092d1	CAP CDS
+ext	.cil	CIL	data		CIL
+lang	CIL	CIL	data		CIL
+ext	.clp	CLIPS	programming	#00A300	CLIPS
+lang	CLIPS	CLIPS	programming	#00A300	CLIPS
+ext	.cmake	CMake	programming	#DA3434	CMake
+ext	.cmake.in	CMake	programming	#DA3434	CMake
+filename	CMakeLists.txt	CMake	programming	#DA3434	CMake
+lang	CMake	CMake	programming	#DA3434	CMake
+ext	.cob	COBOL	programming		COBOL
+ext	.cbl	COBOL	programming		COBOL
+ext	.ccp	COBOL	programming		COBOL
+ext	.cobol	COBOL	programming		COBOL
+ext	.cpy	COBOL	programming		COBOL
+lang	COBOL	COBOL	programming		COBOL
+filename	CODEOWNERS	CODEOWNERS	data		CODEOWNERS
+lang	CODEOWNERS	CODEOWNERS	data		CODEOWNERS
+ext	.dae	COLLADA	data	#F1A42B	COLLADA
+lang	COLLADA	COLLADA	data	#F1A42B	COLLADA
+ext	.cql	CQL	programming	#006091	CQL
+lang	CQL	CQL	programming	#006091	CQL
+ext	.cson	CSON	data	#244776	CSON
+lang	CSON	CSON	data	#244776	CSON
+ext	.css	CSS	markup	#663399	CSS
+lang	CSS	CSS	markup	#663399	CSS
+ext	.csv	CSV	data	#237346	CSV
+lang	CSV	CSV	data	#237346	CSV
+ext	.cue	CUE	programming		CUE
+lang	CUE	CUE	programming	#5886E1	CUE
+ext	.w	CWeb	programming	#00007a	CWeb
+lang	CWeb	CWeb	programming	#00007a	CWeb
+ext	.cabal	Cabal Config	data	#483465	Cabal Config
+filename	cabal.config	Cabal Config	data	#483465	Cabal Config
+filename	cabal.project	Cabal Config	data	#483465	Cabal Config
+lang	Cabal Config	Cabal Config	data	#483465	Cabal Config
+ext	.caddyfile	Caddyfile	data	#22b638	Caddyfile
+filename	Caddyfile	Caddyfile	data	#22b638	Caddyfile
+lang	Caddyfile	Caddyfile	data	#22b638	Caddyfile
+ext	.cdc	Cadence	programming	#00ef8b	Cadence
+lang	Cadence	Cadence	programming	#00ef8b	Cadence
+ext	.cairo	Cairo	programming	#ff4a48	Cairo
+lang	Cairo	Cairo	programming	#ff4a48	Cairo
+ext	.cairo	Cairo Zero	programming	#ff4a48	Cairo Zero
+lang	Cairo Zero	Cairo Zero	programming	#ff4a48	Cairo
+ext	.mligo	CameLIGO	programming	#3be133	CameLIGO
+lang	CameLIGO	CameLIGO	programming	#3be133	LigoLANG
+ext	.cj	Cangjie	programming		Cangjie
+lang	Cangjie	Cangjie	programming	#00868B	Cangjie
+ext	.capnp	Cap'n Proto	programming	#c42727	Cap'n Proto
+lang	Cap'n Proto	Cap'n Proto	programming	#c42727	Cap'n Proto
+ext	.carbon	Carbon	programming	#222222	Carbon
+lang	Carbon	Carbon	programming	#222222	Carbon
+ext	.mss	CartoCSS	programming		CartoCSS
+lang	CartoCSS	CartoCSS	programming		CartoCSS
+ext	.ceylon	Ceylon	programming	#dfa535	Ceylon
+lang	Ceylon	Ceylon	programming	#dfa535	Ceylon
+ext	.chpl	Chapel	programming	#8dc63f	Chapel
+lang	Chapel	Chapel	programming	#8dc63f	Chapel
+ext	.ch	Charity	programming		Charity
+lang	Charity	Charity	programming		Charity
+filename	MD5SUMS	Checksums	data		Checksums
+filename	SHA1SUMS	Checksums	data		Checksums
+filename	SHA256SUMS	Checksums	data		Checksums
+filename	SHA256SUMS.txt	Checksums	data		Checksums
+filename	SHA512SUMS	Checksums	data		Checksums
+filename	checksums.txt	Checksums	data		Checksums
+filename	cksums	Checksums	data		Checksums
+filename	md5sum.txt	Checksums	data		Checksums
+ext	.crc32	Checksums	data		Checksums
+ext	.md2	Checksums	data		Checksums
+ext	.md4	Checksums	data		Checksums
+ext	.md5	Checksums	data		Checksums
+ext	.sha1	Checksums	data		Checksums
+ext	.sha2	Checksums	data		Checksums
+ext	.sha224	Checksums	data		Checksums
+ext	.sha256	Checksums	data		Checksums
+ext	.sha256sum	Checksums	data		Checksums
+ext	.sha3	Checksums	data		Checksums
+ext	.sha384	Checksums	data		Checksums
+ext	.sha512	Checksums	data		Checksums
+lang	Checksums	Checksums	data		Checksums
+ext	.ck	ChucK	programming	#3f8000	ChucK
+lang	ChucK	ChucK	programming	#3f8000	ChucK
+ext	.circom	Circom	programming		Circom
+lang	Circom	Circom	programming	#707575	Circom
+ext	.cirru	Cirru	programming	#ccccff	Cirru
+lang	Cirru	Cirru	programming	#ccccff	Cirru
+ext	.clw	Clarion	programming	#db901e	Clarion
+lang	Clarion	Clarion	programming	#db901e	Clarion
+ext	.clar	Clarity	programming	#5546ff	Clarity
+lang	Clarity	Clarity	programming	#5546ff	Clarity
+ext	.asp	Classic ASP	programming	#6a40fd	Classic ASP
+lang	Classic ASP	Classic ASP	programming	#6a40fd	Classic ASP
+ext	.icl	Clean	programming	#3F85AF	Clean
+ext	.dcl	Clean	programming	#3F85AF	Clean
+lang	Clean	Clean	programming	#3F85AF	Clean
+ext	.click	Click	programming	#E4E6F3	Click
+lang	Click	Click	programming	#E4E6F3	Click
+ext	.clj	Clojure	programming	#db5855	Clojure
+ext	.bb	Clojure	programming	#db5855	Clojure
+ext	.boot	Clojure	programming	#db5855	Clojure
+ext	.cl2	Clojure	programming	#db5855	Clojure
+ext	.cljc	Clojure	programming	#db5855	Clojure
+ext	.cljs	Clojure	programming	#db5855	Clojure
+ext	.cljs.hl	Clojure	programming	#db5855	Clojure
+ext	.cljscm	Clojure	programming	#db5855	Clojure
+ext	.cljx	Clojure	programming	#db5855	Clojure
+ext	.hic	Clojure	programming	#db5855	Clojure
+filename	riemann.config	Clojure	programming	#db5855	Clojure
+interpreter	bb	Clojure	programming	#db5855	Clojure
+lang	Clojure	Clojure	programming	#db5855	Clojure
+ext	.soy	Closure Templates	markup	#0d948f	Closure Templates
+lang	Closure Templates	Closure Templates	markup	#0d948f	Closure Templates
+filename	firestore.rules	Cloud Firestore Security Rules	data	#FFA000	Cloud Firestore Security Rules
+lang	Cloud Firestore Security Rules	Cloud Firestore Security Rules	data	#FFA000	Cloud Firestore Security Rules
+ext	.clue	Clue	programming	#0009b5	Clue
+lang	Clue	Clue	programming	#0009b5	Clue
+ext	.conllu	CoNLL-U	data		CoNLL-U
+ext	.conll	CoNLL-U	data		CoNLL-U
+lang	CoNLL-U	CoNLL-U	data		CoNLL-U
+ext	.ql	CodeQL	programming	#140f46	CodeQL
+ext	.qll	CodeQL	programming	#140f46	CodeQL
+lang	CodeQL	CodeQL	programming	#140f46	CodeQL
+ext	.coffee	CoffeeScript	programming	#244776	CoffeeScript
+ext	._coffee	CoffeeScript	programming	#244776	CoffeeScript
+ext	.cake	CoffeeScript	programming	#244776	CoffeeScript
+ext	.cjsx	CoffeeScript	programming	#244776	CoffeeScript
+ext	.coffee.erb	CoffeeScript	programming	#244776	CoffeeScript
+ext	.iced	CoffeeScript	programming	#244776	CoffeeScript
+filename	Cakefile	CoffeeScript	programming	#244776	CoffeeScript
+interpreter	coffee	CoffeeScript	programming	#244776	CoffeeScript
+lang	CoffeeScript	CoffeeScript	programming	#244776	CoffeeScript
+ext	.cfm	ColdFusion	programming	#ed2cd6	ColdFusion
+ext	.cfml	ColdFusion	programming	#ed2cd6	ColdFusion
+lang	ColdFusion	ColdFusion	programming	#ed2cd6	ColdFusion
+ext	.cfc	ColdFusion CFC	programming	#ed2cd6	ColdFusion
+lang	ColdFusion CFC	ColdFusion CFC	programming	#ed2cd6	ColdFusion
+ext	.lisp	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.asd	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.cl	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.l	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.lsp	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.ny	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.podsl	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.sexp	Common Lisp	programming	#3fb68b	Common Lisp
+interpreter	lisp	Common Lisp	programming	#3fb68b	Common Lisp
+interpreter	sbcl	Common Lisp	programming	#3fb68b	Common Lisp
+interpreter	ccl	Common Lisp	programming	#3fb68b	Common Lisp
+interpreter	clisp	Common Lisp	programming	#3fb68b	Common Lisp
+interpreter	ecl	Common Lisp	programming	#3fb68b	Common Lisp
+lang	Common Lisp	Common Lisp	programming	#3fb68b	Common Lisp
+ext	.cwl	Common Workflow Language	programming		Common Workflow Language
+interpreter	cwl-runner	Common Workflow Language	programming		Common Workflow Language
+lang	Common Workflow Language	Common Workflow Language	programming	#B5314C	Common Workflow Language
+ext	.cp	Component Pascal	programming	#B0CE4E	Component Pascal
+ext	.cps	Component Pascal	programming	#B0CE4E	Component Pascal
+lang	Component Pascal	Component Pascal	programming	#B0CE4E	Component Pascal
+ext	.cook	Cooklang	markup	#E15A29	Cooklang
+lang	Cooklang	Cooklang	markup	#E15A29	Cooklang
+ext	.cl	Cool	programming		Cool
+lang	Cool	Cool	programming		Cool
+ext	.cppobjdump	Cpp-ObjDump	data		Cpp-ObjDump
+ext	.c++-objdump	Cpp-ObjDump	data		Cpp-ObjDump
+ext	.c++objdump	Cpp-ObjDump	data		Cpp-ObjDump
+ext	.cpp-objdump	Cpp-ObjDump	data		Cpp-ObjDump
+ext	.cxx-objdump	Cpp-ObjDump	data		Cpp-ObjDump
+lang	Cpp-ObjDump	Cpp-ObjDump	data		Cpp-ObjDump
+ext	.creole	Creole	prose		Creole
+lang	Creole	Creole	prose		Creole
+ext	.cr	Crystal	programming	#000100	Crystal
+interpreter	crystal	Crystal	programming	#000100	Crystal
+lang	Crystal	Crystal	programming	#000100	Crystal
+ext	.orc	Csound	programming	#1a1a1a	Csound
+ext	.udo	Csound	programming	#1a1a1a	Csound
+lang	Csound	Csound	programming	#1a1a1a	Csound
+ext	.csd	Csound Document	programming	#1a1a1a	Csound Document
+lang	Csound Document	Csound Document	programming	#1a1a1a	Csound Document
+ext	.sco	Csound Score	programming	#1a1a1a	Csound Score
+lang	Csound Score	Csound Score	programming	#1a1a1a	Csound Score
+ext	.cu	Cuda	programming		Cuda
+ext	.cuh	Cuda	programming		Cuda
+lang	Cuda	Cuda	programming	#3A4E3A	Cuda
+ext	.cue	Cue Sheet	data		Cue Sheet
+lang	Cue Sheet	Cue Sheet	data		Cue Sheet
+ext	.curry	Curry	programming	#531242	Curry
+lang	Curry	Curry	programming	#531242	Curry
+ext	.cy	Cycript	programming		Cycript
+lang	Cycript	Cycript	programming		Cycript
+ext	.cylc	Cylc	data	#00b3fd	Cylc
+filename	suite.rc	Cylc	data	#00b3fd	Cylc
+lang	Cylc	Cylc	data	#00b3fd	INI
+ext	.cyp	Cypher	programming	#34c0eb	Cypher
+ext	.cypher	Cypher	programming	#34c0eb	Cypher
+lang	Cypher	Cypher	programming	#34c0eb	Cypher
+ext	.pyx	Cython	programming	#fedf5b	Cython
+ext	.pxd	Cython	programming	#fedf5b	Cython
+ext	.pxi	Cython	programming	#fedf5b	Cython
+lang	Cython	Cython	programming	#fedf5b	Cython
+ext	.d	D	programming	#ba595e	D
+ext	.di	D	programming	#ba595e	D
+lang	D	D	programming	#ba595e	D
+ext	.d-objdump	D-ObjDump	data		D-ObjDump
+lang	D-ObjDump	D-ObjDump	data		D-ObjDump
+ext	.d2	D2	markup	#526ee8	D2
+lang	D2	D2	markup	#526ee8	D2
+ext	.com	DIGITAL Command Language	programming		DIGITAL Command Language
+lang	DIGITAL Command Language	DIGITAL Command Language	programming		DIGITAL Command Language
+ext	.dm	DM	programming	#447265	DM
+lang	DM	DM	programming	#447265	DM
+ext	.zone	DNS Zone	data		DNS Zone
+ext	.arpa	DNS Zone	data		DNS Zone
+lang	DNS Zone	DNS Zone	data		DNS Zone
+ext	.d	DTrace	programming		DTrace
+interpreter	dtrace	DTrace	programming		DTrace
+lang	DTrace	DTrace	programming		DTrace
+ext	.dfy	Dafny	programming	#FFEC25	Dafny
+interpreter	dafny	Dafny	programming	#FFEC25	Dafny
+lang	Dafny	Dafny	programming	#FFEC25	Dafny
+ext	.darcspatch	Darcs Patch	data	#8eff23	Darcs Patch
+ext	.dpatch	Darcs Patch	data	#8eff23	Darcs Patch
+lang	Darcs Patch	Darcs Patch	data	#8eff23	Darcs Patch
+ext	.dart	Dart	programming	#00B4AB	Dart
+interpreter	dart	Dart	programming	#00B4AB	Dart
+lang	Dart	Dart	programming	#00B4AB	Dart
+ext	.das	Daslang	programming	#d3d3d3	Daslang
+lang	Daslang	Daslang	programming	#d3d3d3	Daslang
+ext	.dwl	DataWeave	programming	#003a52	DataWeave
+lang	DataWeave	DataWeave	programming	#003a52	DataWeave
+ext	.dsc	Debian Package Control File	data	#D70751	Debian Package Control File
+lang	Debian Package Control File	Debian Package Control File	data	#D70751	Debian Package Control File
+ext	.dsc	DenizenScript	programming	#FBEE96	DenizenScript
+lang	DenizenScript	DenizenScript	programming	#FBEE96	DenizenScript
+ext	.dhall	Dhall	programming	#dfafff	Dhall
+lang	Dhall	Dhall	programming	#dfafff	Dhall
+ext	.diff	Diff	data		Diff
+ext	.patch	Diff	data		Diff
+lang	Diff	Diff	data		Diff
+ext	.x	DirectX 3D File	data	#aace60	DirectX 3D File
+lang	DirectX 3D File	DirectX 3D File	data	#aace60	DirectX 3D File
+ext	.dockerfile	Dockerfile	programming	#384d54	Dockerfile
+ext	.containerfile	Dockerfile	programming	#384d54	Dockerfile
+filename	Containerfile	Dockerfile	programming	#384d54	Dockerfile
+filename	Dockerfile	Dockerfile	programming	#384d54	Dockerfile
+lang	Dockerfile	Dockerfile	programming	#384d54	Dockerfile
+ext	.djs	Dogescript	programming	#cca760	Dogescript
+lang	Dogescript	Dogescript	programming	#cca760	Dogescript
+ext	.env	Dotenv	data	#e5d559	Dotenv
+filename	.env	Dotenv	data	#e5d559	Dotenv
+filename	.env.ci	Dotenv	data	#e5d559	Dotenv
+filename	.env.dev	Dotenv	data	#e5d559	Dotenv
+filename	.env.development	Dotenv	data	#e5d559	Dotenv
+filename	.env.development.local	Dotenv	data	#e5d559	Dotenv
+filename	.env.example	Dotenv	data	#e5d559	Dotenv
+filename	.env.local	Dotenv	data	#e5d559	Dotenv
+filename	.env.prod	Dotenv	data	#e5d559	Dotenv
+filename	.env.production	Dotenv	data	#e5d559	Dotenv
+filename	.env.sample	Dotenv	data	#e5d559	Dotenv
+filename	.env.staging	Dotenv	data	#e5d559	Dotenv
+filename	.env.template	Dotenv	data	#e5d559	Dotenv
+filename	.env.test	Dotenv	data	#e5d559	Dotenv
+filename	.env.testing	Dotenv	data	#e5d559	Dotenv
+lang	Dotenv	Dotenv	data	#e5d559	Dotenv
+filename	dune-project	Dune	programming		Dune
+lang	Dune	Dune	programming	#89421e	Dune
+ext	.dylan	Dylan	programming	#6c616e	Dylan
+ext	.dyl	Dylan	programming	#6c616e	Dylan
+ext	.intr	Dylan	programming	#6c616e	Dylan
+ext	.lid	Dylan	programming	#6c616e	Dylan
+lang	Dylan	Dylan	programming	#6c616e	Dylan
+ext	.e	E	programming	#ccce35	E
+interpreter	rune	E	programming	#ccce35	E
+lang	E	E	programming	#ccce35	E
+ext	.eml	E-mail	data		E-mail
+ext	.mbox	E-mail	data		E-mail
+lang	E-mail	E-mail	data		E-mail
+ext	.ebnf	EBNF	data		EBNF
+lang	EBNF	EBNF	data		EBNF
+ext	.ecl	ECL	programming	#8a1267	ECL
+ext	.eclxml	ECL	programming	#8a1267	ECL
+lang	ECL	ECL	programming	#8a1267	ECL
+ext	.ecl	ECLiPSe	programming	#001d9d	Prolog
+lang	ECLiPSe	ECLiPSe	programming	#001d9d	Prolog
+ext	.ejs	EJS	markup	#a91e50	EJS
+ext	.ect	EJS	markup	#a91e50	EJS
+ext	.ejs.t	EJS	markup	#a91e50	EJS
+ext	.jst	EJS	markup	#a91e50	EJS
+lang	EJS	EJS	markup	#a91e50	EJS
+ext	.eq	EQ	programming	#a78649	EQ
+lang	EQ	EQ	programming	#a78649	EQ
+ext	.sch	Eagle	data		Eagle
+ext	.brd	Eagle	data		Eagle
+lang	Eagle	Eagle	data		Eagle
+filename	Earthfile	Earthly	programming	#2af0ff	Earthly
+lang	Earthly	Earthly	programming	#2af0ff	Earthly
+ext	.eb	Easybuild	data	#069406	Python
+lang	Easybuild	Easybuild	data	#069406	Python
+ext	.epj	Ecere Projects	data	#913960	JavaScript
+lang	Ecere Projects	Ecere Projects	data	#913960	JavaScript
+ext	.html	Ecmarkup	markup	#eb8131	HTML
+lang	Ecmarkup	Ecmarkup	markup	#eb8131	HTML
+ext	.edge	Edge	markup	#0dffe0	Edge
+lang	Edge	Edge	markup	#0dffe0	Edge
+ext	.edgeql	EdgeQL	programming	#31A7FF	EdgeQL
+ext	.esdl	EdgeQL	programming	#31A7FF	EdgeQL
+lang	EdgeQL	EdgeQL	programming	#31A7FF	EdgeQL
+ext	.editorconfig	EditorConfig	data	#fff1f2	INI
+filename	.editorconfig	EditorConfig	data	#fff1f2	INI
+lang	EditorConfig	EditorConfig	data	#fff1f2	INI
+ext	.edc	Edje Data Collection	data		Edje Data Collection
+lang	Edje Data Collection	Edje Data Collection	data		Edje Data Collection
+ext	.e	Eiffel	programming	#4d6977	Eiffel
+lang	Eiffel	Eiffel	programming	#4d6977	Eiffel
+ext	.ex	Elixir	programming	#6e4a7e	Elixir
+ext	.exs	Elixir	programming	#6e4a7e	Elixir
+filename	mix.lock	Elixir	programming	#6e4a7e	Elixir
+interpreter	elixir	Elixir	programming	#6e4a7e	Elixir
+lang	Elixir	Elixir	programming	#6e4a7e	Elixir
+ext	.elm	Elm	programming	#60B5CC	Elm
+lang	Elm	Elm	programming	#60B5CC	Elm
+ext	.elv	Elvish	programming		Elvish
+interpreter	elvish	Elvish	programming		Elvish
+lang	Elvish	Elvish	programming	#55BB55	Elvish
+lang	Elvish Transcript	Elvish Transcript	programming	#55BB55	Elvish
+filename	.abbrev_defs	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	.emacs	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	.emacs.desktop	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	.gnus	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	.spacemacs	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	.viper	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	Cask	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	Eask	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	Project.ede	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	_emacs	Emacs Lisp	programming	#c065db	Emacs Lisp
+filename	abbrev_defs	Emacs Lisp	programming	#c065db	Emacs Lisp
+ext	.el	Emacs Lisp	programming	#c065db	Emacs Lisp
+ext	.emacs	Emacs Lisp	programming	#c065db	Emacs Lisp
+ext	.emacs.desktop	Emacs Lisp	programming	#c065db	Emacs Lisp
+lang	Emacs Lisp	Emacs Lisp	programming	#c065db	Emacs Lisp
+ext	.em	EmberScript	programming	#FFF4F3	EmberScript
+ext	.emberscript	EmberScript	programming	#FFF4F3	EmberScript
+lang	EmberScript	EmberScript	programming	#FFF4F3	EmberScript
+ext	.erl	Erlang	programming	#B83998	Erlang
+ext	.app	Erlang	programming	#B83998	Erlang
+ext	.app.src	Erlang	programming	#B83998	Erlang
+ext	.es	Erlang	programming	#B83998	Erlang
+ext	.escript	Erlang	programming	#B83998	Erlang
+ext	.hrl	Erlang	programming	#B83998	Erlang
+ext	.xrl	Erlang	programming	#B83998	Erlang
+ext	.yrl	Erlang	programming	#B83998	Erlang
+filename	Emakefile	Erlang	programming	#B83998	Erlang
+filename	rebar.config	Erlang	programming	#B83998	Erlang
+filename	rebar.config.lock	Erlang	programming	#B83998	Erlang
+filename	rebar.lock	Erlang	programming	#B83998	Erlang
+interpreter	escript	Erlang	programming	#B83998	Erlang
+lang	Erlang	Erlang	programming	#B83998	Erlang
+ext	.e	Euphoria	programming	#FF790B	Euphoria
+ext	.ex	Euphoria	programming	#FF790B	Euphoria
+interpreter	eui	Euphoria	programming	#FF790B	Euphoria
+interpreter	euiw	Euphoria	programming	#FF790B	Euphoria
+lang	Euphoria	Euphoria	programming	#FF790B	Euphoria
+ext	.fs	F#	programming	#b845fc	F#
+ext	.fsi	F#	programming	#b845fc	F#
+ext	.fsx	F#	programming	#b845fc	F#
+lang	F#	F#	programming	#b845fc	F#
+ext	.fst	F*	programming	#572e30	F*
+ext	.fsti	F*	programming	#572e30	F*
+lang	F*	F*	programming	#572e30	F*
+ext	.flf	FIGlet Font	data	#FFDDBB	FIGlet Font
+lang	FIGlet Font	FIGlet Font	data	#FFDDBB	FIGlet Font
+ext	.fir	FIRRTL	programming	#2f632f	FIRRTL
+lang	FIRRTL	FIRRTL	programming	#2f632f	FIRRTL
+ext	.fx	FLUX	programming	#88ccff	FLUX
+ext	.flux	FLUX	programming	#88ccff	FLUX
+lang	FLUX	FLUX	programming	#88ccff	FLUX
+ext	.fpp	FPP	programming	#d37327	FPP
+ext	.fppi	FPP	programming	#d37327	FPP
+lang	FPP	FPP	programming	#d37327	FPP
+ext	.factor	Factor	programming	#636746	Factor
+filename	.factor-boot-rc	Factor	programming	#636746	Factor
+filename	.factor-rc	Factor	programming	#636746	Factor
+lang	Factor	Factor	programming	#636746	Factor
+ext	.fy	Fancy	programming	#7b9db4	Fancy
+ext	.fancypack	Fancy	programming	#7b9db4	Fancy
+filename	Fakefile	Fancy	programming	#7b9db4	Fancy
+lang	Fancy	Fancy	programming	#7b9db4	Fancy
+ext	.fan	Fantom	programming	#14253c	Fantom
+lang	Fantom	Fantom	programming	#14253c	Fantom
+ext	.dsp	Faust	programming	#c37240	Faust
+lang	Faust	Faust	programming	#c37240	Faust
+interpreter	fennel	Fennel	programming	#fff3d7	Fennel
+ext	.fnl	Fennel	programming	#fff3d7	Fennel
+lang	Fennel	Fennel	programming	#fff3d7	Fennel
+ext	.f	Filebench WML	programming	#F6B900	Filebench WML
+lang	Filebench WML	Filebench WML	programming	#F6B900	Filebench WML
+ext	.fs	Filterscript	programming		RenderScript
+lang	Filterscript	Filterscript	programming		RenderScript
+ext	.fbs	FlatBuffers	data	#ed284a	FlatBuffers
+lang	FlatBuffers	FlatBuffers	data	#ed284a	FlatBuffers
+ext	.flix	Flix	programming	#d44a45	Flix
+lang	Flix	Flix	programming	#d44a45	Flix
+ext	.ftl	Fluent	programming	#ffcc33	Fluent
+lang	Fluent	Fluent	programming	#ffcc33	Fluent
+ext	.for	Formatted	data		Formatted
+ext	.eam.fs	Formatted	data		Formatted
+lang	Formatted	Formatted	data		Formatted
+ext	.fth	Forth	programming	#341708	Forth
+ext	.4th	Forth	programming	#341708	Forth
+ext	.f	Forth	programming	#341708	Forth
+ext	.for	Forth	programming	#341708	Forth
+ext	.forth	Forth	programming	#341708	Forth
+ext	.fr	Forth	programming	#341708	Forth
+ext	.frt	Forth	programming	#341708	Forth
+ext	.fs	Forth	programming	#341708	Forth
+lang	Forth	Forth	programming	#341708	Forth
+ext	.f	Fortran	programming	#4d41b1	Fortran
+ext	.f77	Fortran	programming	#4d41b1	Fortran
+ext	.for	Fortran	programming	#4d41b1	Fortran
+ext	.fpp	Fortran	programming	#4d41b1	Fortran
+lang	Fortran	Fortran	programming	#4d41b1	Fortran
+ext	.f90	Fortran Free Form	programming	#4d41b1	Fortran
+ext	.f03	Fortran Free Form	programming	#4d41b1	Fortran
+ext	.f08	Fortran Free Form	programming	#4d41b1	Fortran
+ext	.f95	Fortran Free Form	programming	#4d41b1	Fortran
+lang	Fortran Free Form	Fortran Free Form	programming	#4d41b1	Fortran
+ext	.bi	FreeBASIC	programming	#141AC9	FreeBASIC
+ext	.bas	FreeBASIC	programming	#141AC9	FreeBASIC
+lang	FreeBASIC	FreeBASIC	programming	#141AC9	FreeBASIC
+ext	.ftl	FreeMarker	programming	#0050b2	FreeMarker
+ext	.ftlh	FreeMarker	programming	#0050b2	FreeMarker
+lang	FreeMarker	FreeMarker	programming	#0050b2	FreeMarker
+ext	.fr	Frege	programming	#00cafe	Frege
+lang	Frege	Frege	programming	#00cafe	Frege
+ext	.fut	Futhark	programming	#5f021f	Futhark
+lang	Futhark	Futhark	programming	#5f021f	Futhark
+ext	.g	G-code	programming	#D08CF2	G-code
+ext	.cnc	G-code	programming	#D08CF2	G-code
+ext	.gco	G-code	programming	#D08CF2	G-code
+ext	.gcode	G-code	programming	#D08CF2	G-code
+lang	G-code	G-code	programming	#D08CF2	G-code
+ext	.gaml	GAML	programming	#FFC766	GAML
+lang	GAML	GAML	programming	#FFC766	GAML
+ext	.gms	GAMS	programming	#f49a22	GAMS
+lang	GAMS	GAMS	programming	#f49a22	GAMS
+ext	.g	GAP	programming	#0000cc	GAP
+ext	.gap	GAP	programming	#0000cc	GAP
+ext	.gd	GAP	programming	#0000cc	GAP
+ext	.gi	GAP	programming	#0000cc	GAP
+ext	.tst	GAP	programming	#0000cc	GAP
+lang	GAP	GAP	programming	#0000cc	GAP
+ext	.md	GCC Machine Description	programming	#FFCFAB	GCC Machine Description
+lang	GCC Machine Description	GCC Machine Description	programming	#FFCFAB	GCC Machine Description
+ext	.gdb	GDB	programming		GDB
+ext	.gdbinit	GDB	programming		GDB
+lang	GDB	GDB	programming		GDB
+ext	.gd	GDScript	programming	#355570	GDScript
+lang	GDScript	GDScript	programming	#355570	GDScript
+ext	.gdshader	GDShader	programming	#478CBF	GDShader
+ext	.gdshaderinc	GDShader	programming	#478CBF	GDShader
+lang	GDShader	GDShader	programming	#478CBF	GDShader
+ext	.ged	GEDCOM	data	#003058	GEDCOM
+lang	GEDCOM	GEDCOM	data	#003058	GEDCOM
+ext	.glsl	GLSL	programming	#5686a5	GLSL
+ext	.fp	GLSL	programming	#5686a5	GLSL
+ext	.frag	GLSL	programming	#5686a5	GLSL
+ext	.frg	GLSL	programming	#5686a5	GLSL
+ext	.fs	GLSL	programming	#5686a5	GLSL
+ext	.fsh	GLSL	programming	#5686a5	GLSL
+ext	.fshader	GLSL	programming	#5686a5	GLSL
+ext	.geo	GLSL	programming	#5686a5	GLSL
+ext	.geom	GLSL	programming	#5686a5	GLSL
+ext	.glslf	GLSL	programming	#5686a5	GLSL
+ext	.glslv	GLSL	programming	#5686a5	GLSL
+ext	.gs	GLSL	programming	#5686a5	GLSL
+ext	.gshader	GLSL	programming	#5686a5	GLSL
+ext	.rchit	GLSL	programming	#5686a5	GLSL
+ext	.rmiss	GLSL	programming	#5686a5	GLSL
+ext	.shader	GLSL	programming	#5686a5	GLSL
+ext	.tesc	GLSL	programming	#5686a5	GLSL
+ext	.tese	GLSL	programming	#5686a5	GLSL
+ext	.vert	GLSL	programming	#5686a5	GLSL
+ext	.vrx	GLSL	programming	#5686a5	GLSL
+ext	.vs	GLSL	programming	#5686a5	GLSL
+ext	.vsh	GLSL	programming	#5686a5	GLSL
+ext	.vshader	GLSL	programming	#5686a5	GLSL
+lang	GLSL	GLSL	programming	#5686a5	GLSL
+ext	.gn	GN	data		GN
+ext	.gni	GN	data		GN
+interpreter	gn	GN	data		GN
+filename	.gn	GN	data		GN
+lang	GN	GN	data		GN
+ext	.gsc	GSC	programming	#FF6800	GSC
+ext	.csc	GSC	programming	#FF6800	GSC
+ext	.gsh	GSC	programming	#FF6800	GSC
+lang	GSC	GSC	programming	#FF6800	GSC
+ext	.gml	Game Maker Language	programming	#71b417	Game Maker Language
+lang	Game Maker Language	Game Maker Language	programming	#71b417	Game Maker Language
+filename	Gemfile.lock	Gemfile.lock	data	#701516	Gemfile.lock
+lang	Gemfile.lock	Gemfile.lock	data	#701516	Gemfile.lock
+ext	.gmi	Gemini	prose	#ff6900	Gemini
+lang	Gemini	Gemini	prose	#ff6900	Gemini
+ext	.4gl	Genero 4gl	programming	#63408e	Genero 4gl
+lang	Genero 4gl	Genero 4gl	programming	#63408e	Genero 4gl
+ext	.per	Genero per	markup	#d8df39	Genero per
+lang	Genero per	Genero per	markup	#d8df39	Genero per
+ext	.gs	Genie	programming		Genie
+lang	Genie	Genie	programming	#fb855d	Genie
+ext	.kid	Genshi	programming	#951531	Genshi
+lang	Genshi	Genshi	programming	#951531	Genshi
+ext	.ebuild	Gentoo Ebuild	programming	#9400ff	Shell
+lang	Gentoo Ebuild	Gentoo Ebuild	programming	#9400ff	Shell
+ext	.eclass	Gentoo Eclass	programming	#9400ff	Shell
+lang	Gentoo Eclass	Gentoo Eclass	programming	#9400ff	Shell
+ext	.gbr	Gerber Image	data	#d20b00	Gerber Image
+ext	.cmp	Gerber Image	data	#d20b00	Gerber Image
+ext	.gbl	Gerber Image	data	#d20b00	Gerber Image
+ext	.gbo	Gerber Image	data	#d20b00	Gerber Image
+ext	.gbp	Gerber Image	data	#d20b00	Gerber Image
+ext	.gbs	Gerber Image	data	#d20b00	Gerber Image
+ext	.gko	Gerber Image	data	#d20b00	Gerber Image
+ext	.gml	Gerber Image	data	#d20b00	Gerber Image
+ext	.gpb	Gerber Image	data	#d20b00	Gerber Image
+ext	.gpt	Gerber Image	data	#d20b00	Gerber Image
+ext	.gtl	Gerber Image	data	#d20b00	Gerber Image
+ext	.gto	Gerber Image	data	#d20b00	Gerber Image
+ext	.gtp	Gerber Image	data	#d20b00	Gerber Image
+ext	.gts	Gerber Image	data	#d20b00	Gerber Image
+ext	.ncl	Gerber Image	data	#d20b00	Gerber Image
+ext	.sol	Gerber Image	data	#d20b00	Gerber Image
+interpreter	gerbv	Gerber Image	data	#d20b00	Gerber Image
+interpreter	gerbview	Gerber Image	data	#d20b00	Gerber Image
+lang	Gerber Image	Gerber Image	data	#d20b00	Gerber Image
+ext	.po	Gettext Catalog	prose		Gettext Catalog
+ext	.pot	Gettext Catalog	prose		Gettext Catalog
+lang	Gettext Catalog	Gettext Catalog	prose		Gettext Catalog
+ext	.feature	Gherkin	programming		Gherkin
+ext	.story	Gherkin	programming		Gherkin
+lang	Gherkin	Gherkin	programming	#5B2063	Gherkin
+filename	.gitattributes	Git Attributes	data	#F44D27	Git Attributes
+lang	Git Attributes	Git Attributes	data	#F44D27	Git Attributes
+filename	.gitmessage	Git Commit	data	#F44D27	Git Commit
+filename	COMMIT_EDITMSG	Git Commit	data	#F44D27	Git Commit
+lang	Git Commit	Git Commit	data	#F44D27	Git Commit
+ext	.gitconfig	Git Config	data	#F44D27	INI
+filename	.gitconfig	Git Config	data	#F44D27	INI
+filename	.gitmodules	Git Config	data	#F44D27	INI
+filename	.tgitconfig	Git Config	data	#F44D27	INI
+filename	config.worktree	Git Config	data	#F44D27	INI
+lang	Git Config	Git Config	data	#F44D27	INI
+filename	.git-blame-ignore-revs	Git Revision List	data	#F44D27	Git Revision List
+lang	Git Revision List	Git Revision List	data	#F44D27	Git Revision List
+ext	.gleam	Gleam	programming	#ffaff3	Gleam
+lang	Gleam	Gleam	programming	#ffaff3	Gleam
+ext	.gjs	Glimmer JS	programming		Glimmer JS
+lang	Glimmer JS	Glimmer JS	programming	#F5835F	JavaScript
+ext	.gts	Glimmer TS	programming		Glimmer TS
+lang	Glimmer TS	Glimmer TS	programming	#3178c6	TypeScript
+ext	.glf	Glyph	programming	#c1ac7f	Glyph
+lang	Glyph	Glyph	programming	#c1ac7f	Glyph
+ext	.bdf	Glyph Bitmap Distribution Format	data		Glyph Bitmap Distribution Format
+lang	Glyph Bitmap Distribution Format	Glyph Bitmap Distribution Format	data		Glyph Bitmap Distribution Format
+ext	.gno	Gno	programming	#226c57	Gno
+lang	Gno	Gno	programming	#226c57	Gno
+ext	.gp	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.gnu	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.gnuplot	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.p	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.plot	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.plt	Gnuplot	programming	#f0a9f0	Gnuplot
+interpreter	gnuplot	Gnuplot	programming	#f0a9f0	Gnuplot
+lang	Gnuplot	Gnuplot	programming	#f0a9f0	Gnuplot
+ext	.go	Go	programming	#00ADD8	Go
+lang	Go	Go	programming	#00ADD8	Go
+filename	go.sum	Go Checksums	data	#00ADD8	Go Checksums
+filename	go.work.sum	Go Checksums	data	#00ADD8	Go Checksums
+lang	Go Checksums	Go Checksums	data	#00ADD8	Go Checksums
+filename	go.mod	Go Module	data	#00ADD8	Go Module
+lang	Go Module	Go Module	data	#00ADD8	Go Module
+ext	.gohtml	Go Template	markup	#00ADD8	Go Template
+ext	.gotmpl	Go Template	markup	#00ADD8	Go Template
+ext	.html.tmpl	Go Template	markup	#00ADD8	Go Template
+ext	.tmpl	Go Template	markup	#00ADD8	Go Template
+ext	.tpl	Go Template	markup	#00ADD8	Go Template
+filename	_helpers.tpl	Go Template	markup	#00ADD8	Go Template
+lang	Go Template	Go Template	markup	#00ADD8	Go Template
+filename	go.work	Go Workspace	data	#00ADD8	Go Workspace
+lang	Go Workspace	Go Workspace	data	#00ADD8	Go Workspace
+ext	.gdnlib	Godot Resource	data	#355570	Godot Resource
+ext	.gdns	Godot Resource	data	#355570	Godot Resource
+ext	.tres	Godot Resource	data	#355570	Godot Resource
+ext	.tscn	Godot Resource	data	#355570	Godot Resource
+filename	project.godot	Godot Resource	data	#355570	Godot Resource
+lang	Godot Resource	Godot Resource	data	#355570	Godot Resource
+ext	.golo	Golo	programming	#88562A	Golo
+lang	Golo	Golo	programming	#88562A	Golo
+ext	.gs	Gosu	programming	#82937f	Gosu
+ext	.gst	Gosu	programming	#82937f	Gosu
+ext	.gsx	Gosu	programming	#82937f	Gosu
+ext	.vark	Gosu	programming	#82937f	Gosu
+lang	Gosu	Gosu	programming	#82937f	Gosu
+ext	.grace	Grace	programming	#615f8b	Grace
+lang	Grace	Grace	programming	#615f8b	Grace
+ext	.gradle	Gradle	data	#02303a	Gradle
+lang	Gradle	Gradle	data	#02303a	Gradle
+ext	.gradle.kts	Gradle Kotlin DSL	data	#02303a	Gradle
+lang	Gradle Kotlin DSL	Gradle Kotlin DSL	data	#02303a	Gradle
+ext	.gf	Grammatical Framework	programming		Grammatical Framework
+lang	Grammatical Framework	Grammatical Framework	programming	#ff0000	Grammatical Framework
+ext	.gml	Graph Modeling Language	data		Graph Modeling Language
+lang	Graph Modeling Language	Graph Modeling Language	data		Graph Modeling Language
+ext	.graphql	GraphQL	data	#e10098	GraphQL
+ext	.gql	GraphQL	data	#e10098	GraphQL
+ext	.graphqls	GraphQL	data	#e10098	GraphQL
+lang	GraphQL	GraphQL	data	#e10098	GraphQL
+ext	.dot	Graphviz (DOT)	data	#2596be	Graphviz (DOT)
+ext	.gv	Graphviz (DOT)	data	#2596be	Graphviz (DOT)
+lang	Graphviz (DOT)	Graphviz (DOT)	data	#2596be	Graphviz (DOT)
+ext	.groovy	Groovy	programming	#4298b8	Groovy
+ext	.grt	Groovy	programming	#4298b8	Groovy
+ext	.gtpl	Groovy	programming	#4298b8	Groovy
+ext	.gvy	Groovy	programming	#4298b8	Groovy
+interpreter	groovy	Groovy	programming	#4298b8	Groovy
+filename	Jenkinsfile	Groovy	programming	#4298b8	Groovy
+lang	Groovy	Groovy	programming	#4298b8	Groovy
+ext	.gsp	Groovy Server Pages	programming	#4298b8	Groovy
+lang	Groovy Server Pages	Groovy Server Pages	programming	#4298b8	Groovy
+ext	.gtkrc	GtkRC	data	#7fe719	GtkRC
+filename	gtkrc	GtkRC	data	#7fe719	GtkRC
+filename	gtkrc-2.0	GtkRC	data	#7fe719	GtkRC
+lang	GtkRC	GtkRC	data	#7fe719	GtkRC
+ext	.cfg	HAProxy	data	#106da9	HAProxy
+filename	haproxy.cfg	HAProxy	data	#106da9	HAProxy
+lang	HAProxy	HAProxy	data	#106da9	HAProxy
+ext	.hcl	HCL	programming	#844FBA	HCL
+ext	.nomad	HCL	programming	#844FBA	HCL
+ext	.tf	HCL	programming	#844FBA	HCL
+ext	.tfvars	HCL	programming	#844FBA	HCL
+ext	.tofu	HCL	programming	#844FBA	HCL
+ext	.workflow	HCL	programming	#844FBA	HCL
+lang	HCL	HCL	programming	#844FBA	HCL
+ext	.hip	HIP	programming	#4F3A4F	HIP
+lang	HIP	HIP	programming	#4F3A4F	HIP
+ext	.hlsl	HLSL	programming	#aace60	HLSL
+ext	.cginc	HLSL	programming	#aace60	HLSL
+ext	.fx	HLSL	programming	#aace60	HLSL
+ext	.fxh	HLSL	programming	#aace60	HLSL
+ext	.hlsli	HLSL	programming	#aace60	HLSL
+lang	HLSL	HLSL	programming	#aace60	HLSL
+ext	.hocon	HOCON	data	#9ff8ee	HOCON
+filename	.scalafix.conf	HOCON	data	#9ff8ee	HOCON
+filename	.scalafmt.conf	HOCON	data	#9ff8ee	HOCON
+lang	HOCON	HOCON	data	#9ff8ee	HOCON
+ext	.html	HTML	markup	#e34c26	HTML
+ext	.hta	HTML	markup	#e34c26	HTML
+ext	.htm	HTML	markup	#e34c26	HTML
+ext	.html.hl	HTML	markup	#e34c26	HTML
+ext	.inc	HTML	markup	#e34c26	HTML
+ext	.xht	HTML	markup	#e34c26	HTML
+ext	.xhtml	HTML	markup	#e34c26	HTML
+lang	HTML	HTML	markup	#e34c26	HTML
+ext	.ecr	HTML+ECR	markup	#2e1052	HTML
+lang	HTML+ECR	HTML+ECR	markup	#2e1052	HTML
+ext	.html.eex	HTML+EEX	markup	#6e4a7e	HTML
+ext	.heex	HTML+EEX	markup	#6e4a7e	HTML
+ext	.leex	HTML+EEX	markup	#6e4a7e	HTML
+lang	HTML+EEX	HTML+EEX	markup	#6e4a7e	HTML
+ext	.erb	HTML+ERB	markup	#701516	HTML
+ext	.erb.deface	HTML+ERB	markup	#701516	HTML
+ext	.rhtml	HTML+ERB	markup	#701516	HTML
+lang	HTML+ERB	HTML+ERB	markup	#701516	HTML
+ext	.phtml	HTML+PHP	markup	#4f5d95	HTML
+lang	HTML+PHP	HTML+PHP	markup	#4f5d95	HTML
+ext	.cshtml	HTML+Razor	markup	#512be4	HTML
+ext	.razor	HTML+Razor	markup	#512be4	HTML
+lang	HTML+Razor	HTML+Razor	markup	#512be4	HTML
+ext	.http	HTTP	data	#005C9C	HTTP
+lang	HTTP	HTTP	data	#005C9C	HTTP
+ext	.hxml	HXML	data	#f68712	HXML
+lang	HXML	HXML	data	#f68712	HXML
+ext	.hack	Hack	programming		Hack
+ext	.hh	Hack	programming		Hack
+ext	.hhi	Hack	programming		Hack
+ext	.php	Hack	programming		Hack
+lang	Hack	Hack	programming	#878787	Hack
+ext	.haml	Haml	markup	#ece2a9	Haml
+ext	.haml.deface	Haml	markup	#ece2a9	Haml
+lang	Haml	Haml	markup	#ece2a9	Haml
+ext	.handlebars	Handlebars	markup	#f7931e	Handlebars
+ext	.hbs	Handlebars	markup	#f7931e	Handlebars
+lang	Handlebars	Handlebars	markup	#f7931e	Handlebars
+ext	.hb	Harbour	programming	#0e60e3	Harbour
+lang	Harbour	Harbour	programming	#0e60e3	Harbour
+ext	.ha	Hare	programming	#9d7424	Hare
+lang	Hare	Hare	programming	#9d7424	Hare
+ext	.hs	Haskell	programming	#5e5086	Haskell
+ext	.hs-boot	Haskell	programming	#5e5086	Haskell
+ext	.hsc	Haskell	programming	#5e5086	Haskell
+interpreter	runghc	Haskell	programming	#5e5086	Haskell
+interpreter	runhaskell	Haskell	programming	#5e5086	Haskell
+interpreter	runhugs	Haskell	programming	#5e5086	Haskell
+lang	Haskell	Haskell	programming	#5e5086	Haskell
+ext	.hx	Haxe	programming	#df7900	Haxe
+ext	.hxsl	Haxe	programming	#df7900	Haxe
+lang	Haxe	Haxe	programming	#df7900	Haxe
+ext	.q	HiveQL	programming		HiveQL
+ext	.hql	HiveQL	programming		HiveQL
+lang	HiveQL	HiveQL	programming	#dce200	HiveQL
+ext	.hc	HolyC	programming	#ffefaf	HolyC
+lang	HolyC	HolyC	programming	#ffefaf	HolyC
+filename	HOSTS	Hosts File	data	#308888	Hosts File
+filename	hosts	Hosts File	data	#308888	Hosts File
+filename	hosts.txt	Hosts File	data	#308888	Hosts File
+lang	Hosts File	Hosts File	data	#308888	Hosts File
+ext	.hurl	Hurl	programming	#FF0288	Hurl
+lang	Hurl	Hurl	programming	#FF0288	Hurl
+ext	.hy	Hy	programming	#7790B2	Hy
+interpreter	hy	Hy	programming	#7790B2	Hy
+lang	Hy	Hy	programming	#7790B2	Hy
+ext	.bf	HyPhy	programming		HyPhy
+lang	HyPhy	HyPhy	programming		HyPhy
+ext	.pro	IDL	programming	#a3522f	IDL
+ext	.dlm	IDL	programming	#a3522f	IDL
+lang	IDL	IDL	programming	#a3522f	IDL
+ext	.ipf	IGOR Pro	programming	#0000cc	IGOR Pro
+lang	IGOR Pro	IGOR Pro	programming	#0000cc	IGOR Pro
+ext	.il	IL Assembly	programming	#512BD4	IL Assembly
+lang	IL Assembly	IL Assembly	programming	#512BD4	IL Assembly
+ext	.ini	INI	data	#d1dbe0	INI
+ext	.cfg	INI	data	#d1dbe0	INI
+ext	.cnf	INI	data	#d1dbe0	INI
+ext	.container	INI	data	#d1dbe0	INI
+ext	.dof	INI	data	#d1dbe0	INI
+ext	.frm	INI	data	#d1dbe0	INI
+ext	.lektorproject	INI	data	#d1dbe0	INI
+ext	.mount	INI	data	#d1dbe0	INI
+ext	.network	INI	data	#d1dbe0	INI
+ext	.prefs	INI	data	#d1dbe0	INI
+ext	.pro	INI	data	#d1dbe0	INI
+ext	.properties	INI	data	#d1dbe0	INI
+ext	.service	INI	data	#d1dbe0	INI
+ext	.socket	INI	data	#d1dbe0	INI
+ext	.target	INI	data	#d1dbe0	INI
+ext	.timer	INI	data	#d1dbe0	INI
+ext	.url	INI	data	#d1dbe0	INI
+filename	.buckconfig	INI	data	#d1dbe0	INI
+filename	.coveragerc	INI	data	#d1dbe0	INI
+filename	.flake8	INI	data	#d1dbe0	INI
+filename	.gitreview	INI	data	#d1dbe0	INI
+filename	.pylintrc	INI	data	#d1dbe0	INI
+filename	HOSTS	INI	data	#d1dbe0	INI
+filename	buildozer.spec	INI	data	#d1dbe0	INI
+filename	hosts	INI	data	#d1dbe0	INI
+filename	pylintrc	INI	data	#d1dbe0	INI
+filename	vlcrc	INI	data	#d1dbe0	INI
+lang	INI	INI	data	#d1dbe0	INI
+ext	.irclog	IRC log	data		IRC log
+ext	.weechatlog	IRC log	data		IRC log
+lang	IRC log	IRC log	data		IRC log
+ext	.ispc	ISPC	programming	#2D68B1	ISPC
+lang	ISPC	ISPC	programming	#2D68B1	ISPC
+ext	.idr	Idris	programming	#b30000	Idris
+ext	.lidr	Idris	programming	#b30000	Idris
+lang	Idris	Idris	programming	#b30000	Idris
+ext	.gitignore	Ignore List	data	#000000	Ignore List
+filename	.agignore	Ignore List	data	#000000	Ignore List
+filename	.atomignore	Ignore List	data	#000000	Ignore List
+filename	.babelignore	Ignore List	data	#000000	Ignore List
+filename	.bzrignore	Ignore List	data	#000000	Ignore List
+filename	.ckignore	Ignore List	data	#000000	Ignore List
+filename	.coffeelintignore	Ignore List	data	#000000	Ignore List
+filename	.cvsignore	Ignore List	data	#000000	Ignore List
+filename	.dockerignore	Ignore List	data	#000000	Ignore List
+filename	.easignore	Ignore List	data	#000000	Ignore List
+filename	.eleventyignore	Ignore List	data	#000000	Ignore List
+filename	.eslint-ignore	Ignore List	data	#000000	Ignore List
+filename	.eslintignore	Ignore List	data	#000000	Ignore List
+filename	.gitignore	Ignore List	data	#000000	Ignore List
+filename	.ignore	Ignore List	data	#000000	Ignore List
+filename	.markdownlintignore	Ignore List	data	#000000	Ignore List
+filename	.nodemonignore	Ignore List	data	#000000	Ignore List
+filename	.npmignore	Ignore List	data	#000000	Ignore List
+filename	.prettierignore	Ignore List	data	#000000	Ignore List
+filename	.rgignore	Ignore List	data	#000000	Ignore List
+filename	.stylelintignore	Ignore List	data	#000000	Ignore List
+filename	.vercelignore	Ignore List	data	#000000	Ignore List
+filename	.vscodeignore	Ignore List	data	#000000	Ignore List
+filename	gitignore-global	Ignore List	data	#000000	Ignore List
+filename	gitignore_global	Ignore List	data	#000000	Ignore List
+lang	Ignore List	Ignore List	data	#000000	Ignore List
+ext	.hexpat	ImHex Pattern Language	programming	#3a6be0	ImHex Pattern Language
+lang	ImHex Pattern Language	ImHex Pattern Language	programming	#3a6be0	ImHex Pattern Language
+ext	.ijm	ImageJ Macro	programming	#99AAFF	ImageJ Macro
+lang	ImageJ Macro	ImageJ Macro	programming	#99AAFF	ImageJ Macro
+ext	.imba	Imba	programming	#16cec6	Imba
+lang	Imba	Imba	programming	#16cec6	Imba
+ext	.ni	Inform 7	programming		Inform 7
+ext	.i7x	Inform 7	programming		Inform 7
+lang	Inform 7	Inform 7	programming		Inform 7
+ext	.ink	Ink	programming		Ink
+lang	Ink	Ink	programming		Ink
+ext	.iss	Inno Setup	programming	#264b99	Inno Setup
+ext	.isl	Inno Setup	programming	#264b99	Inno Setup
+lang	Inno Setup	Inno Setup	programming	#264b99	Inno Setup
+ext	.io	Io	programming	#a9188d	Io
+interpreter	io	Io	programming	#a9188d	Io
+lang	Io	Io	programming	#a9188d	Io
+ext	.ik	Ioke	programming	#078193	Ioke
+interpreter	ioke	Ioke	programming	#078193	Ioke
+lang	Ioke	Ioke	programming	#078193	Ioke
+ext	.thy	Isabelle	programming	#FEFE00	Isabelle
+lang	Isabelle	Isabelle	programming	#FEFE00	Isabelle
+filename	ROOT	Isabelle ROOT	programming	#FEFE00	Isabelle
+lang	Isabelle ROOT	Isabelle ROOT	programming	#FEFE00	Isabelle
+ext	.ijs	J	programming	#9EEDFF	J
+interpreter	jconsole	J	programming	#9EEDFF	J
+lang	J	J	programming	#9EEDFF	J
+filename	MANIFEST.MF	JAR Manifest	data	#b07219	JAR Manifest
+lang	JAR Manifest	JAR Manifest	data	#b07219	JAR Manifest
+ext	.j	JASS	programming	#FF0303	JASS
+lang	JASS	JASS	programming	#FF0303	JASS
+ext	.jcl	JCL	programming	#d90e09	JCL
+lang	JCL	JCL	programming	#d90e09	JCL
+ext	.flex	JFlex	programming	#DBCA00	Lex
+ext	.jflex	JFlex	programming	#DBCA00	Lex
+lang	JFlex	JFlex	programming	#DBCA00	Lex
+ext	.json	JSON	data	#292929	JSON
+ext	.4DForm	JSON	data	#292929	JSON
+ext	.4DProject	JSON	data	#292929	JSON
+ext	.avsc	JSON	data	#292929	JSON
+ext	.geojson	JSON	data	#292929	JSON
+ext	.gltf	JSON	data	#292929	JSON
+ext	.har	JSON	data	#292929	JSON
+ext	.ice	JSON	data	#292929	JSON
+ext	.JSON-tmLanguage	JSON	data	#292929	JSON
+ext	.json.example	JSON	data	#292929	JSON
+ext	.jsonl	JSON	data	#292929	JSON
+ext	.mcmeta	JSON	data	#292929	JSON
+ext	.sarif	JSON	data	#292929	JSON
+ext	.slnlaunch	JSON	data	#292929	JSON
+ext	.tact	JSON	data	#292929	JSON
+ext	.tfstate	JSON	data	#292929	JSON
+ext	.tfstate.backup	JSON	data	#292929	JSON
+ext	.topojson	JSON	data	#292929	JSON
+ext	.webapp	JSON	data	#292929	JSON
+ext	.webmanifest	JSON	data	#292929	JSON
+ext	.yy	JSON	data	#292929	JSON
+ext	.yyp	JSON	data	#292929	JSON
+filename	.all-contributorsrc	JSON	data	#292929	JSON
+filename	.arcconfig	JSON	data	#292929	JSON
+filename	.auto-changelog	JSON	data	#292929	JSON
+filename	.c8rc	JSON	data	#292929	JSON
+filename	.htmlhintrc	JSON	data	#292929	JSON
+filename	.imgbotconfig	JSON	data	#292929	JSON
+filename	.nycrc	JSON	data	#292929	JSON
+filename	.releaserc	JSON	data	#292929	JSON
+filename	.secrets.baseline	JSON	data	#292929	JSON
+filename	.tern-config	JSON	data	#292929	JSON
+filename	.tern-project	JSON	data	#292929	JSON
+filename	.watchmanconfig	JSON	data	#292929	JSON
+filename	MODULE.bazel.lock	JSON	data	#292929	JSON
+filename	Package.resolved	JSON	data	#292929	JSON
+filename	Pipfile.lock	JSON	data	#292929	JSON
+filename	bun.lock	JSON	data	#292929	JSON
+filename	composer.lock	JSON	data	#292929	JSON
+filename	deno.lock	JSON	data	#292929	JSON
+filename	flake.lock	JSON	data	#292929	JSON
+filename	mcmod.info	JSON	data	#292929	JSON
+lang	JSON	JSON	data	#292929	JSON
+ext	.jsonc	JSON with Comments	data	#292929	JSON
+ext	.code-snippets	JSON with Comments	data	#292929	JSON
+ext	.code-workspace	JSON with Comments	data	#292929	JSON
+ext	.hujson	JSON with Comments	data	#292929	JSON
+ext	.sublime-build	JSON with Comments	data	#292929	JSON
+ext	.sublime-color-scheme	JSON with Comments	data	#292929	JSON
+ext	.sublime-commands	JSON with Comments	data	#292929	JSON
+ext	.sublime-completions	JSON with Comments	data	#292929	JSON
+ext	.sublime-keymap	JSON with Comments	data	#292929	JSON
+ext	.sublime-macro	JSON with Comments	data	#292929	JSON
+ext	.sublime-menu	JSON with Comments	data	#292929	JSON
+ext	.sublime-mousemap	JSON with Comments	data	#292929	JSON
+ext	.sublime-project	JSON with Comments	data	#292929	JSON
+ext	.sublime-settings	JSON with Comments	data	#292929	JSON
+ext	.sublime-theme	JSON with Comments	data	#292929	JSON
+ext	.sublime-workspace	JSON with Comments	data	#292929	JSON
+ext	.sublime_metrics	JSON with Comments	data	#292929	JSON
+ext	.sublime_session	JSON with Comments	data	#292929	JSON
+ext	.tsconfig.json	JSON with Comments	data	#292929	JSON
+filename	.babelrc	JSON with Comments	data	#292929	JSON
+filename	.devcontainer.json	JSON with Comments	data	#292929	JSON
+filename	.eslintrc	JSON with Comments	data	#292929	JSON
+filename	.eslintrc.json	JSON with Comments	data	#292929	JSON
+filename	.jscsrc	JSON with Comments	data	#292929	JSON
+filename	.jshintrc	JSON with Comments	data	#292929	JSON
+filename	.jslintrc	JSON with Comments	data	#292929	JSON
+filename	.oxlintrc.json	JSON with Comments	data	#292929	JSON
+filename	.swcrc	JSON with Comments	data	#292929	JSON
+filename	api-extractor.json	JSON with Comments	data	#292929	JSON
+filename	devcontainer.json	JSON with Comments	data	#292929	JSON
+filename	jsconfig.json	JSON with Comments	data	#292929	JSON
+filename	language-configuration.json	JSON with Comments	data	#292929	JSON
+filename	tsconfig.json	JSON with Comments	data	#292929	JSON
+filename	tslint.json	JSON with Comments	data	#292929	JSON
+lang	JSON with Comments	JSON with Comments	data	#292929	JSON
+ext	.json5	JSON5	data	#267CB9	JSON5
+lang	JSON5	JSON5	data	#267CB9	JSON5
+ext	.jsonld	JSONLD	data	#0c479c	JSONLD
+lang	JSONLD	JSONLD	data	#0c479c	JSONLD
+ext	.jq	JSONiq	programming	#40d47e	JSONiq
+lang	JSONiq	JSONiq	programming	#40d47e	JSONiq
+ext	.jac	Jac	programming	#FC792D	Jac
+lang	Jac	Jac	programming	#FC792D	Jac
+ext	.jai	Jai	programming	#ab8b4b	Jai
+lang	Jai	Jai	programming	#ab8b4b	Jai
+ext	.janet	Janet	programming	#0886a5	Janet
+interpreter	janet	Janet	programming	#0886a5	Janet
+lang	Janet	Janet	programming	#0886a5	Janet
+ext	.j	Jasmin	programming	#d03600	Jasmin
+lang	Jasmin	Jasmin	programming	#d03600	Jasmin
+ext	.java	Java	programming	#b07219	Java
+ext	.jav	Java	programming	#b07219	Java
+ext	.jsh	Java	programming	#b07219	Java
+lang	Java	Java	programming	#b07219	Java
+ext	.properties	Java Properties	data	#2A6277	Java Properties
+lang	Java Properties	Java Properties	data	#2A6277	Java Properties
+ext	.jsp	Java Server Pages	programming	#2A6277	Java
+ext	.tag	Java Server Pages	programming	#2A6277	Java
+lang	Java Server Pages	Java Server Pages	programming	#2A6277	Java
+ext	.jte	Java Template Engine	programming	#2A6277	Java
+lang	Java Template Engine	Java Template Engine	programming	#2A6277	Java
+ext	.js	JavaScript	programming	#f1e05a	JavaScript
+ext	._js	JavaScript	programming	#f1e05a	JavaScript
+ext	.bones	JavaScript	programming	#f1e05a	JavaScript
+ext	.cjs	JavaScript	programming	#f1e05a	JavaScript
+ext	.es	JavaScript	programming	#f1e05a	JavaScript
+ext	.es6	JavaScript	programming	#f1e05a	JavaScript
+ext	.frag	JavaScript	programming	#f1e05a	JavaScript
+ext	.gs	JavaScript	programming	#f1e05a	JavaScript
+ext	.jake	JavaScript	programming	#f1e05a	JavaScript
+ext	.javascript	JavaScript	programming	#f1e05a	JavaScript
+ext	.jsb	JavaScript	programming	#f1e05a	JavaScript
+ext	.jscad	JavaScript	programming	#f1e05a	JavaScript
+ext	.jsfl	JavaScript	programming	#f1e05a	JavaScript
+ext	.jslib	JavaScript	programming	#f1e05a	JavaScript
+ext	.jsm	JavaScript	programming	#f1e05a	JavaScript
+ext	.jspre	JavaScript	programming	#f1e05a	JavaScript
+ext	.jss	JavaScript	programming	#f1e05a	JavaScript
+ext	.jsx	JavaScript	programming	#f1e05a	JavaScript
+ext	.mjs	JavaScript	programming	#f1e05a	JavaScript
+ext	.njs	JavaScript	programming	#f1e05a	JavaScript
+ext	.pac	JavaScript	programming	#f1e05a	JavaScript
+ext	.sjs	JavaScript	programming	#f1e05a	JavaScript
+ext	.ssjs	JavaScript	programming	#f1e05a	JavaScript
+ext	.xsjs	JavaScript	programming	#f1e05a	JavaScript
+ext	.xsjslib	JavaScript	programming	#f1e05a	JavaScript
+filename	Jakefile	JavaScript	programming	#f1e05a	JavaScript
+interpreter	bun	JavaScript	programming	#f1e05a	JavaScript
+interpreter	chakra	JavaScript	programming	#f1e05a	JavaScript
+interpreter	d8	JavaScript	programming	#f1e05a	JavaScript
+interpreter	deno	JavaScript	programming	#f1e05a	JavaScript
+interpreter	gjs	JavaScript	programming	#f1e05a	JavaScript
+interpreter	js	JavaScript	programming	#f1e05a	JavaScript
+interpreter	node	JavaScript	programming	#f1e05a	JavaScript
+interpreter	nodejs	JavaScript	programming	#f1e05a	JavaScript
+interpreter	qjs	JavaScript	programming	#f1e05a	JavaScript
+interpreter	rhino	JavaScript	programming	#f1e05a	JavaScript
+interpreter	v8	JavaScript	programming	#f1e05a	JavaScript
+interpreter	v8-shell	JavaScript	programming	#f1e05a	JavaScript
+lang	JavaScript	JavaScript	programming	#f1e05a	JavaScript
+ext	.js.erb	JavaScript+ERB	programming	#f1e05a	JavaScript
+lang	JavaScript+ERB	JavaScript+ERB	programming	#f1e05a	JavaScript
+ext	.snap	Jest Snapshot	data	#15c213	Jest Snapshot
+lang	Jest Snapshot	Jest Snapshot	data	#15c213	Jest Snapshot
+ext	.mps	JetBrains MPS	programming	#21D789	JetBrains MPS
+ext	.mpl	JetBrains MPS	programming	#21D789	JetBrains MPS
+ext	.msd	JetBrains MPS	programming	#21D789	JetBrains MPS
+lang	JetBrains MPS	JetBrains MPS	programming	#21D789	JetBrains MPS
+ext	.jinja	Jinja	markup	#a52a22	Jinja
+ext	.j2	Jinja	markup	#a52a22	Jinja
+ext	.jinja2	Jinja	markup	#a52a22	Jinja
+lang	Jinja	Jinja	markup	#a52a22	Jinja
+ext	.jison	Jison	programming	#56b3cb	Yacc
+lang	Jison	Jison	programming	#56b3cb	Yacc
+ext	.jisonlex	Jison Lex	programming	#56b3cb	Lex
+lang	Jison Lex	Jison Lex	programming	#56b3cb	Lex
+ext	.ol	Jolie	programming		Jolie
+ext	.iol	Jolie	programming		Jolie
+interpreter	jolie	Jolie	programming		Jolie
+lang	Jolie	Jolie	programming	#843179	Jolie
+ext	.jsonnet	Jsonnet	programming	#0064bd	Jsonnet
+ext	.libsonnet	Jsonnet	programming	#0064bd	Jsonnet
+lang	Jsonnet	Jsonnet	programming	#0064bd	Jsonnet
+ext	.jl	Julia	programming		Julia
+interpreter	julia	Julia	programming		Julia
+lang	Julia	Julia	programming	#a270ba	Julia
+lang	Julia REPL	Julia REPL	programming	#a270ba	Julia
+ext	.ipynb	Jupyter Notebook	markup	#DA5B0B	Jupyter Notebook
+filename	Notebook	Jupyter Notebook	markup	#DA5B0B	Jupyter Notebook
+lang	Jupyter Notebook	Jupyter Notebook	markup	#DA5B0B	Jupyter Notebook
+filename	.JUSTFILE	Just	programming	#384d54	Just
+filename	.Justfile	Just	programming	#384d54	Just
+filename	.justfile	Just	programming	#384d54	Just
+filename	JUSTFILE	Just	programming	#384d54	Just
+filename	Justfile	Just	programming	#384d54	Just
+filename	justfile	Just	programming	#384d54	Just
+ext	.just	Just	programming	#384d54	Just
+lang	Just	Just	programming	#384d54	Just
+ext	.k	KCL	programming	#7ABABF	KCL
+filename	kcl.mod	KCL	programming	#7ABABF	KCL
+filename	kcl.mod.lock	KCL	programming	#7ABABF	KCL
+lang	KCL	KCL	programming	#7ABABF	KCL
+ext	.kdl	KDL	data	#ffb3b3	KDL
+lang	KDL	KDL	data	#ffb3b3	KDL
+ext	.k	KFramework	programming	#4195c5	KFramework
+lang	KFramework	KFramework	programming	#4195c5	KFramework
+ext	.krl	KRL	programming	#28430A	KRL
+lang	KRL	KRL	programming	#28430A	KRL
+ext	.ksy	Kaitai Struct	programming	#773b37	Kaitai Struct
+lang	Kaitai Struct	Kaitai Struct	programming	#773b37	Kaitai Struct
+ext	.kak	KakouneScript	programming	#6f8042	KakouneScript
+filename	kakrc	KakouneScript	programming	#6f8042	KakouneScript
+lang	KakouneScript	KakouneScript	programming	#6f8042	KakouneScript
+ext	.ks	KerboScript	programming		KerboScript
+lang	KerboScript	KerboScript	programming	#41adf0	KerboScript
+ext	.kicad_pcb	KiCad Layout	data	#2f4aab	KiCad Layout
+ext	.kicad_mod	KiCad Layout	data	#2f4aab	KiCad Layout
+ext	.kicad_wks	KiCad Layout	data	#2f4aab	KiCad Layout
+filename	fp-lib-table	KiCad Layout	data	#2f4aab	KiCad Layout
+lang	KiCad Layout	KiCad Layout	data	#2f4aab	KiCad Layout
+ext	.brd	KiCad Legacy Layout	data	#2f4aab	KiCad Legacy Layout
+lang	KiCad Legacy Layout	KiCad Legacy Layout	data	#2f4aab	KiCad Legacy Layout
+ext	.kicad_sch	KiCad Schematic	data	#2f4aab	KiCad Schematic
+ext	.kicad_sym	KiCad Schematic	data	#2f4aab	KiCad Schematic
+ext	.sch	KiCad Schematic	data	#2f4aab	KiCad Schematic
+lang	KiCad Schematic	KiCad Schematic	data	#2f4aab	KiCad Schematic
+ext	.ks	Kickstart	data		Kickstart
+lang	Kickstart	Kickstart	data		Kickstart
+ext	.kit	Kit	markup		Kit
+lang	Kit	Kit	markup		Kit
+ext	.ash	KoLmafia ASH	programming	#B9D9B9	KoLmafia ASH
+lang	KoLmafia ASH	KoLmafia ASH	programming	#B9D9B9	KoLmafia ASH
+ext	.kk	Koka	programming		Koka
+interpreter	koka	Koka	programming		Koka
+lang	Koka	Koka	programming	#215166	Koka
+ext	.kt	Kotlin	programming	#A97BFF	Kotlin
+ext	.ktm	Kotlin	programming	#A97BFF	Kotlin
+ext	.kts	Kotlin	programming	#A97BFF	Kotlin
+lang	Kotlin	Kotlin	programming	#A97BFF	Kotlin
+ext	.csl	Kusto	data		Kusto
+ext	.kql	Kusto	data		Kusto
+lang	Kusto	Kusto	data		Kusto
+ext	.lfe	LFE	programming	#4C3023	LFE
+lang	LFE	LFE	programming	#4C3023	LFE
+ext	.ll	LLVM	programming		LLVM
+lang	LLVM	LLVM	programming	#185619	LLVM
+ext	.lol	LOLCODE	programming		LOLCODE
+lang	LOLCODE	LOLCODE	programming	#cc9900	LOLCODE
+ext	.lsl	LSL	programming		LSL
+ext	.lslp	LSL	programming		LSL
+interpreter	lsl	LSL	programming		LSL
+lang	LSL	LSL	programming	#3d9970	LSL
+ext	.asy	LTspice Symbol	data		LTspice Symbol
+lang	LTspice Symbol	LTspice Symbol	data		LTspice Symbol
+ext	.lvproj	LabVIEW	programming	#fede06	LabVIEW
+ext	.lvclass	LabVIEW	programming	#fede06	LabVIEW
+ext	.lvlib	LabVIEW	programming	#fede06	LabVIEW
+lang	LabVIEW	LabVIEW	programming	#fede06	LabVIEW
+ext	.lp	Lambdapi	programming	#8027a3	Lambdapi
+lang	Lambdapi	Lambdapi	programming	#8027a3	Lambdapi
+ext	.langium	Langium	programming	#2c8c87	Langium
+lang	Langium	Langium	programming	#2c8c87	Langium
+ext	.lark	Lark	data	#2980B9	Lark
+lang	Lark	Lark	data	#2980B9	Lark
+ext	.lasso	Lasso	programming	#999999	Lasso
+ext	.las	Lasso	programming	#999999	Lasso
+ext	.lasso8	Lasso	programming	#999999	Lasso
+ext	.lasso9	Lasso	programming	#999999	Lasso
+lang	Lasso	Lasso	programming	#999999	Lasso
+ext	.latte	Latte	markup	#f2a542	Latte
+lang	Latte	Latte	markup	#f2a542	Latte
+ext	.lean	Lean	programming		Lean
+ext	.hlean	Lean	programming		Lean
+lang	Lean	Lean	programming		Lean
+ext	.lean	Lean 4	programming		Lean
+lang	Lean 4	Lean 4	programming		Lean
+ext	.leo	Leo	programming	#C4FFC2	Leo
+lang	Leo	Leo	programming	#C4FFC2	Leo
+ext	.less	Less	markup	#1d365d	Less
+lang	Less	Less	markup	#1d365d	Less
+ext	.l	Lex	programming	#DBCA00	Lex
+ext	.lex	Lex	programming	#DBCA00	Lex
+filename	Lexer.x	Lex	programming	#DBCA00	Lex
+filename	lexer.x	Lex	programming	#DBCA00	Lex
+lang	Lex	Lex	programming	#DBCA00	Lex
+ext	.ligo	LigoLANG	programming	#0e74ff	LigoLANG
+lang	LigoLANG	LigoLANG	programming	#0e74ff	LigoLANG
+ext	.ly	LilyPond	programming	#9ccc7c	LilyPond
+ext	.ily	LilyPond	programming	#9ccc7c	LilyPond
+lang	LilyPond	LilyPond	programming	#9ccc7c	LilyPond
+ext	.b	Limbo	programming		Limbo
+ext	.m	Limbo	programming		Limbo
+lang	Limbo	Limbo	programming		Limbo
+ext	.lp	Linear Programming	programming		Linear Programming
+lang	Linear Programming	Linear Programming	programming		Linear Programming
+ext	.ld	Linker Script	programming		Linker Script
+ext	.lds	Linker Script	programming		Linker Script
+ext	.x	Linker Script	programming		Linker Script
+filename	ld.script	Linker Script	programming		Linker Script
+lang	Linker Script	Linker Script	programming		Linker Script
+ext	.mod	Linux Kernel Module	data		Linux Kernel Module
+lang	Linux Kernel Module	Linux Kernel Module	data		Linux Kernel Module
+ext	.liquid	Liquid	markup	#67b8de	Liquid
+lang	Liquid	Liquid	markup	#67b8de	Liquid
+ext	.liq	Liquidsoap	programming	#990066	Liquidsoap
+lang	Liquidsoap	Liquidsoap	programming	#990066	Liquidsoap
+ext	.lagda	Literate Agda	programming	#315665	Agda
+lang	Literate Agda	Literate Agda	programming	#315665	Agda
+ext	.litcoffee	Literate CoffeeScript	programming	#244776	CoffeeScript
+ext	.coffee.md	Literate CoffeeScript	programming	#244776	CoffeeScript
+lang	Literate CoffeeScript	Literate CoffeeScript	programming	#244776	CoffeeScript
+ext	.lhs	Literate Haskell	programming	#5e5086	Haskell
+lang	Literate Haskell	Literate Haskell	programming	#5e5086	Haskell
+ext	.livecodescript	LiveCode Script	programming	#0c5ba5	LiveCode Script
+lang	LiveCode Script	LiveCode Script	programming	#0c5ba5	LiveCode Script
+ext	.ls	LiveScript	programming	#499886	LiveScript
+ext	._ls	LiveScript	programming	#499886	LiveScript
+filename	Slakefile	LiveScript	programming	#499886	LiveScript
+lang	LiveScript	LiveScript	programming	#499886	LiveScript
+ext	.lobster	Lobster	programming	#f95428	Lobster
+lang	Lobster	Lobster	programming	#f95428	Lobster
+ext	.xm	Logos	programming		Logos
+ext	.x	Logos	programming		Logos
+ext	.xi	Logos	programming		Logos
+lang	Logos	Logos	programming		Logos
+ext	.lgt	Logtalk	programming	#295b9a	Logtalk
+ext	.logtalk	Logtalk	programming	#295b9a	Logtalk
+lang	Logtalk	Logtalk	programming	#295b9a	Logtalk
+ext	.lkml	LookML	programming	#652B81	LookML
+ext	.lookml	LookML	programming	#652B81	LookML
+lang	LookML	LookML	programming	#652B81	LookML
+ext	.ls	LoomScript	programming		LoomScript
+lang	LoomScript	LoomScript	programming		LoomScript
+ext	.lua	Lua	programming	#000080	Lua
+ext	.fcgi	Lua	programming	#000080	Lua
+ext	.nse	Lua	programming	#000080	Lua
+ext	.p8	Lua	programming	#000080	Lua
+ext	.pd_lua	Lua	programming	#000080	Lua
+ext	.rbxs	Lua	programming	#000080	Lua
+ext	.rockspec	Lua	programming	#000080	Lua
+ext	.wlua	Lua	programming	#000080	Lua
+filename	.luacheckrc	Lua	programming	#000080	Lua
+interpreter	lua	Lua	programming	#000080	Lua
+interpreter	luajit	Lua	programming	#000080	Lua
+lang	Lua	Lua	programming	#000080	Lua
+ext	.luau	Luau	programming	#00A2FF	Luau
+interpreter	luau	Luau	programming	#00A2FF	Luau
+lang	Luau	Luau	programming	#00A2FF	Luau
+ext	.mumps	M	programming		M
+ext	.m	M	programming		M
+lang	M	M	programming		M
+ext	.m3u	M3U	data		M3U
+ext	.m3u8	M3U	data		M3U
+lang	M3U	M3U	data	#179C7D	M3U
+ext	.m4	M4	programming		M4
+ext	.mc	M4	programming		M4
+lang	M4	M4	programming		M4
+ext	.m4	M4Sugar	programming		M4
+filename	configure.ac	M4Sugar	programming		M4
+lang	M4Sugar	M4Sugar	programming		M4
+ext	.matlab	MATLAB	programming	#e16737	MATLAB
+ext	.m	MATLAB	programming	#e16737	MATLAB
+lang	MATLAB	MATLAB	programming	#e16737	MATLAB
+ext	.ms	MAXScript	programming	#00a6a6	MAXScript
+ext	.mcr	MAXScript	programming	#00a6a6	MAXScript
+lang	MAXScript	MAXScript	programming	#00a6a6	MAXScript
+ext	.mdx	MDX	markup	#fcb32c	MDX
+lang	MDX	MDX	markup	#fcb32c	MDX
+ext	.mlir	MLIR	programming	#5EC8DB	MLIR
+lang	MLIR	MLIR	programming	#5EC8DB	MLIR
+ext	.mq4	MQL4	programming	#62A8D6	MQL4
+ext	.mqh	MQL4	programming	#62A8D6	MQL4
+lang	MQL4	MQL4	programming	#62A8D6	MQL4
+ext	.mq5	MQL5	programming	#4A76B8	MQL5
+ext	.mqh	MQL5	programming	#4A76B8	MQL5
+lang	MQL5	MQL5	programming	#4A76B8	MQL5
+ext	.mtml	MTML	markup	#b7e1f4	MTML
+lang	MTML	MTML	markup	#b7e1f4	MTML
+ext	.muf	MUF	programming		Forth
+ext	.m	MUF	programming		Forth
+lang	MUF	MUF	programming		Forth
+ext	.m2	Macaulay2	programming		Macaulay2
+interpreter	M2	Macaulay2	programming		Macaulay2
+lang	Macaulay2	Macaulay2	programming	#d8ffff	Macaulay2
+ext	.mak	Makefile	programming	#427819	Makefile
+ext	.d	Makefile	programming	#427819	Makefile
+ext	.make	Makefile	programming	#427819	Makefile
+ext	.makefile	Makefile	programming	#427819	Makefile
+ext	.mk	Makefile	programming	#427819	Makefile
+ext	.mkfile	Makefile	programming	#427819	Makefile
+filename	BSDmakefile	Makefile	programming	#427819	Makefile
+filename	GNUmakefile	Makefile	programming	#427819	Makefile
+filename	Kbuild	Makefile	programming	#427819	Makefile
+filename	Makefile	Makefile	programming	#427819	Makefile
+filename	Makefile.am	Makefile	programming	#427819	Makefile
+filename	Makefile.boot	Makefile	programming	#427819	Makefile
+filename	Makefile.frag	Makefile	programming	#427819	Makefile
+filename	Makefile.in	Makefile	programming	#427819	Makefile
+filename	Makefile.inc	Makefile	programming	#427819	Makefile
+filename	Makefile.pc	Makefile	programming	#427819	Makefile
+filename	Makefile.wat	Makefile	programming	#427819	Makefile
+filename	makefile	Makefile	programming	#427819	Makefile
+filename	makefile.sco	Makefile	programming	#427819	Makefile
+filename	mkfile	Makefile	programming	#427819	Makefile
+interpreter	make	Makefile	programming	#427819	Makefile
+lang	Makefile	Makefile	programming	#427819	Makefile
+ext	.mako	Mako	programming	#7e858d	Mako
+ext	.mao	Mako	programming	#7e858d	Mako
+lang	Mako	Mako	programming	#7e858d	Mako
+ext	.md	Markdown	prose	#083fa1	Markdown
+ext	.livemd	Markdown	prose	#083fa1	Markdown
+ext	.markdown	Markdown	prose	#083fa1	Markdown
+ext	.mdown	Markdown	prose	#083fa1	Markdown
+ext	.mdwn	Markdown	prose	#083fa1	Markdown
+ext	.mkd	Markdown	prose	#083fa1	Markdown
+ext	.mkdn	Markdown	prose	#083fa1	Markdown
+ext	.mkdown	Markdown	prose	#083fa1	Markdown
+ext	.ronn	Markdown	prose	#083fa1	Markdown
+ext	.scd	Markdown	prose	#083fa1	Markdown
+ext	.workbook	Markdown	prose	#083fa1	Markdown
+filename	contents.lr	Markdown	prose	#083fa1	Markdown
+lang	Markdown	Markdown	prose	#083fa1	Markdown
+ext	.marko	Marko	markup	#42bff2	Marko
+lang	Marko	Marko	markup	#42bff2	Marko
+ext	.mask	Mask	markup	#f97732	Mask
+lang	Mask	Mask	markup	#f97732	Mask
+ext	.mps	Mathematical Programming System	programming	#0530ad	Mathematical Programming System
+lang	Mathematical Programming System	Mathematical Programming System	programming	#0530ad	Mathematical Programming System
+filename	pom.xml	Maven POM	data		XML
+lang	Maven POM	Maven POM	data		XML
+ext	.maxpat	Max	programming	#c4a79c	Max
+ext	.maxhelp	Max	programming	#c4a79c	Max
+ext	.maxproj	Max	programming	#c4a79c	Max
+ext	.mxt	Max	programming	#c4a79c	Max
+ext	.pat	Max	programming	#c4a79c	Max
+lang	Max	Max	programming	#c4a79c	Max
+ext	.metta	MeTTa	programming	#6a5acd	MeTTa
+lang	MeTTa	MeTTa	programming	#6a5acd	MeTTa
+interpreter	mmi	Mercury	programming	#ff2b2b	Mercury
+ext	.m	Mercury	programming	#ff2b2b	Mercury
+ext	.moo	Mercury	programming	#ff2b2b	Mercury
+lang	Mercury	Mercury	programming	#ff2b2b	Mercury
+ext	.mmd	Mermaid	markup	#ff3670	Mermaid
+ext	.mermaid	Mermaid	markup	#ff3670	Mermaid
+lang	Mermaid	Mermaid	markup	#ff3670	Mermaid
+filename	meson.build	Meson	programming	#007800	Meson
+filename	meson_options.txt	Meson	programming	#007800	Meson
+lang	Meson	Meson	programming	#007800	Meson
+ext	.metal	Metal	programming	#8f14e9	Metal
+lang	Metal	Metal	programming	#8f14e9	Metal
+ext	.dsp	Microsoft Developer Studio Project	data		Microsoft Developer Studio Project
+lang	Microsoft Developer Studio Project	Microsoft Developer Studio Project	data		Microsoft Developer Studio Project
+ext	.sln	Microsoft Visual Studio Solution	data		Microsoft Visual Studio Solution
+lang	Microsoft Visual Studio Solution	Microsoft Visual Studio Solution	data		Microsoft Visual Studio Solution
+ext	.minid	MiniD	programming		MiniD
+lang	MiniD	MiniD	programming		MiniD
+ext	.ms	MiniScript	programming	#4B4A56	MiniScript
+lang	MiniScript	MiniScript	programming	#4B4A56	MiniScript
+ext	.yaml	MiniYAML	data	#ff1111	MiniYAML
+ext	.yml	MiniYAML	data	#ff1111	MiniYAML
+lang	MiniYAML	MiniYAML	data	#ff1111	MiniYAML
+ext	.mzn	MiniZinc	programming	#06a9e6	MiniZinc
+lang	MiniZinc	MiniZinc	programming	#06a9e6	MiniZinc
+ext	.dzn	MiniZinc Data	data		MiniZinc Data
+lang	MiniZinc Data	MiniZinc Data	data		MiniZinc Data
+ext	.mint	Mint	programming		Mint
+lang	Mint	Mint	programming	#02b046	Mint
+ext	.druby	Mirah	programming	#c7a938	Mirah
+ext	.duby	Mirah	programming	#c7a938	Mirah
+ext	.mirah	Mirah	programming	#c7a938	Mirah
+lang	Mirah	Mirah	programming	#c7a938	Mirah
+ext	.mo	Modelica	programming	#de1d31	Modelica
+lang	Modelica	Modelica	programming	#de1d31	Modelica
+ext	.mod	Modula-2	programming	#10253f	Modula-2
+lang	Modula-2	Modula-2	programming	#10253f	Modula-2
+ext	.i3	Modula-3	programming		Modula-3
+ext	.ig	Modula-3	programming		Modula-3
+ext	.m3	Modula-3	programming		Modula-3
+ext	.mg	Modula-3	programming		Modula-3
+lang	Modula-3	Modula-3	programming	#223388	Modula-3
+ext	.mms	Module Management System	programming		Module Management System
+ext	.mmk	Module Management System	programming		Module Management System
+filename	descrip.mmk	Module Management System	programming		Module Management System
+filename	descrip.mms	Module Management System	programming		Module Management System
+lang	Module Management System	Module Management System	programming		Module Management System
+ext	.mojo	Mojo	programming	#ff4c1f	Mojo
+lang	Mojo	Mojo	programming	#ff4c1f	Mojo
+ext	.monkey	Monkey	programming		Monkey
+ext	.monkey2	Monkey	programming		Monkey
+lang	Monkey	Monkey	programming		Monkey
+ext	.mc	Monkey C	programming	#8D6747	Monkey C
+lang	Monkey C	Monkey C	programming	#8D6747	Monkey C
+ext	.moo	Moocode	programming		Moocode
+lang	Moocode	Moocode	programming		Moocode
+ext	.mbt	MoonBit	programming	#b92381	MoonBit
+lang	MoonBit	MoonBit	programming	#b92381	MoonBit
+ext	.moon	MoonScript	programming	#ff4585	MoonScript
+interpreter	moon	MoonScript	programming	#ff4585	MoonScript
+lang	MoonScript	MoonScript	programming	#ff4585	MoonScript
+ext	.mo	Motoko	programming	#fbb03b	Motoko
+lang	Motoko	Motoko	programming	#fbb03b	Motoko
+ext	.asm	Motorola 68K Assembly	programming	#005daa	Assembly
+ext	.i	Motorola 68K Assembly	programming	#005daa	Assembly
+ext	.inc	Motorola 68K Assembly	programming	#005daa	Assembly
+ext	.s	Motorola 68K Assembly	programming	#005daa	Assembly
+ext	.x68	Motorola 68K Assembly	programming	#005daa	Assembly
+lang	Motorola 68K Assembly	Motorola 68K Assembly	programming	#005daa	Assembly
+ext	.move	Move	programming	#4a137a	Move
+lang	Move	Move	programming	#4a137a	Move
+ext	.muse	Muse	prose		Muse
+lang	Muse	Muse	prose		Muse
+ext	.mustache	Mustache	markup	#724b3b	Mustache
+lang	Mustache	Mustache	markup	#724b3b	Mustache
+ext	.myt	Myghty	programming		Myghty
+lang	Myghty	Myghty	programming		Myghty
+ext	.nasl	NASL	programming		NASL
+ext	.inc	NASL	programming		NASL
+lang	NASL	NASL	programming		NASL
+ext	.ncl	NCL	programming	#28431f	NCL
+lang	NCL	NCL	programming	#28431f	NCL
+ext	.neon	NEON	data		NEON
+lang	NEON	NEON	data		NEON
+ext	.nl	NL	data		NL
+lang	NL	NL	data		NL
+ext	.mod	NMODL	programming	#00356B	NMODL
+lang	NMODL	NMODL	programming	#00356B	NMODL
+filename	.npmrc	NPM Config	data	#cb3837	INI
+lang	NPM Config	NPM Config	data	#cb3837	INI
+ext	.nsi	NSIS	programming		NSIS
+ext	.nsh	NSIS	programming		NSIS
+lang	NSIS	NSIS	programming		NSIS
+ext	.nss	NWScript	programming	#111522	NWScript
+lang	NWScript	NWScript	programming	#111522	NWScript
+ext	.nas	Nasal	programming	#1d2c4e	Nasal
+lang	Nasal	Nasal	programming	#1d2c4e	Nasal
+ext	.ne	Nearley	programming	#990000	Nearley
+ext	.nearley	Nearley	programming	#990000	Nearley
+lang	Nearley	Nearley	programming	#990000	Nearley
+ext	.n	Nemerle	programming	#3d3c6e	Nemerle
+lang	Nemerle	Nemerle	programming	#3d3c6e	Nemerle
+ext	.axs	NetLinx	programming	#0aa0ff	NetLinx
+ext	.axi	NetLinx	programming	#0aa0ff	NetLinx
+lang	NetLinx	NetLinx	programming	#0aa0ff	NetLinx
+ext	.axs.erb	NetLinx+ERB	programming	#747faa	NetLinx+ERB
+ext	.axi.erb	NetLinx+ERB	programming	#747faa	NetLinx+ERB
+lang	NetLinx+ERB	NetLinx+ERB	programming	#747faa	NetLinx+ERB
+ext	.nlogo	NetLogo	programming	#ff6375	NetLogo
+lang	NetLogo	NetLogo	programming	#ff6375	NetLogo
+ext	.nl	NewLisp	programming	#87AED7	NewLisp
+ext	.lisp	NewLisp	programming	#87AED7	NewLisp
+ext	.lsp	NewLisp	programming	#87AED7	NewLisp
+interpreter	newlisp	NewLisp	programming	#87AED7	NewLisp
+lang	NewLisp	NewLisp	programming	#87AED7	NewLisp
+ext	.nf	Nextflow	programming	#3ac486	Nextflow
+filename	nextflow.config	Nextflow	programming	#3ac486	Nextflow
+interpreter	nextflow	Nextflow	programming	#3ac486	Nextflow
+lang	Nextflow	Nextflow	programming	#3ac486	Nextflow
+ext	.nginx	Nginx	data	#009639	Nginx
+ext	.nginxconf	Nginx	data	#009639	Nginx
+ext	.vhost	Nginx	data	#009639	Nginx
+filename	nginx.conf	Nginx	data	#009639	Nginx
+lang	Nginx	Nginx	data	#009639	Nginx
+ext	.ncl	Nickel	programming	#E0C3FC	Nickel
+lang	Nickel	Nickel	programming	#E0C3FC	Nickel
+ext	.nim	Nim	programming	#ffc200	Nim
+ext	.nim.cfg	Nim	programming	#ffc200	Nim
+ext	.nimble	Nim	programming	#ffc200	Nim
+ext	.nimrod	Nim	programming	#ffc200	Nim
+ext	.nims	Nim	programming	#ffc200	Nim
+filename	nim.cfg	Nim	programming	#ffc200	Nim
+lang	Nim	Nim	programming	#ffc200	Nim
+ext	.ninja	Ninja	data		Ninja
+lang	Ninja	Ninja	data		Ninja
+ext	.nit	Nit	programming	#009917	Nit
+lang	Nit	Nit	programming	#009917	Nit
+ext	.nix	Nix	programming	#7e7eff	Nix
+lang	Nix	Nix	programming	#7e7eff	Nix
+ext	.nr	Noir	programming		Noir
+lang	Noir	Noir	programming	#2f1f49	Noir
+ext	.nu	Nu	programming	#c9df40	Nu
+filename	Nukefile	Nu	programming	#c9df40	Nu
+interpreter	nush	Nu	programming	#c9df40	Nu
+lang	Nu	Nu	programming	#c9df40	Nu
+ext	.numpy	NumPy	programming	#9C8AF9	Python
+ext	.numpyw	NumPy	programming	#9C8AF9	Python
+ext	.numsc	NumPy	programming	#9C8AF9	Python
+lang	NumPy	NumPy	programming	#9C8AF9	Python
+ext	.njk	Nunjucks	markup	#3d8137	Nunjucks
+lang	Nunjucks	Nunjucks	markup	#3d8137	Nunjucks
+ext	.nu	Nushell	programming	#4E9906	Nushell
+interpreter	nu	Nushell	programming	#4E9906	Nushell
+lang	Nushell	Nushell	programming	#4E9906	Nushell
+ext	.json	OASv2-json	data	#85ea2d	OASv2-json
+lang	OASv2-json	OASv2-json	data	#85ea2d	OpenAPI Specification v2
+ext	.yaml	OASv2-yaml	data	#85ea2d	OASv2-yaml
+ext	.yml	OASv2-yaml	data	#85ea2d	OASv2-yaml
+lang	OASv2-yaml	OASv2-yaml	data	#85ea2d	OpenAPI Specification v2
+ext	.json	OASv3-json	data	#85ea2d	OASv3-json
+lang	OASv3-json	OASv3-json	data	#85ea2d	OpenAPI Specification v3
+ext	.yaml	OASv3-yaml	data	#85ea2d	OASv3-yaml
+ext	.yml	OASv3-yaml	data	#85ea2d	OASv3-yaml
+lang	OASv3-yaml	OASv3-yaml	data	#85ea2d	OpenAPI Specification v3
+ext	.ml	OCaml	programming	#ef7a08	OCaml
+ext	.eliom	OCaml	programming	#ef7a08	OCaml
+ext	.eliomi	OCaml	programming	#ef7a08	OCaml
+ext	.ml4	OCaml	programming	#ef7a08	OCaml
+ext	.mli	OCaml	programming	#ef7a08	OCaml
+ext	.mll	OCaml	programming	#ef7a08	OCaml
+ext	.mly	OCaml	programming	#ef7a08	OCaml
+interpreter	ocaml	OCaml	programming	#ef7a08	OCaml
+interpreter	ocamlrun	OCaml	programming	#ef7a08	OCaml
+interpreter	ocamlscript	OCaml	programming	#ef7a08	OCaml
+lang	OCaml	OCaml	programming	#ef7a08	OCaml
+ext	.msg	OMNeT++ MSG	programming		OMNeT++ MSG
+lang	OMNeT++ MSG	OMNeT++ MSG	programming	#a0e0a0	OMNeT++ MSG
+ext	.ned	OMNeT++ NED	programming		OMNeT++ NED
+lang	OMNeT++ NED	OMNeT++ NED	programming	#08607c	OMNeT++ NED
+ext	.ob2	Oberon	programming		Oberon
+lang	Oberon	Oberon	programming		Oberon
+ext	.objdump	ObjDump	data		ObjDump
+lang	ObjDump	ObjDump	data		ObjDump
+ext	.odin	Object Data Instance Notation	data		Object Data Instance Notation
+lang	Object Data Instance Notation	Object Data Instance Notation	data		Object Data Instance Notation
+ext	.cls	ObjectScript	programming		ObjectScript
+lang	ObjectScript	ObjectScript	programming	#424893	ObjectScript
+ext	.m	Objective-C	programming	#438eff	Objective-C
+ext	.h	Objective-C	programming	#438eff	Objective-C
+lang	Objective-C	Objective-C	programming	#438eff	Objective-C
+ext	.mm	Objective-C++	programming	#6866fb	Objective-C++
+lang	Objective-C++	Objective-C++	programming	#6866fb	Objective-C++
+ext	.j	Objective-J	programming	#ff0c5a	Objective-J
+ext	.sj	Objective-J	programming	#ff0c5a	Objective-J
+lang	Objective-J	Objective-J	programming	#ff0c5a	Objective-J
+ext	.odin	Odin	programming	#60AFFE	Odin
+lang	Odin	Odin	programming	#60AFFE	Odin
+ext	.omgrofl	Omgrofl	programming		Omgrofl
+lang	Omgrofl	Omgrofl	programming	#cabbff	Omgrofl
+ext	.opa	Opa	programming		Opa
+lang	Opa	Opa	programming		Opa
+ext	.opal	Opal	programming	#f7ede0	Opal
+lang	Opal	Opal	programming	#f7ede0	Opal
+ext	.rego	Open Policy Agent	programming	#7d9199	Open Policy Agent
+lang	Open Policy Agent	Open Policy Agent	programming	#7d9199	Open Policy Agent
+lang	OpenAPI Specification v2	OpenAPI Specification v2	data	#85ea2d	OpenAPI Specification v2
+lang	OpenAPI Specification v3	OpenAPI Specification v3	data	#85ea2d	OpenAPI Specification v3
+ext	.cl	OpenCL	programming	#ed2e2d	C
+ext	.opencl	OpenCL	programming	#ed2e2d	C
+lang	OpenCL	OpenCL	programming	#ed2e2d	C
+ext	.p	OpenEdge ABL	programming	#5ce600	OpenEdge ABL
+ext	.cls	OpenEdge ABL	programming	#5ce600	OpenEdge ABL
+ext	.w	OpenEdge ABL	programming	#5ce600	OpenEdge ABL
+lang	OpenEdge ABL	OpenEdge ABL	programming	#5ce600	OpenEdge ABL
+ext	.qasm	OpenQASM	programming		OpenQASM
+lang	OpenQASM	OpenQASM	programming	#AA70FF	OpenQASM
+interpreter	openrc-run	OpenRC runscript	programming		Shell
+lang	OpenRC runscript	OpenRC runscript	programming		Shell
+ext	.scad	OpenSCAD	programming	#e5cd45	OpenSCAD
+lang	OpenSCAD	OpenSCAD	programming	#e5cd45	OpenSCAD
+ext	.plist	OpenStep Property List	data		OpenStep Property List
+ext	.glyphs	OpenStep Property List	data		OpenStep Property List
+lang	OpenStep Property List	OpenStep Property List	data		OpenStep Property List
+ext	.fea	OpenType Feature File	data		OpenType Feature File
+lang	OpenType Feature File	OpenType Feature File	data		OpenType Feature File
+filename	.ackrc	Option List	data	#476732	Option List
+filename	.rspec	Option List	data	#476732	Option List
+filename	.yardopts	Option List	data	#476732	Option List
+filename	ackrc	Option List	data	#476732	Option List
+filename	mocha.opts	Option List	data	#476732	Option List
+lang	Option List	Option List	data	#476732	Option List
+ext	.org	Org	prose	#77aa99	Org
+lang	Org	Org	prose	#77aa99	Org
+ext	.opy	OverPy	programming	#78b355	OverPy
+lang	OverPy	OverPy	programming	#78b355	OverPy
+ext	.overpassql	OverpassQL	programming	#cce2aa	OverpassQL
+lang	OverpassQL	OverpassQL	programming	#cce2aa	OverpassQL
+ext	.ox	Ox	programming		Ox
+ext	.oxh	Ox	programming		Ox
+ext	.oxo	Ox	programming		Ox
+lang	Ox	Ox	programming		Ox
+ext	.oxygene	Oxygene	programming	#cdd0e3	Oxygene
+lang	Oxygene	Oxygene	programming	#cdd0e3	Oxygene
+ext	.oz	Oz	programming	#fab738	Oz
+lang	Oz	Oz	programming	#fab738	Oz
+ext	.p4	P4	programming	#7055b5	P4
+lang	P4	P4	programming	#7055b5	P4
+ext	.pddl	PDDL	programming	#0d00ff	PDDL
+lang	PDDL	PDDL	programming	#0d00ff	PDDL
+ext	.pegjs	PEG.js	programming	#234d6b	PEG.js
+ext	.peggy	PEG.js	programming	#234d6b	PEG.js
+lang	PEG.js	PEG.js	programming	#234d6b	PEG.js
+ext	.php	PHP	programming	#4F5D95	PHP
+ext	.aw	PHP	programming	#4F5D95	PHP
+ext	.ctp	PHP	programming	#4F5D95	PHP
+ext	.fcgi	PHP	programming	#4F5D95	PHP
+ext	.inc	PHP	programming	#4F5D95	PHP
+ext	.php3	PHP	programming	#4F5D95	PHP
+ext	.php4	PHP	programming	#4F5D95	PHP
+ext	.php5	PHP	programming	#4F5D95	PHP
+ext	.phps	PHP	programming	#4F5D95	PHP
+ext	.phpt	PHP	programming	#4F5D95	PHP
+filename	.php	PHP	programming	#4F5D95	PHP
+filename	.php_cs	PHP	programming	#4F5D95	PHP
+filename	.php_cs.dist	PHP	programming	#4F5D95	PHP
+filename	Phakefile	PHP	programming	#4F5D95	PHP
+interpreter	php	PHP	programming	#4F5D95	PHP
+lang	PHP	PHP	programming	#4F5D95	PHP
+ext	.pls	PLSQL	programming	#dad8d8	PLSQL
+ext	.bdy	PLSQL	programming	#dad8d8	PLSQL
+ext	.ddl	PLSQL	programming	#dad8d8	PLSQL
+ext	.fnc	PLSQL	programming	#dad8d8	PLSQL
+ext	.pck	PLSQL	programming	#dad8d8	PLSQL
+ext	.pkb	PLSQL	programming	#dad8d8	PLSQL
+ext	.pks	PLSQL	programming	#dad8d8	PLSQL
+ext	.plb	PLSQL	programming	#dad8d8	PLSQL
+ext	.plsql	PLSQL	programming	#dad8d8	PLSQL
+ext	.prc	PLSQL	programming	#dad8d8	PLSQL
+ext	.spc	PLSQL	programming	#dad8d8	PLSQL
+ext	.sql	PLSQL	programming	#dad8d8	PLSQL
+ext	.tpb	PLSQL	programming	#dad8d8	PLSQL
+ext	.tps	PLSQL	programming	#dad8d8	PLSQL
+ext	.trg	PLSQL	programming	#dad8d8	PLSQL
+ext	.vw	PLSQL	programming	#dad8d8	PLSQL
+lang	PLSQL	PLSQL	programming	#dad8d8	PLSQL
+ext	.pgsql	PLpgSQL	programming	#336790	PLpgSQL
+ext	.sql	PLpgSQL	programming	#336790	PLpgSQL
+lang	PLpgSQL	PLpgSQL	programming	#336790	PLpgSQL
+ext	.pov	POV-Ray SDL	programming	#6bac65	POV-Ray SDL
+ext	.inc	POV-Ray SDL	programming	#6bac65	POV-Ray SDL
+lang	POV-Ray SDL	POV-Ray SDL	programming	#6bac65	POV-Ray SDL
+ext	.pact	Pact	programming	#F7A8B8	Pact
+lang	Pact	Pact	programming	#F7A8B8	Pact
+ext	.pan	Pan	programming	#cc0000	Pan
+lang	Pan	Pan	programming	#cc0000	Pan
+ext	.psc	Papyrus	programming	#6600cc	Papyrus
+lang	Papyrus	Papyrus	programming	#6600cc	Papyrus
+ext	.parrot	Parrot	programming	#f3ca0a	Parrot
+lang	Parrot	Parrot	programming	#f3ca0a	Parrot
+ext	.pasm	Parrot Assembly	programming		Parrot
+interpreter	parrot	Parrot Assembly	programming		Parrot
+lang	Parrot Assembly	Parrot Assembly	programming		Parrot
+ext	.pir	Parrot Internal Representation	programming		Parrot
+interpreter	parrot	Parrot Internal Representation	programming		Parrot
+lang	Parrot Internal Representation	Parrot Internal Representation	programming		Parrot
+ext	.pas	Pascal	programming	#E3F171	Pascal
+ext	.dfm	Pascal	programming	#E3F171	Pascal
+ext	.dpr	Pascal	programming	#E3F171	Pascal
+ext	.inc	Pascal	programming	#E3F171	Pascal
+ext	.lpr	Pascal	programming	#E3F171	Pascal
+ext	.pascal	Pascal	programming	#E3F171	Pascal
+ext	.pp	Pascal	programming	#E3F171	Pascal
+interpreter	instantfpc	Pascal	programming	#E3F171	Pascal
+lang	Pascal	Pascal	programming	#E3F171	Pascal
+ext	.pwn	Pawn	programming	#dbb284	Pawn
+ext	.inc	Pawn	programming	#dbb284	Pawn
+ext	.sma	Pawn	programming	#dbb284	Pawn
+lang	Pawn	Pawn	programming	#dbb284	Pawn
+ext	.pep	Pep8	programming	#C76F5B	Pep8
+lang	Pep8	Pep8	programming	#C76F5B	Pep8
+ext	.pl	Perl	programming	#0298c3	Perl
+ext	.al	Perl	programming	#0298c3	Perl
+ext	.cgi	Perl	programming	#0298c3	Perl
+ext	.fcgi	Perl	programming	#0298c3	Perl
+ext	.perl	Perl	programming	#0298c3	Perl
+ext	.ph	Perl	programming	#0298c3	Perl
+ext	.plx	Perl	programming	#0298c3	Perl
+ext	.pm	Perl	programming	#0298c3	Perl
+ext	.psgi	Perl	programming	#0298c3	Perl
+ext	.t	Perl	programming	#0298c3	Perl
+filename	.latexmkrc	Perl	programming	#0298c3	Perl
+filename	Makefile.PL	Perl	programming	#0298c3	Perl
+filename	Rexfile	Perl	programming	#0298c3	Perl
+filename	ack	Perl	programming	#0298c3	Perl
+filename	cpanfile	Perl	programming	#0298c3	Perl
+filename	latexmkrc	Perl	programming	#0298c3	Perl
+interpreter	cperl	Perl	programming	#0298c3	Perl
+interpreter	perl	Perl	programming	#0298c3	Perl
+lang	Perl	Perl	programming	#0298c3	Perl
+ext	.pic	Pic	markup		Roff
+ext	.chem	Pic	markup		Roff
+lang	Pic	Pic	markup		Roff
+ext	.pkl	Pickle	data		Pickle
+lang	Pickle	Pickle	data		Pickle
+ext	.l	PicoLisp	programming	#6067af	PicoLisp
+interpreter	picolisp	PicoLisp	programming	#6067af	PicoLisp
+interpreter	pil	PicoLisp	programming	#6067af	PicoLisp
+lang	PicoLisp	PicoLisp	programming	#6067af	PicoLisp
+ext	.pig	PigLatin	programming	#fcd7de	PigLatin
+lang	PigLatin	PigLatin	programming	#fcd7de	PigLatin
+ext	.pike	Pike	programming	#005390	Pike
+ext	.pmod	Pike	programming	#005390	Pike
+interpreter	pike	Pike	programming	#005390	Pike
+lang	Pike	Pike	programming	#005390	Pike
+filename	dev-requirements.txt	Pip Requirements	data	#FFD343	Pip Requirements
+filename	requirements-dev.txt	Pip Requirements	data	#FFD343	Pip Requirements
+filename	requirements.lock.txt	Pip Requirements	data	#FFD343	Pip Requirements
+filename	requirements.txt	Pip Requirements	data	#FFD343	Pip Requirements
+lang	Pip Requirements	Pip Requirements	data	#FFD343	Pip Requirements
+ext	.pkl	Pkl	programming	#6b9543	Pkl
+interpreter	pkl	Pkl	programming	#6b9543	Pkl
+lang	Pkl	Pkl	programming	#6b9543	Pkl
+ext	.puml	PlantUML	data	#fbbd16	PlantUML
+ext	.iuml	PlantUML	data	#fbbd16	PlantUML
+ext	.plantuml	PlantUML	data	#fbbd16	PlantUML
+lang	PlantUML	PlantUML	data	#fbbd16	PlantUML
+ext	.pod	Pod	prose		Pod
+interpreter	perl	Pod	prose		Pod
+lang	Pod	Pod	prose		Pod
+ext	.pod	Pod 6	prose		Pod 6
+ext	.pod6	Pod 6	prose		Pod 6
+interpreter	perl6	Pod 6	prose		Pod 6
+lang	Pod 6	Pod 6	prose		Pod 6
+ext	.pogo	PogoScript	programming	#d80074	PogoScript
+lang	PogoScript	PogoScript	programming	#d80074	PogoScript
+ext	.polar	Polar	programming	#ae81ff	Polar
+lang	Polar	Polar	programming	#ae81ff	Polar
+ext	.pony	Pony	programming		Pony
+lang	Pony	Pony	programming		Pony
+ext	.por	Portugol	programming	#f8bd00	Portugol
+lang	Portugol	Portugol	programming	#f8bd00	Portugol
+ext	.pcss	PostCSS	markup	#dc3a0c	CSS
+ext	.postcss	PostCSS	markup	#dc3a0c	CSS
+lang	PostCSS	PostCSS	markup	#dc3a0c	CSS
+ext	.ps	PostScript	markup	#da291c	PostScript
+ext	.eps	PostScript	markup	#da291c	PostScript
+ext	.epsi	PostScript	markup	#da291c	PostScript
+ext	.pfa	PostScript	markup	#da291c	PostScript
+lang	PostScript	PostScript	markup	#da291c	PostScript
+ext	.pq	Power Query	programming		Power Query
+lang	Power Query	Power Query	programming	#d38e0d	Power Query
+ext	.pbt	PowerBuilder	programming	#8f0f8d	PowerBuilder
+ext	.sra	PowerBuilder	programming	#8f0f8d	PowerBuilder
+ext	.sru	PowerBuilder	programming	#8f0f8d	PowerBuilder
+ext	.srw	PowerBuilder	programming	#8f0f8d	PowerBuilder
+lang	PowerBuilder	PowerBuilder	programming	#8f0f8d	PowerBuilder
+ext	.ps1	PowerShell	programming	#012456	PowerShell
+ext	.psd1	PowerShell	programming	#012456	PowerShell
+ext	.psm1	PowerShell	programming	#012456	PowerShell
+interpreter	pwsh	PowerShell	programming	#012456	PowerShell
+lang	PowerShell	PowerShell	programming	#012456	PowerShell
+ext	.praat	Praat	programming	#c8506d	Praat
+lang	Praat	Praat	programming	#c8506d	Praat
+ext	.prisma	Prisma	data	#0c344b	Prisma
+lang	Prisma	Prisma	data	#0c344b	Prisma
+ext	.pc	Pro*C	programming	#bb8368	Pro*C
+lang	Pro*C	Pro*C	programming	#bb8368	Pro*C
+ext	.pde	Processing	programming	#0096D8	Processing
+lang	Processing	Processing	programming	#0096D8	Processing
+filename	Procfile	Procfile	programming	#3B2F63	Procfile
+lang	Procfile	Procfile	programming	#3B2F63	Procfile
+ext	.pro	Proguard	data		Proguard
+lang	Proguard	Proguard	data		Proguard
+ext	.pl	Prolog	programming	#74283c	Prolog
+ext	.plt	Prolog	programming	#74283c	Prolog
+ext	.pro	Prolog	programming	#74283c	Prolog
+ext	.prolog	Prolog	programming	#74283c	Prolog
+ext	.yap	Prolog	programming	#74283c	Prolog
+interpreter	swipl	Prolog	programming	#74283c	Prolog
+interpreter	yap	Prolog	programming	#74283c	Prolog
+lang	Prolog	Prolog	programming	#74283c	Prolog
+ext	.pml	Promela	programming	#de0000	Promela
+lang	Promela	Promela	programming	#de0000	Promela
+ext	.spin	Propeller Spin	programming	#7fa2a7	Propeller Spin
+lang	Propeller Spin	Propeller Spin	programming	#7fa2a7	Propeller Spin
+ext	.proto	Protocol Buffer	data		Protocol Buffer
+lang	Protocol Buffer	Protocol Buffer	data		Protocol Buffer
+ext	.textproto	Protocol Buffer Text Format	data		Protocol Buffer Text Format
+ext	.pbt	Protocol Buffer Text Format	data		Protocol Buffer Text Format
+ext	.pbtxt	Protocol Buffer Text Format	data		Protocol Buffer Text Format
+ext	.txtpb	Protocol Buffer Text Format	data		Protocol Buffer Text Format
+lang	Protocol Buffer Text Format	Protocol Buffer Text Format	data		Protocol Buffer Text Format
+ext	.asc	Public Key	data		Public Key
+ext	.pub	Public Key	data		Public Key
+lang	Public Key	Public Key	data		Public Key
+ext	.jade	Pug	markup	#a86454	Pug
+ext	.pug	Pug	markup	#a86454	Pug
+lang	Pug	Pug	markup	#a86454	Pug
+ext	.pp	Puppet	programming	#302B6D	Puppet
+filename	Modulefile	Puppet	programming	#302B6D	Puppet
+lang	Puppet	Puppet	programming	#302B6D	Puppet
+ext	.pd	Pure Data	data		Pure Data
+lang	Pure Data	Pure Data	data		Pure Data
+ext	.pb	PureBasic	programming	#5a6986	PureBasic
+ext	.pbi	PureBasic	programming	#5a6986	PureBasic
+lang	PureBasic	PureBasic	programming	#5a6986	PureBasic
+ext	.purs	PureScript	programming	#1D222D	PureScript
+lang	PureScript	PureScript	programming	#1D222D	PureScript
+ext	.arr	Pyret	programming	#ee1e10	Pyret
+lang	Pyret	Pyret	programming	#ee1e10	Pyret
+ext	.py	Python	programming	#3572A5	Python
+ext	.cgi	Python	programming	#3572A5	Python
+ext	.fcgi	Python	programming	#3572A5	Python
+ext	.gyp	Python	programming	#3572A5	Python
+ext	.gypi	Python	programming	#3572A5	Python
+ext	.lmi	Python	programming	#3572A5	Python
+ext	.py3	Python	programming	#3572A5	Python
+ext	.pyde	Python	programming	#3572A5	Python
+ext	.pyi	Python	programming	#3572A5	Python
+ext	.pyp	Python	programming	#3572A5	Python
+ext	.pyt	Python	programming	#3572A5	Python
+ext	.pyw	Python	programming	#3572A5	Python
+ext	.rpy	Python	programming	#3572A5	Python
+ext	.spec	Python	programming	#3572A5	Python
+ext	.tac	Python	programming	#3572A5	Python
+ext	.wsgi	Python	programming	#3572A5	Python
+ext	.xpy	Python	programming	#3572A5	Python
+filename	.gclient	Python	programming	#3572A5	Python
+filename	DEPS	Python	programming	#3572A5	Python
+filename	SConscript	Python	programming	#3572A5	Python
+filename	SConstruct	Python	programming	#3572A5	Python
+filename	wscript	Python	programming	#3572A5	Python
+interpreter	python	Python	programming	#3572A5	Python
+interpreter	python2	Python	programming	#3572A5	Python
+interpreter	python3	Python	programming	#3572A5	Python
+interpreter	py	Python	programming	#3572A5	Python
+interpreter	pypy	Python	programming	#3572A5	Python
+interpreter	pypy3	Python	programming	#3572A5	Python
+interpreter	uv	Python	programming	#3572A5	Python
+lang	Python	Python	programming	#3572A5	Python
+lang	Python console	Python console	programming	#3572A5	Python
+ext	.pytb	Python traceback	data	#3572A5	Python
+lang	Python traceback	Python traceback	data	#3572A5	Python
+ext	.qs	Q#	programming		Q#
+lang	Q#	Q#	programming	#fed659	Q#
+ext	.qml	QML	programming	#44a51c	QML
+ext	.qbs	QML	programming	#44a51c	QML
+lang	QML	QML	programming	#44a51c	QML
+ext	.pro	QMake	programming		QMake
+ext	.pri	QMake	programming		QMake
+interpreter	qmake	QMake	programming		QMake
+lang	QMake	QMake	programming		QMake
+ext	.qs	Qt Script	programming		Qt Script
+filename	installscript.qs	Qt Script	programming		Qt Script
+filename	toolchain_installscript.qs	Qt Script	programming		Qt Script
+lang	Qt Script	Qt Script	programming	#00b841	Qt Script
+filename	m3makefile	Quake	programming		Quake
+filename	m3overrides	Quake	programming		Quake
+lang	Quake	Quake	programming	#882233	Quake
+ext	.qc	QuakeC	programming		QuakeC
+lang	QuakeC	QuakeC	programming	#975777	QuakeC
+ext	.sip	Quartus Simulation IP	data	#58C42E	Quartus Simulation IP
+lang	Quartus Simulation IP	Quartus Simulation IP	data	#58C42E	Quartus Simulation IP
+ext	.bas	QuickBASIC	programming	#008080	QuickBASIC
+ext	.bi	QuickBASIC	programming	#008080	QuickBASIC
+lang	QuickBASIC	QuickBASIC	programming	#008080	QuickBASIC
+ext	.qnt	Quint	programming	#9d6ce5	Quint
+lang	Quint	Quint	programming	#9d6ce5	Quint
+ext	.r	R	programming	#198CE7	R
+ext	.rd	R	programming	#198CE7	R
+ext	.rhistory	R	programming	#198CE7	R
+ext	.rsx	R	programming	#198CE7	R
+filename	.Rapp.history	R	programming	#198CE7	R
+filename	.Rhistory	R	programming	#198CE7	R
+filename	.Rprofile	R	programming	#198CE7	R
+filename	expr-dist	R	programming	#198CE7	R
+interpreter	Rscript	R	programming	#198CE7	R
+lang	R	R	programming	#198CE7	R
+ext	.raml	RAML	markup	#77d9fb	RAML
+lang	RAML	RAML	markup	#77d9fb	RAML
+ext	.rascript	RAScript	programming		RAScript
+lang	RAScript	RAScript	programming	#2C97FA	RAScript
+ext	.rbs	RBS	data		RBS
+lang	RBS	RBS	data	#701516	Ruby
+ext	.rdoc	RDoc	prose	#701516	RDoc
+lang	RDoc	RDoc	prose	#701516	RDoc
+ext	.rbbas	REALbasic	programming		REALbasic
+ext	.rbfrm	REALbasic	programming		REALbasic
+ext	.rbmnu	REALbasic	programming		REALbasic
+ext	.rbres	REALbasic	programming		REALbasic
+ext	.rbtbar	REALbasic	programming		REALbasic
+ext	.rbuistate	REALbasic	programming		REALbasic
+lang	REALbasic	REALbasic	programming		REALbasic
+ext	.rexx	REXX	programming	#d90e09	REXX
+ext	.pprx	REXX	programming	#d90e09	REXX
+ext	.rex	REXX	programming	#d90e09	REXX
+interpreter	regina	REXX	programming	#d90e09	REXX
+interpreter	rexx	REXX	programming	#d90e09	REXX
+lang	REXX	REXX	programming	#d90e09	REXX
+ext	.qmd	RMarkdown	prose	#198ce7	RMarkdown
+ext	.rmd	RMarkdown	prose	#198ce7	RMarkdown
+lang	RMarkdown	RMarkdown	prose	#198ce7	RMarkdown
+ext	.ron	RON	data	#a62c00	RON
+lang	RON	RON	data	#a62c00	RON
+ext	.msg	ROS Interface	data	#22314e	ROS Interface
+ext	.action	ROS Interface	data	#22314e	ROS Interface
+ext	.srv	ROS Interface	data	#22314e	ROS Interface
+lang	ROS Interface	ROS Interface	data	#22314e	ROS Interface
+ext	.x	RPC	programming		RPC
+lang	RPC	RPC	programming		RPC
+ext	.rpgle	RPGLE	programming	#2BDE21	RPGLE
+ext	.sqlrpgle	RPGLE	programming	#2BDE21	RPGLE
+lang	RPGLE	RPGLE	programming	#2BDE21	RPGLE
+ext	.spec	RPM Spec	data		RPM Spec
+lang	RPM Spec	RPM Spec	data		RPM Spec
+ext	.rnh	RUNOFF	markup	#665a4e	RUNOFF
+ext	.rno	RUNOFF	markup	#665a4e	RUNOFF
+lang	RUNOFF	RUNOFF	markup	#665a4e	RUNOFF
+ext	.rkt	Racket	programming	#3c5caa	Racket
+ext	.rktd	Racket	programming	#3c5caa	Racket
+ext	.rktl	Racket	programming	#3c5caa	Racket
+ext	.scrbl	Racket	programming	#3c5caa	Racket
+interpreter	racket	Racket	programming	#3c5caa	Racket
+lang	Racket	Racket	programming	#3c5caa	Racket
+ext	.rl	Ragel	programming	#9d5200	Ragel
+lang	Ragel	Ragel	programming	#9d5200	Ragel
+ext	.6pl	Raku	programming	#0000fb	Raku
+ext	.6pm	Raku	programming	#0000fb	Raku
+ext	.nqp	Raku	programming	#0000fb	Raku
+ext	.p6	Raku	programming	#0000fb	Raku
+ext	.p6l	Raku	programming	#0000fb	Raku
+ext	.p6m	Raku	programming	#0000fb	Raku
+ext	.pl	Raku	programming	#0000fb	Raku
+ext	.pl6	Raku	programming	#0000fb	Raku
+ext	.pm	Raku	programming	#0000fb	Raku
+ext	.pm6	Raku	programming	#0000fb	Raku
+ext	.raku	Raku	programming	#0000fb	Raku
+ext	.rakumod	Raku	programming	#0000fb	Raku
+ext	.t	Raku	programming	#0000fb	Raku
+interpreter	perl6	Raku	programming	#0000fb	Raku
+interpreter	raku	Raku	programming	#0000fb	Raku
+interpreter	rakudo	Raku	programming	#0000fb	Raku
+lang	Raku	Raku	programming	#0000fb	Raku
+ext	.rsc	Rascal	programming	#fffaa0	Rascal
+lang	Rascal	Rascal	programming	#fffaa0	Rascal
+ext	.raw	Raw token data	data		Raw token data
+lang	Raw token data	Raw token data	data		Raw token data
+ext	.res	ReScript	programming	#ed5051	ReScript
+ext	.resi	ReScript	programming	#ed5051	ReScript
+interpreter	ocaml	ReScript	programming	#ed5051	ReScript
+lang	ReScript	ReScript	programming	#ed5051	ReScript
+filename	.inputrc	Readline Config	data		INI
+filename	inputrc	Readline Config	data		INI
+lang	Readline Config	Readline Config	data		INI
+ext	.re	Reason	programming	#ff5847	Reason
+ext	.rei	Reason	programming	#ff5847	Reason
+lang	Reason	Reason	programming	#ff5847	Reason
+ext	.religo	ReasonLIGO	programming	#ff5847	LigoLANG
+lang	ReasonLIGO	ReasonLIGO	programming	#ff5847	LigoLANG
+ext	.reb	Rebol	programming	#358a5b	Rebol
+ext	.r	Rebol	programming	#358a5b	Rebol
+ext	.r2	Rebol	programming	#358a5b	Rebol
+ext	.r3	Rebol	programming	#358a5b	Rebol
+ext	.rebol	Rebol	programming	#358a5b	Rebol
+lang	Rebol	Rebol	programming	#358a5b	Rebol
+filename	language-subtag-registry.txt	Record Jar	data		Record Jar
+lang	Record Jar	Record Jar	data	#0673ba	Record Jar
+ext	.red	Red	programming	#f50000	Red
+ext	.reds	Red	programming	#f50000	Red
+lang	Red	Red	programming	#f50000	Red
+ext	.cw	Redcode	programming		Redcode
+lang	Redcode	Redcode	programming		Redcode
+filename	_redirects	Redirect Rules	data		Redirect Rules
+lang	Redirect Rules	Redirect Rules	data		Redirect Rules
+ext	.reds	Redscript	programming	#f44336	Redscript
+lang	Redscript	Redscript	programming	#f44336	Redscript
+ext	.regexp	Regular Expression	data	#009a00	Regular Expression
+ext	.regex	Regular Expression	data	#009a00	Regular Expression
+lang	Regular Expression	Regular Expression	data	#009a00	Regular Expression
+ext	.rpy	Ren'Py	programming	#ff7f7f	Ren'Py
+lang	Ren'Py	Ren'Py	programming	#ff7f7f	Ren'Py
+ext	.rs	RenderScript	programming		RenderScript
+ext	.rsh	RenderScript	programming		RenderScript
+lang	RenderScript	RenderScript	programming		RenderScript
+ext	.r	Rez	programming		Rez
+lang	Rez	Rez	programming	#FFDAB3	Rez
+ext	.rhai	Rhai	programming	#FBA63B	Rhai
+lang	Rhai	Rhai	programming	#FBA63B	Rhai
+ext	.rtf	Rich Text Format	markup		Rich Text Format
+lang	Rich Text Format	Rich Text Format	markup		Rich Text Format
+ext	.ring	Ring	programming	#2D54CB	Ring
+lang	Ring	Ring	programming	#2D54CB	Ring
+ext	.riot	Riot	markup	#A71E49	Riot
+lang	Riot	Riot	markup	#A71E49	Riot
+ext	.robot	RobotFramework	programming	#00c0b5	RobotFramework
+ext	.resource	RobotFramework	programming	#00c0b5	RobotFramework
+lang	RobotFramework	RobotFramework	programming	#00c0b5	RobotFramework
+filename	robots.txt	Robots Exclusion Rules	data		Robots Exclusion Rules
+lang	Robots Exclusion Rules	Robots Exclusion Rules	data		Robots Exclusion Rules
+ext	.roc	Roc	programming	#7c38f5	Roc
+lang	Roc	Roc	programming	#7c38f5	Roc
+ext	.v	Rocq Prover	programming	#d0b68c	Rocq Prover
+ext	.coq	Rocq Prover	programming	#d0b68c	Rocq Prover
+lang	Rocq Prover	Rocq Prover	programming	#d0b68c	Rocq Prover
+ext	.roff	Roff	markup	#ecdebe	Roff
+ext	.1	Roff	markup	#ecdebe	Roff
+ext	.1in	Roff	markup	#ecdebe	Roff
+ext	.1m	Roff	markup	#ecdebe	Roff
+ext	.1x	Roff	markup	#ecdebe	Roff
+ext	.2	Roff	markup	#ecdebe	Roff
+ext	.3	Roff	markup	#ecdebe	Roff
+ext	.3in	Roff	markup	#ecdebe	Roff
+ext	.3m	Roff	markup	#ecdebe	Roff
+ext	.3p	Roff	markup	#ecdebe	Roff
+ext	.3pm	Roff	markup	#ecdebe	Roff
+ext	.3qt	Roff	markup	#ecdebe	Roff
+ext	.3x	Roff	markup	#ecdebe	Roff
+ext	.4	Roff	markup	#ecdebe	Roff
+ext	.5	Roff	markup	#ecdebe	Roff
+ext	.6	Roff	markup	#ecdebe	Roff
+ext	.7	Roff	markup	#ecdebe	Roff
+ext	.8	Roff	markup	#ecdebe	Roff
+ext	.9	Roff	markup	#ecdebe	Roff
+ext	.l	Roff	markup	#ecdebe	Roff
+ext	.man	Roff	markup	#ecdebe	Roff
+ext	.mdoc	Roff	markup	#ecdebe	Roff
+ext	.me	Roff	markup	#ecdebe	Roff
+ext	.ms	Roff	markup	#ecdebe	Roff
+ext	.n	Roff	markup	#ecdebe	Roff
+ext	.nr	Roff	markup	#ecdebe	Roff
+ext	.rno	Roff	markup	#ecdebe	Roff
+ext	.tmac	Roff	markup	#ecdebe	Roff
+filename	eqnrc	Roff	markup	#ecdebe	Roff
+filename	mmn	Roff	markup	#ecdebe	Roff
+filename	mmt	Roff	markup	#ecdebe	Roff
+filename	troffrc	Roff	markup	#ecdebe	Roff
+filename	troffrc-end	Roff	markup	#ecdebe	Roff
+lang	Roff	Roff	markup	#ecdebe	Roff
+ext	.1	Roff Manpage	markup	#ecdebe	Roff
+ext	.1in	Roff Manpage	markup	#ecdebe	Roff
+ext	.1m	Roff Manpage	markup	#ecdebe	Roff
+ext	.1x	Roff Manpage	markup	#ecdebe	Roff
+ext	.2	Roff Manpage	markup	#ecdebe	Roff
+ext	.3	Roff Manpage	markup	#ecdebe	Roff
+ext	.3in	Roff Manpage	markup	#ecdebe	Roff
+ext	.3m	Roff Manpage	markup	#ecdebe	Roff
+ext	.3p	Roff Manpage	markup	#ecdebe	Roff
+ext	.3pm	Roff Manpage	markup	#ecdebe	Roff
+ext	.3qt	Roff Manpage	markup	#ecdebe	Roff
+ext	.3x	Roff Manpage	markup	#ecdebe	Roff
+ext	.4	Roff Manpage	markup	#ecdebe	Roff
+ext	.5	Roff Manpage	markup	#ecdebe	Roff
+ext	.6	Roff Manpage	markup	#ecdebe	Roff
+ext	.7	Roff Manpage	markup	#ecdebe	Roff
+ext	.8	Roff Manpage	markup	#ecdebe	Roff
+ext	.9	Roff Manpage	markup	#ecdebe	Roff
+ext	.man	Roff Manpage	markup	#ecdebe	Roff
+ext	.mdoc	Roff Manpage	markup	#ecdebe	Roff
+lang	Roff Manpage	Roff Manpage	markup	#ecdebe	Roff
+ext	.rg	Rouge	programming	#cc0088	Rouge
+lang	Rouge	Rouge	programming	#cc0088	Rouge
+ext	.rsc	RouterOS Script	programming		RouterOS Script
+interpreter	RouterOS	RouterOS Script	programming		RouterOS Script
+lang	RouterOS Script	RouterOS Script	programming	#DE3941	RouterOS Script
+ext	.rb	Ruby	programming	#701516	Ruby
+ext	.builder	Ruby	programming	#701516	Ruby
+ext	.eye	Ruby	programming	#701516	Ruby
+ext	.fcgi	Ruby	programming	#701516	Ruby
+ext	.gemspec	Ruby	programming	#701516	Ruby
+ext	.god	Ruby	programming	#701516	Ruby
+ext	.jbuilder	Ruby	programming	#701516	Ruby
+ext	.mspec	Ruby	programming	#701516	Ruby
+ext	.pluginspec	Ruby	programming	#701516	Ruby
+ext	.podspec	Ruby	programming	#701516	Ruby
+ext	.prawn	Ruby	programming	#701516	Ruby
+ext	.rabl	Ruby	programming	#701516	Ruby
+ext	.rake	Ruby	programming	#701516	Ruby
+ext	.rbi	Ruby	programming	#701516	Ruby
+ext	.rbuild	Ruby	programming	#701516	Ruby
+ext	.rbw	Ruby	programming	#701516	Ruby
+ext	.rbx	Ruby	programming	#701516	Ruby
+ext	.ru	Ruby	programming	#701516	Ruby
+ext	.ruby	Ruby	programming	#701516	Ruby
+ext	.spec	Ruby	programming	#701516	Ruby
+ext	.thor	Ruby	programming	#701516	Ruby
+ext	.watchr	Ruby	programming	#701516	Ruby
+interpreter	ruby	Ruby	programming	#701516	Ruby
+interpreter	macruby	Ruby	programming	#701516	Ruby
+interpreter	rake	Ruby	programming	#701516	Ruby
+interpreter	jruby	Ruby	programming	#701516	Ruby
+interpreter	rbx	Ruby	programming	#701516	Ruby
+filename	.irbrc	Ruby	programming	#701516	Ruby
+filename	.pryrc	Ruby	programming	#701516	Ruby
+filename	.simplecov	Ruby	programming	#701516	Ruby
+filename	Appraisals	Ruby	programming	#701516	Ruby
+filename	Berksfile	Ruby	programming	#701516	Ruby
+filename	Brewfile	Ruby	programming	#701516	Ruby
+filename	Buildfile	Ruby	programming	#701516	Ruby
+filename	Capfile	Ruby	programming	#701516	Ruby
+filename	Dangerfile	Ruby	programming	#701516	Ruby
+filename	Deliverfile	Ruby	programming	#701516	Ruby
+filename	Fastfile	Ruby	programming	#701516	Ruby
+filename	Gemfile	Ruby	programming	#701516	Ruby
+filename	Guardfile	Ruby	programming	#701516	Ruby
+filename	Jarfile	Ruby	programming	#701516	Ruby
+filename	Mavenfile	Ruby	programming	#701516	Ruby
+filename	Podfile	Ruby	programming	#701516	Ruby
+filename	Puppetfile	Ruby	programming	#701516	Ruby
+filename	Rakefile	Ruby	programming	#701516	Ruby
+filename	Snapfile	Ruby	programming	#701516	Ruby
+filename	Steepfile	Ruby	programming	#701516	Ruby
+filename	Thorfile	Ruby	programming	#701516	Ruby
+filename	Vagrantfile	Ruby	programming	#701516	Ruby
+filename	buildfile	Ruby	programming	#701516	Ruby
+lang	Ruby	Ruby	programming	#701516	Ruby
+ext	.rs	Rust	programming	#dea584	Rust
+ext	.rs.in	Rust	programming	#dea584	Rust
+interpreter	rust-script	Rust	programming	#dea584	Rust
+lang	Rust	Rust	programming	#dea584	Rust
+ext	.sas	SAS	programming	#B34936	SAS
+lang	SAS	SAS	programming	#B34936	SAS
+ext	.scss	SCSS	markup	#c6538c	SCSS
+lang	SCSS	SCSS	markup	#c6538c	SCSS
+ext	.te	SELinux Policy	data		SELinux Policy
+filename	file_contexts	SELinux Policy	data		SELinux Policy
+filename	genfs_contexts	SELinux Policy	data		SELinux Policy
+filename	initial_sids	SELinux Policy	data		SELinux Policy
+filename	port_contexts	SELinux Policy	data		SELinux Policy
+filename	security_classes	SELinux Policy	data		SELinux Policy
+lang	SELinux Policy	SELinux Policy	data		SELinux Policy
+ext	.sip	SIP	programming	#4E8D83	SIP
+lang	SIP	SIP	programming	#4E8D83	SIP
+ext	.smt2	SMT	programming		SMT
+ext	.smt	SMT	programming		SMT
+ext	.z3	SMT	programming		SMT
+interpreter	boolector	SMT	programming		SMT
+interpreter	cvc4	SMT	programming		SMT
+interpreter	mathsat5	SMT	programming		SMT
+interpreter	opensmt	SMT	programming		SMT
+interpreter	smtinterpol	SMT	programming		SMT
+interpreter	smt-rat	SMT	programming		SMT
+interpreter	stp	SMT	programming		SMT
+interpreter	verit	SMT	programming		SMT
+interpreter	yices2	SMT	programming		SMT
+interpreter	z3	SMT	programming		SMT
+lang	SMT	SMT	programming		SMT
+ext	.sparql	SPARQL	data	#0C4597	SPARQL
+ext	.rq	SPARQL	data	#0C4597	SPARQL
+lang	SPARQL	SPARQL	data	#0C4597	SPARQL
+ext	.sqf	SQF	programming	#3F3F3F	SQF
+ext	.hqf	SQF	programming	#3F3F3F	SQF
+lang	SQF	SQF	programming	#3F3F3F	SQF
+ext	.sql	SQL	data	#e38c00	SQL
+ext	.ddl	SQL	data	#e38c00	SQL
+ext	.inc	SQL	data	#e38c00	SQL
+ext	.mysql	SQL	data	#e38c00	SQL
+ext	.prc	SQL	data	#e38c00	SQL
+ext	.tab	SQL	data	#e38c00	SQL
+ext	.udf	SQL	data	#e38c00	SQL
+ext	.viw	SQL	data	#e38c00	SQL
+lang	SQL	SQL	data	#e38c00	SQL
+ext	.sql	SQLPL	programming	#e38c00	SQLPL
+ext	.db2	SQLPL	programming	#e38c00	SQLPL
+lang	SQLPL	SQLPL	programming	#e38c00	SQLPL
+ext	.srt	SRecode Template	markup	#348a34	SRecode Template
+lang	SRecode Template	SRecode Template	markup	#348a34	SRecode Template
+filename	ssh-config	SSH Config	data		INI
+filename	ssh_config	SSH Config	data		INI
+filename	sshconfig	SSH Config	data		INI
+filename	sshconfig.snip	SSH Config	data		INI
+filename	sshd-config	SSH Config	data		INI
+filename	sshd_config	SSH Config	data		INI
+lang	SSH Config	SSH Config	data		INI
+ext	.star	STAR	data		STAR
+lang	STAR	STAR	data		STAR
+ext	.stl	STL	data	#373b5e	STL
+lang	STL	STL	data	#373b5e	STL
+ext	.ston	STON	data		Smalltalk
+lang	STON	STON	data		Smalltalk
+ext	.svg	SVG	data	#ff9900	SVG
+lang	SVG	SVG	data	#ff9900	SVG
+ext	.i	SWIG	programming		SWIG
+ext	.swg	SWIG	programming		SWIG
+ext	.swig	SWIG	programming		SWIG
+lang	SWIG	SWIG	programming		SWIG
+ext	.sage	Sage	programming		Sage
+ext	.sagews	Sage	programming		Sage
+lang	Sage	Sage	programming		Sage
+ext	.sail	Sail	programming	#259dd5	Sail
+lang	Sail	Sail	programming	#259dd5	Sail
+ext	.sls	Salt	programming	#57bcad	Salt
+lang	Salt	Salt	programming	#57bcad	Salt
+ext	.sass	Sass	markup	#a53b70	Sass
+lang	Sass	Sass	markup	#a53b70	Sass
+ext	.scala	Scala	programming	#c22d40	Scala
+ext	.kojo	Scala	programming	#c22d40	Scala
+ext	.sbt	Scala	programming	#c22d40	Scala
+ext	.sc	Scala	programming	#c22d40	Scala
+interpreter	scala	Scala	programming	#c22d40	Scala
+lang	Scala	Scala	programming	#c22d40	Scala
+ext	.scaml	Scaml	markup	#bd181a	Scaml
+lang	Scaml	Scaml	markup	#bd181a	Scaml
+ext	.scenic	Scenic	programming	#fdc700	Scenic
+interpreter	scenic	Scenic	programming	#fdc700	Scenic
+lang	Scenic	Scenic	programming	#fdc700	Scenic
+ext	.scm	Scheme	programming	#1e4aec	Scheme
+ext	.sch	Scheme	programming	#1e4aec	Scheme
+ext	.sld	Scheme	programming	#1e4aec	Scheme
+ext	.sls	Scheme	programming	#1e4aec	Scheme
+ext	.sps	Scheme	programming	#1e4aec	Scheme
+ext	.ss	Scheme	programming	#1e4aec	Scheme
+interpreter	scheme	Scheme	programming	#1e4aec	Scheme
+interpreter	guile	Scheme	programming	#1e4aec	Scheme
+interpreter	bigloo	Scheme	programming	#1e4aec	Scheme
+interpreter	chicken	Scheme	programming	#1e4aec	Scheme
+interpreter	csi	Scheme	programming	#1e4aec	Scheme
+interpreter	gosh	Scheme	programming	#1e4aec	Scheme
+interpreter	r6rs	Scheme	programming	#1e4aec	Scheme
+lang	Scheme	Scheme	programming	#1e4aec	Scheme
+ext	.sci	Scilab	programming	#ca0f21	Scilab
+ext	.sce	Scilab	programming	#ca0f21	Scilab
+ext	.tst	Scilab	programming	#ca0f21	Scilab
+lang	Scilab	Scilab	programming	#ca0f21	Scilab
+ext	.self	Self	programming	#0579aa	Self
+lang	Self	Self	programming	#0579aa	Self
+ext	.shader	ShaderLab	programming	#222c37	ShaderLab
+lang	ShaderLab	ShaderLab	programming	#222c37	ShaderLab
+ext	.sh	Shell	programming	#89e051	Shell
+ext	.bash	Shell	programming	#89e051	Shell
+ext	.bats	Shell	programming	#89e051	Shell
+ext	.cgi	Shell	programming	#89e051	Shell
+ext	.command	Shell	programming	#89e051	Shell
+ext	.fcgi	Shell	programming	#89e051	Shell
+ext	.ksh	Shell	programming	#89e051	Shell
+ext	.pacscript	Shell	programming	#89e051	Shell
+ext	.sbatch	Shell	programming	#89e051	Shell
+ext	.sh.in	Shell	programming	#89e051	Shell
+ext	.slurm	Shell	programming	#89e051	Shell
+ext	.tmux	Shell	programming	#89e051	Shell
+ext	.tool	Shell	programming	#89e051	Shell
+ext	.trigger	Shell	programming	#89e051	Shell
+ext	.zsh	Shell	programming	#89e051	Shell
+ext	.zsh-theme	Shell	programming	#89e051	Shell
+filename	.bash_aliases	Shell	programming	#89e051	Shell
+filename	.bash_functions	Shell	programming	#89e051	Shell
+filename	.bash_history	Shell	programming	#89e051	Shell
+filename	.bash_logout	Shell	programming	#89e051	Shell
+filename	.bash_profile	Shell	programming	#89e051	Shell
+filename	.bashrc	Shell	programming	#89e051	Shell
+filename	.cshrc	Shell	programming	#89e051	Shell
+filename	.envrc	Shell	programming	#89e051	Shell
+filename	.flaskenv	Shell	programming	#89e051	Shell
+filename	.kshrc	Shell	programming	#89e051	Shell
+filename	.login	Shell	programming	#89e051	Shell
+filename	.profile	Shell	programming	#89e051	Shell
+filename	.tmux.conf	Shell	programming	#89e051	Shell
+filename	.xinitrc	Shell	programming	#89e051	Shell
+filename	.xsession	Shell	programming	#89e051	Shell
+filename	.zlogin	Shell	programming	#89e051	Shell
+filename	.zlogout	Shell	programming	#89e051	Shell
+filename	.zprofile	Shell	programming	#89e051	Shell
+filename	.zshenv	Shell	programming	#89e051	Shell
+filename	.zshrc	Shell	programming	#89e051	Shell
+filename	9fs	Shell	programming	#89e051	Shell
+filename	PKGBUILD	Shell	programming	#89e051	Shell
+filename	bash_aliases	Shell	programming	#89e051	Shell
+filename	bash_logout	Shell	programming	#89e051	Shell
+filename	bash_profile	Shell	programming	#89e051	Shell
+filename	bashrc	Shell	programming	#89e051	Shell
+filename	cshrc	Shell	programming	#89e051	Shell
+filename	gradlew	Shell	programming	#89e051	Shell
+filename	kshrc	Shell	programming	#89e051	Shell
+filename	login	Shell	programming	#89e051	Shell
+filename	man	Shell	programming	#89e051	Shell
+filename	mvnw	Shell	programming	#89e051	Shell
+filename	profile	Shell	programming	#89e051	Shell
+filename	tmux.conf	Shell	programming	#89e051	Shell
+filename	xinitrc	Shell	programming	#89e051	Shell
+filename	xsession	Shell	programming	#89e051	Shell
+filename	zlogin	Shell	programming	#89e051	Shell
+filename	zlogout	Shell	programming	#89e051	Shell
+filename	zprofile	Shell	programming	#89e051	Shell
+filename	zshenv	Shell	programming	#89e051	Shell
+filename	zshrc	Shell	programming	#89e051	Shell
+interpreter	ash	Shell	programming	#89e051	Shell
+interpreter	bash	Shell	programming	#89e051	Shell
+interpreter	dash	Shell	programming	#89e051	Shell
+interpreter	ksh	Shell	programming	#89e051	Shell
+interpreter	mksh	Shell	programming	#89e051	Shell
+interpreter	pdksh	Shell	programming	#89e051	Shell
+interpreter	rc	Shell	programming	#89e051	Shell
+interpreter	sh	Shell	programming	#89e051	Shell
+interpreter	zsh	Shell	programming	#89e051	Shell
+lang	Shell	Shell	programming	#89e051	Shell
+filename	.shellcheckrc	ShellCheck Config	data	#cecfcb	ShellCheck Config
+lang	ShellCheck Config	ShellCheck Config	data	#cecfcb	ShellCheck Config
+ext	.sh-session	ShellSession	programming		ShellSession
+lang	ShellSession	ShellSession	programming		ShellSession
+ext	.shen	Shen	programming	#120F14	Shen
+lang	Shen	Shen	programming	#120F14	Shen
+ext	.sieve	Sieve	programming		Sieve
+lang	Sieve	Sieve	programming		Sieve
+ext	.sfv	Simple File Verification	data	#C9BFED	Checksums
+lang	Simple File Verification	Simple File Verification	data	#C9BFED	Checksums
+filename	Singularity	Singularity	programming	#64E6AD	Singularity
+lang	Singularity	Singularity	programming	#64E6AD	Singularity
+ext	.slang	Slang	programming	#1fbec9	Slang
+lang	Slang	Slang	programming	#1fbec9	Slang
+ext	.sl	Slash	programming	#007eff	Slash
+lang	Slash	Slash	programming	#007eff	Slash
+ext	.ice	Slice	programming	#003fa2	Slice
+lang	Slice	Slice	programming	#003fa2	Slice
+ext	.slim	Slim	markup	#2b2b2b	Slim
+lang	Slim	Slim	markup	#2b2b2b	Slim
+ext	.slint	Slint	markup	#2379F4	Slint
+lang	Slint	Slint	markup	#2379F4	Slint
+ext	.cocci	SmPL	programming		SmPL
+lang	SmPL	SmPL	programming	#c94949	SmPL
+ext	.smali	Smali	programming		Smali
+lang	Smali	Smali	programming		Smali
+ext	.st	Smalltalk	programming	#596706	Smalltalk
+ext	.cs	Smalltalk	programming	#596706	Smalltalk
+lang	Smalltalk	Smalltalk	programming	#596706	Smalltalk
+ext	.tpl	Smarty	programming	#f0c040	Smarty
+lang	Smarty	Smarty	programming	#f0c040	Smarty
+ext	.smithy	Smithy	programming	#c44536	Smithy
+lang	Smithy	Smithy	programming	#c44536	Smithy
+ext	.smk	Snakemake	programming	#419179	Python
+ext	.snakefile	Snakemake	programming	#419179	Python
+filename	Snakefile	Snakemake	programming	#419179	Python
+lang	Snakemake	Snakemake	programming	#419179	Python
+ext	.sol	Solidity	programming	#AA6746	Solidity
+lang	Solidity	Solidity	programming	#AA6746	Solidity
+filename	Android.bp	Soong	data		Soong
+lang	Soong	Soong	data		Soong
+ext	.sp	SourcePawn	programming	#f69e1d	SourcePawn
+ext	.inc	SourcePawn	programming	#f69e1d	SourcePawn
+lang	SourcePawn	SourcePawn	programming	#f69e1d	SourcePawn
+ext	.zed	SpiceDB Schema	data	#a5318a	SpiceDB Schema
+lang	SpiceDB Schema	SpiceDB Schema	data	#a5318a	SpiceDB Schema
+ext	.sfd	Spline Font Database	data		Spline Font Database
+lang	Spline Font Database	Spline Font Database	data		Spline Font Database
+ext	.nut	Squirrel	programming	#800000	Squirrel
+lang	Squirrel	Squirrel	programming	#800000	Squirrel
+ext	.stan	Stan	programming	#b2011d	Stan
+lang	Stan	Stan	programming	#b2011d	Stan
+ext	.ml	Standard ML	programming	#dc566d	Standard ML
+ext	.fun	Standard ML	programming	#dc566d	Standard ML
+ext	.sig	Standard ML	programming	#dc566d	Standard ML
+ext	.sml	Standard ML	programming	#dc566d	Standard ML
+lang	Standard ML	Standard ML	programming	#dc566d	Standard ML
+ext	.bzl	Starlark	programming	#76d275	Starlark
+ext	.star	Starlark	programming	#76d275	Starlark
+filename	BUCK	Starlark	programming	#76d275	Starlark
+filename	BUILD	Starlark	programming	#76d275	Starlark
+filename	BUILD.bazel	Starlark	programming	#76d275	Starlark
+filename	MODULE.bazel	Starlark	programming	#76d275	Starlark
+filename	Tiltfile	Starlark	programming	#76d275	Starlark
+filename	WORKSPACE	Starlark	programming	#76d275	Starlark
+filename	WORKSPACE.bazel	Starlark	programming	#76d275	Starlark
+filename	WORKSPACE.bzlmod	Starlark	programming	#76d275	Starlark
+lang	Starlark	Starlark	programming	#76d275	Starlark
+ext	.do	Stata	programming	#1a5f91	Stata
+ext	.ado	Stata	programming	#1a5f91	Stata
+ext	.doh	Stata	programming	#1a5f91	Stata
+ext	.ihlp	Stata	programming	#1a5f91	Stata
+ext	.mata	Stata	programming	#1a5f91	Stata
+ext	.matah	Stata	programming	#1a5f91	Stata
+ext	.sthlp	Stata	programming	#1a5f91	Stata
+lang	Stata	Stata	programming	#1a5f91	Stata
+ext	.st	StringTemplate	markup	#3fb34f	StringTemplate
+lang	StringTemplate	StringTemplate	markup	#3fb34f	StringTemplate
+ext	.styl	Stylus	markup	#ff6347	Stylus
+lang	Stylus	Stylus	markup	#ff6347	Stylus
+ext	.srt	SubRip Text	data	#9e0101	SubRip Text
+lang	SubRip Text	SubRip Text	data	#9e0101	SubRip Text
+ext	.sss	SugarSS	markup	#2fcc9f	SugarSS
+lang	SugarSS	SugarSS	markup	#2fcc9f	SugarSS
+ext	.sc	SuperCollider	programming	#46390b	SuperCollider
+ext	.scd	SuperCollider	programming	#46390b	SuperCollider
+interpreter	sclang	SuperCollider	programming	#46390b	SuperCollider
+interpreter	scsynth	SuperCollider	programming	#46390b	SuperCollider
+lang	SuperCollider	SuperCollider	programming	#46390b	SuperCollider
+ext	.surql	SurrealQL	programming	#ff00a0	SurrealQL
+lang	SurrealQL	SurrealQL	programming	#ff00a0	SurrealQL
+ext	.svx	Survex data	data	#ffcc99	Survex data
+lang	Survex data	Survex data	data	#ffcc99	Survex data
+ext	.svelte	Svelte	markup	#ff3e00	Svelte
+lang	Svelte	Svelte	markup	#ff3e00	Svelte
+ext	.sw	Sway	programming	#00F58C	Sway
+lang	Sway	Sway	programming	#00F58C	Sway
+ext	.rnw	Sweave	prose	#198ce7	Sweave
+lang	Sweave	Sweave	prose	#198ce7	Sweave
+ext	.swift	Swift	programming	#F05138	Swift
+lang	Swift	Swift	programming	#F05138	Swift
+ext	.sv	SystemVerilog	programming	#DAE1C2	SystemVerilog
+ext	.svh	SystemVerilog	programming	#DAE1C2	SystemVerilog
+ext	.vh	SystemVerilog	programming	#DAE1C2	SystemVerilog
+lang	SystemVerilog	SystemVerilog	programming	#DAE1C2	SystemVerilog
+ext	.8xp	TI Program	programming	#A0AA87	TI Program
+ext	.8xp.txt	TI Program	programming	#A0AA87	TI Program
+lang	TI Program	TI Program	programming	#A0AA87	TI Program
+ext	.tlv	TL-Verilog	programming		TL-Verilog
+lang	TL-Verilog	TL-Verilog	programming	#C40023	TL-Verilog
+ext	.tla	TLA	programming	#4b0079	TLA
+lang	TLA	TLA	programming	#4b0079	TLA
+ext	.tmdl	TMDL	data	#f0c913	TMDL
+lang	TMDL	TMDL	data	#f0c913	TMDL
+ext	.toml	TOML	data	#9c4221	TOML
+ext	.toml.example	TOML	data	#9c4221	TOML
+filename	Cargo.lock	TOML	data	#9c4221	TOML
+filename	Cargo.toml.orig	TOML	data	#9c4221	TOML
+filename	Gopkg.lock	TOML	data	#9c4221	TOML
+filename	Pipfile	TOML	data	#9c4221	TOML
+filename	mise.local.lock	TOML	data	#9c4221	TOML
+filename	mise.lock	TOML	data	#9c4221	TOML
+filename	pdm.lock	TOML	data	#9c4221	TOML
+filename	poetry.lock	TOML	data	#9c4221	TOML
+filename	uv.lock	TOML	data	#9c4221	TOML
+lang	TOML	TOML	data	#9c4221	TOML
+ext	.tsp	TSPLIB data	data		TSPLIB data
+lang	TSPLIB data	TSPLIB data	data		TSPLIB data
+ext	.sql	TSQL	programming	#e38c00	TSQL
+lang	TSQL	TSQL	programming	#e38c00	TSQL
+ext	.tsv	TSV	data	#237346	TSV
+ext	.vcf	TSV	data	#237346	TSV
+lang	TSV	TSV	data	#237346	TSV
+ext	.tsx	TSX	programming	#3178c6	TypeScript
+lang	TSX	TSX	programming	#3178c6	TypeScript
+ext	.txl	TXL	programming	#0178b8	TXL
+lang	TXL	TXL	programming	#0178b8	TXL
+ext	.tact	Tact	programming	#48b5ff	Tact
+lang	Tact	Tact	programming	#48b5ff	Tact
+ext	.talon	Talon	programming	#333333	Talon
+lang	Talon	Talon	programming	#333333	Talon
+ext	.tape	Tape	programming		Tape
+lang	Tape	Tape	programming		Tape
+ext	.tcl	Tcl	programming	#e4cc98	Tcl
+ext	.adp	Tcl	programming	#e4cc98	Tcl
+ext	.sdc	Tcl	programming	#e4cc98	Tcl
+ext	.tcl.in	Tcl	programming	#e4cc98	Tcl
+ext	.tm	Tcl	programming	#e4cc98	Tcl
+ext	.xdc	Tcl	programming	#e4cc98	Tcl
+filename	owh	Tcl	programming	#e4cc98	Tcl
+filename	starfield	Tcl	programming	#e4cc98	Tcl
+interpreter	tclsh	Tcl	programming	#e4cc98	Tcl
+interpreter	wish	Tcl	programming	#e4cc98	Tcl
+lang	Tcl	Tcl	programming	#e4cc98	Tcl
+ext	.tcsh	Tcsh	programming		Shell
+ext	.csh	Tcsh	programming		Shell
+interpreter	tcsh	Tcsh	programming		Shell
+interpreter	csh	Tcsh	programming		Shell
+lang	Tcsh	Tcsh	programming		Shell
+ext	.tex	TeX	markup	#3D6117	TeX
+ext	.aux	TeX	markup	#3D6117	TeX
+ext	.bbx	TeX	markup	#3D6117	TeX
+ext	.cbx	TeX	markup	#3D6117	TeX
+ext	.cls	TeX	markup	#3D6117	TeX
+ext	.dtx	TeX	markup	#3D6117	TeX
+ext	.ins	TeX	markup	#3D6117	TeX
+ext	.lbx	TeX	markup	#3D6117	TeX
+ext	.ltx	TeX	markup	#3D6117	TeX
+ext	.mkii	TeX	markup	#3D6117	TeX
+ext	.mkiv	TeX	markup	#3D6117	TeX
+ext	.mkvi	TeX	markup	#3D6117	TeX
+ext	.sty	TeX	markup	#3D6117	TeX
+ext	.toc	TeX	markup	#3D6117	TeX
+lang	TeX	TeX	markup	#3D6117	TeX
+ext	.tea	Tea	markup		Tea
+lang	Tea	Tea	markup		Tea
+ext	.tl	Teal	programming		Teal
+interpreter	tl	Teal	programming	#00B1BC	Teal
+lang	Teal	Teal	programming	#00B1BC	Teal
+ext	.t	Terra	programming		Terra
+interpreter	lua	Terra	programming	#00004c	Terra
+lang	Terra	Terra	programming	#00004c	Terra
+ext	.tftpl	Terraform Template	markup		Terraform Template
+lang	Terraform Template	Terraform Template	markup	#7b42bb	HCL
+ext	.texinfo	Texinfo	prose		Texinfo
+ext	.texi	Texinfo	prose		Texinfo
+ext	.txi	Texinfo	prose		Texinfo
+interpreter	makeinfo	Texinfo	prose		Texinfo
+lang	Texinfo	Texinfo	prose		Texinfo
+ext	.txt	Text	prose		Text
+ext	.fr	Text	prose		Text
+ext	.nb	Text	prose		Text
+ext	.ncl	Text	prose		Text
+ext	.no	Text	prose		Text
+filename	CITATION	Text	prose		Text
+filename	CITATIONS	Text	prose		Text
+filename	COPYING	Text	prose		Text
+filename	COPYING.regex	Text	prose		Text
+filename	COPYRIGHT.regex	Text	prose		Text
+filename	FONTLOG	Text	prose		Text
+filename	INSTALL	Text	prose		Text
+filename	INSTALL.mysql	Text	prose		Text
+filename	LICENSE	Text	prose		Text
+filename	LICENSE.mysql	Text	prose		Text
+filename	NEWS	Text	prose		Text
+filename	README.me	Text	prose		Text
+filename	README.mysql	Text	prose		Text
+filename	README.nss	Text	prose		Text
+filename	README.pc	Text	prose		Text
+filename	click.me	Text	prose		Text
+filename	delete.me	Text	prose		Text
+filename	keep.me	Text	prose		Text
+filename	package.mask	Text	prose		Text
+filename	package.use.mask	Text	prose		Text
+filename	package.use.stable.mask	Text	prose		Text
+filename	read.me	Text	prose		Text
+filename	readme.1st	Text	prose		Text
+filename	test.me	Text	prose		Text
+filename	use.mask	Text	prose		Text
+filename	use.stable.mask	Text	prose		Text
+lang	Text	Text	prose		Text
+ext	.TextGrid	TextGrid	data	#c8506d	TextGrid
+lang	TextGrid	TextGrid	data	#c8506d	TextGrid
+filename	.tm_properties	TextMate Properties	data	#df66e4	TextMate Properties
+lang	TextMate Properties	TextMate Properties	data	#df66e4	TextMate Properties
+ext	.textile	Textile	prose	#ffe7ac	Textile
+lang	Textile	Textile	prose	#ffe7ac	Textile
+ext	.thrift	Thrift	programming	#D12127	Thrift
+lang	Thrift	Thrift	programming	#D12127	Thrift
+ext	.toit	Toit	programming	#c2c9fb	Toit
+lang	Toit	Toit	programming	#c2c9fb	Toit
+ext	.tolk	Tolk	programming	#30A1F5	Tolk
+lang	Tolk	Tolk	programming	#30A1F5	Tolk
+filename	torrc	Tor Config	data	#59316b	Tor Config
+lang	Tor Config	Tor Config	data	#59316b	Tor Config
+ext	.scm	Tree-sitter Query	programming	#8ea64c	Tree-sitter Query
+lang	Tree-sitter Query	Tree-sitter Query	programming	#8ea64c	Tree-sitter Query
+ext	.t	Turing	programming	#cf142b	Turing
+ext	.tu	Turing	programming	#cf142b	Turing
+lang	Turing	Turing	programming	#cf142b	Turing
+ext	.ttl	Turtle	data		Turtle
+lang	Turtle	Turtle	data		Turtle
+ext	.twig	Twig	markup	#c1d026	Twig
+lang	Twig	Twig	markup	#c1d026	Twig
+ext	.tl	Type Language	data		Type Language
+lang	Type Language	Type Language	data		Type Language
+interpreter	bun	TypeScript	programming	#3178c6	TypeScript
+interpreter	deno	TypeScript	programming	#3178c6	TypeScript
+interpreter	ts-node	TypeScript	programming	#3178c6	TypeScript
+interpreter	tsx	TypeScript	programming	#3178c6	TypeScript
+interpreter	node	TypeScript	programming	#3178c6	TypeScript
+ext	.ts	TypeScript	programming	#3178c6	TypeScript
+ext	.cts	TypeScript	programming	#3178c6	TypeScript
+ext	.mts	TypeScript	programming	#3178c6	TypeScript
+lang	TypeScript	TypeScript	programming	#3178c6	TypeScript
+ext	.tsp	TypeSpec	programming	#4A3665	TypeSpec
+lang	TypeSpec	TypeSpec	programming	#4A3665	TypeSpec
+ext	.typ	Typst	programming	#239dad	Typst
+lang	Typst	Typst	programming	#239dad	Typst
+ext	.upc	Unified Parallel C	programming	#4e3617	C
+lang	Unified Parallel C	Unified Parallel C	programming	#4e3617	C
+ext	.anim	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.asset	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.mask	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.mat	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.meta	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.prefab	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.unity	Unity3D Asset	data	#222c37	Unity3D Asset
+lang	Unity3D Asset	Unity3D Asset	data	#222c37	Unity3D Asset
+ext	.s	Unix Assembly	programming		Assembly
+ext	.ms	Unix Assembly	programming		Assembly
+lang	Unix Assembly	Unix Assembly	programming		Assembly
+ext	.uno	Uno	programming	#9933cc	Uno
+lang	Uno	Uno	programming	#9933cc	Uno
+ext	.uc	UnrealScript	programming	#a54c4d	UnrealScript
+lang	UnrealScript	UnrealScript	programming	#a54c4d	UnrealScript
+ext	.uplc	Untyped Plutus Core	programming	#36adbd	Untyped Plutus Core
+lang	Untyped Plutus Core	Untyped Plutus Core	programming	#36adbd	Untyped Plutus Core
+ext	.ur	UrWeb	programming	#ccccee	UrWeb
+ext	.urs	UrWeb	programming	#ccccee	UrWeb
+lang	UrWeb	UrWeb	programming	#ccccee	UrWeb
+ext	.v	V	programming	#4f87c4	V
+lang	V	V	programming	#4f87c4	V
+ext	.bas	VBA	programming	#867db1	VBA
+ext	.cls	VBA	programming	#867db1	VBA
+ext	.frm	VBA	programming	#867db1	VBA
+ext	.vba	VBA	programming	#867db1	VBA
+lang	VBA	VBA	programming	#867db1	VBA
+ext	.vbs	VBScript	programming	#15dcdc	VBScript
+lang	VBScript	VBScript	programming	#15dcdc	VBScript
+ext	.vcl	VCL	programming	#148AA8	VCL
+lang	VCL	VCL	programming	#148AA8	VCL
+ext	.vhdl	VHDL	programming	#adb2cb	VHDL
+ext	.vhd	VHDL	programming	#adb2cb	VHDL
+ext	.vhf	VHDL	programming	#adb2cb	VHDL
+ext	.vhi	VHDL	programming	#adb2cb	VHDL
+ext	.vho	VHDL	programming	#adb2cb	VHDL
+ext	.vhs	VHDL	programming	#adb2cb	VHDL
+ext	.vht	VHDL	programming	#adb2cb	VHDL
+ext	.vhw	VHDL	programming	#adb2cb	VHDL
+lang	VHDL	VHDL	programming	#adb2cb	VHDL
+ext	.vala	Vala	programming	#a56de2	Vala
+ext	.vapi	Vala	programming	#a56de2	Vala
+lang	Vala	Vala	programming	#a56de2	Vala
+ext	.vdf	Valve Data Format	data	#f26025	Valve Data Format
+ext	.vmf	Valve Data Format	data	#f26025	Valve Data Format
+lang	Valve Data Format	Valve Data Format	data	#f26025	Valve Data Format
+ext	.vtl	Velocity Template Language	markup	#507cff	Velocity Template Language
+lang	Velocity Template Language	Velocity Template Language	markup	#507cff	Velocity Template Language
+ext	.vto	Vento	markup	#ff0080	Vento
+lang	Vento	Vento	markup	#ff0080	Vento
+ext	.v	Verilog	programming	#b2b7f8	Verilog
+ext	.veo	Verilog	programming	#b2b7f8	Verilog
+lang	Verilog	Verilog	programming	#b2b7f8	Verilog
+ext	.verse	Verse	programming	#518ef8	Verse
+lang	Verse	Verse	programming	#518ef8	Verse
+ext	.sd	Vespa Schema Definition	data	#61D790	Vespa Schema Definition
+lang	Vespa Schema Definition	Vespa Schema Definition	data	#61D790	Vespa Schema Definition
+ext	.txt	Vim Help File	prose	#199f4b	Vim Help File
+lang	Vim Help File	Vim Help File	prose	#199f4b	Vim Help File
+ext	.snip	Vim Snippet	markup	#199f4b	Vim Snippet
+ext	.snippet	Vim Snippet	markup	#199f4b	Vim Snippet
+ext	.snippets	Vim Snippet	markup	#199f4b	Vim Snippet
+lang	Vim Snippet	Vim Snippet	markup	#199f4b	Vim Snippet
+ext	.vim	Vim script	programming	#199f4b	Vim script
+ext	.vba	Vim script	programming	#199f4b	Vim script
+ext	.vimrc	Vim script	programming	#199f4b	Vim script
+ext	.vmb	Vim script	programming	#199f4b	Vim script
+filename	.exrc	Vim script	programming	#199f4b	Vim script
+filename	.gvimrc	Vim script	programming	#199f4b	Vim script
+filename	.nvimrc	Vim script	programming	#199f4b	Vim script
+filename	.vimrc	Vim script	programming	#199f4b	Vim script
+filename	_vimrc	Vim script	programming	#199f4b	Vim script
+filename	gvimrc	Vim script	programming	#199f4b	Vim script
+filename	nvimrc	Vim script	programming	#199f4b	Vim script
+filename	vimrc	Vim script	programming	#199f4b	Vim script
+lang	Vim script	Vim script	programming	#199f4b	Vim script
+ext	.vb	Visual Basic .NET	programming	#945db7	Visual Basic .NET
+ext	.vbhtml	Visual Basic .NET	programming	#945db7	Visual Basic .NET
+lang	Visual Basic .NET	Visual Basic .NET	programming	#945db7	Visual Basic .NET
+ext	.bas	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+ext	.cls	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+ext	.ctl	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+ext	.Dsr	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+ext	.frm	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+lang	Visual Basic 6.0	Visual Basic 6.0	programming	#2c6353	Visual Basic 6.0
+ext	.volt	Volt	programming	#1F1F1F	Volt
+lang	Volt	Volt	programming	#1F1F1F	Volt
+ext	.vue	Vue	markup	#41b883	Vue
+lang	Vue	Vue	markup	#41b883	Vue
+ext	.vy	Vyper	programming		Vyper
+lang	Vyper	Vyper	programming	#9F4CF2	Vyper
+ext	.wdl	WDL	programming	#42f1f4	WDL
+lang	WDL	WDL	programming	#42f1f4	WDL
+ext	.wgsl	WGSL	programming	#1a5e9a	WGSL
+lang	WGSL	WGSL	programming	#1a5e9a	WGSL
+ext	.mtl	Wavefront Material	data		Wavefront Material
+lang	Wavefront Material	Wavefront Material	data		Wavefront Material
+ext	.obj	Wavefront Object	data		Wavefront Object
+lang	Wavefront Object	Wavefront Object	data		Wavefront Object
+ext	.owl	Web Ontology Language	data	#5b70bd	Web Ontology Language
+lang	Web Ontology Language	Web Ontology Language	data	#5b70bd	Web Ontology Language
+ext	.wast	WebAssembly	programming	#04133b	WebAssembly
+ext	.wat	WebAssembly	programming	#04133b	WebAssembly
+lang	WebAssembly	WebAssembly	programming	#04133b	WebAssembly
+ext	.wit	WebAssembly Interface Type	data	#6250e7	WebAssembly Interface Type
+lang	WebAssembly Interface Type	WebAssembly Interface Type	data	#6250e7	WebAssembly Interface Type
+ext	.webidl	WebIDL	programming		WebIDL
+lang	WebIDL	WebIDL	programming		WebIDL
+ext	.vtt	WebVTT	data		WebVTT
+lang	WebVTT	WebVTT	data		WebVTT
+filename	.wgetrc	Wget Config	data		INI
+lang	Wget Config	Wget Config	data		INI
+ext	.whiley	Whiley	programming	#d5c397	Whiley
+lang	Whiley	Whiley	programming	#d5c397	Whiley
+ext	.mediawiki	Wikitext	prose	#fc5757	Wikitext
+ext	.wiki	Wikitext	prose	#fc5757	Wikitext
+ext	.wikitext	Wikitext	prose	#fc5757	Wikitext
+lang	Wikitext	Wikitext	prose	#fc5757	Wikitext
+ext	.mc	Win32 Message File	data		Win32 Message File
+lang	Win32 Message File	Win32 Message File	data		Win32 Message File
+ext	.reg	Windows Registry Entries	data	#52d5ff	Windows Registry Entries
+lang	Windows Registry Entries	Windows Registry Entries	data	#52d5ff	Windows Registry Entries
+ext	.ws	Witcher Script	programming	#ff0000	Witcher Script
+lang	Witcher Script	Witcher Script	programming	#ff0000	Witcher Script
+ext	.mathematica	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.cdf	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.m	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.ma	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.mt	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.nb	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.nbp	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.wl	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.wls	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.wlt	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	wolfram	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	WolframKernel	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	wolframscript	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	math	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	MathKernel	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	MathematicaScript	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	WolframNB	Wolfram Language	programming	#dd1100	Wolfram Language
+interpreter	Mathematica	Wolfram Language	programming	#dd1100	Wolfram Language
+lang	Wolfram Language	Wolfram Language	programming	#dd1100	Wolfram Language
+ext	.wlk	Wollok	programming	#a23738	Wollok
+lang	Wollok	Wollok	programming	#a23738	Wollok
+ext	.toc	World of Warcraft Addon Data	data	#f7e43f	World of Warcraft Addon Data
+lang	World of Warcraft Addon Data	World of Warcraft Addon Data	data	#f7e43f	World of Warcraft Addon Data
+ext	.wren	Wren	programming	#383838	Wren
+lang	Wren	Wren	programming	#383838	Wren
+ext	.xbm	X BitMap	data		C
+lang	X BitMap	X BitMap	data		C
+filename	encodings.dir	X Font Directory Index	data		X Font Directory Index
+filename	fonts.alias	X Font Directory Index	data		X Font Directory Index
+filename	fonts.dir	X Font Directory Index	data		X Font Directory Index
+filename	fonts.scale	X Font Directory Index	data		X Font Directory Index
+lang	X Font Directory Index	X Font Directory Index	data		X Font Directory Index
+ext	.xpm	X PixMap	data		C
+ext	.pm	X PixMap	data		C
+lang	X PixMap	X PixMap	data		C
+ext	.x10	X10	programming		X10
+lang	X10	X10	programming	#4B6BEF	X10
+ext	.xc	XC	programming	#99DA07	XC
+lang	XC	XC	programming	#99DA07	XC
+filename	.XCompose	XCompose	data		XCompose
+filename	XCompose	XCompose	data		XCompose
+filename	xcompose	XCompose	data		XCompose
+lang	XCompose	XCompose	data		XCompose
+ext	.xml	XML	data	#0060ac	XML
+ext	.adml	XML	data	#0060ac	XML
+ext	.admx	XML	data	#0060ac	XML
+ext	.ant	XML	data	#0060ac	XML
+ext	.axaml	XML	data	#0060ac	XML
+ext	.axml	XML	data	#0060ac	XML
+ext	.builds	XML	data	#0060ac	XML
+ext	.ccproj	XML	data	#0060ac	XML
+ext	.ccxml	XML	data	#0060ac	XML
+ext	.clixml	XML	data	#0060ac	XML
+ext	.cproject	XML	data	#0060ac	XML
+ext	.cscfg	XML	data	#0060ac	XML
+ext	.csdef	XML	data	#0060ac	XML
+ext	.csl	XML	data	#0060ac	XML
+ext	.csproj	XML	data	#0060ac	XML
+ext	.ct	XML	data	#0060ac	XML
+ext	.depproj	XML	data	#0060ac	XML
+ext	.dita	XML	data	#0060ac	XML
+ext	.ditamap	XML	data	#0060ac	XML
+ext	.ditaval	XML	data	#0060ac	XML
+ext	.dll.config	XML	data	#0060ac	XML
+ext	.dotsettings	XML	data	#0060ac	XML
+ext	.filters	XML	data	#0060ac	XML
+ext	.fsproj	XML	data	#0060ac	XML
+ext	.fxml	XML	data	#0060ac	XML
+ext	.glade	XML	data	#0060ac	XML
+ext	.gml	XML	data	#0060ac	XML
+ext	.gmx	XML	data	#0060ac	XML
+ext	.gpx	XML	data	#0060ac	XML
+ext	.grxml	XML	data	#0060ac	XML
+ext	.gst	XML	data	#0060ac	XML
+ext	.hzp	XML	data	#0060ac	XML
+ext	.icls	XML	data	#0060ac	XML
+ext	.iml	XML	data	#0060ac	XML
+ext	.ivy	XML	data	#0060ac	XML
+ext	.jelly	XML	data	#0060ac	XML
+ext	.jsproj	XML	data	#0060ac	XML
+ext	.kml	XML	data	#0060ac	XML
+ext	.launch	XML	data	#0060ac	XML
+ext	.mdpolicy	XML	data	#0060ac	XML
+ext	.meta4	XML	data	#0060ac	XML
+ext	.mjml	XML	data	#0060ac	XML
+ext	.mm	XML	data	#0060ac	XML
+ext	.mod	XML	data	#0060ac	XML
+ext	.mojo	XML	data	#0060ac	XML
+ext	.mxml	XML	data	#0060ac	XML
+ext	.natvis	XML	data	#0060ac	XML
+ext	.ncl	XML	data	#0060ac	XML
+ext	.ndproj	XML	data	#0060ac	XML
+ext	.nproj	XML	data	#0060ac	XML
+ext	.nuspec	XML	data	#0060ac	XML
+ext	.odd	XML	data	#0060ac	XML
+ext	.osm	XML	data	#0060ac	XML
+ext	.pkgproj	XML	data	#0060ac	XML
+ext	.pluginspec	XML	data	#0060ac	XML
+ext	.proj	XML	data	#0060ac	XML
+ext	.props	XML	data	#0060ac	XML
+ext	.ps1xml	XML	data	#0060ac	XML
+ext	.psc1	XML	data	#0060ac	XML
+ext	.pt	XML	data	#0060ac	XML
+ext	.pubxml	XML	data	#0060ac	XML
+ext	.qhelp	XML	data	#0060ac	XML
+ext	.rbxmx	XML	data	#0060ac	XML
+ext	.rdf	XML	data	#0060ac	XML
+ext	.res	XML	data	#0060ac	XML
+ext	.resx	XML	data	#0060ac	XML
+ext	.rs	XML	data	#0060ac	XML
+ext	.rss	XML	data	#0060ac	XML
+ext	.sch	XML	data	#0060ac	XML
+ext	.scxml	XML	data	#0060ac	XML
+ext	.sfproj	XML	data	#0060ac	XML
+ext	.shproj	XML	data	#0060ac	XML
+ext	.slnx	XML	data	#0060ac	XML
+ext	.srdf	XML	data	#0060ac	XML
+ext	.storyboard	XML	data	#0060ac	XML
+ext	.sublime-snippet	XML	data	#0060ac	XML
+ext	.sw	XML	data	#0060ac	XML
+ext	.targets	XML	data	#0060ac	XML
+ext	.tml	XML	data	#0060ac	XML
+ext	.ts	XML	data	#0060ac	XML
+ext	.tsx	XML	data	#0060ac	XML
+ext	.typ	XML	data	#0060ac	XML
+ext	.ui	XML	data	#0060ac	XML
+ext	.urdf	XML	data	#0060ac	XML
+ext	.ux	XML	data	#0060ac	XML
+ext	.vbproj	XML	data	#0060ac	XML
+ext	.vcxproj	XML	data	#0060ac	XML
+ext	.vsixmanifest	XML	data	#0060ac	XML
+ext	.vssettings	XML	data	#0060ac	XML
+ext	.vstemplate	XML	data	#0060ac	XML
+ext	.vxml	XML	data	#0060ac	XML
+ext	.wixproj	XML	data	#0060ac	XML
+ext	.workflow	XML	data	#0060ac	XML
+ext	.wsdl	XML	data	#0060ac	XML
+ext	.wsf	XML	data	#0060ac	XML
+ext	.wxi	XML	data	#0060ac	XML
+ext	.wxl	XML	data	#0060ac	XML
+ext	.wxs	XML	data	#0060ac	XML
+ext	.x3d	XML	data	#0060ac	XML
+ext	.xacro	XML	data	#0060ac	XML
+ext	.xaml	XML	data	#0060ac	XML
+ext	.xib	XML	data	#0060ac	XML
+ext	.xlf	XML	data	#0060ac	XML
+ext	.xliff	XML	data	#0060ac	XML
+ext	.xmi	XML	data	#0060ac	XML
+ext	.xml.dist	XML	data	#0060ac	XML
+ext	.xmp	XML	data	#0060ac	XML
+ext	.xproj	XML	data	#0060ac	XML
+ext	.xsd	XML	data	#0060ac	XML
+ext	.xspec	XML	data	#0060ac	XML
+ext	.xul	XML	data	#0060ac	XML
+ext	.zcml	XML	data	#0060ac	XML
+filename	.classpath	XML	data	#0060ac	XML
+filename	.cproject	XML	data	#0060ac	XML
+filename	.project	XML	data	#0060ac	XML
+filename	App.config	XML	data	#0060ac	XML
+filename	NuGet.config	XML	data	#0060ac	XML
+filename	Settings.StyleCop	XML	data	#0060ac	XML
+filename	Web.Debug.config	XML	data	#0060ac	XML
+filename	Web.Release.config	XML	data	#0060ac	XML
+filename	Web.config	XML	data	#0060ac	XML
+filename	packages.config	XML	data	#0060ac	XML
+lang	XML	XML	data	#0060ac	XML
+ext	.plist	XML Property List	data	#0060ac	XML
+ext	.stTheme	XML Property List	data	#0060ac	XML
+ext	.tmCommand	XML Property List	data	#0060ac	XML
+ext	.tmLanguage	XML Property List	data	#0060ac	XML
+ext	.tmPreferences	XML Property List	data	#0060ac	XML
+ext	.tmSnippet	XML Property List	data	#0060ac	XML
+ext	.tmTheme	XML Property List	data	#0060ac	XML
+lang	XML Property List	XML Property List	data	#0060ac	XML
+ext	.xsp-config	XPages	data		XPages
+ext	.xsp.metadata	XPages	data		XPages
+lang	XPages	XPages	data		XPages
+ext	.xpl	XProc	programming		XProc
+ext	.xproc	XProc	programming		XProc
+lang	XProc	XProc	programming		XProc
+ext	.xquery	XQuery	programming	#5232e7	XQuery
+ext	.xq	XQuery	programming	#5232e7	XQuery
+ext	.xql	XQuery	programming	#5232e7	XQuery
+ext	.xqm	XQuery	programming	#5232e7	XQuery
+ext	.xqy	XQuery	programming	#5232e7	XQuery
+lang	XQuery	XQuery	programming	#5232e7	XQuery
+ext	.xs	XS	programming		XS
+lang	XS	XS	programming		XS
+ext	.xslt	XSLT	programming		XSLT
+ext	.xsl	XSLT	programming		XSLT
+lang	XSLT	XSLT	programming	#EB8CEB	XSLT
+filename	xmake.lua	Xmake	programming	#22a079	Xmake
+lang	Xmake	Xmake	programming	#22a079	Xmake
+ext	.xojo_code	Xojo	programming	#81bd41	Xojo
+ext	.xojo_menu	Xojo	programming	#81bd41	Xojo
+ext	.xojo_report	Xojo	programming	#81bd41	Xojo
+ext	.xojo_script	Xojo	programming	#81bd41	Xojo
+ext	.xojo_toolbar	Xojo	programming	#81bd41	Xojo
+ext	.xojo_window	Xojo	programming	#81bd41	Xojo
+lang	Xojo	Xojo	programming	#81bd41	Xojo
+ext	.xsh	Xonsh	programming	#285EEF	Xonsh
+lang	Xonsh	Xonsh	programming	#285EEF	Xonsh
+ext	.xtend	Xtend	programming	#24255d	Xtend
+lang	Xtend	Xtend	programming	#24255d	Xtend
+ext	.yml	YAML	data	#cb171e	YAML
+ext	.mir	YAML	data	#cb171e	YAML
+ext	.reek	YAML	data	#cb171e	YAML
+ext	.rviz	YAML	data	#cb171e	YAML
+ext	.sublime-syntax	YAML	data	#cb171e	YAML
+ext	.syntax	YAML	data	#cb171e	YAML
+ext	.yaml	YAML	data	#cb171e	YAML
+ext	.yaml-tmlanguage	YAML	data	#cb171e	YAML
+ext	.yaml.sed	YAML	data	#cb171e	YAML
+ext	.yml.mysql	YAML	data	#cb171e	YAML
+filename	.clang-format	YAML	data	#cb171e	YAML
+filename	.clang-tidy	YAML	data	#cb171e	YAML
+filename	.clangd	YAML	data	#cb171e	YAML
+filename	.eslintrc	YAML	data	#cb171e	YAML
+filename	.gemrc	YAML	data	#cb171e	YAML
+filename	.releaserc	YAML	data	#cb171e	YAML
+filename	CITATION.cff	YAML	data	#cb171e	YAML
+filename	glide.lock	YAML	data	#cb171e	YAML
+filename	pixi.lock	YAML	data	#cb171e	YAML
+filename	yarn.lock	YAML	data	#cb171e	YAML
+lang	YAML	YAML	data	#cb171e	YAML
+ext	.yang	YANG	data		YANG
+lang	YANG	YANG	data		YANG
+ext	.yar	YARA	programming	#220000	YARA
+ext	.yara	YARA	programming	#220000	YARA
+lang	YARA	YARA	programming	#220000	YARA
+ext	.yasnippet	YASnippet	markup	#32AB90	YASnippet
+lang	YASnippet	YASnippet	markup	#32AB90	YASnippet
+ext	.y	Yacc	programming		Yacc
+ext	.yacc	Yacc	programming		Yacc
+ext	.yy	Yacc	programming		Yacc
+lang	Yacc	Yacc	programming	#4B6C4B	Yacc
+ext	.yul	Yul	programming	#794932	Yul
+lang	Yul	Yul	programming	#794932	Yul
+ext	.zap	ZAP	programming	#0d665e	ZAP
+ext	.xzap	ZAP	programming	#0d665e	ZAP
+lang	ZAP	ZAP	programming	#0d665e	ZAP
+ext	.zil	ZIL	programming	#dc75e5	ZIL
+ext	.mud	ZIL	programming	#dc75e5	ZIL
+lang	ZIL	ZIL	programming	#dc75e5	ZIL
+ext	.zeek	Zeek	programming		Zeek
+ext	.bro	Zeek	programming		Zeek
+lang	Zeek	Zeek	programming		Zeek
+ext	.zs	ZenScript	programming	#00BCD1	ZenScript
+lang	ZenScript	ZenScript	programming	#00BCD1	ZenScript
+ext	.zep	Zephir	programming	#118f9e	Zephir
+lang	Zephir	Zephir	programming	#118f9e	Zephir
+ext	.zig	Zig	programming	#ec915c	Zig
+ext	.zig.zon	Zig	programming	#ec915c	Zig
+lang	Zig	Zig	programming	#ec915c	Zig
+ext	.zimpl	Zimpl	programming	#d67711	Zimpl
+ext	.zmpl	Zimpl	programming	#d67711	Zimpl
+ext	.zpl	Zimpl	programming	#d67711	Zimpl
+lang	Zimpl	Zimpl	programming	#d67711	Zimpl
+ext	.zmodel	Zmodel	data	#ff7100	Zmodel
+lang	Zmodel	Zmodel	data	#ff7100	Zmodel
+filename	.curlrc	cURL Config	data		INI
+filename	_curlrc	cURL Config	data		INI
+lang	cURL Config	cURL Config	data		INI
+filename	crontab	crontab	data	#ead7ac	crontab
+lang	crontab	crontab	data	#ead7ac	crontab
+ext	.desktop	desktop	data		INI
+ext	.desktop.in	desktop	data		INI
+lang	desktop	desktop	data		INI
+ext	.dircolors	dircolors	data		dircolors
+filename	.dir_colors	dircolors	data		dircolors
+filename	.dircolors	dircolors	data		dircolors
+filename	DIR_COLORS	dircolors	data		dircolors
+filename	_dir_colors	dircolors	data		dircolors
+filename	_dircolors	dircolors	data		dircolors
+filename	dir_colors	dircolors	data		dircolors
+lang	dircolors	dircolors	data		dircolors
+ext	.ec	eC	programming	#913960	eC
+ext	.eh	eC	programming	#913960	eC
+lang	eC	eC	programming	#913960	eC
+ext	.edn	edn	data		edn
+lang	edn	edn	data		edn
+interpreter	fish	fish	programming	#4aae47	Shell
+ext	.fish	fish	programming	#4aae47	Shell
+lang	fish	fish	programming	#4aae47	Shell
+ext	.hoon	hoon	programming	#00b171	hoon
+lang	hoon	hoon	programming	#00b171	hoon
+ext	.ics	iCalendar	data	#ec564c	iCalendar
+ext	.ical	iCalendar	data	#ec564c	iCalendar
+lang	iCalendar	iCalendar	data	#ec564c	iCalendar
+ext	.jq	jq	programming	#c7254e	jq
+interpreter	gojq	jq	programming	#c7254e	jq
+interpreter	jaq	jq	programming	#c7254e	jq
+interpreter	jq	jq	programming	#c7254e	jq
+interpreter	jqjq	jq	programming	#c7254e	jq
+interpreter	jqq	jq	programming	#c7254e	jq
+interpreter	query-json	jq	programming	#c7254e	jq
+lang	jq	jq	programming	#c7254e	jq
+ext	.kv	kvlang	markup		kvlang
+lang	kvlang	kvlang	markup	#1da6e0	kvlang
+ext	.mrc	mIRC Script	programming	#3d57c3	mIRC Script
+lang	mIRC Script	mIRC Script	programming	#3d57c3	mIRC Script
+ext	.mcfunction	mcfunction	programming	#E22837	mcfunction
+lang	mcfunction	mcfunction	programming	#E22837	mcfunction
+ext	.svx	mdsvex	markup	#5f9ea0	mdsvex
+lang	mdsvex	mdsvex	markup	#5f9ea0	mdsvex
+ext	.mu	mupad	programming	#244963	mupad
+lang	mupad	mupad	programming	#244963	mupad
+ext	.nanorc	nanorc	data	#2d004d	INI
+filename	.nanorc	nanorc	data	#2d004d	INI
+filename	nanorc	nanorc	data	#2d004d	INI
+lang	nanorc	nanorc	data	#2d004d	INI
+ext	.nc	nesC	programming	#94B0C7	nesC
+lang	nesC	nesC	programming	#94B0C7	nesC
+ext	.ooc	ooc	programming	#b0b77e	ooc
+lang	ooc	ooc	programming	#b0b77e	ooc
+ext	.pc	pkg-config	data	#2b5e82	pkg-config
+ext	.pc.in	pkg-config	data	#2b5e82	pkg-config
+lang	pkg-config	pkg-config	data	#2b5e82	pkg-config
+ext	.q	q	programming		q
+lang	q	q	programming	#0040cd	q
+ext	.rst	reStructuredText	prose	#141414	reStructuredText
+ext	.rest	reStructuredText	prose	#141414	reStructuredText
+ext	.rest.txt	reStructuredText	prose	#141414	reStructuredText
+ext	.rst.txt	reStructuredText	prose	#141414	reStructuredText
+lang	reStructuredText	reStructuredText	prose	#141414	reStructuredText
+ext	.sed	sed	programming	#64b970	sed
+interpreter	gsed	sed	programming	#64b970	sed
+interpreter	minised	sed	programming	#64b970	sed
+interpreter	sed	sed	programming	#64b970	sed
+interpreter	ssed	sed	programming	#64b970	sed
+lang	sed	sed	programming	#64b970	sed
+ext	.templ	templ	markup	#66D0DD	templ
+lang	templ	templ	markup	#66D0DD	templ
+ext	.uc	ucode	programming	#00b8d4	ucode
+interpreter	ucode	ucode	programming	#00b8d4	ucode
+lang	ucode	ucode	programming	#00b8d4	ucode
+ext	.vcf	vCard	data	#ee2647	vCard
+lang	vCard	vCard	data	#ee2647	vCard
+ext	.wisp	wisp	programming	#7582D1	wisp
+lang	wisp	wisp	programming	#7582D1	wisp
+ext	.prg	xBase	programming	#403a40	xBase
+ext	.ch	xBase	programming	#403a40	xBase
+ext	.prw	xBase	programming	#403a40	xBase
+lang	xBase	xBase	programming	#403a40	xBase

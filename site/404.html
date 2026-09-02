@@ -10,13 +10,14 @@
 <body>
 <div class="wrap">
 @@HEADER@@
-<main id="main">
+<main id="main" class="git-page">
 <h2>404</h2>
 <hr class="rule">
-<p>The requested page does not exist.</p>
+<p>The requested page does not exist. If this is a new git commit, file, or account, the page may fill in from GitHub.</p>
 <p><a href="@@ROOT@@">home</a> · <a href="@@ROOT@@docs/">handbook</a> · <a href="@@ROOT@@git/">git</a> · <a href="@@ROOT@@install/">install</a></p>
 </main>
 @@FOOTER@@
 </div>
+<script src="@@ROOT@@assets/git.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@" data-git="@@GIT_HOST@@"></script>
 </body>
 </html>

@@ -279,22 +279,22 @@ footer p {
 	font-size: 0.9rem;
 }
 
-.feed .who {
+.who {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.35rem;
 	color: var(--fg);
 }
 
-.feed a.who {
+a.who {
 	color: var(--accent);
 }
 
-.feed a.who:hover .avatar {
+a.who:hover .avatar {
 	border-color: var(--accent);
 }
 
-.feed .avatar {
+.avatar {
 	display: block;
 	width: 24px;
 	height: 24px;
@@ -303,7 +303,7 @@ footer p {
 	flex-shrink: 0;
 }
 
-.feed .verified {
+.verified {
 	display: inline-block;
 	color: var(--accent);
 	border: 1px solid var(--accent);
@@ -651,13 +651,8 @@ pre.block.git-blob {
 	display: block;
 	height: 100%;
 	background: var(--accent);
-	opacity: 0.95;
 	min-width: 1px;
 }
-
-.lang-seg:nth-child(2) { opacity: 0.7; }
-.lang-seg:nth-child(3) { opacity: 0.5; }
-.lang-seg:nth-child(n+4) { opacity: 0.35; background: #888; }
 
 .lang-list {
 	list-style: none;
@@ -670,6 +665,69 @@ pre.block.git-blob {
 .lang-list li {
 	display: inline;
 	margin-right: 1rem;
+}
+
+.lang-dot {
+	display: inline-block;
+	width: 0.65rem;
+	height: 0.65rem;
+	border: 1px solid var(--rule);
+	vertical-align: middle;
+	margin-right: 0.2rem;
+}
+
+.lang-badge {
+	margin: 0 0 0.5rem;
+}
+
+.people {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.25rem;
+	margin: 0.75rem 0 1.25rem;
+	align-items: center;
+}
+
+.person {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.profile {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+	margin: 0 0 1.25rem;
+}
+
+.profile-avatar {
+	width: 80px;
+	height: 80px;
+}
+
+.profile-body {
+	min-width: 0;
+	flex: 1;
+}
+
+.profile-body h2 {
+	margin-top: 0;
+}
+
+.profile-name {
+	margin: 0.15rem 0 0.5rem;
+	color: var(--muted);
+}
+
+.live-note {
+	color: var(--accent);
+	margin: 0.35rem 0 0.75rem;
+}
+
+table.git-log .who,
+table.git-log td {
+	vertical-align: middle;
 }
 
 #git-filter {

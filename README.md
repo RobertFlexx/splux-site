@@ -69,18 +69,20 @@ in-page GitHub refresh still pick releases up.
 
 ## GitHub Pages
 
-The workflow rebuilds the package index and news feed every five minutes
-and on push to `main`.
+The workflow rebuilds the package index, news feed, and git browser
+every fifteen minutes and on push to `main`.
 The custom domain is `https://splux.robertflexx.dev`. Point a DNS CNAME
 for `splux` at `robertflexx.github.io`, then GitHub Pages serves this
 repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 
 ## Git
 
-`/git/` is a static browse of SPS, sps-core, sps-extra, and this
-repository. The Pages workflow clones those trees and writes commit,
-file, and language pages. There is no git server, no accounts, and no
-pull requests. Clone from GitHub:
+`/git/` is a live HTML mirror of SPS, sps-core, sps-extra, and this
+repository. Languages match GitHub Linguist. Commits show the GitHub
+account that uploaded them, with avatars, and `/git/users/` holds
+profiles. The Pages workflow rebuilds those pages; the browser also
+asks GitHub for anything newer. There is no git server and no pull
+requests. Clone from GitHub:
 
 ```sh
 git clone https://github.com/RobertFlexx/SPS.git
@@ -89,9 +91,9 @@ git clone https://github.com/RobertFlexx/sps-extra.git
 git clone https://github.com/RobertFlexx/splux-site.git
 ```
 
-News commit links point at `/git/<repo>/commit/<sha>/`. Recipe pages
-link into `/git/sps-core/` and `/git/sps-extra/`. Live ISO files stay
-on GitHub Releases.
+News commit links point at `/git/<repo>/commit/<sha>/`. Author names
+point at `/git/users/<login>/`. Recipe pages link into `/git/sps-core/`
+and `/git/sps-extra/`. Live ISO files stay on GitHub Releases.
 
 `git.splux.robertflexx.dev` is not a separate service. GitHub Pages
 allows one custom domain on this repository (`splux.robertflexx.dev`).

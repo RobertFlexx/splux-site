@@ -9,6 +9,8 @@ BEGIN {
 		mode = "html"
 	if (siteurl == "")
 		siteurl = "https://splux.robertflexx.dev"
+	if (gitusers == "")
+		gitusers = siteurl "/git/users"
 	per = per + 0
 	if (per < 1)
 		per = 20
@@ -114,8 +116,11 @@ END {
 }
 
 function profile_href(a) {
-	if (a ~ /^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$/ && length(a) <= 39)
+	if (a ~ /^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$/ && length(a) <= 39) {
+		if (gitusers != "")
+			return gitusers "/" a "/"
 		return "https://github.com/" a
+	}
 	return ""
 }
 

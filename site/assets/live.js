@@ -165,7 +165,7 @@
 	function profileOf(it) {
 		var name = it && it.author ? String(it.author) : "";
 		if (/^[A-Za-z0-9]([A-Za-z0-9-]*[A-Za-z0-9])?$/.test(name) && name.length <= 39)
-			return "https://github.com/" + name;
+			return gitHost + "/users/" + name + "/";
 		return "";
 	}
 

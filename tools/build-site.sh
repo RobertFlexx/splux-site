@@ -254,7 +254,7 @@ then
 	printf '%s\n' "warning: news collection failed" >&2
 	: >"$tmp/news.tsv"
 fi
-awk -f tools/news.awk -v mode=brief "$tmp/news.tsv" >"$tmp/news-brief.html"
+awk -f tools/news.awk -v mode=brief -v gitusers="$GIT_HOST/users" "$tmp/news.tsv" >"$tmp/news-brief.html"
 generated_iso=$(date -u '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u '+%Y-%m-%dT00:00:00Z')
 awk -f tools/news.awk -v mode=atom -v siteurl="$SITE_URL" \
 	-v feedupdated="$generated_iso" \
@@ -378,6 +378,7 @@ do
 done <"$tmp/gitpages"
 
 awk -f tools/news.awk -v mode=html -v page=1 -v per="$news_per" \
+	-v gitusers="$GIT_HOST/users" \
 	"$tmp/news.tsv" >"$tmp/news.html"
 awk -f tools/news.awk -v mode=pager -v page=1 -v pages="$news_pages" \
 	-v per="$news_per" -v nest=0 "$tmp/news.tsv" >"$tmp/pager.html"
@@ -387,6 +388,7 @@ news_p=2
 while [ "$news_p" -le "$news_pages" ]
 do
 	awk -f tools/news.awk -v mode=html -v page="$news_p" -v per="$news_per" \
+		-v gitusers="$GIT_HOST/users" \
 		"$tmp/news.tsv" >"$tmp/news.html"
 	awk -f tools/news.awk -v mode=pager -v page="$news_p" -v pages="$news_pages" \
 		-v per="$news_per" -v nest=1 "$tmp/news.tsv" >"$tmp/pager.html"
