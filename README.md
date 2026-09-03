@@ -79,12 +79,22 @@ repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 
 `/git/` is a live HTML mirror of SPS, sps-core, sps-extra, and this
 repository. Languages match GitHub Linguist. Open a language to see
-how many files use it (`/git/<repo>/lang/<Lang>/`). Commits show the
-GitHub account that uploaded them, with avatars. In a repository,
-People lists that tree's commit authors (`/git/<repo>/people/`).
-`/git/users/` holds profiles across all official trees. The Pages
-workflow rebuilds those pages; the browser also asks GitHub for
-anything newer. There is no git server and no pull requests. Clone
+how many files use it (`/git/<repo>/lang/<Lang>/`). Source files are
+highlighted per language. Markdown files, README notes, and GitHub
+release bodies render as HTML. Commits show the GitHub account that
+uploaded them, with avatars. In a repository, People lists that tree's
+commit authors (`/git/<repo>/people/`). `/git/users/` holds profiles
+across all official trees.
+
+Tags are `/git/<repo>/tags/` and `/git/<repo>/tags/<name>/`. Releases
+are `/git/<repo>/releases/`, `/git/<repo>/releases/tag/<name>/`, and
+`/git/<repo>/releases/latest/`. Those pages follow GitHub's lists and
+notes, with this site's URLs and layout. Source zip and tar.gz links
+point at GitHub. ISO files and other release assets stay on GitHub
+Releases.
+
+The Pages workflow rebuilds those pages; the browser also asks GitHub
+for anything newer. There is no git server and no pull requests. Clone
 from GitHub:
 
 ```sh

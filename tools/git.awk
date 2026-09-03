@@ -14,6 +14,12 @@
 #                -v userpfx= -v commitpfx=
 # mode=entries   TSV kind size name href [lang]
 #                -v langpfx=  -v showlang=no
+# mode=tags      TSV name sha short iso kind subject rel [seg]
+#                -v tagpfx=  -v commitpfx=  -v relpfx=
+# mode=releases  TSV tag title iso login avatar pre latest nassets excerpt reactions [seg]
+#                -v relpfx=  -v tagpfx=  -v userpfx=
+# mode=assets    TSV name size downloads url [type]
+# mode=notes     release body as text; light markdown (lists, headings, code, links)
 
 function esc(s) {
 	gsub(/&/, "\\&amp;", s)
@@ -38,6 +44,60 @@ function langhref(name) {
 	if (langpfx == "" || name == "")
 		return ""
 	return langpfx slug(name) "/"
+}
+
+function humansize(n,    mb) {
+	n = n + 0
+	if (n >= 1073741824)
+		return sprintf("%.1f GB", n / 1073741824)
+	if (n >= 1048576) {
+		mb = n / 1048576
+		if (mb >= 10)
+			return sprintf("%.0f MB", mb)
+		return sprintf("%.1f MB", mb)
+	}
+	if (n >= 1024)
+		return sprintf("%.0f KB", n / 1024)
+	if (n > 0)
+		return n " B"
+	return "0 B"
+}
+
+function autolink(s,    out, url) {
+	out = ""
+	while (match(s, /https:\/\/[^[:space:]<>"']+/)) {
+		url = substr(s, RSTART, RLENGTH)
+		out = out substr(s, 1, RSTART - 1) "<a href=\"" url "\">" url "</a>"
+		s = substr(s, RSTART + RLENGTH)
+	}
+	return out s
+}
+
+function inline(s,    out, code) {
+	s = esc(s)
+	out = ""
+	while (match(s, /`[^`]+`/)) {
+		code = substr(s, RSTART + 1, RLENGTH - 2)
+		out = out substr(s, 1, RSTART - 1) "<code>" code "</code>"
+		s = substr(s, RSTART + RLENGTH)
+	}
+	return autolink(out s)
+}
+
+function notes_flush_p() {
+	if (para != "") {
+		print "<p>" inline(para) "</p>"
+		para = ""
+		any = 1
+	}
+}
+
+function notes_flush_ul() {
+	if (inul) {
+		print "</ul>"
+		inul = 0
+		any = 1
+	}
 }
 
 function who(login, name, avatar,    html, av, label) {
@@ -147,7 +207,116 @@ mode == "entries" {
 	elang[n] = $5
 }
 
+mode == "tags" {
+	n++
+	name[n] = $1
+	hash[n] = $2
+	short[n] = $3
+	iso[n] = $4
+	kind[n] = $5
+	subject[n] = $6
+	rel[n] = $7
+	tseg[n] = ($8 != "") ? $8 : $1
+}
+
+mode == "releases" {
+	n++
+	rtag[n] = $1
+	title[n] = $2
+	iso[n] = $3
+	login[n] = $4
+	avatar[n] = $5
+	pre[n] = $6
+	latest[n] = $7
+	nassets[n] = $8
+	excerpt[n] = $9
+	react[n] = $10
+	rseg[n] = ($11 != "") ? $11 : $1
+}
+
+mode == "assets" {
+	n++
+	name[n] = $1
+	size[n] = $2
+	count[n] = $3
+	href[n] = $4
+	kind[n] = $5
+}
+
+mode == "notes" {
+	line = $0
+	sub(/\r$/, "", line)
+	if (line ~ /^```/) {
+		notes_flush_p()
+		notes_flush_ul()
+		if (inpre) {
+			print "</pre>"
+			inpre = 0
+		} else {
+			print "<pre class=\"block\">"
+			inpre = 1
+		}
+		any = 1
+		next
+	}
+	if (inpre) {
+		print esc(line)
+		any = 1
+		next
+	}
+	if (line ~ /^### /) {
+		notes_flush_p()
+		notes_flush_ul()
+		print "<h4>" inline(substr(line, 5)) "</h4>"
+		any = 1
+		next
+	}
+	if (line ~ /^## /) {
+		notes_flush_p()
+		notes_flush_ul()
+		print "<h3>" inline(substr(line, 4)) "</h3>"
+		any = 1
+		next
+	}
+	if (line ~ /^# /) {
+		notes_flush_p()
+		notes_flush_ul()
+		print "<h3>" inline(substr(line, 3)) "</h3>"
+		any = 1
+		next
+	}
+	if (line ~ /^- / || line ~ /^\* /) {
+		notes_flush_p()
+		if (!inul) {
+			print "<ul class=\"plain\">"
+			inul = 1
+		}
+		print "<li>" inline(substr(line, 3)) "</li>"
+		any = 1
+		next
+	}
+	if (line ~ /^[[:space:]]*$/) {
+		notes_flush_p()
+		notes_flush_ul()
+		next
+	}
+	notes_flush_ul()
+	if (para != "")
+		para = para " " line
+	else
+		para = line
+}
+
 END {
+	if (mode == "notes") {
+		if (inpre)
+			print "</pre>"
+		notes_flush_p()
+		notes_flush_ul()
+		if (!any)
+			print "<p class=\"muted\">No notes.</p>"
+		exit
+	}
 	if (mode == "pre") {
 		if (!opened)
 			print "<pre class=\"block git-blob\"></pre>"
@@ -311,6 +480,117 @@ END {
 					printf "<td class=\"muted\">%s</td>", esc(elang[i])
 			}
 			printf "<td class=\"muted\">%s</td>", esc(sz)
+			print "</tr>"
+		}
+		print "</tbody></table>"
+		exit
+	}
+	if (mode == "tags") {
+		if (n < 1) {
+			print "<p class=\"muted\">No tags in this tree.</p>"
+			exit
+		}
+		print "<table class=\"pkgs git-tags\" id=\"git-tag-table\">"
+		print "<thead><tr><th>Tag</th><th>Commit</th><th>When</th><th>Message</th><th></th></tr></thead>"
+		print "<tbody>"
+		for (i = 1; i <= n; i++) {
+			thref = (tagpfx != "") ? tagpfx esc(tseg[i]) "/" : ""
+			chref = (commitpfx != "" && hash[i] != "") ? commitpfx esc(hash[i]) "/" : ""
+			rhref = (relpfx != "" && rel[i] != "") ? relpfx esc(tseg[i]) "/" : ""
+			search = tolower(name[i] " " subject[i] " " kind[i])
+			printf "<tr data-tag=\"%s\" data-sha=\"%s\" data-search=\"%s\">", \
+				esc(name[i]), esc(hash[i]), esc(search)
+			printf "<td>"
+			if (thref != "")
+				printf "<a href=\"%s\"><code>%s</code></a>", thref, esc(name[i])
+			else
+				printf "<code>%s</code>", esc(name[i])
+			printf "</td>"
+			printf "<td>"
+			if (chref != "")
+				printf "<a href=\"%s\"><code>%s</code></a>", chref, esc(short[i])
+			else
+				printf "<code>%s</code>", esc(short[i])
+			printf "</td>"
+			day = iso[i]
+			sub(/T.*/, "", day)
+			if (iso[i] != "")
+				printf "<td><time datetime=\"%s\">%s</time></td>", \
+					esc(iso[i]), esc(day)
+			else
+				printf "<td></td>"
+			printf "<td>%s</td>", esc(subject[i])
+			printf "<td>"
+			if (kind[i] == "annotated")
+				printf "<span class=\"badge\">annotated</span> "
+			if (rhref != "")
+				printf "<a href=\"%s\">release</a>", rhref
+			print "</td></tr>"
+		}
+		print "</tbody></table>"
+		exit
+	}
+	if (mode == "releases") {
+		if (n < 1) {
+			print "<p class=\"muted\">No GitHub releases yet.</p>"
+			exit
+		}
+		print "<div class=\"release-list\" id=\"git-releases\">"
+		for (i = 1; i <= n; i++) {
+			thref = (tagpfx != "") ? tagpfx esc(rseg[i]) "/" : ""
+			rhref = (relpfx != "") ? relpfx esc(rseg[i]) "/" : ""
+			search = tolower(rtag[i] " " title[i] " " login[i])
+			printf "<article class=\"release\" data-tag=\"%s\" data-search=\"%s\">\n", \
+				esc(rtag[i]), esc(search)
+			printf "<p class=\"meta\">"
+			if (latest[i] == "yes")
+				printf "<span class=\"badge latest\">Latest</span> "
+			if (pre[i] == "yes")
+				printf "<span class=\"badge\">Pre-release</span> "
+			if (iso[i] != "") {
+				day = iso[i]
+				sub(/T.*/, "", day)
+				printf "<time datetime=\"%s\">%s</time> ", esc(iso[i]), esc(day)
+			}
+			printf "%s", who(login[i], login[i], avatar[i])
+			print "</p>"
+			printf "<h3>"
+			if (rhref != "")
+				printf "<a href=\"%s\">%s</a>", rhref, esc(title[i])
+			else
+				printf "%s", esc(title[i])
+			print "</h3>"
+			printf "<p class=\"muted\">"
+			if (thref != "")
+				printf "<a href=\"%s\"><code>%s</code></a>", thref, esc(rtag[i])
+			else
+				printf "<code>%s</code>", esc(rtag[i])
+			if (nassets[i] + 0 > 0)
+				printf " · %s files", esc(nassets[i])
+			if (react[i] + 0 > 0)
+				printf " · %s reactions", esc(react[i])
+			print "</p>"
+			if (excerpt[i] != "")
+				printf "<p class=\"summary\">%s</p>\n", esc(excerpt[i])
+			print "</article>"
+		}
+		print "</div>"
+		exit
+	}
+	if (mode == "assets") {
+		if (n < 1) {
+			print "<p class=\"muted\">No files attached.</p>"
+			exit
+		}
+		print "<table class=\"pkgs git-assets\" id=\"git-asset-table\">"
+		print "<thead><tr><th>File</th><th>Size</th><th>Downloads</th></tr></thead>"
+		print "<tbody>"
+		for (i = 1; i <= n; i++) {
+			search = tolower(name[i] " " kind[i])
+			printf "<tr data-search=\"%s\">", esc(search)
+			printf "<td><a href=\"%s\">%s</a></td>", esc(href[i]), esc(name[i])
+			printf "<td class=\"muted\">%s</td>", esc(humansize(size[i]))
+			printf "<td class=\"muted\">%s</td>", esc(count[i])
 			print "</tr>"
 		}
 		print "</tbody></table>"

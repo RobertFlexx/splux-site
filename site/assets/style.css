@@ -757,3 +757,130 @@ table.git-log td {
 	padding: 0.25rem 0.5rem;
 	min-width: 12rem;
 }
+
+.badge {
+	display: inline-block;
+	border: 1px solid var(--rule);
+	color: var(--muted);
+	padding: 0 0.35rem;
+	font-size: 0.8rem;
+}
+
+.badge.latest {
+	color: var(--accent);
+	border-color: var(--accent);
+}
+
+.release-list {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	margin: 0.75rem 0 1.25rem;
+}
+
+article.release {
+	border-bottom: 1px solid var(--rule);
+	padding-bottom: 1rem;
+}
+
+article.release h3 {
+	margin: 0.25rem 0 0.35rem;
+}
+
+article.release .meta {
+	color: var(--muted);
+	margin: 0 0 0.25rem;
+}
+
+article.release .summary {
+	margin: 0.5rem 0 0;
+}
+
+.git-blob code,
+.git-blob span {
+	font: inherit;
+}
+
+.git-blob .c { color: #6a6a6a; }
+.git-blob .k { color: var(--accent); }
+.git-blob .s { color: #c8c890; }
+.git-blob .n { color: #d6d6d6; }
+.git-blob .t { color: #e8e8e8; }
+.git-blob .b { color: #ffff88; }
+.git-blob .f { color: #d6d6d6; }
+.git-blob .p { color: #aaaa66; }
+.git-blob .g { color: var(--accent); }
+.git-blob .a { color: #c8c890; }
+.git-blob .o { color: var(--muted); }
+
+.md {
+	margin: 0.75rem 0 1.25rem;
+}
+
+.md h2, .md h3, .md h4, .md h5, .md h6 {
+	margin: 1.1rem 0 0.45rem;
+}
+
+.md p {
+	margin: 0.55rem 0;
+}
+
+.md hr {
+	border: 0;
+	border-top: 1px solid var(--rule);
+	margin: 1rem 0;
+}
+
+.md blockquote {
+	margin: 0.75rem 0;
+	padding: 0 0 0 0.85rem;
+	border-left: 2px solid var(--rule);
+	color: var(--muted);
+}
+
+.md img {
+	max-width: 100%;
+	height: auto;
+	border: 1px solid var(--rule);
+}
+
+.md code {
+	background: #111;
+	border: 1px solid var(--rule);
+	padding: 0 0.25rem;
+	font: inherit;
+}
+
+.md pre.block {
+	margin: 0.75rem 0;
+}
+
+.md pre code {
+	background: none;
+	border: 0;
+	padding: 0;
+}
+
+.md ul, .md ol {
+	margin: 0.5rem 0 0.75rem 1.25rem;
+}
+
+.md .task {
+	color: var(--muted);
+}
+
+.md .task.done {
+	color: var(--accent);
+}
+
+.md-table {
+	margin: 0.75rem 0;
+}
+
+.md del {
+	color: var(--muted);
+}
+
+article.release:last-child {
+	border-bottom: 0;
+}

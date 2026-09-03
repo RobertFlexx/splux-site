@@ -16,6 +16,7 @@ SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
 GIT_HOST=${GIT_HOST:-$SITE_URL/git}
 GIT_HOST=${GIT_HOST%/}
 AWK=tools/git.awk
+RENDER=tools/render.awk
 LANGAWK=tools/git-lang.awk
 MAPFILE=${MAPFILE:-tools/linguist.map}
 MAXBLOB=262144
@@ -117,6 +118,7 @@ page_end() {
 		printf '%s\n' '</main>'
 		printf '%s\n' '@@FOOTER@@'
 		printf '%s\n' '</div>'
+		printf '%s\n' '<script src="@@ROOT@@assets/render.js?v=@@LIVE_SIG@@"></script>'
 		printf '%s\n' '<script src="@@ROOT@@assets/git.js?v=@@LIVE_SIG@@" data-root="@@ROOT@@" data-git="@@GIT_HOST@@"></script>'
 		printf '%s\n' '</body></html>'
 	} >>"$_dest"
@@ -143,6 +145,218 @@ lookup_lang() {
 	_file=$2
 	[ -s "$_file" ] || return 0
 	awk -F '\t' -v p="$_path" '$1 == p { print $2 "\t" $4; exit }' "$_file"
+}
+
+# Highlight a blob, or render Markdown. Baked HTML matches site/assets/render.js.
+render_blob() {
+	_lang=${1-}
+	_path=${2-}
+	case $_path in
+		*.md|*.mdx|*.markdown|*.mdown|*.MD)
+			awk -f "$RENDER" -v mode=markdown -v mapfile="$MAPFILE"
+			return
+			;;
+	esac
+	case $_lang in
+		Markdown|MDX)
+			awk -f "$RENDER" -v mode=markdown -v mapfile="$MAPFILE"
+			;;
+		*)
+			awk -f "$RENDER" -v mode=highlight -v lang="$_lang" -v mapfile="$MAPFILE"
+			;;
+	esac
+}
+
+source_archives() {
+	_repo=$1
+	_tag=$2
+	_gh=$(github_of "$_repo")
+	_enc=$(pct_seg "$_tag")
+	printf '%s\n' '<h3>Source</h3>'
+	printf '%s\n' '<ul class="plain">'
+	printf '<li><a href="%s/archive/refs/tags/%s.zip">%s.zip</a></li>\n' \
+		"$(esc "$_gh")" "$(esc "$_enc")" "$(esc "$_tag")"
+	printf '<li><a href="%s/archive/refs/tags/%s.tar.gz">%s.tar.gz</a></li>\n' \
+		"$(esc "$_gh")" "$(esc "$_enc")" "$(esc "$_tag")"
+	printf '%s\n' '</ul>'
+}
+
+# Local tags plus GitHub tags/releases. Writes .tags.tsv .releases.tsv .assets.tsv
+# and decoded note bodies under .bodies/.
+collect_repo_meta() {
+	_name=$1
+	_dir=$2
+	_base=$3
+	_tagstsv=$_base/.tags.tsv
+	_reltsv=$_base/.releases.tsv
+	_assetstsv=$_base/.assets.tsv
+	_bodies=$_base/.bodies
+	_ghtags=$_base/.tags-gh.tsv
+	_local=$_base/.tags-local.tsv
+	_rawrel=$_base/.releases-raw.tsv
+	_names=$_base/.tag-names
+	mkdir -p "$_bodies"
+	: >"$_tagstsv"
+	: >"$_reltsv"
+	: >"$_assetstsv"
+	: >"$_names"
+
+	if ! fetch_github_tags "$_name" "$_ghtags"; then
+		: >"$_ghtags"
+	fi
+
+	git -C "$_dir" for-each-ref --sort=-creatordate \
+		--format='%(objectname)%09%(objecttype)%09%(refname:short)%09%(creatordate:iso-strict)%09%(taggername)%09%(*objectname)%09%(contents:subject)' \
+		refs/tags 2>/dev/null |
+		awk -F '\t' -v OFS='\t' '{
+			subj = $7
+			for (i = 8; i <= NF; i++)
+				subj = subj " " $i
+			gsub(/\t/, " ", subj)
+			print $1, $2, $3, $4, $5, $6, subj
+		}' >"$_local" || : >"$_local"
+
+	if [ -s "$_local" ]; then
+		while IFS= read -r _line || [ -n "${_line-}" ]
+		do
+			[ -n "${_line-}" ] || continue
+			_obj=$(tsv_cut "$_line" 1)
+			_otype=$(tsv_cut "$_line" 2)
+			_tname=$(tsv_cut "$_line" 3)
+			_iso=$(tsv_cut "$_line" 4)
+			_peeled=$(tsv_cut "$_line" 6)
+			_subj=$(tsv_cut "$_line" 7)
+			[ -n "$_tname" ] || continue
+			if [ "$_otype" = tag ]; then
+				_kind=annotated
+				_sha=$_peeled
+				[ -n "$_sha" ] || _sha=$_obj
+			else
+				_kind=lightweight
+				_sha=$_obj
+			fi
+			if [ -z "$_sha" ] && [ -s "$_ghtags" ]; then
+				_sha=$(awk -F '\t' -v n="$_tname" '$1 == n { print $2; exit }' "$_ghtags")
+			fi
+			_short=$(printf '%s' "$_sha" | cut -c1-7)
+			_seg=$(pct_seg "$_tname")
+			printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+				"$_tname" "$_sha" "$_short" "$_iso" "$_kind" "$_subj" "" "$_seg" \
+				>>"$_tagstsv"
+			printf '%s\n' "$_tname" >>"$_names"
+		done <"$_local"
+	fi
+
+	if [ -s "$_ghtags" ]; then
+		while IFS= read -r _line || [ -n "${_line-}" ]
+		do
+			[ -n "${_line-}" ] || continue
+			_tname=$(tsv_cut "$_line" 1)
+			_sha=$(tsv_cut "$_line" 2)
+			[ -n "$_tname" ] || continue
+			if [ -s "$_names" ] && grep -Fxq "$_tname" "$_names"; then
+				continue
+			fi
+			_short=$(printf '%s' "$_sha" | cut -c1-7)
+			_seg=$(pct_seg "$_tname")
+			printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+				"$_tname" "$_sha" "$_short" "" "lightweight" "" "" "$_seg" \
+				>>"$_tagstsv"
+			printf '%s\n' "$_tname" >>"$_names"
+		done <"$_ghtags"
+	fi
+
+	_latest=
+	if fetch_github_releases "$_name" "$_rawrel"; then
+		fetch_github_release_assets "$_name" "$_assetstsv" || : >"$_assetstsv"
+		_latest=$(fetch_github_latest_tag "$_name" 2>/dev/null || true)
+		while IFS= read -r _line || [ -n "${_line-}" ]
+		do
+			[ -n "${_line-}" ] || continue
+			_rtag=$(tsv_cut "$_line" 1)
+			_title=$(tsv_cut "$_line" 2)
+			_riso=$(tsv_cut "$_line" 3)
+			_rlogin=$(tsv_cut "$_line" 4)
+			_ravatar=$(tsv_cut "$_line" 5)
+			_pre=$(tsv_cut "$_line" 6)
+			_react=$(tsv_cut "$_line" 9)
+			_b64=$(tsv_cut "$_line" 10)
+			[ -n "$_rtag" ] || continue
+			[ -n "$_title" ] || _title=$_rtag
+			_seg=$(pct_seg "$_rtag")
+			_body=$_bodies/$_seg
+			if [ -n "$_b64" ]; then
+				printf '%s' "$_b64" | base64 -d >"$_body" 2>/dev/null || : >"$_body"
+			else
+				: >"$_body"
+			fi
+			_excerpt=$(excerpt_text "$_body")
+			_islatest=no
+			[ "$_rtag" = "$_latest" ] && _islatest=yes
+			_nassets=0
+			if [ -s "$_assetstsv" ]; then
+				_nassets=$(awk -F '\t' -v t="$_rtag" '$1 == t { c++ } END { print c + 0 }' \
+					"$_assetstsv")
+			fi
+			printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+				"$_rtag" "$_title" "$_riso" "$_rlogin" "$_ravatar" "$_pre" \
+				"$_islatest" "$_nassets" "$_excerpt" "$_react" "$_seg" \
+				>>"$_reltsv"
+			if [ -s "$_names" ] && grep -Fxq "$_rtag" "$_names"; then
+				:
+			else
+				_rsha=$(awk -F '\t' -v n="$_rtag" '$1 == n { print $2; exit }' "$_ghtags")
+				_rshort=$(printf '%s' "$_rsha" | cut -c1-7)
+				printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
+					"$_rtag" "$_rsha" "$_rshort" "$_riso" "lightweight" "" \
+					"$_rtag" "$_seg" >>"$_tagstsv"
+				printf '%s\n' "$_rtag" >>"$_names"
+			fi
+		done <"$_rawrel"
+	fi
+
+	if [ -s "$_reltsv" ]; then
+		if ! awk -F '\t' '$7 == "yes" { found = 1; exit } END { exit found ? 0 : 1 }' "$_reltsv"
+		then
+			awk -F '\t' -v OFS='\t' '
+				{
+					n++
+					line[n] = $0
+					pre[n] = $6
+				}
+				END {
+					pick = 0
+					for (i = 1; i <= n; i++) {
+						if (pre[i] != "yes") {
+							pick = i
+							break
+						}
+					}
+					if (!pick)
+						pick = 1
+					for (i = 1; i <= n; i++) {
+						split(line[i], f, "\t")
+						f[7] = (i == pick) ? "yes" : "no"
+						out = f[1]
+						for (j = 2; j <= 11; j++)
+							out = out "\t" f[j]
+						print out
+					}
+				}
+			' "$_reltsv" >"$_base/.releases-mark.tsv"
+			mv "$_base/.releases-mark.tsv" "$_reltsv"
+		fi
+		awk -F '\t' -v OFS='\t' '
+			FNR == NR { has[$1] = 1; next }
+			{
+				$7 = ($1 in has) ? $1 : ""
+				print
+			}
+		' "$_reltsv" "$_tagstsv" >"$_base/.tags-joined.tsv"
+		mv "$_base/.tags-joined.tsv" "$_tagstsv"
+	fi
+
+	rm -f "$_ghtags" "$_local" "$_rawrel" "$_names"
 }
 
 colorize_langs() {
@@ -231,6 +445,97 @@ fetch_github_user() {
 		] | @tsv' >"$_dest" 2>/dev/null && [ -s "$_dest" ]
 }
 
+# One URL path segment. Keep unreserved characters, percent-encode the rest.
+pct_seg() {
+	printf '%s' "$1" | LC_ALL=C awk '
+		BEGIN {
+			hex = "0123456789ABCDEF"
+			for (i = 0; i < 256; i++)
+				ord[sprintf("%c", i)] = i
+		}
+		{
+			for (i = 1; i <= length($0); i++) {
+				c = substr($0, i, 1)
+				if (c ~ /[A-Za-z0-9._~-]/)
+					printf "%s", c
+				else {
+					o = ord[c] + 0
+					printf "%%%s%s", substr(hex, int(o / 16) + 1, 1), \
+						substr(hex, (o % 16) + 1, 1)
+				}
+			}
+		}'
+}
+
+fetch_github_tags() {
+	_repo=$1
+	_dest=$2
+	have_gh || return 1
+	gh api --paginate "repos/$OWNER/$_repo/tags?per_page=100" --jq \
+		'.[] | [.name, .commit.sha] | @tsv' \
+		>"$_dest" 2>/dev/null && [ -s "$_dest" ]
+}
+
+fetch_github_releases() {
+	_repo=$1
+	_dest=$2
+	have_gh || return 1
+	gh api --paginate "repos/$OWNER/$_repo/releases?per_page=100" --jq \
+		'.[] | select(.draft == false) | [
+			.tag_name,
+			((.name // .tag_name) | gsub("[\r\t\n]"; " ")),
+			(.published_at // .created_at // ""),
+			(.author.login // ""),
+			((.author.avatar_url // "") | gsub("[\r\t]"; " ")),
+			(if .prerelease then "yes" else "no" end),
+			(.html_url // ""),
+			((.target_commitish // "") | gsub("[\r\t]"; " ")),
+			((.reactions.total_count // 0) | tostring),
+			((.body // "") | @base64)
+		] | @tsv' >"$_dest" 2>/dev/null && [ -s "$_dest" ]
+}
+
+fetch_github_release_assets() {
+	_repo=$1
+	_dest=$2
+	have_gh || return 1
+	gh api --paginate "repos/$OWNER/$_repo/releases?per_page=100" --jq \
+		'.[] | select(.draft == false) | .tag_name as $t |
+		(.assets[]? | [
+			$t,
+			((.name // "") | gsub("[\r\t\n]"; " ")),
+			(.size | tostring),
+			(.download_count | tostring),
+			(.browser_download_url // ""),
+			((.content_type // "") | gsub("[\r\t]"; " "))
+		] | @tsv)' >"$_dest" 2>/dev/null
+	return 0
+}
+
+fetch_github_latest_tag() {
+	_repo=$1
+	have_gh || return 1
+	gh api "repos/$OWNER/$_repo/releases/latest" --jq .tag_name 2>/dev/null
+}
+
+excerpt_text() {
+	awk 'BEGIN { n = 0 }
+	{
+		line = $0
+		gsub(/[ \t]+/, " ", line)
+		if (n > 0)
+			buf = buf " "
+		buf = buf line
+		n++
+	}
+	END {
+		if (length(buf) > 400)
+			buf = substr(buf, 1, 400) "..."
+		gsub(/\t/, " ", buf)
+		print buf
+	}' "$1"
+}
+
 who_cell() {
 	awk -f "$AWK" -v mode=who \
 		-v userpfx="$1" -v login="$2" -v name="$3" \
@@ -273,6 +578,18 @@ git_nav() {
 		printf '<a href="%srefs/">refs</a>' "$(esc "$_r")"
 	fi
 	printf ' · '
+	if [ "$_here" = tags ] || [ "$_here" = tag ]; then
+		printf 'tags'
+	else
+		printf '<a href="%stags/">tags</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
+	if [ "$_here" = releases ] || [ "$_here" = release ] || [ "$_here" = latest ]; then
+		printf 'releases'
+	else
+		printf '<a href="%sreleases/">releases</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
 	if [ "$_here" = people ]; then
 		printf 'people'
 	else
@@ -290,6 +607,15 @@ git_nav() {
 	fi
 	if [ "$_here" = blob ]; then
 		printf ' · file'
+	fi
+	if [ "$_here" = tag ]; then
+		printf ' · tag'
+	fi
+	if [ "$_here" = release ]; then
+		printf ' · release'
+	fi
+	if [ "$_here" = latest ]; then
+		printf ' · latest'
 	fi
 	printf '</p>\n'
 }
@@ -331,6 +657,9 @@ $1 == "lang" && $3 != "" && $5 != "" {
 END { print "}" }
 ' "$MAPFILE" >"$OUT/data/linguist-colors.json"
 
+awk -f "$RENDER" -v mode=famjson -v mapfile="$MAPFILE" \
+	</dev/null >"$OUT/data/linguist-fams.json"
+
 index_rows=$OUT/data/git-index.tsv
 all_commits=$OUT/data/git-commits.tsv
 all_people=$OUT/data/git-people.tsv
@@ -355,7 +684,8 @@ build_repo() {
 
 	base=$OUT/git/$name
 	mkdir -p "$base/log" "$base/refs" "$base/tree" "$base/commit" "$base/blob" \
-		"$base/people" "$base/lang"
+		"$base/people" "$base/lang" "$base/tags" "$base/releases/tag" \
+		"$base/releases/latest" "$base/.bodies"
 	userpfx="@@ROOT@@git/users/"
 	reporoot="@@ROOT@@git/$name/"
 
@@ -499,6 +829,21 @@ build_repo() {
 		rm -f "$base/.langs-bar.tsv"
 	fi
 
+	collect_repo_meta "$name" "$dir" "$base"
+	tagstsv=$base/.tags.tsv
+	reltsv=$base/.releases.tsv
+	assetstsv=$base/.assets.tsv
+	n_tags=0
+	n_releases=0
+	latest_tag=
+	if [ -s "$tagstsv" ]; then
+		n_tags=$(wc -l <"$tagstsv" | tr -d ' ')
+	fi
+	if [ -s "$reltsv" ]; then
+		n_releases=$(wc -l <"$reltsv" | tr -d ' ')
+		latest_tag=$(awk -F '\t' '$7 == "yes" { print $1; exit }' "$reltsv")
+	fi
+
 	GIT_KIND=repo
 	GIT_REPO=$name
 	GIT_USER=
@@ -519,6 +864,16 @@ build_repo() {
 			"$(esc "$ncommits")"
 		printf '<div class="dl-row"><span class="muted">Files</span><span>%s</span></div>\n' \
 			"$(esc "$nfiles")"
+		printf '<div class="dl-row"><span class="muted">Tags</span><span id="git-ntags"><a href="%stags/">%s</a></span></div>\n' \
+			"$(esc "$reporoot")" "$(esc "$n_tags")"
+		printf '<div class="dl-row"><span class="muted">Releases</span><span id="git-nreleases"><a href="%sreleases/">%s</a></span></div>\n' \
+			"$(esc "$reporoot")" "$(esc "$n_releases")"
+		if [ -n "$latest_tag" ]; then
+			printf '<div class="dl-row"><span class="muted">Latest</span><span id="git-latest"><a href="%sreleases/latest/"><code>%s</code></a></span></div>\n' \
+				"$(esc "$reporoot")" "$(esc "$latest_tag")"
+		else
+			printf '%s\n' '<div class="dl-row"><span class="muted">Latest</span><span id="git-latest" class="muted">none</span></div>'
+		fi
 		printf '<div class="dl-row"><span class="muted">Clone</span><span><code>git clone %s.git</code></span></div>\n' \
 			"$(esc "$gh")"
 		printf '%s\n' '</div>'
@@ -543,10 +898,10 @@ build_repo() {
 		printf '%s\n' '<p><a href="log/">Full log</a></p>'
 		if git -C "$dir" cat-file -e HEAD:README.md 2>/dev/null; then
 			printf '%s\n' '<h3>README.md</h3>'
-			git -C "$dir" show HEAD:README.md | awk -f "$AWK" -v mode=pre
+			git -C "$dir" show HEAD:README.md | render_blob Markdown README.md
 		elif git -C "$dir" cat-file -e HEAD:README 2>/dev/null; then
 			printf '%s\n' '<h3>README</h3>'
-			git -C "$dir" show HEAD:README | awk -f "$AWK" -v mode=pre
+			git -C "$dir" show HEAD:README | render_blob Markdown README
 		fi
 	} >>"$base/index.html"
 	page_end "$base/index.html"
@@ -584,18 +939,24 @@ build_repo() {
 		done
 		printf '%s\n' '</ul>'
 		printf '%s\n' '<h3>Tags</h3>'
-		printf '%s\n' '<ul class="plain">'
-		git -C "$dir" for-each-ref --format='%(objectname) %(refname:short)' refs/tags |
-		while IFS= read -r line
-		do
-			[ -n "$line" ] || continue
-			h=${line%% *}
-			r=${line#* }
-			c=$(git -C "$dir" rev-parse "$r^{commit}" 2>/dev/null || printf '%s\n' "$h")
-			printf '<li><a href="../commit/%s/">%s</a></li>\n' \
-				"$(esc "$c")" "$(esc "$r")"
-		done
-		printf '%s\n' '</ul>'
+		printf '<p><a href="%stags/">All tags</a>' "$(esc "$reporoot")"
+		if [ "$n_tags" -gt 0 ]; then
+			printf ' · %s' "$(esc "$n_tags")"
+		fi
+		printf '</p>\n'
+		if [ -s "$tagstsv" ]; then
+			head -n 15 "$tagstsv" |
+				awk -f "$AWK" -v mode=tags \
+					-v tagpfx="${reporoot}tags/" \
+					-v commitpfx="${reporoot}commit/" \
+					-v relpfx="${reporoot}releases/tag/"
+			if [ "$n_tags" -gt 15 ]; then
+				printf '<p class="muted">%s more on the <a href="%stags/">tags</a> page.</p>\n' \
+					"$(esc $((n_tags - 15)))" "$(esc "$reporoot")"
+			fi
+		else
+			printf '%s\n' '<p class="muted">No tags in this tree.</p>'
+		fi
 	} >>"$base/refs/index.html"
 	page_end "$base/refs/index.html"
 
@@ -649,7 +1010,7 @@ build_repo() {
 			printf '%s\n' '<h3>Diff</h3>'
 			git -C "$dir" show --format= --color=never "$hash" |
 				dd bs=1024 count=300 2>/dev/null |
-				awk -f "$AWK" -v mode=pre
+				render_blob Diff "$hash.diff"
 		} >>"$cdir/index.html"
 		page_end "$cdir/index.html"
 		if [ -n "$shortc" ] && [ "$shortc" != "$hash" ]; then
@@ -789,7 +1150,7 @@ build_repo() {
 			elif [ "$szn" -gt "$MAXBLOB" ]; then
 				printf '%s\n' '<p>File is too large to embed here. Clone the repository or open the GitHub mirror.</p>'
 			else
-				git -C "$dir" cat-file blob "$obj" | awk -f "$AWK" -v mode=pre
+				git -C "$dir" cat-file blob "$obj" | render_blob "$flang" "$path"
 			fi
 		} >>"$bdest"
 		page_end "$bdest"
@@ -879,14 +1240,230 @@ build_repo() {
 		done <"$base/.lang-index.tsv"
 	fi
 
+	GIT_KIND=tags
+	GIT_SHA=
+	GIT_PATH=
+	page_begin "$base/tags/index.html" "Tags - $name - Splux Git" "Tags in $name"
+	{
+		git_nav "$name" tags
+		printf '%s\n' '<h2>Tags</h2>'
+		printf '%s\n' '<hr class="rule">'
+		printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
+		printf '%s\n' '<p>Every tag in this tree. Annotated tags keep their message. A tag with a GitHub release links through to that page. Source archives are zip and tar.gz from GitHub.</p>'
+		printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="tag"></p>'
+		if [ -s "$tagstsv" ]; then
+			awk -f "$AWK" -v mode=tags \
+				-v tagpfx="${reporoot}tags/" \
+				-v commitpfx="${reporoot}commit/" \
+				-v relpfx="${reporoot}releases/tag/" \
+				"$tagstsv"
+		else
+			printf '%s\n' '<p class="muted">No tags in this tree.</p>'
+		fi
+	} >>"$base/tags/index.html"
+	page_end "$base/tags/index.html"
+
+	if [ -s "$tagstsv" ]; then
+		while IFS= read -r _tline || [ -n "${_tline-}" ]
+		do
+			[ -n "${_tline-}" ] || continue
+			tname=$(tsv_cut "$_tline" 1)
+			tsha=$(tsv_cut "$_tline" 2)
+			tshort=$(tsv_cut "$_tline" 3)
+			tiso=$(tsv_cut "$_tline" 4)
+			tkind=$(tsv_cut "$_tline" 5)
+			tsubj=$(tsv_cut "$_tline" 6)
+			trel=$(tsv_cut "$_tline" 7)
+			tseg=$(tsv_cut "$_tline" 8)
+			[ -n "$tname" ] || continue
+			[ -n "$tseg" ] || tseg=$(pct_seg "$tname")
+			tdest=$base/tags/$tseg/index.html
+			GIT_KIND=tag
+			GIT_PATH=$tname
+			GIT_SHA=$tsha
+			page_begin "$tdest" "$tname - $name - Splux Git" "Tag $tname in $name"
+			{
+				git_nav "$name" tag
+				printf '<h2><code>%s</code></h2>\n' "$(esc "$tname")"
+				printf '%s\n' '<hr class="rule">'
+				printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
+				printf '%s\n' '<div class="info">'
+				if [ "$tkind" = annotated ]; then
+					printf '%s\n' '<div class="dl-row"><span class="muted">Kind</span><span><span class="badge">annotated</span></span></div>'
+				else
+					printf '%s\n' '<div class="dl-row"><span class="muted">Kind</span><span><span class="badge">lightweight</span></span></div>'
+				fi
+				if [ -n "$tsha" ]; then
+					printf '<div class="dl-row"><span class="muted">Commit</span><span><a href="%scommit/%s/"><code>%s</code></a></span></div>\n' \
+						"$(esc "$reporoot")" "$(esc "$tsha")" "$(esc "${tshort:-$tsha}")"
+				fi
+				if [ -n "$tiso" ]; then
+					printf '<div class="dl-row"><span class="muted">Date</span><span><time datetime="%s">%s</time></span></div>\n' \
+						"$(esc "$tiso")" "$(esc "$tiso")"
+				fi
+				if [ -n "$trel" ]; then
+					printf '<div class="dl-row"><span class="muted">Release</span><span><a href="%sreleases/tag/%s/">%s</a></span></div>\n' \
+						"$(esc "$reporoot")" "$(esc "$tseg")" "$(esc "$tname")"
+				fi
+				printf '<div class="dl-row"><span class="muted">GitHub</span><span><a href="%s/releases/tag/%s">mirror</a></span></div>\n' \
+					"$(esc "$gh")" "$(esc "$tseg")"
+				printf '%s\n' '</div>'
+				if [ -n "$tsubj" ]; then
+					printf '<p>%s</p>\n' "$(esc "$tsubj")"
+				fi
+				source_archives "$name" "$tname"
+			} >>"$tdest"
+			page_end "$tdest"
+		done <"$tagstsv"
+	fi
+
+	GIT_KIND=releases
+	GIT_SHA=
+	GIT_PATH=
+	page_begin "$base/releases/index.html" "Releases - $name - Splux Git" \
+		"GitHub releases for $name"
+	{
+		git_nav "$name" releases
+		printf '%s\n' '<h2>Releases</h2>'
+		printf '%s\n' '<hr class="rule">'
+		printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
+		printf '%s\n' '<p>GitHub releases for this tree. ISO files and other assets stay on GitHub. Notes are Markdown. <a href="latest/">Latest</a></p>'
+		printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="release"></p>'
+		if [ -s "$reltsv" ]; then
+			awk -f "$AWK" -v mode=releases \
+				-v relpfx="${reporoot}releases/tag/" \
+				-v tagpfx="${reporoot}tags/" \
+				-v userpfx="$userpfx" \
+				"$reltsv"
+		else
+			printf '%s\n' '<p class="muted">No GitHub releases yet.</p>'
+		fi
+	} >>"$base/releases/index.html"
+	page_end "$base/releases/index.html"
+
+	write_release_page() {
+		_rdest=$1
+		_rhere=$2
+		_rline=$3
+		_rtag=$(tsv_cut "$_rline" 1)
+		_rtitle=$(tsv_cut "$_rline" 2)
+		_riso=$(tsv_cut "$_rline" 3)
+		_rlogin=$(tsv_cut "$_rline" 4)
+		_ravatar=$(tsv_cut "$_rline" 5)
+		_rpre=$(tsv_cut "$_rline" 6)
+		_rlatest=$(tsv_cut "$_rline" 7)
+		_rnassets=$(tsv_cut "$_rline" 8)
+		_rreact=$(tsv_cut "$_rline" 10)
+		_rseg=$(tsv_cut "$_rline" 11)
+		[ -n "$_rtag" ] || return 0
+		[ -n "$_rtitle" ] || _rtitle=$_rtag
+		[ -n "$_rseg" ] || _rseg=$(pct_seg "$_rtag")
+		GIT_KIND=$_rhere
+		GIT_PATH=$_rtag
+		GIT_SHA=
+		page_begin "$_rdest" "$_rtitle - $name - Splux Git" "Release $_rtag of $name"
+		{
+			git_nav "$name" "$_rhere"
+			printf '<h2>%s</h2>\n' "$(esc "$_rtitle")"
+			printf '%s\n' '<hr class="rule">'
+			printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
+			printf '%s\n' '<p class="meta">'
+			if [ "$_rlatest" = yes ]; then
+				printf '%s' '<span class="badge latest">Latest</span> '
+			fi
+			if [ "$_rpre" = yes ]; then
+				printf '%s' '<span class="badge">Pre-release</span> '
+			fi
+			printf '</p>\n'
+			printf '%s\n' '<div class="info">'
+			printf '<div class="dl-row"><span class="muted">Tag</span><span><a href="%stags/%s/"><code>%s</code></a></span></div>\n' \
+				"$(esc "$reporoot")" "$(esc "$_rseg")" "$(esc "$_rtag")"
+			if [ -n "$_riso" ]; then
+				printf '<div class="dl-row"><span class="muted">Date</span><span><time datetime="%s">%s</time></span></div>\n' \
+					"$(esc "$_riso")" "$(esc "$_riso")"
+			fi
+			if [ -n "$_rlogin" ]; then
+				printf '<div class="dl-row"><span class="muted">Author</span><span>%s</span></div>\n' \
+					"$(who_cell "$userpfx" "$_rlogin" "$_rlogin" "$_ravatar" "")"
+			fi
+			if [ -n "$_rnassets" ] && [ "$_rnassets" != 0 ]; then
+				printf '<div class="dl-row"><span class="muted">Files</span><span>%s</span></div>\n' \
+					"$(esc "$_rnassets")"
+			fi
+			if [ -n "$_rreact" ] && [ "$_rreact" != 0 ]; then
+				printf '<div class="dl-row"><span class="muted">Reactions</span><span>%s</span></div>\n' \
+					"$(esc "$_rreact")"
+			fi
+			printf '<div class="dl-row"><span class="muted">GitHub</span><span><a href="%s/releases/tag/%s">mirror</a></span></div>\n' \
+				"$(esc "$gh")" "$(esc "$_rseg")"
+			printf '%s\n' '</div>'
+			_body=$base/.bodies/$_rseg
+			if [ -s "$_body" ]; then
+				printf '%s\n' '<h3>Notes</h3>'
+				awk -f "$RENDER" -v mode=markdown -v mapfile="$MAPFILE" "$_body"
+			fi
+			_atmp=$base/.assets-one.tsv
+			: >"$_atmp"
+			if [ -s "$assetstsv" ]; then
+				awk -F '\t' -v OFS='\t' -v t="$_rtag" \
+					'$1 == t { print $2, $3, $4, $5, $6 }' \
+					"$assetstsv" >"$_atmp"
+			fi
+			if [ -s "$_atmp" ]; then
+				printf '%s\n' '<h3>Assets</h3>'
+				awk -f "$AWK" -v mode=assets "$_atmp"
+			fi
+			rm -f "$_atmp"
+			source_archives "$name" "$_rtag"
+		} >>"$_rdest"
+		page_end "$_rdest"
+	}
+
+	if [ -s "$reltsv" ]; then
+		while IFS= read -r _rline || [ -n "${_rline-}" ]
+		do
+			[ -n "${_rline-}" ] || continue
+			_rseg=$(tsv_cut "$_rline" 11)
+			_rtag=$(tsv_cut "$_rline" 1)
+			[ -n "$_rtag" ] || continue
+			[ -n "$_rseg" ] || _rseg=$(pct_seg "$_rtag")
+			write_release_page "$base/releases/tag/$_rseg/index.html" release "$_rline"
+		done <"$reltsv"
+	fi
+
+	GIT_KIND=latest
+	GIT_PATH=$latest_tag
+	latest_line=
+	if [ -s "$reltsv" ]; then
+		latest_line=$(awk -F '\t' '$7 == "yes" { print; exit }' "$reltsv")
+		if [ -z "$latest_line" ]; then
+			latest_line=$(head -n 1 "$reltsv")
+		fi
+	fi
+	if [ -n "$latest_line" ]; then
+		write_release_page "$base/releases/latest/index.html" latest "$latest_line"
+	else
+		page_begin "$base/releases/latest/index.html" "Latest - $name - Splux Git" \
+			"Latest GitHub release of $name"
+		{
+			git_nav "$name" latest
+			printf '%s\n' '<h2>Latest</h2>'
+			printf '%s\n' '<hr class="rule">'
+			printf '%s\n' '<p class="muted">No GitHub releases yet.</p>'
+		} >>"$base/releases/latest/index.html"
+		page_end "$base/releases/latest/index.html"
+	fi
+
 	day=${lastiso%%T*}
 	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
 		"$name" "$repo_desc" "$short" "$head" "$ncommits" "$nfiles" "$day" "$gh" \
 		>>"$index_rows"
 
 	rm -f "$langtmp" "$clog" "$base/.entries.tsv" "$base/.people.tsv" \
-		"$filelang" "$base/.lang-index.tsv"
-	printf '%s\n' "git: $name ($ncommits commits, $nfiles files)" >&2
+		"$filelang" "$base/.lang-index.tsv" "$base/.tags.tsv" \
+		"$base/.releases.tsv" "$base/.assets.tsv"
+	rm -rf "$base/.bodies"
+	printf '%s\n' "git: $name ($ncommits commits, $nfiles files, $n_tags tags, $n_releases releases)" >&2
 }
 
 build_repo SPS "$SPS"

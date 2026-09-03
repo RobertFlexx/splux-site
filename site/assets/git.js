@@ -93,13 +93,18 @@
 	function colorsReady() {
 		if (Object.keys(COLORS).length)
 			return Promise.resolve(COLORS);
-		return fetch(dataRoot + "data/linguist-colors.json", { cache: "force-cache" })
-			.then(function (r) { return r.ok ? r.json() : {}; })
-			.then(function (c) {
-				COLORS = c || {};
-				return COLORS;
-			})
-			.catch(function () { return COLORS; });
+		return Promise.all([
+			fetch(dataRoot + "data/linguist-colors.json", { cache: "force-cache" })
+				.then(function (r) { return r.ok ? r.json() : {}; }),
+			fetch(dataRoot + "data/linguist-fams.json", { cache: "force-cache" })
+				.then(function (r) { return r.ok ? r.json() : {}; })
+				.catch(function () { return {}; })
+		]).then(function (rows) {
+			COLORS = rows[0] || {};
+			if (window.SpluxRender && SpluxRender.setFams)
+				SpluxRender.setFams(rows[1] || {});
+			return COLORS;
+		}).catch(function () { return COLORS; });
 	}
 
 	function colorOf(name) {
@@ -136,6 +141,18 @@
 				out.kind = "langs";
 			else
 				out.path = parts.slice(3).join("/");
+		} else if (out.kind === "tags") {
+			if (parts.length > 3) {
+				out.kind = "tag";
+				out.path = decodeSeg(parts.slice(3).join("/"));
+			}
+		} else if (out.kind === "releases") {
+			if (parts[3] === "latest")
+				out.kind = "latest";
+			else if (parts[3] === "tag" && parts[4]) {
+				out.kind = "release";
+				out.path = decodeSeg(parts.slice(4).join("/"));
+			}
 		}
 		return out;
 	}
@@ -176,6 +193,104 @@
 	function commitHref(repo, sha) {
 		return gitHost + "/" + encodeURIComponent(repo) + "/commit/" +
 			encodeURIComponent(sha) + "/";
+	}
+
+	function decodeSeg(s) {
+		s = String(s || "");
+		try {
+			return decodeURIComponent(s);
+		} catch (e) {
+			return s;
+		}
+	}
+
+	function navHtml(repo, here) {
+		var r = repoHref(repo);
+		var bits = [];
+		if (here === "home")
+			bits.push(esc(repo));
+		else
+			bits.push("<a href=\"" + esc(r) + "\">" + esc(repo) + "</a>");
+		bits.push(here === "log"
+			? "log"
+			: "<a href=\"" + esc(r + "log/") + "\">log</a>");
+		bits.push(here === "files"
+			? "files"
+			: "<a href=\"" + esc(r + "tree/") + "\">files</a>");
+		bits.push(here === "refs"
+			? "refs"
+			: "<a href=\"" + esc(r + "refs/") + "\">refs</a>");
+		bits.push(here === "tags" || here === "tag"
+			? "tags"
+			: "<a href=\"" + esc(r + "tags/") + "\">tags</a>");
+		bits.push(here === "releases" || here === "release" || here === "latest"
+			? "releases"
+			: "<a href=\"" + esc(r + "releases/") + "\">releases</a>");
+		bits.push(here === "people"
+			? "people"
+			: "<a href=\"" + esc(r + "people/") + "\">people</a>");
+		bits.push(here === "langs" || here === "lang"
+			? "languages"
+			: "<a href=\"" + esc(r + "lang/") + "\">languages</a>");
+		bits.push("<a href=\"https://github.com/" + OWNER + "/" +
+			encodeURIComponent(repo) + "\">GitHub</a>");
+		if (here === "commit")
+			bits.push("commit");
+		if (here === "blob")
+			bits.push("file");
+		if (here === "tag")
+			bits.push("tag");
+		if (here === "release")
+			bits.push("release");
+		if (here === "latest")
+			bits.push("latest");
+		return "<p class=\"git-nav\">" + bits.join(" · ") + "</p>";
+	}
+
+	function tagHref(repo, name) {
+		return repoHref(repo) + "tags/" + encodeURIComponent(name) + "/";
+	}
+
+	function releaseHref(repo, name) {
+		return repoHref(repo) + "releases/tag/" + encodeURIComponent(name) + "/";
+	}
+
+	function archiveHref(repo, tag, kind) {
+		return "https://github.com/" + OWNER + "/" + encodeURIComponent(repo) +
+			"/archive/refs/tags/" + encodeURIComponent(tag) + "." + kind;
+	}
+
+	function humansize(n) {
+		n = Number(n) || 0;
+		if (n >= 1073741824)
+			return (n / 1073741824).toFixed(1) + " GB";
+		if (n >= 1048576) {
+			var mb = n / 1048576;
+			return (mb >= 10 ? mb.toFixed(0) : mb.toFixed(1)) + " MB";
+		}
+		if (n >= 1024)
+			return (n / 1024).toFixed(0) + " KB";
+		if (n > 0)
+			return String(n) + " B";
+		return "0 B";
+	}
+
+	function renderText(text, lang, path) {
+		if (window.SpluxRender) {
+			if (SpluxRender.isMarkdown(lang, path))
+				return SpluxRender.markdown(text);
+			return SpluxRender.highlight(text,
+				lang || SpluxRender.langFromPath(path) || "");
+		}
+		return "<pre class=\"block git-blob\">" + esc(text) + "</pre>";
+	}
+
+	function sourceArchivesHtml(repo, tag) {
+		return "<h3>Source</h3><ul class=\"plain\">" +
+			"<li><a href=\"" + esc(archiveHref(repo, tag, "zip")) + "\">" +
+			esc(tag) + ".zip</a></li>" +
+			"<li><a href=\"" + esc(archiveHref(repo, tag, "tar.gz")) + "\">" +
+			esc(tag) + ".tar.gz</a></li></ul>";
 	}
 
 	function repoHref(repo) {
@@ -344,19 +459,34 @@
 		var table = document.getElementById("git-repos") ||
 			document.getElementById("git-people-table") ||
 			document.getElementById("git-lang-table") ||
+			document.getElementById("git-tag-table") ||
+			document.getElementById("git-asset-table") ||
 			document.querySelector("table.git-tree") ||
 			document.querySelector("table.git-log") ||
 			document.querySelector("table.pkgs");
-		if (!table)
+		var list = document.getElementById("git-releases");
+		if (!table && !list)
 			return;
 		function apply() {
 			var q = (input.value || "").toLowerCase();
-			var rows = table.querySelectorAll("tbody tr");
-			for (var i = 0; i < rows.length; i++) {
-				var hay = rows[i].getAttribute("data-search") ||
-					rows[i].textContent || "";
-				rows[i].hidden = q !== "" &&
-					hay.toLowerCase().indexOf(q) === -1;
+			var i;
+			if (table) {
+				var rows = table.querySelectorAll("tbody tr");
+				for (i = 0; i < rows.length; i++) {
+					var hay = rows[i].getAttribute("data-search") ||
+						rows[i].textContent || "";
+					rows[i].hidden = q !== "" &&
+						hay.toLowerCase().indexOf(q) === -1;
+				}
+			}
+			if (list) {
+				var arts = list.querySelectorAll("article.release");
+				for (i = 0; i < arts.length; i++) {
+					var hay2 = arts[i].getAttribute("data-search") ||
+						arts[i].textContent || "";
+					arts[i].hidden = q !== "" &&
+						hay2.toLowerCase().indexOf(q) === -1;
+				}
 			}
 		}
 		input.addEventListener("input", apply);
@@ -502,9 +632,7 @@
 		var it = fromCommit(c, info.repo);
 		var parents = c.parents || [];
 		var files = c.files || [];
-		var html = "<p class=\"git-nav\"><a href=\"" + esc(repoHref(info.repo)) +
-			"\">" + esc(info.repo) + "</a> · <a href=\"" +
-			esc(repoHref(info.repo) + "log/") + "\">log</a> · commit</p>";
+		var html = navHtml(info.repo, "commit");
 		html += "<h2><code>" + esc(it.short) + "</code></h2><hr class=\"rule\">";
 		html += "<p>" + esc(it.subject) + "</p>";
 		html += "<div class=\"info\">";
@@ -534,23 +662,35 @@
 		if (c.stats)
 			html += "<p class=\"muted\">+" + esc(String(c.stats.additions || 0)) +
 				" / -" + esc(String(c.stats.deletions || 0)) + "</p>";
+		var patch = "";
+		for (var k = 0; k < files.length; k++) {
+			if (files[k].patch)
+				patch += "diff --git a/" + (files[k].filename || "") +
+					" b/" + (files[k].filename || "") + "\n" +
+					files[k].patch + "\n";
+		}
+		if (patch)
+			html += "<h3>Diff</h3>" + renderText(patch, "Diff", "commit.diff");
 		main.innerHTML = html;
 		document.title = it.short + " - " + info.repo + " - Splux Git";
+		localizeTimes(main);
 	}
 
 	function paintBlob(info, item) {
 		if (!main || !item)
 			return;
-		var html = "<p class=\"git-nav\"><a href=\"" + esc(repoHref(info.repo)) +
-			"\">" + esc(info.repo) + "</a> · file</p>";
+		var html = navHtml(info.repo, "blob");
 		html += "<h2>" + esc(info.path) + "</h2><hr class=\"rule\">";
 		if (item.html_url)
 			html += "<p class=\"muted\"><a href=\"" + esc(item.html_url) +
 				"\">GitHub</a></p>";
 		if (item.type === "file") {
 			var text = decodeContent(item);
+			var lang = (window.SpluxRender && SpluxRender.langFromPath(info.path)) || "";
+			if (lang)
+				html += "<p class=\"lang-badge\">" + esc(lang) + "</p>";
 			if (text)
-				html += "<pre class=\"block git-blob\">" + esc(text) + "</pre>";
+				html += renderText(text, lang, info.path);
 			else
 				html += "<p>Open the GitHub mirror for this file.</p>";
 		} else {
@@ -567,8 +707,7 @@
 			paintBlob(info, list);
 			return;
 		}
-		var html = "<p class=\"git-nav\"><a href=\"" + esc(repoHref(info.repo)) +
-			"\">" + esc(info.repo) + "</a> · files</p>";
+		var html = navHtml(info.repo, "files");
 		html += "<h2>" + esc(info.path || "Files") + "</h2><hr class=\"rule\">";
 		html += "<table class=\"pkgs git-tree\"><thead><tr><th></th><th>Name</th><th>Size</th></tr></thead><tbody>";
 		for (var i = 0; i < list.length; i++) {
@@ -630,6 +769,284 @@
 		document.title = login + " - Splux Git";
 	}
 
+	function fetchTags(repo) {
+		return cached("git-tags-" + repo, API + "/repos/" + OWNER + "/" +
+			repo + "/tags?per_page=100");
+	}
+
+	function fetchReleases(repo) {
+		return cached("git-releases-" + repo, API + "/repos/" + OWNER + "/" +
+			repo + "/releases?per_page=100").then(function (list) {
+			var out = [];
+			for (var i = 0; i < (list || []).length; i++) {
+				if (list[i] && !list[i].draft)
+					out.push(list[i]);
+			}
+			return out;
+		});
+	}
+
+	function fetchLatestRelease(repo) {
+		return cached("git-latest-" + repo, API + "/repos/" + OWNER + "/" +
+			repo + "/releases/latest");
+	}
+
+	function fetchReleaseByTag(repo, tag) {
+		return cached("git-rel-" + repo + "-" + tag, API + "/repos/" + OWNER +
+			"/" + repo + "/releases/tags/" + encodeURIComponent(tag));
+	}
+
+	function tagRow(it, repo, relset) {
+		var name = it.name || "";
+		var sha = (it.commit && it.commit.sha) || it.sha || "";
+		var short = sha.slice(0, 7);
+		var hasRel = relset && relset[name];
+		var search = name.toLowerCase();
+		var html = "<tr data-tag=\"" + esc(name) + "\" data-sha=\"" +
+			esc(sha) + "\" data-search=\"" + esc(search) + "\">";
+		html += "<td><a href=\"" + esc(tagHref(repo, name)) +
+			"\"><code>" + esc(name) + "</code></a></td>";
+		html += "<td>";
+		if (sha)
+			html += "<a href=\"" + esc(commitHref(repo, sha)) +
+				"\"><code>" + esc(short) + "</code></a>";
+		html += "</td><td></td><td></td><td>";
+		if (hasRel)
+			html += "<a href=\"" + esc(releaseHref(repo, name)) +
+				"\">release</a>";
+		html += "</td></tr>";
+		return html;
+	}
+
+	function mergeTagRows(table, tags, repo, relset) {
+		if (!table || !tags || !tags.length)
+			return 0;
+		var body = table.tBodies[0] || table;
+		var seen = {};
+		var existing = body.querySelectorAll("tr[data-tag]");
+		var i;
+		for (i = 0; i < existing.length; i++)
+			seen[existing[i].getAttribute("data-tag")] = true;
+		var added = 0;
+		var html = "";
+		for (i = 0; i < tags.length; i++) {
+			var name = tags[i] && tags[i].name;
+			if (!name || seen[name])
+				continue;
+			seen[name] = true;
+			html += tagRow(tags[i], repo, relset);
+			added++;
+		}
+		if (html) {
+			body.insertAdjacentHTML("afterbegin", html);
+			localizeTimes(body);
+		}
+		return added;
+	}
+
+	function releaseArticle(rel, repo, latestTag) {
+		var tag = rel.tag_name || "";
+		var title = rel.name || tag;
+		var login = (rel.author && rel.author.login) || "";
+		var avatar = (rel.author && rel.author.avatar_url) || "";
+		var iso = rel.published_at || rel.created_at || "";
+		var search = (tag + " " + title + " " + login).toLowerCase();
+		var nassets = (rel.assets && rel.assets.length) || 0;
+		var react = (rel.reactions && rel.reactions.total_count) || 0;
+		var html = "<article class=\"release\" data-tag=\"" + esc(tag) +
+			"\" data-search=\"" + esc(search) + "\">";
+		html += "<p class=\"meta\">";
+		if (latestTag && tag === latestTag)
+			html += "<span class=\"badge latest\">Latest</span> ";
+		if (rel.prerelease)
+			html += "<span class=\"badge\">Pre-release</span> ";
+		if (iso)
+			html += "<time datetime=\"" + esc(iso) + "\">" +
+				esc(dayOf(iso)) + "</time> ";
+		html += whoHtml(login, login, avatar) + "</p>";
+		html += "<h3><a href=\"" + esc(releaseHref(repo, tag)) + "\">" +
+			esc(title) + "</a></h3>";
+		html += "<p class=\"muted\"><a href=\"" + esc(tagHref(repo, tag)) +
+			"\"><code>" + esc(tag) + "</code></a>";
+		if (nassets)
+			html += " · " + nassets + " files";
+		if (react)
+			html += " · " + react + " reactions";
+		html += "</p>";
+		if (rel.body) {
+			var excerpt = String(rel.body).replace(/\s+/g, " ");
+			if (excerpt.length > 400)
+				excerpt = excerpt.slice(0, 400) + "...";
+			html += "<p class=\"summary\">" + esc(excerpt) + "</p>";
+		}
+		html += "</article>";
+		return html;
+	}
+
+	function mergeReleaseList(root, releases, repo, latestTag) {
+		if (!root || !releases || !releases.length)
+			return 0;
+		var seen = {};
+		var existing = root.querySelectorAll("article.release[data-tag]");
+		var i;
+		for (i = 0; i < existing.length; i++)
+			seen[existing[i].getAttribute("data-tag")] = true;
+		var added = 0;
+		var html = "";
+		for (i = 0; i < releases.length; i++) {
+			var tag = releases[i] && releases[i].tag_name;
+			if (!tag || seen[tag])
+				continue;
+			seen[tag] = true;
+			html += releaseArticle(releases[i], repo, latestTag);
+			added++;
+		}
+		if (html) {
+			root.insertAdjacentHTML("afterbegin", html);
+			localizeTimes(root);
+		}
+		return added;
+	}
+
+	function paintTags(info, tags, releases) {
+		if (!main)
+			return;
+		var relset = {};
+		var i;
+		for (i = 0; releases && i < releases.length; i++) {
+			if (releases[i] && releases[i].tag_name)
+				relset[releases[i].tag_name] = true;
+		}
+		var html = navHtml(info.repo, "tags");
+		html += "<h2>Tags</h2><hr class=\"rule\">";
+		html += "<p>Every tag in this tree. A tag with a GitHub release links through to that page.</p>";
+		html += "<p><label for=\"git-filter\">Filter</label> <input id=\"git-filter\" type=\"search\" placeholder=\"tag\"></p>";
+		if (!tags || !tags.length)
+			html += "<p class=\"muted\">No tags in this tree.</p>";
+		else {
+			html += "<table class=\"pkgs git-tags\" id=\"git-tag-table\"><thead><tr><th>Tag</th><th>Commit</th><th>When</th><th>Message</th><th></th></tr></thead><tbody>";
+			for (i = 0; i < tags.length; i++)
+				html += tagRow(tags[i], info.repo, relset);
+			html += "</tbody></table>";
+		}
+		main.innerHTML = html;
+		document.title = "Tags - " + info.repo + " - Splux Git";
+		bindFilter();
+	}
+
+	function paintTag(info, tagObj, releases) {
+		if (!main)
+			return;
+		var name = info.path || (tagObj && tagObj.name) || "";
+		var sha = (tagObj && tagObj.commit && tagObj.commit.sha) ||
+			(tagObj && tagObj.sha) || "";
+		var rel = null;
+		var i;
+		for (i = 0; releases && i < releases.length; i++) {
+			if (releases[i] && releases[i].tag_name === name) {
+				rel = releases[i];
+				break;
+			}
+		}
+		var html = navHtml(info.repo, "tag");
+		html += "<h2><code>" + esc(name) + "</code></h2><hr class=\"rule\">";
+		html += "<div class=\"info\">";
+		if (sha)
+			html += "<div class=\"dl-row\"><span class=\"muted\">Commit</span><span><a href=\"" +
+				esc(commitHref(info.repo, sha)) + "\"><code>" +
+				esc(sha.slice(0, 7)) + "</code></a></span></div>";
+		if (rel)
+			html += "<div class=\"dl-row\"><span class=\"muted\">Release</span><span><a href=\"" +
+				esc(releaseHref(info.repo, name)) + "\">" +
+				esc(name) + "</a></span></div>";
+		html += "<div class=\"dl-row\"><span class=\"muted\">GitHub</span><span><a href=\"https://github.com/" +
+			OWNER + "/" + encodeURIComponent(info.repo) + "/releases/tag/" +
+			encodeURIComponent(name) + "\">mirror</a></span></div></div>";
+		html += sourceArchivesHtml(info.repo, name);
+		main.innerHTML = html;
+		document.title = name + " - " + info.repo + " - Splux Git";
+	}
+
+	function assetsTable(assets) {
+		if (!assets || !assets.length)
+			return "";
+		var html = "<h3>Assets</h3><table class=\"pkgs git-assets\" id=\"git-asset-table\"><thead><tr><th>File</th><th>Size</th><th>Downloads</th></tr></thead><tbody>";
+		for (var i = 0; i < assets.length; i++) {
+			var a = assets[i];
+			html += "<tr data-search=\"" + esc((a.name || "").toLowerCase()) + "\">";
+			html += "<td><a href=\"" + esc(a.browser_download_url || "") + "\">" +
+				esc(a.name || "") + "</a></td>";
+			html += "<td class=\"muted\">" + esc(humansize(a.size)) + "</td>";
+			html += "<td class=\"muted\">" + esc(String(a.download_count || 0)) +
+				"</td></tr>";
+		}
+		html += "</tbody></table>";
+		return html;
+	}
+
+	function paintRelease(info, rel, latestTag, here) {
+		if (!main || !rel)
+			return;
+		var tag = rel.tag_name || info.path || "";
+		var title = rel.name || tag;
+		var login = (rel.author && rel.author.login) || "";
+		var avatar = (rel.author && rel.author.avatar_url) || "";
+		var iso = rel.published_at || rel.created_at || "";
+		var html = navHtml(info.repo, here || "release");
+		html += "<h2>" + esc(title) + "</h2><hr class=\"rule\">";
+		html += "<p class=\"meta\">";
+		if (latestTag && tag === latestTag)
+			html += "<span class=\"badge latest\">Latest</span> ";
+		if (rel.prerelease)
+			html += "<span class=\"badge\">Pre-release</span> ";
+		html += "</p><div class=\"info\">";
+		html += "<div class=\"dl-row\"><span class=\"muted\">Tag</span><span><a href=\"" +
+			esc(tagHref(info.repo, tag)) + "\"><code>" + esc(tag) +
+			"</code></a></span></div>";
+		if (iso)
+			html += "<div class=\"dl-row\"><span class=\"muted\">Date</span><span><time datetime=\"" +
+				esc(iso) + "\">" + esc(formatLocal(iso)) + "</time></span></div>";
+		if (login)
+			html += "<div class=\"dl-row\"><span class=\"muted\">Author</span><span>" +
+				whoHtml(login, login, avatar) + "</span></div>";
+		if (rel.assets && rel.assets.length)
+			html += "<div class=\"dl-row\"><span class=\"muted\">Files</span><span>" +
+				esc(String(rel.assets.length)) + "</span></div>";
+		html += "<div class=\"dl-row\"><span class=\"muted\">GitHub</span><span><a href=\"" +
+			esc(rel.html_url || ("https://github.com/" + OWNER + "/" +
+				info.repo + "/releases/tag/" + encodeURIComponent(tag))) +
+			"\">mirror</a></span></div></div>";
+		if (rel.body)
+			html += "<h3>Notes</h3>" + renderText(rel.body, "Markdown", tag + ".md");
+		html += assetsTable(rel.assets);
+		html += sourceArchivesHtml(info.repo, tag);
+		main.innerHTML = html;
+		document.title = title + " - " + info.repo + " - Splux Git";
+		localizeTimes(main);
+	}
+
+	function paintReleases(info, releases, latestTag) {
+		if (!main)
+			return;
+		var html = navHtml(info.repo, "releases");
+		html += "<h2>Releases</h2><hr class=\"rule\">";
+		html += "<p>GitHub releases for this tree. ISO files and other assets stay on GitHub. Notes are Markdown. <a href=\"" +
+			esc(repoHref(info.repo) + "releases/latest/") + "\">Latest</a></p>";
+		html += "<p><label for=\"git-filter\">Filter</label> <input id=\"git-filter\" type=\"search\" placeholder=\"release\"></p>";
+		if (!releases || !releases.length)
+			html += "<p class=\"muted\">No GitHub releases yet.</p>";
+		else {
+			html += "<div class=\"release-list\" id=\"git-releases\">";
+			for (var i = 0; i < releases.length; i++)
+				html += releaseArticle(releases[i], info.repo, latestTag);
+			html += "</div>";
+		}
+		main.innerHTML = html;
+		document.title = "Releases - " + info.repo + " - Splux Git";
+		bindFilter();
+		localizeTimes(main);
+	}
+
 	function knownRepo(name) {
 		for (var i = 0; i < REPOS.length; i++) {
 			if (REPOS[i] === name)
@@ -646,12 +1063,18 @@
 			return Promise.all([
 				fetchLangs(repo).catch(function () { return null; }),
 				fetchCommits(repo, info.kind === "log" ? 100 : 20).catch(function () { return null; }),
-				fetchRepo(repo).catch(function () { return null; })
+				fetchRepo(repo).catch(function () { return null; }),
+				fetchTags(repo).catch(function () { return null; }),
+				fetchReleases(repo).catch(function () { return null; }),
+				fetchLatestRelease(repo).catch(function () { return null; })
 			]);
 		}).then(function (rows) {
 			var langs = rows[0];
 			var commits = rows[1];
 			var meta = rows[2];
+			var tags = rows[3];
+			var releases = rows[4];
+			var latest = rows[5];
 			var changed = 0;
 			if (langs && langs.length) {
 				var box = document.getElementById("git-langs");
@@ -677,7 +1100,73 @@
 				typeof meta.size === "number") {
 				/* keep baked commit count unless GitHub reports more via commits list */
 			}
+			if (tags && document.getElementById("git-ntags")) {
+				var ntagsEl = document.getElementById("git-ntags");
+				var ntags = String(tags.length);
+				if (ntagsEl.textContent.replace(/\s/g, "") !== ntags) {
+					ntagsEl.innerHTML = "<a href=\"" +
+						esc(repoHref(repo) + "tags/") + "\">" +
+						esc(ntags) + "</a>";
+					changed++;
+				}
+			}
+			if (releases && document.getElementById("git-nreleases")) {
+				var nrelEl = document.getElementById("git-nreleases");
+				var nrel = String(releases.length);
+				if (nrelEl.textContent.replace(/\s/g, "") !== nrel) {
+					nrelEl.innerHTML = "<a href=\"" +
+						esc(repoHref(repo) + "releases/") + "\">" +
+						esc(nrel) + "</a>";
+					changed++;
+				}
+			}
+			if (latest && latest.tag_name && document.getElementById("git-latest")) {
+				var latestEl = document.getElementById("git-latest");
+				if (latestEl.textContent.replace(/\s/g, "") !== latest.tag_name) {
+					latestEl.innerHTML = "<a href=\"" +
+						esc(repoHref(repo) + "releases/latest/") +
+						"\"><code>" + esc(latest.tag_name) + "</code></a>";
+					changed++;
+				}
+			}
 			if (changed)
+				showLive();
+		});
+	}
+
+	function refreshTags(info) {
+		if (!knownRepo(info.repo))
+			return;
+		return Promise.all([
+			fetchTags(info.repo),
+			fetchReleases(info.repo).catch(function () { return []; })
+		]).then(function (rows) {
+			var tags = rows[0] || [];
+			var releases = rows[1] || [];
+			var relset = {};
+			for (var i = 0; i < releases.length; i++) {
+				if (releases[i] && releases[i].tag_name)
+					relset[releases[i].tag_name] = true;
+			}
+			var table = document.getElementById("git-tag-table");
+			if (table && mergeTagRows(table, tags, info.repo, relset))
+				showLive();
+		});
+	}
+
+	function refreshReleases(info) {
+		if (!knownRepo(info.repo))
+			return;
+		return Promise.all([
+			fetchReleases(info.repo),
+			fetchLatestRelease(info.repo).catch(function () { return null; })
+		]).then(function (rows) {
+			var releases = rows[0] || [];
+			var latest = rows[1];
+			var latestTag = (latest && latest.tag_name) ||
+				(releases[0] && releases[0].tag_name) || "";
+			var list = document.getElementById("git-releases");
+			if (list && mergeReleaseList(list, releases, info.repo, latestTag))
 				showLive();
 		});
 	}
@@ -767,9 +1256,7 @@
 						repo: info.repo
 					});
 				}
-				var html = "<p class=\"git-nav\"><a href=\"" +
-					esc(repoHref(info.repo)) + "\">" + esc(info.repo) +
-					"</a> · people</p>";
+				var html = navHtml(info.repo, "people");
 				html += "<h2>People</h2><hr class=\"rule\">";
 				html += "<p>Everyone who authored a commit in " + esc(info.repo) +
 					". <a href=\"" + esc(gitHost + "/users/") +
@@ -781,6 +1268,53 @@
 				main.innerHTML = html;
 				document.title = "People - " + info.repo + " - Splux Git";
 				bindFilter();
+			});
+		}
+		if (info.kind === "tags" && knownRepo(info.repo)) {
+			return Promise.all([
+				fetchTags(info.repo),
+				fetchReleases(info.repo).catch(function () { return []; })
+			]).then(function (rows) {
+				paintTags(info, rows[0], rows[1]);
+			});
+		}
+		if (info.kind === "tag" && knownRepo(info.repo) && info.path) {
+			return Promise.all([
+				fetchTags(info.repo),
+				fetchReleases(info.repo).catch(function () { return []; })
+			]).then(function (rows) {
+				var tags = rows[0] || [];
+				var found = null;
+				for (var i = 0; i < tags.length; i++) {
+					if (tags[i] && tags[i].name === info.path) {
+						found = tags[i];
+						break;
+					}
+				}
+				paintTag(info, found || { name: info.path }, rows[1]);
+			});
+		}
+		if (info.kind === "releases" && knownRepo(info.repo)) {
+			return Promise.all([
+				fetchReleases(info.repo),
+				fetchLatestRelease(info.repo).catch(function () { return null; })
+			]).then(function (rows) {
+				var latest = rows[1];
+				paintReleases(info, rows[0], latest && latest.tag_name);
+			});
+		}
+		if ((info.kind === "release" || info.kind === "latest") &&
+			knownRepo(info.repo)) {
+			var work = info.kind === "latest"
+				? fetchLatestRelease(info.repo)
+				: fetchReleaseByTag(info.repo, info.path);
+			return Promise.all([
+				work,
+				fetchLatestRelease(info.repo).catch(function () { return null; })
+			]).then(function (rows) {
+				var latest = rows[1];
+				paintRelease(info, rows[0], latest && latest.tag_name,
+					info.kind === "latest" ? "latest" : "release");
 			});
 		}
 		if (info.kind === "user" && validLogin(info.user)) {
@@ -819,6 +1353,8 @@
 	function ready() {
 		bindFilter();
 		localizeTimes(document);
+		if (window.SpluxRender && main)
+			SpluxRender.apply(main);
 		var info = pageInfo();
 		var work = colorsReady();
 		if (info.hydrate) {
@@ -833,6 +1369,13 @@
 				.catch(function () {});
 		if (info.kind === "people" || info.kind === "repo")
 			work = work.then(function () { return refreshPeople(info); })
+				.catch(function () {});
+		if (info.kind === "tags" || info.kind === "tag" || info.kind === "refs")
+			work = work.then(function () { return refreshTags(info); })
+				.catch(function () {});
+		if (info.kind === "releases" || info.kind === "release" ||
+			info.kind === "latest")
+			work = work.then(function () { return refreshReleases(info); })
 				.catch(function () {});
 		if (info.kind === "user")
 			work = work.then(function () { return refreshUser(info); })

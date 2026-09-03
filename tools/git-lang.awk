@@ -40,6 +40,14 @@ function loadmap(    line, f, k) {
 	prefer(".md", "Markdown")
 	prefer(".markdown", "Markdown")
 	prefer(".scm", "Scheme")
+	fnname["recipe"] = "Shell"
+	fntype["recipe"] = "programming"
+	fncolor["recipe"] = "#89e051"
+	fngroup["recipe"] = "Shell"
+	fnname["Recipe"] = "Shell"
+	fntype["Recipe"] = "programming"
+	fncolor["Recipe"] = "#89e051"
+	fngroup["Recipe"] = "Shell"
 }
 
 function prefer(ext, lang) {
