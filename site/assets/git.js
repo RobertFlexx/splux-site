@@ -131,6 +131,12 @@
 			out.sha = parts[3] || "";
 		else if (out.kind === "tree" || out.kind === "blob")
 			out.path = parts.slice(3).join("/");
+		else if (out.kind === "lang") {
+			if (parts.length === 3)
+				out.kind = "langs";
+			else
+				out.path = parts.slice(3).join("/");
+		}
 		return out;
 	}
 
@@ -174,6 +180,18 @@
 
 	function repoHref(repo) {
 		return gitHost + "/" + encodeURIComponent(repo) + "/";
+	}
+
+	function slugLang(name) {
+		return String(name || "").replace(/[ \/]/g, "-");
+	}
+
+	function langHref(repo, name) {
+		return repoHref(repo) + "lang/" + encodeURIComponent(slugLang(name)) + "/";
+	}
+
+	function peopleHref(repo) {
+		return repoHref(repo) + "people/";
 	}
 
 	function avatarOf(login, url) {
@@ -242,7 +260,7 @@
 		return html;
 	}
 
-	function paintLangs(root, langs) {
+	function paintLangs(root, langs, repo) {
 		if (!root || !langs || !langs.length)
 			return;
 		var total = 0;
@@ -256,17 +274,28 @@
 			var w = Math.round((langs[i].bytes * 1000) / total) / 10;
 			if (w <= 0 && langs[i].bytes > 0)
 				w = 0.1;
-			html += "<span class=\"lang-seg\" style=\"width:" + w +
-				"%;background:" + esc(langs[i].color || colorOf(langs[i].name)) +
-				"\" title=\"" + esc(langs[i].name) + " " + w + "%\"></span>";
+			var href = repo ? langHref(repo, langs[i].name) : "";
+			var style = "width:" + w + "%;background:" +
+				esc(langs[i].color || colorOf(langs[i].name));
+			var title = esc(langs[i].name) + " " + w + "%";
+			if (href)
+				html += "<a class=\"lang-seg\" href=\"" + esc(href) +
+					"\" style=\"" + style + "\" title=\"" + title + "\"></a>";
+			else
+				html += "<span class=\"lang-seg\" style=\"" + style +
+					"\" title=\"" + title + "\"></span>";
 		}
 		html += "</div><ul class=\"lang-list\">";
 		for (i = 0; i < langs.length; i++) {
 			var p = Math.round((langs[i].bytes * 1000) / total) / 10;
-			html += "<li><span class=\"lang-dot\" style=\"background:" +
+			var item = "<span class=\"lang-dot\" style=\"background:" +
 				esc(langs[i].color || colorOf(langs[i].name)) + "\"></span> " +
-				esc(langs[i].name) + " <span class=\"muted\">" + p +
-				"%</span></li>";
+				esc(langs[i].name) + " <span class=\"muted\">" + p + "%</span>";
+			if (repo)
+				html += "<li><a href=\"" + esc(langHref(repo, langs[i].name)) +
+					"\">" + item + "</a></li>";
+			else
+				html += "<li>" + item + "</li>";
 		}
 		html += "</ul>";
 		root.innerHTML = html;
@@ -313,8 +342,11 @@
 		if (!input)
 			return;
 		var table = document.getElementById("git-repos") ||
+			document.getElementById("git-people-table") ||
+			document.getElementById("git-lang-table") ||
 			document.querySelector("table.git-tree") ||
-			document.querySelector("table.git-log");
+			document.querySelector("table.git-log") ||
+			document.querySelector("table.pkgs");
 		if (!table)
 			return;
 		function apply() {
@@ -352,6 +384,95 @@
 
 	function fetchUser(login) {
 		return cached("git-user-" + login, API + "/users/" + login);
+	}
+
+	function fetchContributors(repo) {
+		return cached("git-contrib-" + repo, API + "/repos/" + OWNER + "/" +
+			repo + "/contributors?per_page=100");
+	}
+
+	function peopleRow(it) {
+		var search = ((it.login || "") + " " + (it.name || "")).toLowerCase();
+		var html = "<tr data-login=\"" + esc(it.login || "") +
+			"\" data-search=\"" + esc(search) + "\">";
+		html += "<td>" + whoHtml(it.login, it.name, it.avatar) + "</td>";
+		html += "<td class=\"muted\">" + esc(String(it.count || "")) + "</td>";
+		if (it.sha && it.repo)
+			html += "<td><a href=\"" + esc(commitHref(it.repo, it.sha)) + "\">" +
+				esc(it.subject || "") + "</a></td>";
+		else
+			html += "<td>" + esc(it.subject || "") + "</td>";
+		if (it.iso)
+			html += "<td><time datetime=\"" + esc(it.iso) + "\">" +
+				esc(dayOf(it.iso)) + "</time></td>";
+		else
+			html += "<td></td>";
+		return html + "</tr>";
+	}
+
+	function mergePeopleRows(table, items) {
+		if (!table || !items || !items.length)
+			return 0;
+		var body = table.tBodies[0] || table;
+		var seen = {};
+		var existing = body.querySelectorAll("tr[data-login]");
+		var i;
+		for (i = 0; i < existing.length; i++) {
+			var k = existing[i].getAttribute("data-login") ||
+				existing[i].textContent;
+			if (k)
+				seen[k] = true;
+		}
+		var added = 0;
+		var html = "";
+		for (i = 0; i < items.length; i++) {
+			var key = items[i].login || items[i].name || "";
+			if (!key || seen[key])
+				continue;
+			seen[key] = true;
+			html += peopleRow(items[i]);
+			added++;
+		}
+		if (html) {
+			body.insertAdjacentHTML("beforeend", html);
+			localizeTimes(body);
+		}
+		return added;
+	}
+
+	function refreshPeople(info) {
+		if (!knownRepo(info.repo))
+			return;
+		return fetchContributors(info.repo).then(function (list) {
+			if (!list || !list.length)
+				return;
+			var items = [];
+			for (var i = 0; i < list.length; i++) {
+				if (!list[i] || list[i].type === "Anonymous")
+					continue;
+				items.push({
+					login: list[i].login || "",
+					name: list[i].login || "",
+					avatar: list[i].avatar_url || "",
+					count: list[i].contributions || "",
+					repo: info.repo
+				});
+			}
+			var table = document.getElementById("git-people-table");
+			if (table && mergePeopleRows(table, items))
+				showLive();
+			var strip = document.getElementById("git-people");
+			if (strip && items.length && !strip.querySelector(".person")) {
+				var html = "";
+				for (var j = 0; j < items.length; j++)
+					html += "<span class=\"person\">" +
+						whoHtml(items[j].login, items[j].name, items[j].avatar) +
+						" <span class=\"muted\">" + esc(String(items[j].count)) +
+						"</span></span>";
+				strip.innerHTML = html;
+				showLive();
+			}
+		});
 	}
 
 	function fetchContents(repo, path) {
@@ -535,7 +656,7 @@
 			if (langs && langs.length) {
 				var box = document.getElementById("git-langs");
 				if (box) {
-					paintLangs(box, langs);
+					paintLangs(box, langs, repo);
 					changed++;
 				}
 			}
@@ -632,6 +753,36 @@
 				paintTree(info, item);
 			});
 		}
+		if (info.kind === "people" && knownRepo(info.repo)) {
+			return fetchContributors(info.repo).then(function (list) {
+				var items = [];
+				for (var i = 0; list && i < list.length; i++) {
+					if (!list[i] || list[i].type === "Anonymous")
+						continue;
+					items.push({
+						login: list[i].login || "",
+						name: list[i].login || "",
+						avatar: list[i].avatar_url || "",
+						count: list[i].contributions || "",
+						repo: info.repo
+					});
+				}
+				var html = "<p class=\"git-nav\"><a href=\"" +
+					esc(repoHref(info.repo)) + "\">" + esc(info.repo) +
+					"</a> · people</p>";
+				html += "<h2>People</h2><hr class=\"rule\">";
+				html += "<p>Everyone who authored a commit in " + esc(info.repo) +
+					". <a href=\"" + esc(gitHost + "/users/") +
+					"\">All people</a></p>";
+				html += "<table class=\"pkgs git-people\" id=\"git-people-table\"><thead><tr><th>Person</th><th>Commits</th><th>Last commit</th><th>When</th></tr></thead><tbody>";
+				for (var j = 0; j < items.length; j++)
+					html += peopleRow(items[j]);
+				html += "</tbody></table>";
+				main.innerHTML = html;
+				document.title = "People - " + info.repo + " - Splux Git";
+				bindFilter();
+			});
+		}
 		if (info.kind === "user" && validLogin(info.user)) {
 			return fetchUser(info.user).then(function (u) {
 				return Promise.all(REPOS.map(function (repo) {
@@ -679,6 +830,9 @@
 			work = work.then(refreshIndex).catch(function () {});
 		if (info.kind === "repo" || info.kind === "log")
 			work = work.then(function () { return refreshRepo(info); })
+				.catch(function () {});
+		if (info.kind === "people" || info.kind === "repo")
+			work = work.then(function () { return refreshPeople(info); })
 				.catch(function () {});
 		if (info.kind === "user")
 			work = work.then(function () { return refreshUser(info); })

@@ -237,6 +237,63 @@ who_cell() {
 		-v avatar="$4" -v verified="$5"
 }
 
+lang_slug() {
+	printf '%s\n' "$1" | tr ' /' '--'
+}
+
+# In-repo nav. Links go through @@ROOT@@git/<repo>/ so they work
+# without a trailing slash on the current URL.
+git_nav() {
+	_repo=$1
+	_here=$2
+	_r="@@ROOT@@git/${_repo}/"
+	_gh=$(github_of "$_repo")
+	printf '<p class="git-nav">'
+	if [ "$_here" = home ]; then
+		printf '%s' "$(esc "$_repo")"
+	else
+		printf '<a href="%s">%s</a>' "$(esc "$_r")" "$(esc "$_repo")"
+	fi
+	printf ' · '
+	if [ "$_here" = log ]; then
+		printf 'log'
+	else
+		printf '<a href="%slog/">log</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
+	if [ "$_here" = files ]; then
+		printf 'files'
+	else
+		printf '<a href="%stree/">files</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
+	if [ "$_here" = refs ]; then
+		printf 'refs'
+	else
+		printf '<a href="%srefs/">refs</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
+	if [ "$_here" = people ]; then
+		printf 'people'
+	else
+		printf '<a href="%speople/">people</a>' "$(esc "$_r")"
+	fi
+	printf ' · '
+	if [ "$_here" = langs ] || [ "$_here" = lang ]; then
+		printf 'languages'
+	else
+		printf '<a href="%slang/">languages</a>' "$(esc "$_r")"
+	fi
+	printf ' · <a href="%s">GitHub</a>' "$(esc "$_gh")"
+	if [ "$_here" = commit ]; then
+		printf ' · commit'
+	fi
+	if [ "$_here" = blob ]; then
+		printf ' · file'
+	fi
+	printf '</p>\n'
+}
+
 mkdir -p "$OUT/git" "$OUT/data" "$OUT/git/users"
 
 # Refresh Linguist map when the network allows; keep the committed map otherwise.
@@ -297,7 +354,10 @@ build_repo() {
 	nfiles=$(printf '%s' "$nfiles" | tr -d ' ')
 
 	base=$OUT/git/$name
-	mkdir -p "$base/log" "$base/refs" "$base/tree" "$base/commit" "$base/blob"
+	mkdir -p "$base/log" "$base/refs" "$base/tree" "$base/commit" "$base/blob" \
+		"$base/people" "$base/lang"
+	userpfx="@@ROOT@@git/users/"
+	reporoot="@@ROOT@@git/$name/"
 
 	scan=$base/.scan.tsv
 	filelang=$base/.filelang.tsv
@@ -341,19 +401,102 @@ build_repo() {
 	}' "$clog" >>"$all_commits"
 
 	awk -F '\t' -v OFS='\t' '{
-		if ($7 == "") next
 		login=$7
-		av=$8
-		c[login]++
-		if (av != "" && !(login in avatar))
-			avatar[login]=av
+		name=$6
+		key = (login != "") ? login : name
+		if (key == "") next
+		c[key]++
+		if (login != "")
+			haslogin[key]=login
+		if ($8 != "" && !(key in avatar))
+			avatar[key]=$8
+		if (name != "" && !(key in author))
+			author[key]=name
+		epoch=$3+0
+		if (!(key in last) || epoch >= last[key]) {
+			last[key]=epoch
+			iso[key]=$4
+			subj[key]=$5
+			sha[key]=$1
+		}
 	}
 	END {
-		for (l in c)
-			print l, avatar[l], c[l]
+		for (k in c)
+			print (k in haslogin) ? haslogin[k] : "", avatar[k], c[k], \
+				(k in author) ? author[k] : k, iso[k], subj[k], sha[k]
 	}' "$clog" | LC_ALL=C sort -t "$(printf '\t')" -k3,3nr >"$base/.people.tsv"
 	if [ -s "$base/.people.tsv" ]; then
-		cat "$base/.people.tsv" >>"$all_people"
+		awk -F '\t' -v OFS='\t' '$1 != "" { print $1, $2, $3 }' \
+			"$base/.people.tsv" >>"$all_people"
+	fi
+
+	# Languages with file counts for the bar and the language index.
+	awk -F '\t' -v OFS='\t' -v fl="$filelang" '
+		BEGIN {
+			while ((getline < fl) > 0) {
+				path=$1
+				name=$2
+				col=$4
+				sz=$5+0
+				group=($6 != "") ? $6 : $2
+				if (name != "") {
+					key = name SUBSEP path
+					if (!(key in seen)) {
+						seen[key]=1
+						nf[name]++
+						fsz[name]+=sz
+					}
+					if (col != "" && !(name in color))
+						color[name]=col
+				}
+				if (group != "" && group != name) {
+					key = group SUBSEP path
+					if (!(key in seen)) {
+						seen[key]=1
+						nf[group]++
+						fsz[group]+=sz
+					}
+				}
+			}
+			close(fl)
+		}
+		{
+			gh[$1]=$2+0
+			if ($3 != "")
+				color[$1]=$3
+			bar[$1]=1
+		}
+		END {
+			for (k in nf)
+				all[k]=1
+			for (k in bar)
+				all[k]=1
+			n=0
+			for (k in all) {
+				n++
+				names[n]=k
+			}
+			for (i = 1; i <= n; i++) {
+				for (j = i + 1; j <= n; j++) {
+					bi = (names[i] in gh) ? gh[names[i]] : fsz[names[i]]+0
+					bj = (names[j] in gh) ? gh[names[j]] : fsz[names[j]]+0
+					if (bj > bi) {
+						t=names[i]; names[i]=names[j]; names[j]=t
+					}
+				}
+			}
+			for (i = 1; i <= n; i++) {
+				k=names[i]
+				print k, gh[k]+0, color[k], nf[k]+0, fsz[k]+0
+			}
+		}
+	' "$langtmp" >"$base/.lang-index.tsv"
+	awk -F '\t' -v OFS='\t' '$2 + 0 > 0 { print $1, $2, $3, $4 }' \
+		"$base/.lang-index.tsv" >"$base/.langs-bar.tsv"
+	if [ -s "$base/.langs-bar.tsv" ]; then
+		mv "$base/.langs-bar.tsv" "$langtmp"
+	else
+		rm -f "$base/.langs-bar.tsv"
 	fi
 
 	GIT_KIND=repo
@@ -367,11 +510,7 @@ build_repo() {
 		printf '<h2>%s</h2>\n' "$(esc "$name")"
 		printf '%s\n' '<hr class="rule">'
 		printf '<p>%s</p>\n' "$(esc "$repo_desc")"
-		printf '%s\n' '<p class="git-nav">'
-		printf '<a href="log/">log</a> · <a href="tree/">files</a> · <a href="refs/">refs</a> · '
-		printf '<a href="../users/">people</a> · '
-		printf '<a href="%s">GitHub</a>\n' "$(esc "$gh")"
-		printf '%s\n' '</p>'
+		git_nav "$name" home
 		printf '%s\n' '<p class="live-note" id="git-live" hidden>Showing newer commits from GitHub.</p>'
 		printf '%s\n' '<div class="info" id="git-info">'
 		printf '<div class="dl-row"><span class="muted">HEAD</span><span id="git-head"><a href="commit/%s/"><code>%s</code></a> (%s)</span></div>\n' \
@@ -386,19 +525,20 @@ build_repo() {
 		if [ -s "$langtmp" ]; then
 			printf '%s\n' '<h3>Languages</h3>'
 			printf '%s\n' '<div id="git-langs">'
-			awk -f "$AWK" -v mode=langs "$langtmp"
+			awk -f "$AWK" -v mode=langs -v langpfx="${reporoot}lang/" "$langtmp"
 			printf '%s\n' '</div>'
 		else
 			printf '%s\n' '<div id="git-langs"></div>'
 		fi
 		if [ -s "$base/.people.tsv" ]; then
 			printf '%s\n' '<h3>People</h3>'
-			awk -f "$AWK" -v mode=people -v userpfx="../users/" "$base/.people.tsv"
+			awk -f "$AWK" -v mode=people -v userpfx="$userpfx" "$base/.people.tsv"
+			printf '<p><a href="%speople/">All contributors</a></p>\n' "$(esc "$reporoot")"
 		fi
 		printf '%s\n' '<h3>Recent commits</h3>'
 		printf '%s\n' '<div id="git-recent">'
-		awk -f "$AWK" -v mode=commits -v commitpfx="commit/" \
-			-v userpfx="../users/" -v limit=20 "$clog"
+		awk -f "$AWK" -v mode=commits -v commitpfx="${reporoot}commit/" \
+			-v userpfx="$userpfx" -v limit=20 "$clog"
 		printf '%s\n' '</div>'
 		printf '%s\n' '<p><a href="log/">Full log</a></p>'
 		if git -C "$dir" cat-file -e HEAD:README.md 2>/dev/null; then
@@ -414,14 +554,13 @@ build_repo() {
 	GIT_KIND=log
 	page_begin "$base/log/index.html" "Log - $name - Splux Git" "Commit log for $name"
 	{
-		printf '<p class="git-nav"><a href="../">%s</a> · log · <a href="../../users/">people</a></p>\n' \
-			"$(esc "$name")"
+		git_nav "$name" log
 		printf '<h2>Log</h2>\n'
 		printf '%s\n' '<hr class="rule">'
 		printf '%s\n' '<p class="live-note" id="git-live" hidden>Showing newer commits from GitHub.</p>'
 		printf '%s\n' '<div id="git-log">'
-		awk -f "$AWK" -v mode=commits -v commitpfx="../commit/" \
-			-v userpfx="../../users/" "$clog"
+		awk -f "$AWK" -v mode=commits -v commitpfx="${reporoot}commit/" \
+			-v userpfx="$userpfx" "$clog"
 		printf '%s\n' '</div>'
 	} >>"$base/log/index.html"
 	page_end "$base/log/index.html"
@@ -429,7 +568,7 @@ build_repo() {
 	GIT_KIND=refs
 	page_begin "$base/refs/index.html" "Refs - $name - Splux Git" "Branches and tags for $name"
 	{
-		printf '<p class="git-nav"><a href="../">%s</a> · refs</p>\n' "$(esc "$name")"
+		git_nav "$name" refs
 		printf '<h2>Refs</h2>\n'
 		printf '%s\n' '<hr class="rule">'
 		printf '%s\n' '<h3>Branches</h3>'
@@ -479,14 +618,13 @@ build_repo() {
 		GIT_PATH=
 		page_begin "$cdir/index.html" "$shortc - $name - Splux Git" "$subject"
 		{
-			printf '<p class="git-nav"><a href="../../">%s</a> · <a href="../../log/">log</a> · commit</p>\n' \
-				"$(esc "$name")"
+			git_nav "$name" commit
 			printf '<h2><code>%s</code></h2>\n' "$(esc "$shortc")"
 			printf '%s\n' '<hr class="rule">'
 			printf '<p>%s</p>\n' "$(esc "$subject")"
 			printf '%s\n' '<div class="info">'
 			printf '<div class="dl-row"><span class="muted">Author</span><span>%s</span></div>\n' \
-				"$(who_cell "../../../users/" "$login" "$author" "$avatar" "$verified")"
+				"$(who_cell "$userpfx" "$login" "$author" "$avatar" "$verified")"
 			printf '<div class="dl-row"><span class="muted">Date</span><span><time datetime="%s">%s</time></span></div>\n' \
 				"$(esc "$iso")" "$(esc "$iso")"
 			printf '<div class="dl-row"><span class="muted">Commit</span><span><code>%s</code></span></div>\n' \
@@ -556,8 +694,7 @@ build_repo() {
 		fi
 		page_begin "$tdest" "$title" "HEAD tree for $name"
 		{
-			printf '<p class="git-nav"><a href="%s">%s</a> · files</p>\n' \
-				"$(esc "$up_repo")" "$(esc "$name")"
+			git_nav "$name" files
 			if [ -n "$treepath" ]; then
 				printf '<h2>%s</h2>\n' "$(esc "$treepath")"
 			else
@@ -598,7 +735,7 @@ build_repo() {
 				fi
 			done >"$ent"
 			if [ -s "$ent" ]; then
-				awk -f "$AWK" -v mode=entries "$ent"
+				awk -f "$AWK" -v mode=entries -v langpfx="${reporoot}lang/" "$ent"
 			else
 				printf '%s\n' '<p class="muted">empty directory</p>'
 			fi
@@ -627,41 +764,21 @@ build_repo() {
 		GIT_SHA=
 		GIT_PATH=$path
 		page_begin "$bdest" "$path - $name - Splux Git" "$path at HEAD"
-		parent=${path%/*}
-		depth=1
-		rest=$path
-		while [ "$rest" != "${rest#*/}" ]
-		do
-			depth=$((depth + 1))
-			rest=${rest#*/}
-		done
-		up=""
-		j=0
-		while [ "$j" -le "$depth" ]
-		do
-			up="../$up"
-			j=$((j + 1))
-		done
 		fl=$(lookup_lang "$path" "$filelang")
 		flang=${fl%%$tab*}
 		fcolor=${fl#*$tab}
 		[ "$fcolor" = "$fl" ] && fcolor=
 		{
-			if [ "$parent" = "$path" ]; then
-				dirhref="${up}tree/"
-			else
-				dirhref="${up}tree/${parent}/"
-			fi
-			printf '<p class="git-nav"><a href="%s">%s</a> · <a href="%s">directory</a></p>\n' \
-				"$(esc "$up")" "$(esc "$name")" "$(esc "$dirhref")"
+			git_nav "$name" blob
 			printf '<h2>%s</h2>\n' "$(esc "$path")"
 			printf '%s\n' '<hr class="rule">'
 			if [ -n "$flang" ]; then
-				printf '<p class="lang-badge"><span class="lang-dot" style="background:%s"></span> %s</p>\n' \
+				printf '<p class="lang-badge"><a href="%slang/%s/"><span class="lang-dot" style="background:%s"></span> %s</a></p>\n' \
+					"$(esc "$reporoot")" "$(esc "$(lang_slug "$flang")")" \
 					"$(esc "${fcolor:-#888888}")" "$(esc "$flang")"
 			fi
 			printf '<p class="muted">%s bytes at <a href="%scommit/%s/">%s</a> · <a href="%s/blob/main/%s">GitHub</a></p>\n' \
-				"$(esc "$sz")" "$(esc "$up")" "$(esc "$head")" "$(esc "$short")" \
+				"$(esc "$sz")" "$(esc "$reporoot")" "$(esc "$head")" "$(esc "$short")" \
 				"$(esc "$gh")" "$(esc "$path")"
 			szn=$(printf '%s' "$sz" | tr -d ' ')
 			case $szn in
@@ -678,12 +795,97 @@ build_repo() {
 		page_end "$bdest"
 	done
 
+	GIT_KIND=people
+	GIT_SHA=
+	GIT_PATH=
+	page_begin "$base/people/index.html" "People - $name - Splux Git" \
+		"Commit authors in $name"
+	{
+		git_nav "$name" people
+		printf '%s\n' '<h2>People</h2>'
+		printf '%s\n' '<hr class="rule">'
+		printf '<p>Everyone who authored a commit in %s. GitHub accounts link to their profile. Authors without a GitHub login are listed by git name. <a href="@@ROOT@@git/users/">All people</a></p>\n' \
+			"$(esc "$name")"
+		printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
+		printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="person"></p>'
+		if [ -s "$base/.people.tsv" ]; then
+			awk -f "$AWK" -v mode=peoplelist -v userpfx="$userpfx" \
+				-v commitpfx="${reporoot}commit/" "$base/.people.tsv"
+		else
+			printf '%s\n' '<table class="pkgs git-people" id="git-people-table"><thead><tr><th>Person</th><th>Commits</th><th>Last commit</th><th>When</th></tr></thead><tbody></tbody></table>'
+		fi
+	} >>"$base/people/index.html"
+	page_end "$base/people/index.html"
+
+	GIT_KIND=langs
+	GIT_PATH=
+	page_begin "$base/lang/index.html" "Languages - $name - Splux Git" \
+		"Languages in $name"
+	{
+		git_nav "$name" langs
+		printf '%s\n' '<h2>Languages</h2>'
+		printf '%s\n' '<hr class="rule">'
+		printf '%s\n' '<p>Click a language to see how many files use it.</p>'
+		printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="language"></p>'
+		if [ -s "$base/.lang-index.tsv" ]; then
+			awk -f "$AWK" -v mode=langindex -v langpfx="${reporoot}lang/" \
+				"$base/.lang-index.tsv"
+		else
+			printf '%s\n' '<p class="muted">No languages recorded.</p>'
+		fi
+	} >>"$base/lang/index.html"
+	page_end "$base/lang/index.html"
+
+	if [ -s "$base/.lang-index.tsv" ]; then
+		while IFS= read -r _lline || [ -n "${_lline-}" ]
+		do
+			[ -n "${_lline-}" ] || continue
+			langname=$(tsv_cut "$_lline" 1)
+			nlangfiles=$(tsv_cut "$_lline" 4)
+			langbytes=$(tsv_cut "$_lline" 5)
+			[ -n "$langname" ] || continue
+			lslug=$(lang_slug "$langname")
+			ldest=$base/lang/$lslug/index.html
+			GIT_KIND=lang
+			GIT_PATH=$langname
+			page_begin "$ldest" "$langname - $name - Splux Git" \
+				"$langname files in $name"
+			{
+				git_nav "$name" lang
+				printf '<h2>%s</h2>\n' "$(esc "$langname")"
+				printf '%s\n' '<hr class="rule">'
+				printf '<p>%s files' "$(esc "${nlangfiles:-0}")"
+				if [ -n "$langbytes" ] && [ "$langbytes" != 0 ]; then
+					printf ', %s bytes' "$(esc "$langbytes")"
+				fi
+				printf ' · <a href="%slang/">all languages</a></p>\n' \
+					"$(esc "$reporoot")"
+				printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="file"></p>'
+				lf=$base/.lang-files.tsv
+				awk -F '\t' -v OFS='\t' -v lang="$langname" \
+					-v blobpfx="${reporoot}blob/" '
+					$2 == lang || $6 == lang {
+						print "file", $5, $1, blobpfx $1 "/", $2
+					}
+				' "$filelang" | LC_ALL=C sort -t "$(printf '\t')" -k3,3 >"$lf"
+				if [ -s "$lf" ]; then
+					awk -f "$AWK" -v mode=entries -v showlang=no "$lf"
+				else
+					printf '%s\n' '<p class="muted">No files listed for this language.</p>'
+				fi
+			} >>"$ldest"
+			page_end "$ldest"
+			rm -f "$lf"
+		done <"$base/.lang-index.tsv"
+	fi
+
 	day=${lastiso%%T*}
 	printf '%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\n' \
 		"$name" "$repo_desc" "$short" "$head" "$ncommits" "$nfiles" "$day" "$gh" \
 		>>"$index_rows"
 
-	rm -f "$langtmp" "$clog" "$base/.entries.tsv" "$base/.people.tsv" "$filelang"
+	rm -f "$langtmp" "$clog" "$base/.entries.tsv" "$base/.people.tsv" \
+		"$filelang" "$base/.lang-index.tsv"
 	printf '%s\n' "git: $name ($ncommits commits, $nfiles files)" >&2
 }
 
@@ -746,7 +948,7 @@ page_begin "$OUT/git/users/index.html" "People - Splux Git" "GitHub accounts tha
 	printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
 	if [ -s "$users_full" ]; then
 		awk -F '\t' -v OFS='\t' '{ print $1, $4, $11 }' "$users_full" |
-			awk -f "$AWK" -v mode=people -v userpfx="./"
+			awk -f "$AWK" -v mode=people -v userpfx="@@ROOT@@git/users/"
 	else
 		printf '%s\n' '<p class="muted">No GitHub accounts recorded for these commits.</p>'
 	fi
@@ -827,8 +1029,8 @@ if [ -s "$users_full" ]; then
 					print $2, $3, $4, $5, $6, $7, $8, $9, $10, $1
 				}
 			' "$all_commits" |
-				awk -f "$AWK" -v mode=commits -v repopfx="../../" \
-					-v userpfx="../"
+				awk -f "$AWK" -v mode=commits -v repopfx="@@ROOT@@git/" \
+					-v userpfx="@@ROOT@@git/users/"
 			printf '%s\n' '</div>'
 		} >>"$udest"
 		page_end "$udest"
@@ -870,7 +1072,7 @@ page_begin "$OUT/git/index.html" "Git - Splux Linux" "Always-updating browse of 
 	if [ -s "$users_full" ]; then
 		printf '%s\n' '<h3>People</h3>'
 		awk -F '\t' -v OFS='\t' '{ print $1, $4, $11 }' "$users_full" |
-			awk -f "$AWK" -v mode=people -v userpfx="users/"
+			awk -f "$AWK" -v mode=people -v userpfx="@@ROOT@@git/users/"
 	fi
 	printf '%s\n' '<h3>Clone</h3>'
 	printf '%s\n' '<pre class="block">git clone https://github.com/RobertFlexx/SPS.git'

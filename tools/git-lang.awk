@@ -157,8 +157,10 @@ BEGIN {
 
 mode == "count" {
 	detect($2, $3)
-	if (filelang != "")
-		print $2 "\t" d_name "\t" d_type "\t" d_color >> filelang
+	if (filelang != "") {
+		g = (d_group != "") ? d_group : d_name
+		print $2 "\t" d_name "\t" d_type "\t" d_color "\t" $1 "\t" g >> filelang
+	}
 	if (skip_stats($2))
 		next
 	if (d_type != "programming" && d_type != "markup")

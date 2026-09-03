@@ -78,11 +78,14 @@ repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 ## Git
 
 `/git/` is a live HTML mirror of SPS, sps-core, sps-extra, and this
-repository. Languages match GitHub Linguist. Commits show the GitHub
-account that uploaded them, with avatars, and `/git/users/` holds
-profiles. The Pages workflow rebuilds those pages; the browser also
-asks GitHub for anything newer. There is no git server and no pull
-requests. Clone from GitHub:
+repository. Languages match GitHub Linguist. Open a language to see
+how many files use it (`/git/<repo>/lang/<Lang>/`). Commits show the
+GitHub account that uploaded them, with avatars. In a repository,
+People lists that tree's commit authors (`/git/<repo>/people/`).
+`/git/users/` holds profiles across all official trees. The Pages
+workflow rebuilds those pages; the browser also asks GitHub for
+anything newer. There is no git server and no pull requests. Clone
+from GitHub:
 
 ```sh
 git clone https://github.com/RobertFlexx/SPS.git

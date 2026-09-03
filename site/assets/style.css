@@ -652,6 +652,11 @@ pre.block.git-blob {
 	height: 100%;
 	background: var(--accent);
 	min-width: 1px;
+	text-decoration: none;
+}
+
+a.lang-seg:hover {
+	opacity: 0.85;
 }
 
 .lang-list {
@@ -667,6 +672,15 @@ pre.block.git-blob {
 	margin-right: 1rem;
 }
 
+.lang-list a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.lang-list a:hover {
+	color: var(--fg);
+}
+
 .lang-dot {
 	display: inline-block;
 	width: 0.65rem;
@@ -678,6 +692,11 @@ pre.block.git-blob {
 
 .lang-badge {
 	margin: 0 0 0.5rem;
+}
+
+.lang-badge a {
+	color: inherit;
+	text-decoration: none;
 }
 
 .people {
