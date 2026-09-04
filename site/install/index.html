@@ -207,6 +207,9 @@ rm -rf /mnt/usr/src/sps/core/.git /mnt/usr/src/sps/extra/.git
 cat &gt; /mnt/etc/sps/repos.conf &lt;&lt;'EOF'
 dir core /mnt/usr/src/sps/core 100
 dir extra /mnt/usr/src/sps/extra 80
+
+# Community is not enabled by default.
+# git community https://github.com/RobertFlexx/sps-community.git 50
 EOF</pre>
 <p>Those paths are for indexing from the live system. After packages you rewrite them to <code>/usr/src/sps/...</code> for the booted machine.</p>
 </li>
@@ -281,6 +284,9 @@ sget install grub</pre>
 <pre class="block">cat &gt; /mnt/etc/sps/repos.conf &lt;&lt;'EOF'
 dir core /usr/src/sps/core 100
 dir extra /usr/src/sps/extra 80
+
+# Community is not enabled by default.
+# git community https://github.com/RobertFlexx/sps-community.git 50
 EOF</pre>
 </li>
 <li>
@@ -364,7 +370,7 @@ reboot</pre>
 <h3>Slim ISO</h3>
 <p><code>sps-live-tty-slim.iso</code> is the small console image from <code>make iso-slim</code> (<code>--no-seed --no-modules</code>, no <code>--core</code>, no <code>--extra</code>). It is a rescue and disk tool. It is not a Splux source-install disc.</p>
 <div class="callout">
-<p><strong>What slim cannot do.</strong> No gcc, no make, no git, no python, no meson, no recipes, no live kernel modules. <code>repos.conf</code> lists git URLs, but <code>git</code> is not on the image, so <code>src update</code> cannot clone sps-core. <code>setup</code> is present because SPS is installed on every live root; it still cannot build packages here.</p>
+<p><strong>What slim cannot do.</strong> No gcc, no make, no git, no python, no meson, no recipes, no live kernel modules. <code>repos.conf</code> lists git URLs for core and extra, but <code>git</code> is not on the image, so <code>src update</code> cannot clone them. Community stays a comment. <code>setup</code> is present because SPS is installed on every live root; it still cannot build packages here.</p>
 </div>
 
 <h4>What is on the disc</h4>

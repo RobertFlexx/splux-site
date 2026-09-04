@@ -1,7 +1,7 @@
 #!/bin/sh
 # Build the static Splux website from official SPS recipe trees.
 # Usage: ./tools/build-site.sh
-# Optional: CORE EXTRA SITE_PREFIX OUT
+# Optional: CORE EXTRA COMMUNITY SPS SITE_PREFIX OUT
 
 set -eu
 
@@ -9,12 +9,14 @@ cd "$(CDPATH= cd -P "$(dirname "$0")/.." && pwd)" || exit 1
 
 CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
+COMMUNITY=${COMMUNITY:-vendor/community}
 SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
 OUT=${OUT:-_site}
 SITE_PREFIX=${SITE_PREFIX-}
 CORE_GIT=${CORE_GIT:-https://github.com/RobertFlexx/sps-core}
 EXTRA_GIT=${EXTRA_GIT:-https://github.com/RobertFlexx/sps-extra}
+COMMUNITY_GIT=${COMMUNITY_GIT:-https://github.com/RobertFlexx/sps-community}
 SPS_GIT=${SPS_GIT:-https://github.com/RobertFlexx/SPS}
 SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
 GIT_HOST=${GIT_HOST:-https://splux.robertflexx.dev/git}
@@ -38,6 +40,10 @@ if [ ! -d "$EXTRA" ]; then
 	clone_tree "$EXTRA_GIT.git" vendor/extra
 	EXTRA=vendor/extra
 fi
+if [ ! -d "$COMMUNITY" ]; then
+	clone_tree "$COMMUNITY_GIT.git" vendor/community
+	COMMUNITY=vendor/community
+fi
 if [ ! -d "$SPS" ]; then
 	clone_tree "$SPS_GIT.git" vendor/sps
 	SPS=vendor/sps
@@ -46,7 +52,7 @@ fi
 rm -rf "$OUT"
 mkdir -p "$OUT/assets" "$OUT/data" "$OUT/download" "$OUT/packages" \
 	"$OUT/install" "$OUT/docs" "$OUT/docs/images" "$OUT/docs/sps" \
-	"$OUT/docs/first-boot" "$OUT/source" "$OUT/news" "$OUT/git"
+	"$OUT/docs/community" "$OUT/docs/first-boot" "$OUT/source" "$OUT/news" "$OUT/git"
 
 cp -a site/assets/. "$OUT/assets/"
 if [ -f CNAME ]; then
@@ -98,6 +104,7 @@ write_docs_nav() {
 		images "${root}docs/images/" "Live images" \
 		install "${root}install/" "Install" \
 		sps "${root}docs/sps/" "SPS tools" \
+		community "${root}docs/community/" "Community" \
 		firstboot "${root}docs/first-boot/" "After first boot" \
 		git "${root}git/" "Git"
 	while [ "$#" -ge 3 ]
@@ -126,6 +133,10 @@ scan_tree() {
 	rootdir=$2
 	github=$3
 	mirror=${4-}
+	if [ ! -d "$rootdir" ]; then
+		printf '%s\n' "warning: missing recipe tree $rootdir" >&2
+		return 0
+	fi
 	find "$rootdir" -name recipe -type f | LC_ALL=C sort | while IFS= read -r rec
 	do
 		rel=${rec#"$rootdir"/}
@@ -151,6 +162,7 @@ scan_tree() {
 printf '%s\n' "reading recipes" >&2
 scan_tree core "$CORE" "$GIT_HOST/sps-core" "https://github.com/RobertFlexx/sps-core"
 scan_tree extra "$EXTRA" "$GIT_HOST/sps-extra" "https://github.com/RobertFlexx/sps-extra"
+scan_tree community "$COMMUNITY" "$GIT_HOST/sps-community" "https://github.com/RobertFlexx/sps-community"
 
 LC_ALL=C sort -t "$(printf '\t')" -k1,1 -k5,5 "$tsv" >"$tmp/sorted.tsv"
 mv "$tmp/sorted.tsv" "$tsv"
@@ -158,6 +170,7 @@ mv "$tmp/sorted.tsv" "$tsv"
 npkgs=$(awk 'END { print NR + 0 }' "$tsv")
 ncore=$(awk -F '\t' '$5 == "core" { n++ } END { print n + 0 }' "$tsv")
 nextra=$(awk -F '\t' '$5 == "extra" { n++ } END { print n + 0 }' "$tsv")
+ncommunity=$(awk -F '\t' '$5 == "community" { n++ } END { print n + 0 }' "$tsv")
 curlver=$(awk -F '\t' '$1 == "curl" { print $2 "-" $3; exit }' "$tsv")
 [ -n "$curlver" ] || curlver="8.21.0-1"
 
@@ -248,7 +261,7 @@ short_sha() {
 	git -C "$1" rev-parse --short HEAD 2>/dev/null || printf '%s\n' unknown
 }
 
-export CORE EXTRA SPS SITE GIT_HOST
+export CORE EXTRA COMMUNITY SPS SITE GIT_HOST
 if ! sh tools/collect-news.sh >"$tmp/news.tsv"
 then
 	printf '%s\n' "warning: news collection failed" >&2
@@ -276,6 +289,7 @@ pagetitle=
 sps_sha=$(short_sha "$SPS")
 core_sha=$(short_sha "$CORE")
 extra_sha=$(short_sha "$EXTRA")
+community_sha=$(short_sha "$COMMUNITY")
 site_sha=$(short_sha "$SITE")
 livesig=${site_sha}-$(date -u '+%Y%m%d%H%M%S' 2>/dev/null || date +%Y%m%d%H%M%S)
 
@@ -285,7 +299,8 @@ cat >"$tmp/news-info.html" <<EOF
 <div class="dl-row"><span class="muted">SPS</span><span id="live-sps"><a href="$GIT_HOST/SPS/commit/$sps_sha/">$sps_sha</a></span></div>
 <div class="dl-row"><span class="muted">sps-core</span><span id="live-core"><a href="$GIT_HOST/sps-core/commit/$core_sha/">$core_sha</a></span></div>
 <div class="dl-row"><span class="muted">sps-extra</span><span id="live-extra"><a href="$GIT_HOST/sps-extra/commit/$extra_sha/">$extra_sha</a></span></div>
-<div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra)</span></div>
+<div class="dl-row"><span class="muted">sps-community</span><span id="live-community"><a href="$GIT_HOST/sps-community/commit/$community_sha/">$community_sha</a></span></div>
+<div class="dl-row"><span class="muted">Packages</span><span>$npkgs ($ncore core, $nextra extra, $ncommunity community)</span></div>
 <div class="dl-row"><span class="muted">Site build</span><span>$generated ($site_sha)</span></div>
 </div>
 EOF
@@ -315,6 +330,7 @@ subst() {
 		-v npkgs="$npkgs" \
 		-v ncore="$ncore" \
 		-v nextra="$nextra" \
+		-v ncommunity="$ncommunity" \
 		-v generated="$generated" \
 		-v livesig="$livesig" \
 		-v curlver="$curlver" \
@@ -330,10 +346,11 @@ subst site/install/index.html "$OUT/install/index.html" "../" install
 subst site/docs/index.html "$OUT/docs/index.html" "../" overview
 subst site/docs/images/index.html "$OUT/docs/images/index.html" "../../" images
 subst site/docs/sps/index.html "$OUT/docs/sps/index.html" "../../" sps
+subst site/docs/community/index.html "$OUT/docs/community/index.html" "../../" community
 subst site/docs/first-boot/index.html "$OUT/docs/first-boot/index.html" "../../" firstboot
 subst site/source/index.html "$OUT/source/index.html" "../"
 
-export OUT CORE EXTRA SPS SITE GIT_HOST SITE_URL
+export OUT CORE EXTRA COMMUNITY SPS SITE GIT_HOST SITE_URL
 sh tools/build-git.sh
 find "$OUT/git" -name index.html >"$tmp/gitpages"
 while IFS= read -r page
@@ -369,6 +386,7 @@ do
 		-v npkgs="$npkgs" \
 		-v ncore="$ncore" \
 		-v nextra="$nextra" \
+		-v ncommunity="$ncommunity" \
 		-v generated="$generated" \
 		-v livesig="$livesig" \
 		-v curlver="$curlver" \
@@ -446,6 +464,7 @@ do
 		-v npkgs="$npkgs" \
 		-v ncore="$ncore" \
 		-v nextra="$nextra" \
+		-v ncommunity="$ncommunity" \
 		-v generated="$generated" \
 		-v livesig="$livesig" \
 		-v curlver="$curlver" \
@@ -454,4 +473,4 @@ do
 	mv "$tmp/page.html" "$page"
 done
 
-printf '%s\n' "built $OUT ($npkgs packages, $ncore core, $nextra extra, tag $tag)" >&2
+printf '%s\n' "built $OUT ($npkgs packages, $ncore core, $nextra extra, $ncommunity community, tag $tag)" >&2

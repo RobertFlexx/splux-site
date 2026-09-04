@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community recipes - Splux Linux</title>
+<meta name="description" content="Enable the opt-in sps-community recipe collection. Not on by default.">
+<link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="@@ROOT@@assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap wide">
+@@HEADER@@
+<div class="handbook">
+@@DOCSNAV@@
+<main id="main">
+<h2>Community recipes</h2>
+<hr class="rule">
+<p><a href="@@ROOT@@git/sps-community/">sps-community</a> is a third recipe tree. It is hosted next to core and extra, uses the same SPS format, and is <strong>not</strong> enabled by <code>setup</code>, <code>mkiso</code>, or a fresh install. Core (priority 100) and extra (80) are. Community uses priority 50, so an official package of the same name always wins.</p>
+<p>That is the Alpine-style split: the distro ships the official collections; you add community yourself.</p>
+
+<h3>Enable it</h3>
+<p>Edit <code>/etc/sps/repos.conf</code>. A generated file already has these two lines commented. Uncomment the git line, or append it:</p>
+<pre class="block">git community https://github.com/RobertFlexx/sps-community.git 50</pre>
+<p>On a machine that still uses bundled <code>dir</code> trees:</p>
+<pre class="block">dir core /usr/src/sps/core 100
+dir extra /usr/src/sps/extra 80
+git community https://github.com/RobertFlexx/sps-community.git 50</pre>
+<p>Then:</p>
+<pre class="block">src update
+src search PATTERN
+sget info PACKAGE
+sget install PACKAGE</pre>
+<p><code>src update</code> clones the checkout to <code>/usr/src/sps/community</code>. Removing the git line and running <code>src update</code> again drops community from the index. Delete the checkout if you want it off disk.</p>
+<p>Do not raise community above extra or core. Do not reuse a package <code>name</code> that already exists in those trees.</p>
+
+<h3>What it is for</h3>
+<p>Software that has a canonical upstream archive and a SHA-256, is not in core or extra, and has been built at least once. Contribute with a GitHub pull request: one package, following <a href="https://github.com/RobertFlexx/sps-community/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>. CI indexes the tree against core and extra. A green check does not mean the package compiled; that is still your job.</p>
+<p>Browse recipes on <a href="@@ROOT@@git/sps-community/">Splux Git</a> and in the <a href="@@ROOT@@packages/?repo=community">package list</a> (filter: community). Clone from GitHub: <a href="https://github.com/RobertFlexx/sps-community.git">github.com/RobertFlexx/sps-community.git</a>.</p>
+</main>
+</div>
+@@FOOTER@@
+</div>
+<script src="@@ROOT@@assets/docs.js?v=@@LIVE_SIG@@"></script>
+</body>
+</html>

@@ -56,12 +56,15 @@ unset SPS_DB SPS_CACHE SPS_BUILD SPS_CONFIG SPS_REPOS_CONFIG SPS_REPO_ROOT</pre>
 <p>Leaving those unset is required so they resolve under the target, not under the live root.</p>
 
 <h3>Repositories</h3>
-<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins. Clone from GitHub. The handbook git pages are an HTML mirror of the same trees, not a clone URL.</p>
+<p><code>/etc/sps/repos.conf</code> lists trees. Higher priority wins. Clone from GitHub. The handbook git pages are an HTML mirror of the same trees, not a clone URL. Core and extra are enabled. Community is a commented hint only until you add it. See the <a href="@@ROOT@@docs/community/">community chapter</a>.</p>
 <pre class="block">dir core /usr/src/sps/core 100
 dir extra /usr/src/sps/extra 80
 
 git core https://github.com/RobertFlexx/sps-core.git 100
-git extra https://github.com/RobertFlexx/sps-extra.git 80</pre>
+git extra https://github.com/RobertFlexx/sps-extra.git 80
+
+# Community is not enabled by default.
+# git community https://github.com/RobertFlexx/sps-community.git 50</pre>
 <p>On tty and Plasma images the live <code>repos.conf</code> uses <code>dir</code> entries pointing at the bundled trees. Slim images have no recipes, so they use the git lines. <code>src update</code> for a git repo needs <code>git</code>, which slim does not ship.</p>
 <p>During a target install, <code>setup</code> writes <code>dir</code> paths prefixed with the target (<code>/mnt/usr/src/sps/core</code>) so <code>src update</code> can index them from the live system, then rewrites them to <code>/usr/src/sps/...</code> for the booted machine. The <a href="@@ROOT@@install/#manual">manual install</a> does the same.</p>
 
@@ -97,6 +100,7 @@ sget install curl</pre>
 <li><a href="@@ROOT@@git/SPS/blob/README.md/">SPS README</a></li>
 <li><a href="@@ROOT@@git/SPS/blob/DESIGN.md/">DESIGN.md</a></li>
 <li><a href="@@ROOT@@git/SPS/blob/PACKAGE-MAINTAINER.md/">Recipe format</a></li>
+<li><a href="@@ROOT@@docs/community/">Community recipes</a></li>
 <li><a href="@@ROOT@@packages/">Package browser</a></li>
 </ul>
 </main>

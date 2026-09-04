@@ -37,6 +37,11 @@ jobs:
           fetch-depth: 0
       - uses: actions/checkout@v4
         with:
+          repository: RobertFlexx/sps-community
+          path: vendor/community
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
           repository: RobertFlexx/SPS
           path: vendor/sps
           fetch-depth: 0
@@ -45,6 +50,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           CORE: vendor/core
           EXTRA: vendor/extra
+          COMMUNITY: vendor/community
           SPS: vendor/sps
           SITE_PREFIX: ""
         run: sh tools/build-site.sh

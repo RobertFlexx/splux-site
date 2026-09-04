@@ -77,6 +77,7 @@ $0 == "@@DOCSNAV@@" {
 	gsub(/@@N_PACKAGES@@/, npkgs)
 	gsub(/@@N_CORE@@/, ncore)
 	gsub(/@@N_EXTRA@@/, nextra)
+	gsub(/@@N_COMMUNITY@@/, ncommunity)
 	gsub(/@@GENERATED@@/, generated)
 	gsub(/@@LIVE_SIG@@/, livesig)
 	gsub(/@@CURL_VER@@/, curlver)

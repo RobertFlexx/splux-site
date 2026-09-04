@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Packages - Splux Linux</title>
-<meta name="description" content="Official Splux package collections: core and extra.">
+<meta name="description" content="Splux package collections: core, extra, and opt-in community.">
 <link rel="icon" href="@@ROOT@@assets/favicon.png" type="image/png">
 <link rel="stylesheet" href="@@ROOT@@assets/style.css">
 </head>
@@ -15,7 +15,7 @@
 <main id="main">
 <h2>Packages</h2>
 <hr class="rule">
-<p>Generated from the official <a href="@@ROOT@@git/sps-core/">sps-core</a> and <a href="@@ROOT@@git/sps-extra/">sps-extra</a> recipe trees. @@N_PACKAGES@@ packages (@@N_CORE@@ core, @@N_EXTRA@@ extra). Updated @@GENERATED@@. Browse them from <a href="@@ROOT@@git/">Splux Git</a>.</p>
+<p>Generated from <a href="@@ROOT@@git/sps-core/">sps-core</a>, <a href="@@ROOT@@git/sps-extra/">sps-extra</a>, and the opt-in <a href="@@ROOT@@git/sps-community/">sps-community</a> tree. @@N_PACKAGES@@ packages (@@N_CORE@@ core, @@N_EXTRA@@ extra, @@N_COMMUNITY@@ community). Community is listed here so you can see it; <code>setup</code> does not enable it. Updated @@GENERATED@@. Browse recipes from <a href="@@ROOT@@git/">Splux Git</a>.</p>
 <form id="pkg-search" role="search">
 <label class="search" for="q">Search
 <input id="q" name="q" type="search" autocomplete="off" spellcheck="false">
@@ -25,6 +25,7 @@
 <a href="?repo=all" data-repo="all">all</a>
 <a href="?repo=core" data-repo="core">core</a>
 <a href="?repo=extra" data-repo="extra">extra</a>
+<a href="?repo=community" data-repo="community">community</a>
 </p>
 <p class="stats" id="pkg-stats">@@N_PACKAGES@@ packages</p>
 <div style="overflow-x:auto">

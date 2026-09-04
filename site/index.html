@@ -65,7 +65,7 @@ mkpkg: running configure phase
 mkpkg: running build phase
 mkpkg: built curl-@@CURL_VER@@-x86_64.pkg.tar.zst
 pkin: installed curl @@CURL_VER@@</pre>
-<p><a href="@@ROOT@@packages/">Search @@N_PACKAGES@@ packages</a> in the official trees.</p>
+<p><a href="@@ROOT@@packages/">Search @@N_PACKAGES@@ packages</a> in core, extra, and community. Community is opt-in; see the <a href="@@ROOT@@docs/community/">community chapter</a>.</p>
 
 <h2 id="repos"><span class="num">[004]</span> Repositories</h2>
 <hr class="rule">
@@ -73,7 +73,9 @@ pkin: installed curl @@CURL_VER@@</pre>
 Base system, toolchain, libraries, boot, filesystems, and networking. @@N_CORE@@ packages. GitHub mirror: <a href="https://github.com/RobertFlexx/sps-core">RobertFlexx/sps-core</a>.</p>
 <p><a href="@@ROOT@@git/sps-extra/">sps-extra</a><br>
 Desktop software, graphics, multimedia, development tools, and other packages. @@N_EXTRA@@ packages. GitHub mirror: <a href="https://github.com/RobertFlexx/sps-extra">RobertFlexx/sps-extra</a>.</p>
-<p>SPS also supports administrator-maintained local repositories in addition to the official trees. Browse recipes from <a href="@@ROOT@@git/">Splux Git</a>.</p>
+<p><a href="@@ROOT@@git/sps-community/">sps-community</a><br>
+Opt-in community recipes. @@N_COMMUNITY@@ packages. Not enabled by <code>setup</code> or <code>mkiso</code>. Add one line to <code>/etc/sps/repos.conf</code>. Handbook: <a href="@@ROOT@@docs/community/">community recipes</a>. GitHub: <a href="https://github.com/RobertFlexx/sps-community">RobertFlexx/sps-community</a>.</p>
+<p>SPS also supports administrator-maintained local repositories. Browse recipes from <a href="@@ROOT@@git/">Splux Git</a>.</p>
 
 <h2 id="docs"><span class="num">[005]</span> Documentation</h2>
 <hr class="rule">
@@ -94,6 +96,8 @@ the package system<br>
 official base recipes<br>
 <a href="@@ROOT@@git/sps-extra/">sps-extra</a>
 official extra recipes<br>
+<a href="@@ROOT@@git/sps-community/">sps-community</a>
+opt-in community recipes<br>
 <a href="@@ROOT@@git/splux-site/">splux-site</a>
 this website
 </p>

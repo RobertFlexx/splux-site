@@ -18,7 +18,7 @@
 <h2>Live images</h2>
 <hr class="rule">
 <p>Images are hybrid ISOs from <a href="@@ROOT@@git/SPS/">SPS</a>. Filenames stay the same; the current tag is <a href="https://github.com/RobertFlexx/SPS/releases/latest">@@RELEASE_TAG@@</a> (@@RELEASE_DATE@@). Verify against <a href="https://github.com/RobertFlexx/SPS/releases/latest/download/SHA256SUMS">SHA256SUMS</a>.</p>
-<p>Every image includes SPS (<code>src</code>, <code>sget</code>, <code>mkpkg</code>, <code>pkin</code>, <code>setup</code>, <code>mkiso</code>, and the rest), <code>dialog</code>, disk tools, <code>dhcpcd</code>, <code>grub-install</code>, and <code>grub-mkconfig</code>. Live PID 1 is busybox init on published snapshots. <code>/bin/sh</code> is busybox. Login is <code>root</code> with an empty password.</p>
+<p>Every image includes SPS (<code>src</code>, <code>sget</code>, <code>mkpkg</code>, <code>pkin</code>, <code>setup</code>, <code>mkiso</code>, and the rest), <code>dialog</code>, disk tools, <code>dhcpcd</code>, <code>grub-install</code>, and <code>grub-mkconfig</code>. Live PID 1 is busybox init on published snapshots. <code>/bin/sh</code> is busybox. Login is <code>root</code> with an empty password. Community recipes are not on the disc; add <code>git community</code> after install. See the <a href="@@ROOT@@docs/community/">community chapter</a>.</p>
 
 <table class="docs">
 <thead>
@@ -45,7 +45,7 @@
 
 <section class="tabpanel" role="tabpanel" id="panel-img-tty" aria-labelledby="tab-img-tty">
 <h3>sps-live-tty.iso</h3>
-<p>This is the install disc. <code>make iso</code> copies sps-core and sps-extra into <code>/usr/src/sps/{core,extra}</code> and writes <code>dir</code> entries in <code>/etc/sps/repos.conf</code>. A host seed compiler, headers, glibc startfiles, and kernel modules come along so packages can be built offline.</p>
+<p>This is the install disc. <code>make iso</code> copies sps-core and sps-extra into <code>/usr/src/sps/{core,extra}</code> and writes <code>dir</code> entries in <code>/etc/sps/repos.conf</code>. Community is a commented hint in that file, not a tree on the disc. A host seed compiler, headers, glibc startfiles, and kernel modules come along so packages can be built offline.</p>
 <p>Seed tools include gcc, g++, make, cmake, ninja, meson, python3, perl, git, curl, wget, tar, xz, gzip, bzip2, zstd, nano, vim, pkg-config, and the binutils used to link. Partition tools, <code>dhcpcd</code>, <code>openssl</code>, <code>grub-install</code>, and <code>efibootmgr</code> (when the builder had it) are on this image too.</p>
 <p>Manual install: <a href="@@ROOT@@install/#manual">Install, Manual tab</a>. Guided: <a href="@@ROOT@@install/#setup">Install, setup tab</a>.</p>
 </section>

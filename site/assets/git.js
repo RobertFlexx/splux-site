@@ -4,7 +4,7 @@
 	var API = "https://api.github.com";
 	var OWNER = "RobertFlexx";
 	var ACCEPT = { Accept: "application/vnd.github+json" };
-	var REPOS = ["SPS", "sps-core", "sps-extra", "splux-site"];
+	var REPOS = ["SPS", "sps-core", "sps-extra", "sps-community", "splux-site"];
 	var TTL = 120000;
 	var COLORS = {};
 

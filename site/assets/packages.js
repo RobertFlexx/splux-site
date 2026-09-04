@@ -1,4 +1,4 @@
-// Package data is generated from the official repositories.
+// Package data is generated from core, extra, and opt-in community.
 (function () {
 	var form = document.getElementById("pkg-search");
 	var input = document.getElementById("q");

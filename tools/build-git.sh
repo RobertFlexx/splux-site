@@ -1,7 +1,7 @@
 #!/bin/sh
 # Build a static git browser under $OUT/git from local clones.
 # Languages follow GitHub Linguist. Authors are GitHub accounts when known.
-# Env: OUT CORE EXTRA SPS SITE GIT_HOST SITE_URL
+# Env: OUT CORE EXTRA COMMUNITY SPS SITE GIT_HOST SITE_URL
 
 set -eu
 
@@ -10,6 +10,7 @@ cd "$(CDPATH= cd -P "$(dirname "$0")/.." && pwd)" || exit 1
 OUT=${OUT:-_site}
 CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
+COMMUNITY=${COMMUNITY:-vendor/community}
 SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
 SITE_URL=${SITE_URL:-https://splux.robertflexx.dev}
@@ -60,6 +61,7 @@ github_of() {
 		SPS) printf '%s\n' https://github.com/RobertFlexx/SPS ;;
 		sps-core) printf '%s\n' https://github.com/RobertFlexx/sps-core ;;
 		sps-extra) printf '%s\n' https://github.com/RobertFlexx/sps-extra ;;
+		sps-community) printf '%s\n' https://github.com/RobertFlexx/sps-community ;;
 		splux-site) printf '%s\n' https://github.com/RobertFlexx/splux-site ;;
 		*) printf '%s\n' "https://github.com/RobertFlexx/$1" ;;
 	esac
@@ -70,6 +72,7 @@ desc_of() {
 		SPS) printf '%s\n' 'Source Package System. Installer and live ISO builder.' ;;
 		sps-core) printf '%s\n' 'Official base recipe collection.' ;;
 		sps-extra) printf '%s\n' 'Official extra recipe collection.' ;;
+		sps-community) printf '%s\n' 'Opt-in community recipe collection. Not enabled by setup.' ;;
 		splux-site) printf '%s\n' 'This website. Static HTML from the recipe trees.' ;;
 		*) printf '%s\n' "$1" ;;
 	esac
@@ -1469,6 +1472,7 @@ build_repo() {
 build_repo SPS "$SPS"
 build_repo sps-core "$CORE"
 build_repo sps-extra "$EXTRA"
+build_repo sps-community "$COMMUNITY"
 build_repo splux-site "$SITE"
 
 # People across trees
@@ -1516,12 +1520,12 @@ GIT_REPO=
 GIT_USER=
 GIT_SHA=
 GIT_PATH=
-page_begin "$OUT/git/users/index.html" "People - Splux Git" "GitHub accounts that pushed to the official Splux trees."
+page_begin "$OUT/git/users/index.html" "People - Splux Git" "GitHub accounts that pushed to the Splux trees."
 {
 	printf '%s\n' '<p class="git-nav"><a href="../">git</a> · people</p>'
 	printf '%s\n' '<h2>People</h2>'
 	printf '%s\n' '<hr class="rule">'
-	printf '%s\n' '<p>Accounts that authored commits in SPS, sps-core, sps-extra, and this site. Avatars and names come from GitHub. Open someone to see their profile and their commits here.</p>'
+	printf '%s\n' '<p>Accounts that authored commits in SPS, sps-core, sps-extra, sps-community, and this site. Avatars and names come from GitHub. Open someone to see their profile and their commits here.</p>'
 	printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
 	if [ -s "$users_full" ]; then
 		awk -F '\t' -v OFS='\t' '{ print $1, $4, $11 }' "$users_full" |
@@ -1619,11 +1623,11 @@ GIT_REPO=
 GIT_USER=
 GIT_SHA=
 GIT_PATH=
-page_begin "$OUT/git/index.html" "Git - Splux Linux" "Always-updating browse of the official Splux git trees."
+page_begin "$OUT/git/index.html" "Git - Splux Linux" "Always-updating browse of the Splux git trees."
 {
 	printf '%s\n' '<h2>Git</h2>'
 	printf '%s\n' '<hr class="rule">'
-	printf '%s\n' '<p>This is a live HTML mirror of the official trees. Languages match GitHub Linguist. Each commit shows the GitHub account that uploaded it, with their avatar. Open <a href="users/">people</a> for profiles. Pages rebuild with the handbook; the browser also asks GitHub for anything newer. There is no git server here. Clone the GitHub URLs.</p>'
+	printf '%s\n' '<p>This is a live HTML mirror of the trees. Languages match GitHub Linguist. Each commit shows the GitHub account that uploaded it, with their avatar. Open <a href="users/">people</a> for profiles. Pages rebuild with the handbook; the browser also asks GitHub for anything newer. There is no git server here. Clone the GitHub URLs. <a href="@@ROOT@@docs/community/">sps-community</a> is listed here; it is not enabled by <code>setup</code>.</p>'
 	printf '%s\n' '<p class="git-nav"><a href="users/">people</a></p>'
 	printf '%s\n' '<p class="live-note" id="git-live" hidden>Updated from GitHub.</p>'
 	printf '%s\n' '<p><label for="git-filter">Filter</label> <input id="git-filter" type="search" placeholder="repository"></p>'
@@ -1655,6 +1659,7 @@ page_begin "$OUT/git/index.html" "Git - Splux Linux" "Always-updating browse of 
 	printf '%s\n' '<pre class="block">git clone https://github.com/RobertFlexx/SPS.git'
 	printf '%s\n' 'git clone https://github.com/RobertFlexx/sps-core.git'
 	printf '%s\n' 'git clone https://github.com/RobertFlexx/sps-extra.git'
+	printf '%s\n' 'git clone https://github.com/RobertFlexx/sps-community.git'
 	printf '%s\n' 'git clone https://github.com/RobertFlexx/splux-site.git</pre>'
 	printf '%s\n' '<p class="note">Live ISO files stay on GitHub Releases. Recipe browse also lives under <a href="@@ROOT@@packages/">packages</a>.</p>'
 } >>"$OUT/git/index.html"

@@ -7,11 +7,11 @@ This site was fully handmade by RobertFlexx.
 ## Build (for maintainers)
 
 ```sh
-CORE=/tmp/sps-core EXTRA=/tmp/sps-extra SPS=/path/to/SPS ./tools/build-site.sh
+CORE=/tmp/sps-core EXTRA=/tmp/sps-extra COMMUNITY=/tmp/sps-community SPS=/path/to/SPS ./tools/build-site.sh
 ```
 
-If `CORE`, `EXTRA`, or `SPS` are unset, the script clones
-`sps-core`, `sps-extra`, and `SPS` into `vendor/`.
+If `CORE`, `EXTRA`, `COMMUNITY`, or `SPS` are unset, the script clones
+`sps-core`, `sps-extra`, `sps-community`, and `SPS` into `vendor/`.
 
 Output is `_site/`. Preview:
 
@@ -46,7 +46,7 @@ registered in `tools/build-site.sh` with the correct `@@ROOT@@` depth.
 history, not edited by hand:
 
 - every published SPS live ISO release (`RobertFlexx/SPS` GitHub Releases)
-- every commit on SPS, sps-core, sps-extra, and this repository that
+- every commit on SPS, sps-core, sps-extra, sps-community, and this repository that
   Git or the GitHub API can see, with author and whether GitHub verified
   the signature. Commit links point at Splux Git.
 
@@ -77,7 +77,7 @@ repository there. `SITE_PREFIX` stays empty so links are rooted at `/`.
 
 ## Git
 
-`/git/` is a live HTML mirror of SPS, sps-core, sps-extra, and this
+`/git/` is a live HTML mirror of SPS, sps-core, sps-extra, sps-community, and this
 repository. Languages match GitHub Linguist. Open a language to see
 how many files use it (`/git/<repo>/lang/<Lang>/`). Source files are
 highlighted per language. Markdown files, README notes, and GitHub
@@ -101,12 +101,14 @@ from GitHub:
 git clone https://github.com/RobertFlexx/SPS.git
 git clone https://github.com/RobertFlexx/sps-core.git
 git clone https://github.com/RobertFlexx/sps-extra.git
+git clone https://github.com/RobertFlexx/sps-community.git
 git clone https://github.com/RobertFlexx/splux-site.git
 ```
 
 News commit links point at `/git/<repo>/commit/<sha>/`. Author names
 point at `/git/users/<login>/`. Recipe pages link into `/git/sps-core/`
-and `/git/sps-extra/`. Live ISO files stay on GitHub Releases.
+and `/git/sps-extra/`. Community recipes are under `/git/sps-community/` and are
+opt-in on the installed system. Live ISO files stay on GitHub Releases.
 
 `git.splux.robertflexx.dev` is not a separate service. GitHub Pages
 allows one custom domain on this repository (`splux.robertflexx.dev`).

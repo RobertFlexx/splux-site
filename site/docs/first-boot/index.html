@@ -64,7 +64,7 @@ dhcpcd eth0</pre>
 <pre class="block">src update
 sget install nano
 pkstat</pre>
-<p>Search the <a href="@@ROOT@@packages/">package browser</a> for names. Extra is where desktop, init, and most applications live. Core is the base system, toolchain pieces that exist as recipes, boot, filesystems, and networking.</p>
+<p>Search the <a href="@@ROOT@@packages/">package browser</a> for names. Extra is where desktop, init, and most applications live. Core is the base system, toolchain pieces that exist as recipes, boot, filesystems, and networking. <a href="@@ROOT@@docs/community/">Community</a> is a third tree. It is not on until you add <code>git community</code> to <code>/etc/sps/repos.conf</code>.</p>
 
 <h3>Configuration files</h3>
 <p>Files under <code>etc</code> are preserved when you change them. On upgrade, SPS keeps the local file. If the new package also changed its copy, the new one is written beside it as <code>.sps-new</code>. SPS does not merge the two.</p>

@@ -1,7 +1,7 @@
 #!/bin/sh
 # Collect Splux releases and git history into TSV for the news page.
 # Fields: epoch iso kind repo url title summary author verified avatar
-# Env: CORE EXTRA SPS SITE GIT_HOST (git work trees). GH_TOKEN optional via gh.
+# Env: CORE EXTRA COMMUNITY SPS SITE GIT_HOST (git work trees). GH_TOKEN optional via gh.
 # Pulls every non-draft SPS release and every commit available from the
 # local clones and from the GitHub API. Commit URLs point at Splux Git.
 # Duplicate URLs keep the last row so GitHub author and verified data
@@ -11,6 +11,7 @@ set -eu
 
 CORE=${CORE:-vendor/core}
 EXTRA=${EXTRA:-vendor/extra}
+COMMUNITY=${COMMUNITY:-vendor/community}
 SPS=${SPS:-vendor/sps}
 SITE=${SITE:-.}
 GIT_HOST=${GIT_HOST:-https://splux.robertflexx.dev/git}
@@ -106,6 +107,7 @@ read_commit_tsv() {
 git_commits "$SPS" SPS "$GIT_HOST/SPS"
 git_commits "$CORE" sps-core "$GIT_HOST/sps-core"
 git_commits "$EXTRA" sps-extra "$GIT_HOST/sps-extra"
+git_commits "$COMMUNITY" sps-community "$GIT_HOST/sps-community"
 git_commits "$SITE" splux-site "$GIT_HOST/splux-site"
 
 if command -v gh >/dev/null 2>&1; then
@@ -153,6 +155,7 @@ if command -v gh >/dev/null 2>&1; then
 	api_commits RobertFlexx/SPS SPS
 	api_commits RobertFlexx/sps-core sps-core
 	api_commits RobertFlexx/sps-extra sps-extra
+	api_commits RobertFlexx/sps-community sps-community
 	api_commits RobertFlexx/splux-site splux-site
 fi
 

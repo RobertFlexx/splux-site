@@ -9,6 +9,7 @@
 		{ path: "SPS", label: "SPS" },
 		{ path: "sps-core", label: "sps-core" },
 		{ path: "sps-extra", label: "sps-extra" },
+		{ path: "sps-community", label: "sps-community" },
 		{ path: "splux-site", label: "splux-site" }
 	];
 
@@ -569,6 +570,8 @@
 					setSha("live-core", "sps-core", sha);
 				else if (REPOS[k].path === "sps-extra")
 					setSha("live-extra", "sps-extra", sha);
+				else if (REPOS[k].path === "sps-community")
+					setSha("live-community", "sps-community", sha);
 			}
 		}).catch(function () {
 			/* keep the HTML from the last site build */
